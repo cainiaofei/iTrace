@@ -95,16 +95,13 @@ public class BonusForLoneWithXml{
         ois.close();
 
         Result result_ir = IR.compute(textDataset, model, new None_CSTI());
-        System.out.println("------------------------93-----------------------");
         Result result_UD_CSTI = IR.compute(textDataset,model, new UD_CSTI(ri));
-        System.out.println("------------------------95-----------------------");
         ri.setPruning(callEdgeScoreThreshold, dataEdgeScoreThreshold);
         
         Map<String,Set<String>> valid = new HashMap<String,Set<String>>();
         Result result_UD_CallThenDataProcessLoneInnerMean07 = IR.compute(textDataset,model,
         		new UD_CallThenDataWithBonusForLone(ri,callEdgeScoreThreshold,
         				dataEdgeScoreThreshold,MethodTypeProcessLone.InnerMean,percent,valid));//0.7
-        System.out.println("------------------------102-----------------------");
         
         //below closeness method
         FileInputStream fis1 = new FileInputStream(project.getClass_RelationInfoPath());
@@ -126,17 +123,12 @@ public class BonusForLoneWithXml{
         		new PruningCall_Data_Connection_Closenss(class_relation, class_relationForO, 
         				class_relationForAllDependencies,
         				UseEdge.Call, 1.0, 1.0));
-        System.out.println("------------------------xx124xx-----------------------");
         
         MyVisualCurve curve = new MyVisualCurve();
         curve.addLine(result_ir);
-        System.out.println("-----130-----");
         curve.addLine(result_UD_CSTI);
-        System.out.println("-----132-----");
         curve.addLine(result_pruningeCall_Data_Dir);
-        System.out.println("-----134-----");
         curve.addLine(result_UD_CallThenDataProcessLoneInnerMean07);//累加 内部 直接平均
-        System.out.println("-----136-----");
         curve.showChart(project.getProjectName());
         System.out.println("-----138-----");
        
@@ -146,16 +138,13 @@ public class BonusForLoneWithXml{
        printPValue(result_UD_CSTI, result_UD_CallThenDataProcessLoneInnerMean07);
         
        String ud = result_UD_CSTI.getWilcoxonDataCol_fmeasure("UD");
-       System.out.println("-----143-----");
        String innerMean7 = result_UD_CallThenDataProcessLoneInnerMean07.getWilcoxonDataCol_fmeasure("innerMean07");
-       System.out.println("-----145-----");
        String ir = result_ir.getWilcoxonDataCol_fmeasure("IR");
        List<String> list = new LinkedList<String>();
        list.add(ud);
        list.add(innerMean7);
        list.add(ir);
        storeRFile(list);
-       System.out.println("-----152-----");
        
         /*
        System.out.println("---------------------------------------------");
