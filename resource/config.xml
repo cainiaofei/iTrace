@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<projectName>iTrust</projectName>
+	<modelName>vsm</modelName>
+	<callEdgeScoreThreshold>0.60</callEdgeScoreThreshold>
+	<dataEdgeScoreThreshold>0.60</dataEdgeScoreThreshold>
+	<percent>0.7</percent>
+</config>

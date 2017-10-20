@@ -1,0 +1,23 @@
+[MNG-225] non default plugin groupId will not work<p>due to the fact the descriptor does not contain the group id, a plugin with a non default group will only partially process, but end up giving the following trace:</p>
+
+<p>org.apache.maven.reactor.ReactorException: Error executing project within the reactor<br/>
+        at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:139)<br/>
+        at org.apache.maven.cli.MavenCli.main(MavenCli.java:216)<br/>
+        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br/>
+        at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)<br/>
+        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)<br/>
+        at java.lang.reflect.Method.invoke(Method.java:585)<br/>
+        at org.codehaus.classworlds.Launcher.launchEnhanced(Launcher.java:303)<br/>
+        at org.codehaus.classworlds.Launcher.launch(Launcher.java:243)<br/>
+        at org.codehaus.classworlds.Launcher.mainWithExitCode(Launcher.java:416)<br/>
+        at org.codehaus.classworlds.Launcher.main(Launcher.java:363)<br/>
+Caused by: org.apache.maven.lifecycle.LifecycleExecutionException: Error during lifecycle execution<br/>
+        at org.apache.maven.lifecycle.DefaultLifecycleExecutor.execute(DefaultLifecycleExecutor.java:151)<br/>
+        at org.apache.maven.DefaultMaven.processProject(DefaultMaven.java:206)<br/>
+        at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:131)<br/>
+        ... 9 more<br/>
+Caused by: java.lang.NullPointerException<br/>
+        at org.apache.maven.lifecycle.DefaultLifecycleExecutor.processPluginPhases(DefaultLifecycleExecutor.java:228)<br/>
+        at org.apache.maven.lifecycle.DefaultLifecycleExecutor.processPluginConfiguration(DefaultLifecycleExecutor.java:198)<br/>
+        at org.apache.maven.lifecycle.DefaultLifecycleExecutor.execute(DefaultLifecycleExecutor.java:127)<br/>
+        ... 11 more</p>
