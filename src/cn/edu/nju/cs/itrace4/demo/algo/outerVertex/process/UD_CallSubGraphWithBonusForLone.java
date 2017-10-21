@@ -407,7 +407,6 @@ public class UD_CallSubGraphWithBonusForLone implements CSTI{
 				index++;
 			}///
 		}//req
-		 System.out.println("UD_CallData_406:");
 		 //this.giveBonusForLoneVertexListUsingNewEquation(matrix, matrix_ud, callSubGraphList);
 		giveBonusForLoneRelativeVertexList(matrix, matrix_ud, callSubGraphList);
 		//giveBonusForLoneVertexList(matrix,matrix_ud,callSubGraphList); 

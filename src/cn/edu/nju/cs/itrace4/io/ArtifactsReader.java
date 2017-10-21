@@ -11,7 +11,7 @@ import java.io.File;
 public class ArtifactsReader {
 
     public static ArtifactsCollection getCollections(String dirPath, String postfixName) {
-    	System.out.println("dirPath:"+dirPath);
+       //System.out.println("dirPath:"+dirPath);
         File dirFile = new File(dirPath);
         if (!dirFile.exists()) {
             _.abort("Artifacts directory doesn't exist");
