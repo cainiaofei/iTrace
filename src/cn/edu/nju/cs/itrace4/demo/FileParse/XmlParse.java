@@ -17,7 +17,7 @@ public class XmlParse {
 	
 	//return a array:two elements projectName and modelName
 	public String[] process() throws ParserConfigurationException, SAXException, IOException{
-		String[] res = new String[5];
+		String[] res = new String[6];
 		DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = builderFactory.newDocumentBuilder();
 		Document doc = builder.parse(new File("resource/config.xml"));
@@ -44,6 +44,9 @@ public class XmlParse {
 			}
 			else if(curNode.getNodeName().equals("percent")) {
 				res[4] = curNode.getTextContent();
+			}
+			else if(curNode.getNodeName().equals("router")) {
+				res[5] = curNode.getTextContent();
 			}
 			else{}
 		}

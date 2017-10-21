@@ -24,7 +24,7 @@ import cn.edu.nju.cs.itrace4.relation.graph.CodeEdge;
 import javafx.util.Pair;
 
 public class UD_CallSubGraphWithBonusForLone implements CSTI{
-	private int routerLen = 6;
+	private int routerLen;
 	private double[][] graphs;
 	private List<SubGraph> callSubGraphList;
 	protected Map<Integer, String> vertexIdNameMap;
@@ -38,6 +38,11 @@ public class UD_CallSubGraphWithBonusForLone implements CSTI{
 		vertexIdNameMap = ri.getVertexIdNameMap();
 		this.valid = valid;
 		this.percent = percent;
+		this.routerLen = Integer.valueOf(System.getProperty("routerLen"));
+		if(routerLen==0) {
+			System.err.println("---err---");
+			System.exit(-1);
+		}
 	}
 	
 	
@@ -350,7 +355,6 @@ public class UD_CallSubGraphWithBonusForLone implements CSTI{
 		 filterSubGraphsList(targetArtifacts);
 		 fillLoneVertex(loneVertexSet,callSubGraphList);
 		 int loneVertexSize = loneVertexSet.size();
-		 System.out.println("UD_CallData_353:"+callSubGraphList.size());
 		 for(String req:matrix.sourceArtifactsIds()){
 			//it will get maxId for every subGraph after sort.
 			Collections.sort(callSubGraphList,new SortBySubGraph(vertexIdNameMap,matrix,req));

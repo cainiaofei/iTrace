@@ -68,6 +68,7 @@ public class BonusForLoneWithXml{
 		callEdgeScoreThreshold = Double.valueOf(res[2]);
 		dataEdgeScoreThreshold = Double.valueOf(res[3]);
 		percent = Double.valueOf(res[4]);
+		System.setProperty("routerLen", Integer.valueOf(res[5])+"");
 	}
 	
 	private void initModelMap(){
@@ -119,7 +120,7 @@ public class BonusForLoneWithXml{
         class_relationForO.setPruning(-1, -1);
         class_relationForAllDependencies.setPruning(-1, -1);
 
-        Result result_pruningeCall_Data_Dir = IR.compute(textDataset, IRModelConst.VSM, 
+        Result result_pruningeCall_Data_Dir = IR.compute(textDataset, model, 
         		new PruningCall_Data_Connection_Closenss(class_relation, class_relationForO, 
         				class_relationForAllDependencies,
         				UseEdge.Call, 1.0, 1.0));
@@ -129,22 +130,23 @@ public class BonusForLoneWithXml{
         curve.addLine(result_UD_CSTI);
         curve.addLine(result_pruningeCall_Data_Dir);
         curve.addLine(result_UD_CallThenDataProcessLoneInnerMean07);//累加 内部 直接平均
-        curve.showChart(project.getProjectName());
-        System.out.println("-----138-----");
+        double irPvalue = printPValue(result_ir, result_UD_CallThenDataProcessLoneInnerMean07);
+        double udPvalue = printPValue(result_UD_CSTI, result_UD_CallThenDataProcessLoneInnerMean07);
+        String irPvalueStr = (irPvalue+"").substring(0, 5);
+        String udPvalueStr = (udPvalue+"").substring(0, 5);
+        curve.showChart(project.getProjectName()+"-"+irPvalueStr+"-"+udPvalueStr);
+        curve.curveStore(".",project.getProjectName()+"-"+callEdgeScoreThreshold+"-"+
+        		dataEdgeScoreThreshold+"-"+model+irPvalueStr+"-"+udPvalueStr);
        
-       //showRate(ri,textDataset);
         
-       printPValue(result_ir, result_UD_CallThenDataProcessLoneInnerMean07);
-       printPValue(result_UD_CSTI, result_UD_CallThenDataProcessLoneInnerMean07);
-        
-       String ud = result_UD_CSTI.getWilcoxonDataCol_fmeasure("UD");
-       String innerMean7 = result_UD_CallThenDataProcessLoneInnerMean07.getWilcoxonDataCol_fmeasure("innerMean07");
-       String ir = result_ir.getWilcoxonDataCol_fmeasure("IR");
-       List<String> list = new LinkedList<String>();
-       list.add(ud);
-       list.add(innerMean7);
-       list.add(ir);
-       storeRFile(list);
+//       String ud = result_UD_CSTI.getWilcoxonDataCol_fmeasure("UD");
+//       String innerMean7 = result_UD_CallThenDataProcessLoneInnerMean07.getWilcoxonDataCol_fmeasure("innerMean07");
+//       String ir = result_ir.getWilcoxonDataCol_fmeasure("IR");
+//       List<String> list = new LinkedList<String>();
+//       list.add(ud);
+//       list.add(innerMean7);
+//       list.add(ir);
+//       storeRFile(list);
        
         /*
        System.out.println("---------------------------------------------");
@@ -350,12 +352,13 @@ public class BonusForLoneWithXml{
     	return count;
 	}
 
-	private static void printPValue(Result ours, Result compareTo) {
+	private static double printPValue(Result ours, Result compareTo) {
 	      MannWhitneyUTest mannWhitneyUTest = new MannWhitneyUTest();
 	      double pValue_fmeasure = mannWhitneyUTest.mannWhitneyUTest(ours.getWilcoxonDataArray_fmeasure(), compareTo.getWilcoxonDataArray_fmeasure());
 	      double pValue_fp = mannWhitneyUTest.mannWhitneyUTest(ours.getWilcoxonDataArray_fp(), compareTo.getWilcoxonDataArray_fp());
-	      System.out.println("F-measure pValue = " + pValue_fmeasure );
-	      System.out.println("FP pValue = " + pValue_fp );
+//	      System.out.println("F-measure pValue = " + pValue_fmeasure );
+//	      System.out.println("FP pValue = " + pValue_fp );
+	      return pValue_fmeasure;
 	}
 	
 	public static void main(String[] args) throws IOException, ClassNotFoundException,

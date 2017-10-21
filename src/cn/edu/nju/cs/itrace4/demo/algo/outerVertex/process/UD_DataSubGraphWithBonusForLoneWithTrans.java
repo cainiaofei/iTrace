@@ -283,7 +283,7 @@ public class UD_DataSubGraphWithBonusForLoneWithTrans implements CSTI{
 		 if(curVertex==target){
 	            allRoutes.add(new LinkedList<Integer>(curRoute));
 	     }
-	     else if(vertexInGraph.contains(curVertex)||curRoute.size()==6){
+	     else if(vertexInGraph.contains(curVertex)||curRoute.size()==2){
 	            return ;
 	     }
 	     else{

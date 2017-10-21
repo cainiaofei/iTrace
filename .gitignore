@@ -3,4 +3,6 @@ data/
 bin/
 out/
 output/
-
+*.png
+*.zip
+*.rar

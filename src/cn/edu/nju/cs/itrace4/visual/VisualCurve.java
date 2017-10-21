@@ -143,6 +143,14 @@ public class VisualCurve extends JFrame {
                 this.getContentPane());
         ImageIO.write(img, "png", new File(path + "/" + curveName + ".png"));
     }
+    
+    public void curveStore(String path,String name) throws IOException {
+        String curveName = name;
+        Component component = this.getContentPane();
+        BufferedImage img = getScreenShot(component);
+        ImageIO.write(img, "png", new File(path + "/" + curveName + ".png"));
+    }
+    
 
     public void resultStore(String expExportPath, String expName) throws IOException {
         String dirName = expName;

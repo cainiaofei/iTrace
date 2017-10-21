@@ -144,7 +144,7 @@ public class PruningCall_Data_Connection_Closenss implements CSTI {
                 for (String s : dataVertexes) {
                     if (!extendedByDataRelation.contains(s)) {
                         extendedByDataRelation.add(s);
-                        System.out.println(" s = " + s );
+                        //System.out.println(" s = " + s );
                     }
                 }
             }
@@ -183,11 +183,11 @@ public class PruningCall_Data_Connection_Closenss implements CSTI {
                         correctImprovedTargetsList.add(target + "@" + source);
                         log.append("Correct\n");
 
-                        System.out.println(source + " " + target + " " + improvedScore + " [Correct]" + " Call");
+                        //System.out.println(source + " " + target + " " + improvedScore + " [Correct]" + " Call");
                     } else {
                         wrongNumForInitialRegion++;
                         log.append("Wrong\n");
-                        System.out.println(source + " " + target + " " + improvedScore+ " Call");
+                        //System.out.println(source + " " + target + " " + improvedScore+ " Call");
                     }
 
                 } else if (extendedByDataRelation.contains(target)) {
@@ -202,12 +202,12 @@ public class PruningCall_Data_Connection_Closenss implements CSTI {
                         correctImprovedTargetsList.add(target + "@" + source);
                         log.append("Correct\n");
 
-                        System.out.println(source + " " + target + " " + improvedScore +  " [Correct]"+ " Data");
+                        //System.out.println(source + " " + target + " " + improvedScore +  " [Correct]"+ " Data");
                     } else {
                         wrongNumForInitialRegion++;
                         log.append("Wrong\n");
 
-                        System.out.println(source + " " + target + " " + improvedScore+ " Data");
+                        //System.out.println(source + " " + target + " " + improvedScore+ " Data");
                     }
 
 
@@ -360,7 +360,7 @@ public class PruningCall_Data_Connection_Closenss implements CSTI {
         index.append("Improved F Measure For Seed = " + fMeasureForSeed + "\n");
 
         log.append(index.toString());
-        System.out.println(index.toString());
+       // System.out.println(index.toString());
         return matrix_neighbour;
     }
 
