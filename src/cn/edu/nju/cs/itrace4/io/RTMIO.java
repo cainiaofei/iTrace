@@ -23,7 +23,7 @@ public class RTMIO {
             sims.addLink(link.getSourceArtifactId(), link.getTargetArtifactId(), link.getScore());
             traceLinkNum++;
         }
-        System.out.printf("Read %d trace links from rtm.\n", traceLinkNum);
+        //System.out.printf("Read %d trace links from rtm.\n", traceLinkNum);
 
         return sims;
     }

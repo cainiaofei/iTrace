@@ -33,9 +33,7 @@ public class UD_CallThenDataWithBonusForLone implements CSTI{
 			SimilarityMatrix similarityMatrix) {
 		//Map<String,Set<String>> valid = new HashMap<String,Set<String>>();
 		UD_CallSubGraphWithBonusForLone improveBasedCall = new UD_CallSubGraphWithBonusForLone(ri,valid,percent);
-		System.out.println("we method call start--");
 		SimilarityMatrix afterImproveBasedCall = improveBasedCall.improve(matrix, textDataset,methodType);
-		System.out.println("we method call finish--");
 		UD_DataSubGraphWithBonusForLoneWithTrans improveBasedData = new
 				UD_DataSubGraphWithBonusForLoneWithTrans(ri,valid,
 				matrix,percent);
