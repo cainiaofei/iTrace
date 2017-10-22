@@ -12,6 +12,10 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+<<<<<<< HEAD
+=======
+import java.util.Set;
+>>>>>>> 6128e8c179a8672594aabe79084049147f5de864
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -28,7 +32,11 @@ public class AdjustParameter {
 
 	public void lookForParameter() throws InterruptedException, IOException, ClassNotFoundException {
 		System.setProperty("routerLen", 6 + "");
+<<<<<<< HEAD
 		Project[] projects = { new Itrust(), new Maven(), new Infinispan() };
+=======
+		Project[] projects = { new Itrust(), new Maven()/*, new Infinispan() */};
+>>>>>>> 6128e8c179a8672594aabe79084049147f5de864
 		String[] models = { "cn.edu.nju.cs.itrace4.core.ir.VSM", "cn.edu.nju.cs.itrace4.core.ir.JSD",
 				"cn.edu.nju.cs.itrace4.core.ir.LSI" };
 		List<Thread> threadList = new ArrayList<Thread>();
@@ -73,7 +81,13 @@ public class AdjustParameter {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+<<<<<<< HEAD
 		findBestParameter(0.0588);
+=======
+		System.out.println("-------all sub thread over");
+		findBestParameter(0.0888);
+		System.out.println("---terminal-----");
+>>>>>>> 6128e8c179a8672594aabe79084049147f5de864
 	}
 
 	public void findBestParameter(double threshold) {
@@ -96,7 +110,14 @@ public class AdjustParameter {
 				}
 			}
 			if (allLessThanThreshold) {
+<<<<<<< HEAD
 				System.out.println(str);
+=======
+				System.out.println("--------------");
+				System.out.println(str);
+				System.out.println(irList.toString());
+				System.out.println(udList.toString());
+>>>>>>> 6128e8c179a8672594aabe79084049147f5de864
 			}
 		}
 	}
@@ -113,6 +134,12 @@ public class AdjustParameter {
 			if (!map.containsKey(callDataIden)) {
 				map.put(callDataIden, new LinkedList<Double>());
 			}
+<<<<<<< HEAD
+=======
+			if(callDataIden.equals("0.4-0.7")){
+				System.out.println(key+":"+pvalueMap.get(key));
+			}
+>>>>>>> 6128e8c179a8672594aabe79084049147f5de864
 			map.get(callDataIden).add(pvalueMap.get(key));
 		}
 		return map;
@@ -132,8 +159,30 @@ public class AdjustParameter {
 		out.close();
 	}
 
+<<<<<<< HEAD
 	public static void main(String[] args) throws InterruptedException, ClassNotFoundException, IOException {
 		AdjustParameter tool = new AdjustParameter();
 		tool.lookForParameter();
+=======
+	/**
+	 * readObject 
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
+	 * @throws ClassNotFoundException 
+	 */
+	public void readObject() throws FileNotFoundException, IOException, ClassNotFoundException{
+		ObjectInputStream in = new ObjectInputStream(new FileInputStream(new File("irPvalueMap.out")));
+		irPvalueMap = (Map<String, Double>) in.readObject();
+		in = new ObjectInputStream(new FileInputStream(new File("udPvalueMap.out")));
+		udPvalueMap = (Map<String, Double>) in.readObject();
+		in.close();
+	}
+	
+	public static void main(String[] args) throws InterruptedException, ClassNotFoundException, IOException {
+		AdjustParameter tool = new AdjustParameter();
+//		tool.lookForParameter();
+		tool.readObject();
+		tool.findBestParameter(0.09);
+>>>>>>> 6128e8c179a8672594aabe79084049147f5de864
 	}
 }
