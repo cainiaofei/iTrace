@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
-<<<<<<< HEAD
-	<projectName>iTrust</projectName>
-	<modelName>vsm</modelName>
-	<callEdgeScoreThreshold>0.6</callEdgeScoreThreshold>
-	<dataEdgeScoreThreshold>0.6</dataEdgeScoreThreshold>
-=======
 	<projectName>maven</projectName>
 	<modelName>jsd</modelName>
 	<callEdgeScoreThreshold>0.4</callEdgeScoreThreshold>
-	<dataEdgeScoreThreshold>0.85</dataEdgeScoreThreshold>
->>>>>>> 6128e8c179a8672594aabe79084049147f5de864
-	<percent>0.7</percent>
-	<router>7</router>
+	<dataEdgeScoreThreshold>0.7</dataEdgeScoreThreshold>
+	<percent>0.5</percent>
+	<router>4</router>
 </config>
