@@ -37,7 +37,6 @@ import cn.edu.nju.cs.itrace4.demo.relation.StoreDataSubGraph;
 import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
 import cn.edu.nju.cs.itrace4.demo.tool.AnalyzeResult;
 import cn.edu.nju.cs.itrace4.demo.visual.MyVisualCurve;
-import cn.edu.nju.cs.itrace4.exp.tool.LookForBug;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 import cn.edu.nju.cs.itrace4.util.Setting;
  
@@ -93,7 +92,6 @@ public class BonusForLoneWithXml{
         RelationInfo ri = (RelationInfo) ois.readObject();
         ois.close();
         
-        LookForBug.getClassFromRI(ri);
         
         Result result_ir = IR.compute(textDataset, model, new None_CSTI());
         Result result_UD_CSTI = IR.compute(textDataset,model, new UD_CSTI(ri));

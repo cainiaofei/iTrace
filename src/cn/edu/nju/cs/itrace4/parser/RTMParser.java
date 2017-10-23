@@ -36,6 +36,7 @@ public class RTMParser {
                 target = target.split("::")[0];
 
 //                For JHotDraw
+                System.out.println("target:"+target);
                 target = getClassName(target);
             } else if (granularity.equals(Granularity.METHOD)) {
                 /*
