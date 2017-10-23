@@ -71,7 +71,7 @@ public class CallRelationIO implements CallRelationIOInterface{
     }
 
     private static String sqlFormatToIdFormatInCallDB(String sqlFormat) {
-
+    	System.out.println(sqlFormat);
         String[] tokens = sqlFormat.split("\\.");
 
         // find Java method
@@ -110,7 +110,9 @@ public class CallRelationIO implements CallRelationIOInterface{
             }
         }
         // [keng]
-        return sb.toString().replace("_002d", "-");
+        String res = sb.toString().replace("_002d", "-");
+        System.out.println("res:"+res);
+        return res;
     }
 
     public static void main(String[] args) {

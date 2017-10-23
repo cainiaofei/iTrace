@@ -172,7 +172,7 @@ public class UD_DataSubGraphWithBonusForLoneWithTrans implements CSTI{
 
 	public SimilarityMatrix processLoneVertexInnerMean (SimilarityMatrix matrix,
 			TextDataset textDataset){
-		SimilarityMatrix oracle = textDataset.getRtm();
+		 SimilarityMatrix oracle = textDataset.getRtm();
 		 SimilarityMatrix matrix_ud = new SimilarityMatrix();
 		 //get all target artifacts
 		 Set<String> targetArtifacts = matrix.targetArtifactsIds();
@@ -213,7 +213,7 @@ public class UD_DataSubGraphWithBonusForLoneWithTrans implements CSTI{
 					for(String vertexName:vertexMapWeight.keySet()){
 						double curValue = matrix.getScoreForLink(req, vertexName);
 						if(!vertexName.equals(represent)){
-							curValue = Math.min(maxScore, curValue+maxScore/subGraph.getVertexList().size());
+							curValue = Math.min(maxScore, curValue+maxScore/(subGraph.getVertexList().size()-1));
 							maxScoreInThisSubGraph = Math.max(maxScoreInThisSubGraph, curValue);
 						}
 						matrix_ud.addLink(req, vertexName,curValue);
@@ -242,6 +242,8 @@ public class UD_DataSubGraphWithBonusForLoneWithTrans implements CSTI{
 		}
 		
 		double rate = allSize(valid)*1.0/res.allLinks().size(); 
+		System.out.println("rate");
+		System.setProperty("rate", rate+"");
 		return res;
 	}
 	
@@ -307,7 +309,10 @@ public class UD_DataSubGraphWithBonusForLoneWithTrans implements CSTI{
 			List<Integer> vertexList = subGraph.getVertexList();
 			Iterator<Integer> ite = vertexList.iterator();
 			while(ite.hasNext()){
-				if(!set.contains(vertexIdNameMap.get(ite.next()))){
+				int id = ite.next();
+				String name = vertexIdNameMap.get(id);
+				if(!set.contains(name)){
+					System.out.println("delete:"+name);
 					ite.remove();
 				}
 			}

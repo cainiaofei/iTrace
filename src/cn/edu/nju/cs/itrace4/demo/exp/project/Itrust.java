@@ -11,7 +11,7 @@ public class Itrust implements Project{
     public static String jsExpExportPath = "data/exp/iTrust/result/js";
     public static String jsExpExportPath_RE = "data/exp/iTrust/result/js_re";
     public static String method_relationInfoPath = "data/exp/iTrust/relation/METHOD_relationInfo.ser";
-    public static String class_relationInfoPath = "data/exp/iTrust/relation/CLASS_relationInfo.ser";
+    public static String class_relationInfoPath = "data/exp/iTrust/relation/CLASS_relationInfo_whole.ser";
     public static String class_relationInfoPathWhole = "data/exp/iTrust/relation/CLASS_relationInfo_whole.ser";
     public static String vsmExpExportPath_ICSME = "data/exp/iTrust/icsme_result/vsm";
     public static String jsExpExportPath_ICSME = "data/exp/iTrust/icsme_result/js";

@@ -31,8 +31,8 @@ public class SourceTargetUnion implements SourceTargetUnionInterface {
         System.out.printf("RTM contains %d classes.\n", rtmClassNum);
         System.out.printf("RTM contains %d methods.\n", rtmMethodNum);
 
-        BatchingParser bp = new BatchingParser(srcDirPath);
-        bp.parse();
+//        BatchingParser bp = new BatchingParser(srcDirPath);
+//        bp.parse();
 
         // Delete Requirements and code which are not mentioned in RTM,
 
@@ -128,11 +128,17 @@ public class SourceTargetUnion implements SourceTargetUnionInterface {
         _.writeFile(sb.toString(), rtmClassPath);
     }
 
+    /**
+     * @author zzf
+     * @date 2017.10.23
+     * @description note the process of jsp name. 
+     */
     private void deleteFilesNotInRTM(String dirPath, Set<String> rtmSet, String fileType) {
         File dir = new File(dirPath);
         int deleteFileNum = 0;
         int allFileNum = 0;
         for (File f : dir.listFiles()) {
+        	System.out.println(dirPath+":"+f.getName());
             String id = f.getName().split(".txt")[0];
             // warning!! jsp文件名 存在“-”字符的编码问题
             id = id.replace("‐", "-");

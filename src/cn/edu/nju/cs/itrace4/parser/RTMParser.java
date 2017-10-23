@@ -62,6 +62,11 @@ public class RTMParser {
         return sort(columnsList, rtm);
     }
 
+    /**
+     * @author zzf <tiaozhanzhe668@163.com>
+     * @date 2017.10.23
+     * @description note jsp 
+     */
     private static String getClassName(String str) {
         String[] tokens = str.split("\\.");
 
@@ -70,7 +75,7 @@ public class RTMParser {
                 return s;
             }
         }
-        return "";
+        return str;
     }
 
     /*

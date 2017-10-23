@@ -29,7 +29,7 @@ public class AdjustParameter {
 
 	public void lookForParameter() throws InterruptedException, IOException, ClassNotFoundException {
 		System.setProperty("routerLen", 6 + "");
-		Project[] projects = { new Itrust(), new Maven()/*, new Infinispan() */};
+		Project[] projects = { new Itrust(), new Maven(), new Infinispan() };
 		String[] models = { "cn.edu.nju.cs.itrace4.core.ir.VSM", "cn.edu.nju.cs.itrace4.core.ir.JSD",
 				"cn.edu.nju.cs.itrace4.core.ir.LSI" };
 		List<Thread> threadList = new ArrayList<Thread>();
@@ -74,6 +74,7 @@ public class AdjustParameter {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		findBestParameter(0.0588);
 		System.out.println("-------all sub thread over");
 		findBestParameter(0.0888);
 		System.out.println("---terminal-----");
@@ -99,6 +100,7 @@ public class AdjustParameter {
 				}
 			}
 			if (allLessThanThreshold) {
+				System.out.println(str);
 				System.out.println("--------------");
 				System.out.println(str);
 				System.out.println(irList.toString());

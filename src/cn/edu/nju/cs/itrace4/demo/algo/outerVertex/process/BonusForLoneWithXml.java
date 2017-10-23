@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
 
@@ -25,7 +24,6 @@ import cn.edu.nju.cs.itrace4.core.algo.UseEdge;
 import cn.edu.nju.cs.itrace4.core.algo.icse.PruningCall_Data_Connection_Closenss;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.ir.IR;
-import cn.edu.nju.cs.itrace4.core.ir.IRModelConst;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
 import cn.edu.nju.cs.itrace4.demo.FileParse.XmlParse;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
@@ -39,7 +37,7 @@ import cn.edu.nju.cs.itrace4.demo.relation.StoreDataSubGraph;
 import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
 import cn.edu.nju.cs.itrace4.demo.tool.AnalyzeResult;
 import cn.edu.nju.cs.itrace4.demo.visual.MyVisualCurve;
-import cn.edu.nju.cs.itrace4.exp.itrust.ITRUST_CONSTANTS;
+import cn.edu.nju.cs.itrace4.exp.tool.LookForBug;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 import cn.edu.nju.cs.itrace4.util.Setting;
  
@@ -94,17 +92,20 @@ public class BonusForLoneWithXml{
         ObjectInputStream ois = new ObjectInputStream(fis);
         RelationInfo ri = (RelationInfo) ois.readObject();
         ois.close();
-
+        
+        LookForBug.getClassFromRI(ri);
+        
         Result result_ir = IR.compute(textDataset, model, new None_CSTI());
         Result result_UD_CSTI = IR.compute(textDataset,model, new UD_CSTI(ri));
         ri.setPruning(callEdgeScoreThreshold, dataEdgeScoreThreshold);
-        
+        System.out.println("IR Count:"+getResultSize(result_ir));
         Map<String,Set<String>> valid = new HashMap<String,Set<String>>();
         Result result_UD_CallThenDataProcessLoneInnerMean07 = IR.compute(textDataset,model,
         		new UD_CallThenDataWithBonusForLone(ri,callEdgeScoreThreshold,
         				dataEdgeScoreThreshold,MethodTypeProcessLone.InnerMean,percent,valid));//0.7
         
         //below closeness method
+        System.out.println("ud_call_data:"+this.getResultSize(result_UD_CallThenDataProcessLoneInnerMean07));
         FileInputStream fis1 = new FileInputStream(project.getClass_RelationInfoPath());
         ObjectInputStream ois1 = new ObjectInputStream(fis1);
         RelationInfo class_relation = (RelationInfo) ois1.readObject();
@@ -120,22 +121,24 @@ public class BonusForLoneWithXml{
         class_relationForO.setPruning(-1, -1);
         class_relationForAllDependencies.setPruning(-1, -1);
 
-        Result result_pruningeCall_Data_Dir = IR.compute(textDataset, model, 
-        		new PruningCall_Data_Connection_Closenss(class_relation, class_relationForO, 
-        				class_relationForAllDependencies,
-        				UseEdge.Call, 1.0, 1.0));
+//        Result result_pruningeCall_Data_Dir = IR.compute(textDataset, model, 
+//        		new PruningCall_Data_Connection_Closenss(class_relation, class_relationForO, 
+//        				class_relationForAllDependencies,
+//        				UseEdge.Call, 1.0, 1.0));
         
         MyVisualCurve curve = new MyVisualCurve();
         curve.addLine(result_ir);
         curve.addLine(result_UD_CSTI);
-        curve.addLine(result_pruningeCall_Data_Dir);
+        //curve.addLine(result_pruningeCall_Data_Dir);
         curve.addLine(result_UD_CallThenDataProcessLoneInnerMean07);//累加 内部 直接平均
         double irPvalue = printPValue(result_ir, result_UD_CallThenDataProcessLoneInnerMean07);
         double udPvalue = printPValue(result_UD_CSTI, result_UD_CallThenDataProcessLoneInnerMean07);
         String irPvalueStr = (irPvalue+"").substring(0, 5);
         String udPvalueStr = (udPvalue+"").substring(0, 5);
-        curve.showChart(project.getProjectName()+"-"+irPvalueStr+"-"+udPvalueStr);
-        curve.curveStore(".",project.getProjectName()+"-"+callEdgeScoreThreshold+"-"+
+        double rate = Double.valueOf(System.getProperty("rate"));
+        String rateStr = (rate+"").substring(0, 5);
+        curve.showChart(project.getProjectName()+"-"+irPvalueStr+"-"+udPvalueStr+"-"+rateStr);
+        curve.curveStore(".",project.getProjectName()+"-"+percent+"-"+callEdgeScoreThreshold+"-"+
         		dataEdgeScoreThreshold+"-"+model+irPvalueStr+"-"+udPvalueStr);
        
         
@@ -185,6 +188,16 @@ public class BonusForLoneWithXml{
 //        storeList(APList,MAPList);
     }
 
+	
+	private int getResultSize(Result result) {
+		int count = 0;
+		for(String key:result.matrix.sourceArtifactsIds()) {
+			count += result.matrix.getLinksForSourceId(key).size();
+		}
+		return count;
+	}
+	
+	
 	private void storeList(List<String> aPList, List<String> mAPList) throws IOException {
 		BufferedWriter bw = new BufferedWriter(new FileWriter(new File("out"+
 	File.separator+project.getProjectName()+File.separator+model+"_MAP.txt")));

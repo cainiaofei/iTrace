@@ -5,5 +5,5 @@
 	<callEdgeScoreThreshold>0.4</callEdgeScoreThreshold>
 	<dataEdgeScoreThreshold>0.7</dataEdgeScoreThreshold>
 	<percent>0.7</percent>
-	<router>7</router>
+	<router>6</router>
 </config>
