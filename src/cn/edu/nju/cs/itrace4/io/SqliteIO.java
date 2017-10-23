@@ -76,10 +76,9 @@ public class SqliteIO {
 
                 // warning!! iTrust-req.db 存在“-”字符的编码问题
                 rowName = rowName.replace("‐", "-");
-
+                System.out.println("rowName:"+rowName);
                 for (String col : columnsList) {
                     String cell = rs.getString(col).trim();
-
                     if (!cell.equals("")) {
                         if (cell.equals("x")) {
                             sb.append(col);

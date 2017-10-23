@@ -7,6 +7,7 @@ import java.util.Set;
 import cn.edu.nju.cs.itrace4.core.algo.CSTI;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
+import cn.edu.nju.cs.itrace4.exp.tool.GetLinkCount;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 import javafx.util.Pair;
 
@@ -33,7 +34,9 @@ public class UD_CallThenDataWithBonusForLone implements CSTI{
 			SimilarityMatrix similarityMatrix) {
 		//Map<String,Set<String>> valid = new HashMap<String,Set<String>>();
 		UD_CallSubGraphWithBonusForLone improveBasedCall = new UD_CallSubGraphWithBonusForLone(ri,valid,percent);
+		System.out.println("before_call"+GetLinkCount.getResultSize(matrix));
 		SimilarityMatrix afterImproveBasedCall = improveBasedCall.improve(matrix, textDataset,methodType);
+		System.out.println("after"+GetLinkCount.getResultSize(afterImproveBasedCall));
 		UD_DataSubGraphWithBonusForLoneWithTrans improveBasedData = new
 				UD_DataSubGraphWithBonusForLoneWithTrans(ri,valid,
 				matrix,percent);

@@ -172,7 +172,7 @@ public class UD_DataSubGraphWithBonusForLoneWithTrans implements CSTI{
 
 	public SimilarityMatrix processLoneVertexInnerMean (SimilarityMatrix matrix,
 			TextDataset textDataset){
-		SimilarityMatrix oracle = textDataset.getRtm();
+		 SimilarityMatrix oracle = textDataset.getRtm();
 		 SimilarityMatrix matrix_ud = new SimilarityMatrix();
 		 //get all target artifacts
 		 Set<String> targetArtifacts = matrix.targetArtifactsIds();
@@ -309,7 +309,10 @@ public class UD_DataSubGraphWithBonusForLoneWithTrans implements CSTI{
 			List<Integer> vertexList = subGraph.getVertexList();
 			Iterator<Integer> ite = vertexList.iterator();
 			while(ite.hasNext()){
-				if(!set.contains(vertexIdNameMap.get(ite.next()))){
+				int id = ite.next();
+				String name = vertexIdNameMap.get(id);
+				if(!set.contains(name)){
+					System.out.println("delete:"+name);
 					ite.remove();
 				}
 			}

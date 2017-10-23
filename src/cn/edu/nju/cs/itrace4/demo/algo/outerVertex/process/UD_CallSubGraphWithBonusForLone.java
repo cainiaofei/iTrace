@@ -410,7 +410,7 @@ public class UD_CallSubGraphWithBonusForLone implements CSTI{
 		 //this.giveBonusForLoneVertexListUsingNewEquation(matrix, matrix_ud, callSubGraphList);
 		giveBonusForLoneRelativeVertexList(matrix, matrix_ud, callSubGraphList);
 		//giveBonusForLoneVertexList(matrix,matrix_ud,callSubGraphList); 
-		 
+		
 		LinksList allLinks = matrix_ud.allLinks();
 		Collections.sort(allLinks, Collections.reverseOrder());
 		SimilarityMatrix res = new SimilarityMatrix();
