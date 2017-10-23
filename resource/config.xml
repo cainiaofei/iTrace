@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
-	<projectName>maven</projectName>
-	<modelName>jsd</modelName>
+	<projectName>iTrust</projectName>
+	<modelName>lsi</modelName>
 	<callEdgeScoreThreshold>0.4</callEdgeScoreThreshold>
-	<dataEdgeScoreThreshold>0.85</dataEdgeScoreThreshold>
+	<dataEdgeScoreThreshold>0.7</dataEdgeScoreThreshold>
 	<percent>0.7</percent>
 	<router>7</router>
 </config>
