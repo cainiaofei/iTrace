@@ -18,18 +18,16 @@ public class TransferTXT {
 	
 	Set<String> set = new HashSet<String>();
 	
-	public TransferTXT() throws IOException, ClassNotFoundException {
-		 FileInputStream fis = new FileInputStream("data/exp/iTrust/relation/CLASS_relationInfo_whole.ser");
-	     ObjectInputStream ois = new ObjectInputStream(fis);
-	     RelationInfo ri = (RelationInfo) ois.readObject();
-	     ois.close();
-	     set = LookForBug.getClassFromRI(ri);
-	     System.out.println(set.size());
-	     System.out.println("------------------");
-	     for(String str:set) {
-	    	 System.out.println(str);
-	     }
-	     System.out.println("---------------------");
+	public TransferTXT() /*throws IOException, ClassNotFoundException*/ {
+//		 FileInputStream fis = new FileInputStream("data/exp/iTrust/relation/CLASS_relationInfo_whole.ser");
+//	     ObjectInputStream ois = new ObjectInputStream(fis);
+//	     RelationInfo ri = (RelationInfo) ois.readObject();
+//	     ois.close();
+//	     set = LookForBug.getClassFromRI(ri);
+//	     for(String str:set) {
+//	    	 System.out.println(str);
+//	     }
+//	     System.out.println("---------------------");
 	}
 	
 	public void transferTXT(String origin,String target) throws IOException {
