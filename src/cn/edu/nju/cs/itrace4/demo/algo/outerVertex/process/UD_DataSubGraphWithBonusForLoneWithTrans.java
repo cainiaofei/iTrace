@@ -40,7 +40,6 @@ public class UD_DataSubGraphWithBonusForLoneWithTrans implements CSTI{
 		this.valid = valid;
 		this.originMatrix = originMatrix;
 		this.percent = percent;
-		this.percent = percent;
 	}
 	
 	private double[][] describeGraphWithMatrix(Map<CodeEdge, Double> dataEdgeScoreMap, int size) {
@@ -242,7 +241,7 @@ public class UD_DataSubGraphWithBonusForLoneWithTrans implements CSTI{
 		}
 		
 		double rate = allSize(valid)*1.0/res.allLinks().size(); 
-		System.out.println("rate");
+		System.out.println(rate);
 		System.setProperty("rate", rate+"");
 		return res;
 	}

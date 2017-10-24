@@ -23,7 +23,9 @@ import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.MethodTypeProcessLone
 import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.UD_CallThenDataWithBonusForLone;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
 import cn.edu.nju.cs.itrace4.demo.exp.project.JhotDraw;
+import cn.edu.nju.cs.itrace4.demo.exp.project.Maven;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Gantt;
+import cn.edu.nju.cs.itrace4.demo.exp.project.Infinispan;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
 import cn.edu.nju.cs.itrace4.demo.tool.CliffAnalyze;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
@@ -43,8 +45,8 @@ public class GetAPAndMAPAllPercent{
 	
 	public void initProjectMap(){
 		projectMap.put(0, "iTrust");
-		projectMap.put(1, "Gantt");
-		projectMap.put(2, "jHotDraw");
+		projectMap.put(1, "Maven");
+		projectMap.put(2, "Infinispan");
 	}
 	
 	public void initModelMap(){
@@ -61,8 +63,8 @@ public class GetAPAndMAPAllPercent{
 	
 	public void initProjects(Project[] project){
 		project[0] = new Itrust();
-		project[1] = new Gantt();
-		project[2] = new JhotDraw();
+		project[1] = new Maven();
+		project[2] = new Infinispan();
 	}
 	
 	public void start() throws Exception{

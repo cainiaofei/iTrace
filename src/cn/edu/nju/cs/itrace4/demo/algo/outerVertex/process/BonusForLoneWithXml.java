@@ -93,7 +93,7 @@ public class BonusForLoneWithXml{
         RelationInfo ri = (RelationInfo) ois.readObject();
         ois.close();
         
-        LookForBug.getClassFromRI(ri);
+        //LookForBug.getClassFromRI(ri);
         
         Result result_ir = IR.compute(textDataset, model, new None_CSTI());
         Result result_UD_CSTI = IR.compute(textDataset,model, new UD_CSTI(ri));

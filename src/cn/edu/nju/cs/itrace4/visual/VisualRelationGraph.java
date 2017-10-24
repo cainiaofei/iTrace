@@ -381,7 +381,7 @@ public class VisualRelationGraph {
     }
 
     public static void main(String[] args) throws IOException {
-        String class_relationInfo = "data/exp/Infinispan/relation/CLASS_relationInfo.ser";
+        String class_relationInfo = "data/exp/iTrust/relation/CLASS_relationInfo.ser";
 
         try {
             FileInputStream fis = new FileInputStream(class_relationInfo);
@@ -391,13 +391,13 @@ public class VisualRelationGraph {
 
             //System.out.println(ri.getRelationGraphFile());
 
-            String rtmClassPath = "data/exp/Infinispan/rtm/RTM_CLASS.txt";
-            String ucPath = "data/exp/Infinispan/uc";
-            String classDirPath = "data/exp/Infinispan/class/code";
+            String rtmClassPath = "data/exp/iTrust/rtm/RTM_CLASS.txt";
+            String ucPath = "data/exp/iTrust/uc";
+            String classDirPath = "data/exp/iTrust/class/code";
             TextDataset textDataset = new TextDataset(ucPath, classDirPath, rtmClassPath);
 
             CallDataRelationGraph cdGraph = new CallDataRelationGraph(ri);
-            String layoutPath = "data/exp/Infinispan/relation/PersistentLayoutDemo.out";
+            String layoutPath = "data/exp/iTrust/relation/PersistentLayoutDemo.out";
             VisualRelationGraph visualRelationGraph = new VisualRelationGraph(textDataset, cdGraph, layoutPath);
             visualRelationGraph.show();
 
