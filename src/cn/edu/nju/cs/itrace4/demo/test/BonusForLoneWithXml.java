@@ -105,7 +105,7 @@ public class BonusForLoneWithXml{
         Result result_UD_CallThenDataProcessLoneInnerMean07 = IR.compute(textDataset,model,
         		new UD_CallThenDataWithBonusForLone(ri,callEdgeScoreThreshold,
         				dataEdgeScoreThreshold,MethodTypeProcessLone.InnerMean,percent,valid));//0.7
-        
+        result_ir.getAveragePrecisionByRanklist();
         //below closeness method
         System.out.println("ud_call_data:"+this.getResultSize(result_UD_CallThenDataProcessLoneInnerMean07));
         FileInputStream fis1 = new FileInputStream(project.getClass_RelationInfoPath());
@@ -138,7 +138,7 @@ public class BonusForLoneWithXml{
         String irPvalueStr = (irPvalue+"").substring(0, 5);
         String udPvalueStr = (udPvalue+"").substring(0, 5);
         double rate = Double.valueOf(System.getProperty("rate"));
-        String rateStr = (rate+"").substring(0, 5);
+        String rateStr = (rate+"");
         curve.showChart(project.getProjectName()+"-"+irPvalueStr+"-"+udPvalueStr+"-"+rateStr);
         curve.curveStore(".",project.getProjectName()+"-"+percent+"-"+callEdgeScoreThreshold+"-"+
         		dataEdgeScoreThreshold+"-"+model+irPvalueStr+"-"+udPvalueStr);

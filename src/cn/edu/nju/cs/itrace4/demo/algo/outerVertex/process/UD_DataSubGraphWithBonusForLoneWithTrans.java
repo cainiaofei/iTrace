@@ -32,6 +32,10 @@ public class UD_DataSubGraphWithBonusForLoneWithTrans implements CSTI{
 	private SimilarityMatrix originMatrix;
 	private double percent;
 	
+	//@date 2017.10.25
+	private int areaCount = 2;
+	private double minInnerBonus = Integer.MAX_VALUE;
+	
 	public UD_DataSubGraphWithBonusForLoneWithTrans(RelationInfo ri,Map<String,Set<String>> valid,
 			SimilarityMatrix originMatrix,double percent){
 		dataSubGraphList = new StoreDataSubGraph().getSubGraphs(ri);
@@ -54,10 +58,22 @@ public class UD_DataSubGraphWithBonusForLoneWithTrans implements CSTI{
 		return matrix;
 	}
 
-	private void fillLoneVertex(Set<Integer> loneVertexSet, List<SubGraph> callSubGraphList) {
-		for(SubGraph subGraph:dataSubGraphList){
-			if(subGraph.getVertexList().size()==1){
-				loneVertexSet.add(subGraph.getVertexList().get(0));
+	private void fillLoneVertex(Set<Integer> loneVertexSet, List<SubGraph> dataSubGraphList) {
+//		for(SubGraph subGraph:dataSubGraphList){
+//			if(subGraph.getVertexList().size()==1){
+//				loneVertexSet.add(subGraph.getVertexList().get(0));
+//			}
+//		}
+		/**
+		 * @author zzf <tiaozhanzhe668@163.com>
+		 * @date 2017.10.25
+		 * @description the area has at least three points.
+		 */
+		for(SubGraph subGraph:dataSubGraphList) {
+			if(subGraph.getVertexList().size()<areaCount) {
+				for(int id:subGraph.getVertexList()) {
+					loneVertexSet.add(id);
+				}
 			}
 		}
 	}
@@ -109,6 +125,7 @@ public class UD_DataSubGraphWithBonusForLoneWithTrans implements CSTI{
 					matrix_ud.addLink(req, loneVertexName, originValue);
 				}
 				else{
+					//validValueSum = Math.max(minInnerBonus, validValueSum);
 					double nowValue = originValue + validSum/sum*validValueSum;////maybe exist trouble
 					nowValue = Math.min(nowValue, maxScore);
 					matrix_ud.addLink(req, loneVertexName, nowValue);
@@ -180,6 +197,7 @@ public class UD_DataSubGraphWithBonusForLoneWithTrans implements CSTI{
 		 fillLoneVertex(loneVertexSet,dataSubGraphList);
 		 int loneVertexSize = loneVertexSet.size();
 		 for(String req:matrix.sourceArtifactsIds()){
+			 minInnerBonus = Integer.MAX_VALUE;
 			//it will get maxId for every subGraph after sort.
 			Collections.sort(dataSubGraphList,new SortBySubGraph(vertexIdNameMap,matrix,req));
 			int maxId = dataSubGraphList.get(0).getMaxId();
@@ -187,8 +205,27 @@ public class UD_DataSubGraphWithBonusForLoneWithTrans implements CSTI{
 			int index = 1;
 			int subGraphAmount = dataSubGraphList.size()-loneVertexSize;
 			for(SubGraph subGraph:dataSubGraphList){
+				
+				/**
+				 * @author zzf
+				 * @date 2017.10.25
+				 * @description use local max
+				 **/
+				int localMaxId = subGraph.getMaxId();
+				double localMaxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(localMaxId));
+				
+				////////////////////////////////////////////////////////////////////////////////////
+				
 				List<Integer> vertexList = subGraph.getVertexList();
-				if(vertexList.size()==1){///////only process subGraph which has only one vertex 
+//				if(vertexList.size()==1){///////only process subGraph which has only one vertex 
+//					continue;
+//				}
+				/**
+				 * @author zzf
+				 * @date 2017.10.25
+				 * @description the vertex number of area is no less than 3 
+				 */
+				if(vertexList.size()<areaCount) {
 					continue;
 				}
 				//regard the max score in this subGraph as represent
@@ -213,7 +250,12 @@ public class UD_DataSubGraphWithBonusForLoneWithTrans implements CSTI{
 						double curValue = matrix.getScoreForLink(req, vertexName);
 						if(!vertexName.equals(represent)){
 							int graphSize = subGraph.getVertexList().size();
+							
+							//
+							double originValue = curValue;
+							//curValue = Math.min(localMaxScore, curValue+localMaxScore/(graphSize-1));
 							curValue = Math.min(maxScore, curValue+maxScore/(graphSize-1));
+							minInnerBonus = Math.min(minInnerBonus, curValue-originValue);
 							maxScoreInThisSubGraph = Math.max(maxScoreInThisSubGraph, curValue);
 						}
 						matrix_ud.addLink(req, vertexName,curValue);

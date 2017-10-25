@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
 	<projectName>maven</projectName>
-	<modelName>jsd</modelName>
+	<modelName>lsi</modelName>
 	<callEdgeScoreThreshold>0.4</callEdgeScoreThreshold>
 	<dataEdgeScoreThreshold>0.7</dataEdgeScoreThreshold>
 	<percent>0.7</percent>
