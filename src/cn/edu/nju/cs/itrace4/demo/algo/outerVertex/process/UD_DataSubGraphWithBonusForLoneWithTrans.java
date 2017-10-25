@@ -16,6 +16,7 @@ import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
 import cn.edu.nju.cs.itrace4.core.document.SingleLink;
 import cn.edu.nju.cs.itrace4.core.document.StringHashSet;
 import cn.edu.nju.cs.itrace4.demo.algo.SortBySubGraph;
+import cn.edu.nju.cs.itrace4.demo.algo.SortVertexByScore;
 import cn.edu.nju.cs.itrace4.demo.relation.StoreDataSubGraph;
 import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
 import cn.edu.nju.cs.itrace4.relation.CallDataRelationGraph;
@@ -188,6 +189,8 @@ public class UD_DataSubGraphWithBonusForLoneWithTrans implements CSTI{
 			int subGraphAmount = dataSubGraphList.size()-loneVertexSize;
 			for(SubGraph subGraph:dataSubGraphList){
 				List<Integer> vertexList = subGraph.getVertexList();
+				Collections.sort(vertexList, new SortVertexByScore(vertexIdNameMap,matrix,req));
+				
 				if(vertexList.size()==1){///////only process subGraph which has only one vertex 
 					continue;
 				}
@@ -207,19 +210,34 @@ public class UD_DataSubGraphWithBonusForLoneWithTrans implements CSTI{
 				}
 				if(oracle.isLinkAboveThreshold(req,represent)&&index<subGraphAmount*percent){
 					subGraph.addReq(req);
-					Map<String,Double> vertexMapWeight = new HashMap<String,Double>();
-					giveBonusForNeighbor(subGraph,subGraph.getMaxId(),vertexMapWeight);
-					for(String vertexName:vertexMapWeight.keySet()){
+					/**
+					 * @author zzf
+					 * @date 2017/10/25
+					 * @description stable sort 
+					 */
+					for(int vertexId:vertexList) {
+						String vertexName = vertexIdNameMap.get(vertexId);
 						double curValue = matrix.getScoreForLink(req, vertexName);
 						if(!vertexName.equals(represent)){
 							int graphSize = subGraph.getVertexList().size();
-							curValue = Math.min(maxScore, curValue+maxScore/(graphSize-1));
+							curValue = Math.min(maxScore*0.9999, curValue+maxScore/(graphSize-1));
 							maxScoreInThisSubGraph = Math.max(maxScoreInThisSubGraph, curValue);
 						}
 						matrix_ud.addLink(req, vertexName,curValue);
 					}
-					
-					matrix_ud.addLink(req, represent, representValue);
+//					Map<String,Double> vertexMapWeight = new HashMap<String,Double>();
+//					giveBonusForNeighbor(subGraph,subGraph.getMaxId(),vertexMapWeight);
+//					for(String vertexName:vertexMapWeight.keySet()){
+//						double curValue = matrix.getScoreForLink(req, vertexName);
+//						if(!vertexName.equals(represent)){
+//							int graphSize = subGraph.getVertexList().size();
+//							curValue = Math.min(maxScore*0.9999, curValue+maxScore/(graphSize-1));
+//							maxScoreInThisSubGraph = Math.max(maxScoreInThisSubGraph, curValue);
+//						}
+//						matrix_ud.addLink(req, vertexName,curValue);
+//					}
+//					
+//					matrix_ud.addLink(req, represent, representValue);
 				}
 				else{
 					for(int id:vertexList){

@@ -116,18 +116,18 @@ public class BonusForLoneWithXml{
         ObjectInputStream oisForO = new ObjectInputStream(fisForO);
         RelationInfo class_relationForO = (RelationInfo) oisForO.readObject();
 
-        FileInputStream fisForAllDependencies = new FileInputStream(project.getClass_RelationInfoPathWhole());
-        ObjectInputStream oisForAllDependencies = new ObjectInputStream(fisForAllDependencies);
-        RelationInfo class_relationForAllDependencies = (RelationInfo) oisForAllDependencies.readObject();
-        class_relation.setPruning(Setting.callThreshold, Setting.dataThreshold);
-        class_relationForO.setPruning(-1, -1);
-        class_relationForAllDependencies.setPruning(-1, -1);
-
+//        FileInputStream fisForAllDependencies = new FileInputStream(project.getClass_RelationInfoPathWhole());
+//        ObjectInputStream oisForAllDependencies = new ObjectInputStream(fisForAllDependencies);
+//        RelationInfo class_relationForAllDependencies = (RelationInfo) oisForAllDependencies.readObject();
+//        class_relation.setPruning(Setting.callThreshold, Setting.dataThreshold);
+//        class_relationForO.setPruning(-1, -1);
+//        class_relationForAllDependencies.setPruning(-1, -1);
+//
 //        Result result_pruningeCall_Data_Dir = IR.compute(textDataset, model, 
 //        		new PruningCall_Data_Connection_Closenss(class_relation, class_relationForO, 
 //        				class_relationForAllDependencies,
 //        				UseEdge.Call, 1.0, 1.0));
-        
+//        
         MyVisualCurve curve = new MyVisualCurve();
         curve.addLine(result_ir);
         curve.addLine(result_UD_CSTI);
@@ -157,13 +157,13 @@ public class BonusForLoneWithXml{
 		System.out.println("cluster:"+cluster_map);
 		System.out.println("pValue:"+pValue);
 		System.out.println("----------------------------");
-		Map<String,Double> udReqValue = result_ud.getAveragePrecisionByQuery();
-		Map<String,Double> clusterReqValue = result_cluster.getAveragePrecisionByQuery();
-		for(String req:udReqValue.keySet()) {
-			System.out.println("--------------------------");
-			System.out.println(req);
-			System.out.println("ud:"+udReqValue.get(req)+"----"+"cluster:"+clusterReqValue.get(req));
-		}
+//		Map<String,Double> udReqValue = result_ud.getAveragePrecisionByQuery();
+//		Map<String,Double> clusterReqValue = result_cluster.getAveragePrecisionByQuery();
+//		for(String req:udReqValue.keySet()) {
+//			System.out.println("--------------------------");
+//			System.out.println(req);
+//			System.out.println("ud:"+udReqValue.get(req)+"----"+"cluster:"+clusterReqValue.get(req));
+//		}
 	}
 
 	private int getResultSize(Result result) {

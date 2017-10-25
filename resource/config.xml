@@ -4,6 +4,6 @@
 	<modelName>jsd</modelName>
 	<callEdgeScoreThreshold>0.4</callEdgeScoreThreshold>
 	<dataEdgeScoreThreshold>0.7</dataEdgeScoreThreshold>
-	<percent>1</percent>
+	<percent>0.7</percent>
 	<router>6</router>
 </config>
