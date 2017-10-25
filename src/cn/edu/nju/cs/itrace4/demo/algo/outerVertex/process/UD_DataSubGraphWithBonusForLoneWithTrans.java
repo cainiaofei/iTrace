@@ -213,7 +213,7 @@ public class UD_DataSubGraphWithBonusForLoneWithTrans implements CSTI{
 						double curValue = matrix.getScoreForLink(req, vertexName);
 						if(!vertexName.equals(represent)){
 							int graphSize = subGraph.getVertexList().size();
-							curValue = Math.min(maxScore, curValue+maxScore/(graphSize-1));
+							curValue = Math.min(maxScore*0.9999, curValue+maxScore/(graphSize-1));
 							maxScoreInThisSubGraph = Math.max(maxScoreInThisSubGraph, curValue);
 						}
 						matrix_ud.addLink(req, vertexName,curValue);
