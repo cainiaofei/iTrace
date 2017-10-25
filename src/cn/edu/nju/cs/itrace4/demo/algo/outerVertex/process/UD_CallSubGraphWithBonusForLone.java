@@ -389,7 +389,8 @@ public class UD_CallSubGraphWithBonusForLone implements CSTI{
 					for(String vertexName:vertexMapWeight.keySet()){
 						double curValue = matrix.getScoreForLink(req, vertexName);
 						if(!vertexName.equals(represent)){
-							curValue = Math.min(maxScore, curValue+maxScore/(subGraph.getVertexList().size()-1));
+							int graphSize = subGraph.getVertexList().size();
+							curValue = Math.min(maxScore, curValue+maxScore/(graphSize-1));
 							//curValue = Math.min(maxScore, curValue+maxScore/allWeight*curWeight);
 							maxScoreInThisSubGraph = Math.max(maxScoreInThisSubGraph, curValue);
 						}
