@@ -143,17 +143,27 @@ public class BonusForLoneWithXml{
         curve.curveStore(".",project.getProjectName()+"-"+percent+"-"+callEdgeScoreThreshold+"-"+
         		dataEdgeScoreThreshold+"-"+model+irPvalueStr+"-"+udPvalueStr);
        
-        getApAndMap(result_UD_CSTI, result_UD_CallThenDataProcessLoneInnerMean07);
+        getApAndMap(result_ir,result_UD_CSTI, result_UD_CallThenDataProcessLoneInnerMean07);
     }
 
 	
-	private void getApAndMap(Result result_ud, Result result_cluster) {
+	private void getApAndMap(Result result_ir,Result result_ud, Result result_cluster) {
+		double ir_map = result_ir.getMeanAveragePrecisionByQuery();
 		double ud_map = result_ud.getMeanAveragePrecisionByQuery();
 		double cluster_map = result_cluster.getMeanAveragePrecisionByQuery();
 		double pValue = printPValue(result_ud, result_cluster);
+		System.out.println("ir:"+ir_map);
 		System.out.println("ud:"+ud_map);
 		System.out.println("cluster:"+cluster_map);
 		System.out.println("pValue:"+pValue);
+		System.out.println("----------------------------");
+		Map<String,Double> udReqValue = result_ud.getAveragePrecisionByQuery();
+		Map<String,Double> clusterReqValue = result_cluster.getAveragePrecisionByQuery();
+		for(String req:udReqValue.keySet()) {
+			System.out.println("--------------------------");
+			System.out.println(req);
+			System.out.println("ud:"+udReqValue.get(req)+"----"+"cluster:"+clusterReqValue.get(req));
+		}
 	}
 
 	private int getResultSize(Result result) {
