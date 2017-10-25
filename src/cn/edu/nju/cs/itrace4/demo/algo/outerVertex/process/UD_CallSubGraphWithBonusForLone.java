@@ -406,21 +406,6 @@ public class UD_CallSubGraphWithBonusForLone implements CSTI{
 						}
 						matrix_ud.addLink(req, vertexName,curValue);
 					}
-					
-//					for(String vertexName:vertexMapWeight.keySet()){
-//						double curValue = matrix.getScoreForLink(req, vertexName);
-//						if(!vertexName.equals(represent)){
-//							int graphSize = subGraph.getVertexList().size();
-//							curValue = Math.min(maxScore*0.9999, curValue+maxScore/(graphSize-1));
-//							//curValue = Math.min(maxScore, curValue+maxScore/allWeight*curWeight);
-//							maxScoreInThisSubGraph = Math.max(maxScoreInThisSubGraph, curValue);
-//						}
-//						matrix_ud.addLink(req, vertexName,curValue);
-//					}
-//					
-//					matrix_ud.addLink(req, represent, representValue);
-					
-					
 				}
 				else{
 					for(int id:vertexList){
@@ -909,7 +894,10 @@ public class UD_CallSubGraphWithBonusForLone implements CSTI{
 			int maxId = callSubGraphList.get(0).getMaxId();
 			double maxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(maxId));
 			
-			for(int loneVertex:loneVertexSet){
+			List<Integer> loneVertexList = fillWithLoneSet(loneVertexSet);
+			Collections.sort(loneVertexList,new SortVertexByScore(vertexIdNameMap,matrix,req));
+			
+			for(int loneVertex:loneVertexList){
 				String loneVertexName = vertexIdNameMap.get(loneVertex);
 				if(hasContainedThisLink(matrix_ud, req, loneVertex)){///////the relative lone vertex is change.
 					continue;
@@ -944,6 +932,15 @@ public class UD_CallSubGraphWithBonusForLone implements CSTI{
 			} 
 		}
 		
+	}
+
+
+	private List<Integer> fillWithLoneSet(Set<Integer> loneVertexSet) {
+		List<Integer> list = new LinkedList<Integer>();
+		for(int ele:loneVertexSet) {
+			list.add(ele);
+		}
+		return list;
 	}
 
 

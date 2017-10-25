@@ -86,6 +86,9 @@ public class UD_DataSubGraphWithBonusForLoneWithTrans implements CSTI{
 			int maxId = dataSubGraphList.get(0).getMaxId();
 			double maxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(maxId));
 			
+			List<Integer> loneVertexList = fillWithLoneSet(loneVertexSet);
+			Collections.sort(loneVertexList,new SortVertexByScore(vertexIdNameMap,matrix,req));
+			
 			for(int loneVertex:loneVertexSet){
 				String loneVertexName = vertexIdNameMap.get(loneVertex);
 				double sum = 0;
@@ -148,6 +151,14 @@ public class UD_DataSubGraphWithBonusForLoneWithTrans implements CSTI{
 		return amount;
 	}
 
+	private List<Integer> fillWithLoneSet(Set<Integer> loneVertexSet) {
+		List<Integer> list = new LinkedList<Integer>();
+		for(int ele:loneVertexSet) {
+			list.add(ele);
+		}
+		return list;
+	}
+	
 	/**
 	 * try the new method
 	 * use closeness when give bonus for neighbor.
@@ -225,19 +236,6 @@ public class UD_DataSubGraphWithBonusForLoneWithTrans implements CSTI{
 						}
 						matrix_ud.addLink(req, vertexName,curValue);
 					}
-//					Map<String,Double> vertexMapWeight = new HashMap<String,Double>();
-//					giveBonusForNeighbor(subGraph,subGraph.getMaxId(),vertexMapWeight);
-//					for(String vertexName:vertexMapWeight.keySet()){
-//						double curValue = matrix.getScoreForLink(req, vertexName);
-//						if(!vertexName.equals(represent)){
-//							int graphSize = subGraph.getVertexList().size();
-//							curValue = Math.min(maxScore*0.9999, curValue+maxScore/(graphSize-1));
-//							maxScoreInThisSubGraph = Math.max(maxScoreInThisSubGraph, curValue);
-//						}
-//						matrix_ud.addLink(req, vertexName,curValue);
-//					}
-//					
-//					matrix_ud.addLink(req, represent, representValue);
 				}
 				else{
 					for(int id:vertexList){

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
-	<projectName>maven</projectName>
+	<projectName>iTrust</projectName>
 	<modelName>jsd</modelName>
 	<callEdgeScoreThreshold>0.4</callEdgeScoreThreshold>
 	<dataEdgeScoreThreshold>0.7</dataEdgeScoreThreshold>
