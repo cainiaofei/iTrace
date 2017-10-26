@@ -23,6 +23,8 @@ import cn.edu.nju.cs.itrace4.core.ir.IRModelConst;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
 import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.MethodTypeProcessLone;
 import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.UD_CallThenDataWithBonusForLone;
+import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataOutLevel;
+import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataWithBonusForLone;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
 import cn.edu.nju.cs.itrace4.demo.visual.MyVisualCurve;
@@ -82,8 +84,11 @@ public class Executor implements Runnable{
         ri.setPruning(callThreshold, dataThreshold);
         
         Map<String,Set<String>> valid = new HashMap<String,Set<String>>();
-        Result result_UD_CallThenDataProcessLoneInnerMean07 = IR.compute(textDataset,model,
-        		new UD_CallThenDataWithBonusForLone(ri,callThreshold,
+//        Result result_UD_CallThenDataProcessLoneInnerMean07 = IR.compute(textDataset,model,
+//        		new UD_CallThenDataWithBonusForLone(ri,callThreshold,
+//        				dataThreshold,MethodTypeProcessLone.InnerMean,0.7,valid));//0.7
+        Result result_UD_CallDataProcessLoneInnerMean07 = IR.compute(textDataset,model,
+        		new UD_CallDataOutLevel(ri,callThreshold,
         				dataThreshold,MethodTypeProcessLone.InnerMean,0.7,valid));//0.7
         
         //below closeness method
@@ -101,8 +106,8 @@ public class Executor implements Runnable{
 //        curve.addLine(result_UD_CSTI);
 //        curve.addLine(result_pruningeCall_Data_Dir);
 //        curve.addLine(result_UD_CallThenDataProcessLoneInnerMean07);//累加 内部 直接平均
-        double irPvalue = printPValue(result_ir, result_UD_CallThenDataProcessLoneInnerMean07);
-        double udPvalue = printPValue(result_UD_CSTI, result_UD_CallThenDataProcessLoneInnerMean07);
+        double irPvalue = printPValue(result_ir, result_UD_CallDataProcessLoneInnerMean07);
+        double udPvalue = printPValue(result_UD_CSTI, result_UD_CallDataProcessLoneInnerMean07);
         System.out.println(project.getProjectName()+"-"+callThreshold+"-"+dataThreshold+"-"+model+":"+irPvalue);
         System.out.println(project.getProjectName()+"-"+callThreshold+"-"+dataThreshold+"-"+model+":"+udPvalue);
         irPvalueMap.put(project.getProjectName()+"-"+callThreshold+"-"+dataThreshold+"-"+model, irPvalue);

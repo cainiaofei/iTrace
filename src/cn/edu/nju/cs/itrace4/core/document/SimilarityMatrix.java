@@ -110,7 +110,7 @@ public class SimilarityMatrix implements Serializable {
     }
 
     public Double getScoreForLink(String sourceArtfactId, String targetArtfactId) {
-        Double retVal = 0.0;
+        Double retVal = 0.0;////
         Map<String, Double> links = matrix.get(sourceArtfactId);
         if (links != null) {
             retVal = links.get(targetArtfactId);

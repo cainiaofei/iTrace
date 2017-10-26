@@ -100,12 +100,15 @@ public class BonusForLoneWithXml{
         
         Result result_ir = IR.compute(textDataset, model, new None_CSTI());
         Result result_UD_CSTI = IR.compute(textDataset,model, new UD_CSTI(ri));
-        ri.setPruning(callEdgeScoreThreshold, dataEdgeScoreThreshold);
+        ri.setPruning(0.4, 0.7);
         System.out.println("IR Count:"+getResultSize(result_ir));
         Map<String,Set<String>> valid = new HashMap<String,Set<String>>();
         Result result_UD_CallThenDataProcessLoneInnerMean07 = IR.compute(textDataset,model,
-        		new UD_CallThenDataWithBonusForLone(ri,callEdgeScoreThreshold,
-        				dataEdgeScoreThreshold,MethodTypeProcessLone.InnerMean,percent,valid));//0.7
+        		new UD_CallThenDataWithBonusForLone(ri,0.4,
+        				0.7,MethodTypeProcessLone.InnerMean,percent,valid));//0.7
+        
+        ri.setPruning(callEdgeScoreThreshold, dataEdgeScoreThreshold);
+        valid = new HashMap<String,Set<String>>();
         Result result_UD_CallDataProcessLoneInnerMean07 = IR.compute(textDataset,model,
         		new UD_CallDataOutLevel(ri,callEdgeScoreThreshold,
         				dataEdgeScoreThreshold,MethodTypeProcessLone.InnerMean,percent,valid));//0.7
@@ -119,8 +122,8 @@ public class BonusForLoneWithXml{
         //curve.addLine(result_pruningeCall_Data_Dir);
         curve.addLine(result_UD_CallThenDataProcessLoneInnerMean07);//累加 内部 直接平均
         curve.addLine(result_UD_CallDataProcessLoneInnerMean07);//
-        double irPvalue = printPValue(result_ir, result_UD_CallThenDataProcessLoneInnerMean07);
-        double udPvalue = printPValue(result_UD_CSTI, result_UD_CallThenDataProcessLoneInnerMean07);
+        double irPvalue = printPValue(result_ir, result_UD_CallDataProcessLoneInnerMean07);
+        double udPvalue = printPValue(result_UD_CSTI, result_UD_CallDataProcessLoneInnerMean07);
         String irPvalueStr = (irPvalue+"").substring(0, 5);
         String udPvalueStr = (udPvalue+"").substring(0, 5);
         double rate = Double.valueOf(System.getProperty("rate"));
@@ -128,7 +131,7 @@ public class BonusForLoneWithXml{
         curve.showChart(project.getProjectName()+"-"+irPvalueStr+"-"+udPvalueStr+"-"+rateStr);
         curve.curveStore(".",project.getProjectName()+"-"+percent+"-"+callEdgeScoreThreshold+"-"+
         		dataEdgeScoreThreshold+"-"+model+irPvalueStr+"-"+udPvalueStr);
-       
+        getApAndMap(result_ir,result_UD_CSTI, result_UD_CallDataProcessLoneInnerMean07);
         
 //       String ud = result_UD_CSTI.getWilcoxonDataCol_fmeasure("UD");
 //       String innerMean7 = result_UD_CallThenDataProcessLoneInnerMean07.getWilcoxonDataCol_fmeasure("innerMean07");
@@ -176,7 +179,24 @@ public class BonusForLoneWithXml{
 //        storeList(APList,MAPList);
     }
 
-	
+	private void getApAndMap(Result result_ir,Result result_ud, Result result_cluster) {
+		double ir_map = result_ir.getMeanAveragePrecisionByQuery();
+		double ud_map = result_ud.getMeanAveragePrecisionByQuery();
+		double cluster_map = result_cluster.getMeanAveragePrecisionByQuery();
+		double pValue = printPValue(result_ud, result_cluster);
+		System.out.println("ir:"+ir_map);
+		System.out.println("ud:"+ud_map);
+		System.out.println("cluster:"+cluster_map);
+		System.out.println("pValue:"+pValue);
+		System.out.println("----------------------------");
+//		Map<String,Double> udReqValue = result_ud.getAveragePrecisionByQuery();
+//		Map<String,Double> clusterReqValue = result_cluster.getAveragePrecisionByQuery();
+//		for(String req:udReqValue.keySet()) {
+//			System.out.println("--------------------------");
+//			System.out.println(req);
+//			System.out.println("ud:"+udReqValue.get(req)+"----"+"cluster:"+clusterReqValue.get(req));
+//		}
+	}
 	private int getResultSize(Result result) {
 		int count = 0;
 		for(String key:result.matrix.sourceArtifactsIds()) {

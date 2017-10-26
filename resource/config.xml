@@ -3,7 +3,7 @@
 	<projectName>maven</projectName>
 	<modelName>jsd</modelName>
 	<callEdgeScoreThreshold>0.6</callEdgeScoreThreshold>
-	<dataEdgeScoreThreshold>0.7</dataEdgeScoreThreshold>
+	<dataEdgeScoreThreshold>0.6</dataEdgeScoreThreshold>
 	<percent>1</percent>
-	<router>1</router>
+	<router>6</router>
 </config>

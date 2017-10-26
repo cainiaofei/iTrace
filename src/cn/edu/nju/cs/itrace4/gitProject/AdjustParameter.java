@@ -157,8 +157,8 @@ public class AdjustParameter {
 	
 	public static void main(String[] args) throws InterruptedException, ClassNotFoundException, IOException {
 		AdjustParameter tool = new AdjustParameter();
-//		tool.lookForParameter();
-		tool.readObject();
-		tool.findBestParameter(0.03);
+		tool.lookForParameter();
+//		tool.readObject();
+//		tool.findBestParameter(0.03);
 	}
 }
