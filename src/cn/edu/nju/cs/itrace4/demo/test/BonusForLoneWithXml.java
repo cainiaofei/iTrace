@@ -140,7 +140,7 @@ public class BonusForLoneWithXml{
         double rate = Double.valueOf(System.getProperty("rate"));
         String rateStr = (rate+"").substring(0, 5);
         curve.showChart(project.getProjectName()+"-"+irPvalueStr+"-"+udPvalueStr+"-"+rateStr);
-        curve.curveStore(".",project.getProjectName()+"-"+percent+"-"+callEdgeScoreThreshold+"-"+
+        curve.curveStore("./图片/remainAsLone",project.getProjectName()+"-"+percent+"-"+callEdgeScoreThreshold+"-"+
         		dataEdgeScoreThreshold+"-"+model+irPvalueStr+"-"+udPvalueStr);
        
         getApAndMap(result_ir,result_UD_CSTI, result_UD_CallThenDataProcessLoneInnerMean07);
