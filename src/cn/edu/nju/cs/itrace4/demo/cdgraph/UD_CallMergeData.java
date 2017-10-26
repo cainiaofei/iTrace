@@ -42,8 +42,7 @@ public class UD_CallMergeData implements CSTI{
 	private double percent;
 	private Map<String,Set<Integer>> reqMapLoneVertex = new HashMap<String,Set<Integer>>();
 	
-	public UD_CallMergeData(RelationInfo ri,Map<String,Set<String>> valid,double percent,
-			StoreSubGraphInfoByThreshold cdg){
+	public UD_CallMergeData(RelationInfo ri,Map<String,Set<String>> valid,double percent){
 		callSubGraphList = new StoreCallSubGraph().getSubGraphs(ri);
 		dataSubGraphList = new StoreDataSubGraph().getSubGraphs(ri);
 		callDataSubGraphList = mergeSubGraphList(callSubGraphList,dataSubGraphList);
@@ -200,14 +199,14 @@ public class UD_CallMergeData implements CSTI{
 					for(int vertexId:vertexList) {
 						String vertexName = vertexIdNameMap.get(vertexId);
 						double curValue = matrix.getScoreForLink(req, vertexName);
-						if(matrix_ud.isLinkAboveThreshold(req, vertexName)) {
+						if(hasContainedThisLink(matrix_ud,req,vertexId)) {
 							curValue = matrix_ud.getScoreForLink(req, vertexName);
 						}
 						if(!vertexName.equals(represent)){
 							int graphSize = subGraph.getVertexList().size();
 							curValue = Math.min(maxScore*0.9999, curValue+maxScore/(graphSize-1)*2);
 						}
-						if(matrix_ud.isLinkAboveThreshold(req, vertexName)) {
+						if(hasContainedThisLink(matrix_ud,req,vertexId)) {
 							matrix_ud.setScoreForLink(req, vertexName, curValue);
 						}
 						else{
@@ -219,8 +218,8 @@ public class UD_CallMergeData implements CSTI{
 					for(int id:vertexList){
 						String vertexName = vertexIdNameMap.get(id);
 						double curValue = matrix.getScoreForLink(req,vertexName);
-						if(!matrix_ud.isLinkAboveThreshold(req, vertexName)) {
-							matrix_ud.addLink(req, vertexIdNameMap.get(id),curValue);//
+						if(!hasContainedThisLink(matrix_ud,req,id)) {
+							matrix_ud.addLink(req, vertexName,curValue);//
 						}
 					}
 				}
@@ -240,7 +239,6 @@ public class UD_CallMergeData implements CSTI{
 		double rate = allSize(valid)*1.0/res.allLinks().size(); 
 		System.out.println(rate);
 		System.setProperty("rate", rate+"");
-		
 		return res;
 	}
 	

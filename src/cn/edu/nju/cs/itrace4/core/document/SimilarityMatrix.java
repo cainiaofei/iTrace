@@ -176,6 +176,8 @@ public class SimilarityMatrix implements Serializable {
 
     public boolean isLinkAboveThreshold(String sourceArtifactId, String targetArtifactId) {
         boolean retVal = false;
+        if(sourceArtifactId.equals("req46")&&targetArtifactId.equals("Restriction")) {
+        }
         Map<String, Double> links = matrix.get(sourceArtifactId);
         if (links != null) {
             Double score = links.get(targetArtifactId);

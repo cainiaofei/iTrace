@@ -109,8 +109,8 @@ public class BonusForLoneWithXml{
         
         ri.setPruning(callEdgeScoreThreshold, dataEdgeScoreThreshold);
         valid = new HashMap<String,Set<String>>();
-        Result result_UD_CallDataProcessLoneInnerMean07 = IR.compute(textDataset,model,
-        		new UD_CallDataOutLevel(ri,callEdgeScoreThreshold,
+        Result result_UD_CallMergeDataProcessLoneInnerMean07 = IR.compute(textDataset,model,
+        		new UD_CallMergeDataOutLevel(ri,callEdgeScoreThreshold,
         				dataEdgeScoreThreshold,MethodTypeProcessLone.InnerMean,percent,valid));//0.7
         
         //below closeness method
@@ -121,9 +121,9 @@ public class BonusForLoneWithXml{
         curve.addLine(result_UD_CSTI);
         //curve.addLine(result_pruningeCall_Data_Dir);
         curve.addLine(result_UD_CallThenDataProcessLoneInnerMean07);//累加 内部 直接平均
-        curve.addLine(result_UD_CallDataProcessLoneInnerMean07);//
-        double irPvalue = printPValue(result_ir, result_UD_CallDataProcessLoneInnerMean07);
-        double udPvalue = printPValue(result_UD_CSTI, result_UD_CallDataProcessLoneInnerMean07);
+        curve.addLine(result_UD_CallMergeDataProcessLoneInnerMean07);//
+        double irPvalue = printPValue(result_ir, result_UD_CallMergeDataProcessLoneInnerMean07);
+        double udPvalue = printPValue(result_UD_CSTI, result_UD_CallMergeDataProcessLoneInnerMean07);
         String irPvalueStr = (irPvalue+"").substring(0, 5);
         String udPvalueStr = (udPvalue+"").substring(0, 5);
         double rate = Double.valueOf(System.getProperty("rate"));
@@ -131,7 +131,7 @@ public class BonusForLoneWithXml{
         curve.showChart(project.getProjectName()+"-"+irPvalueStr+"-"+udPvalueStr+"-"+rateStr);
         curve.curveStore(".",project.getProjectName()+"-"+percent+"-"+callEdgeScoreThreshold+"-"+
         		dataEdgeScoreThreshold+"-"+model+irPvalueStr+"-"+udPvalueStr);
-        getApAndMap(result_ir,result_UD_CSTI, result_UD_CallDataProcessLoneInnerMean07);
+        getApAndMap(result_ir,result_UD_CSTI, result_UD_CallMergeDataProcessLoneInnerMean07);
         
 //       String ud = result_UD_CSTI.getWilcoxonDataCol_fmeasure("UD");
 //       String innerMean7 = result_UD_CallThenDataProcessLoneInnerMean07.getWilcoxonDataCol_fmeasure("innerMean07");
