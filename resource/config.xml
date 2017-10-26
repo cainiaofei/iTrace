@@ -2,8 +2,8 @@
 <config>
 	<projectName>maven</projectName>
 	<modelName>jsd</modelName>
-	<callEdgeScoreThreshold>0.4</callEdgeScoreThreshold>
+	<callEdgeScoreThreshold>0.6</callEdgeScoreThreshold>
 	<dataEdgeScoreThreshold>0.7</dataEdgeScoreThreshold>
 	<percent>1</percent>
-	<router>6</router>
+	<router>1</router>
 </config>
