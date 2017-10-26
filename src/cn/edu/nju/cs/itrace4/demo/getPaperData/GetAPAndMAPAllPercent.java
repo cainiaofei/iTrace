@@ -22,6 +22,6 @@ public class GetAPAndMAPAllPercent {
 	
 	public static void main(String[] args) throws InterruptedException {
 		GetAPAndMAPAllPercent batchTool = new GetAPAndMAPAllPercent();
-		batchTool.bactchProcess("./paperData");
+		batchTool.bactchProcess("./newPaperData");
 	}
 }

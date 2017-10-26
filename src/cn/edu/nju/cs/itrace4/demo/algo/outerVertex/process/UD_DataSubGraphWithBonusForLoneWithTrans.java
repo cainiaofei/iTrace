@@ -89,6 +89,7 @@ public class UD_DataSubGraphWithBonusForLoneWithTrans implements CSTI{
 			List<Integer> loneVertexList = fillWithLoneSet(loneVertexSet);
 			Collections.sort(loneVertexList,new SortVertexByScore(vertexIdNameMap,matrix,req));
 			
+			//for(int loneVertex:loneVertexList){
 			for(int loneVertex:loneVertexSet){
 				String loneVertexName = vertexIdNameMap.get(loneVertex);
 				double sum = 0;

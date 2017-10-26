@@ -897,7 +897,8 @@ public class UD_CallSubGraphWithBonusForLone implements CSTI{
 			List<Integer> loneVertexList = fillWithLoneSet(loneVertexSet);
 			Collections.sort(loneVertexList,new SortVertexByScore(vertexIdNameMap,matrix,req));
 			
-			for(int loneVertex:loneVertexList){
+			//for(int loneVertex:loneVertexList){////
+		    for(int loneVertex:loneVertexSet){////
 				String loneVertexName = vertexIdNameMap.get(loneVertex);
 				if(hasContainedThisLink(matrix_ud, req, loneVertex)){///////the relative lone vertex is change.
 					continue;
