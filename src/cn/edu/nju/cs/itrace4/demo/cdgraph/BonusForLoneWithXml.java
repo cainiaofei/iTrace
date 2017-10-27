@@ -21,14 +21,13 @@ import org.xml.sax.SAXException;
 
 import cn.edu.nju.cs.itrace4.core.algo.None_CSTI;
 import cn.edu.nju.cs.itrace4.core.algo.UD_CSTI;
-import cn.edu.nju.cs.itrace4.core.algo.UseEdge;
-import cn.edu.nju.cs.itrace4.core.algo.icse.PruningCall_Data_Connection_Closenss;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
 import cn.edu.nju.cs.itrace4.demo.FileParse.XmlParse;
 import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.MethodTypeProcessLone;
 import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.UD_CallThenDataWithBonusForLone;
+import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.UD_DataThenCallWithBonusForLone;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
 import cn.edu.nju.cs.itrace4.demo.exp.project.JhotDraw;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Maven;
@@ -40,9 +39,7 @@ import cn.edu.nju.cs.itrace4.demo.relation.StoreDataSubGraph;
 import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
 import cn.edu.nju.cs.itrace4.demo.tool.AnalyzeResult;
 import cn.edu.nju.cs.itrace4.demo.visual.MyVisualCurve;
-import cn.edu.nju.cs.itrace4.exp.tool.LookForBug;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
-import cn.edu.nju.cs.itrace4.util.Setting;
  
 public class BonusForLoneWithXml{
 	
@@ -107,10 +104,14 @@ public class BonusForLoneWithXml{
         		new UD_CallThenDataWithBonusForLone(ri,0.4,
         				0.7,MethodTypeProcessLone.InnerMean,percent,valid));//0.7
         
+        Result result_UD_DataThenCallProcessLoneInnerMean07 = IR.compute(textDataset,model,
+        		new UD_DataThenCallWithBonusForLone(ri,0.4,
+        				0.7,MethodTypeProcessLone.InnerMean,percent,valid));//0.7
+        
         ri.setPruning(callEdgeScoreThreshold, dataEdgeScoreThreshold);
         valid = new HashMap<String,Set<String>>();
-        Result result_UD_CallMergeDataProcessLoneInnerMean07 = IR.compute(textDataset,model,
-        		new UD_CallMergeDataOutLevel(ri,callEdgeScoreThreshold,
+        Result result_UD_CallExtendData = IR.compute(textDataset,model,
+        		new UD_CallExtendDataOutLevel(ri,callEdgeScoreThreshold,
         				dataEdgeScoreThreshold,MethodTypeProcessLone.InnerMean,percent,valid));//0.7
         
         //below closeness method
@@ -120,9 +121,10 @@ public class BonusForLoneWithXml{
         curve.addLine(result_UD_CSTI);
         //curve.addLine(result_pruningeCall_Data_Dir);
         curve.addLine(result_UD_CallThenDataProcessLoneInnerMean07);//累加 内部 直接平均
-        curve.addLine(result_UD_CallMergeDataProcessLoneInnerMean07);//
-        double irPvalue = printPValue(result_ir, result_UD_CallMergeDataProcessLoneInnerMean07);
-        double udPvalue = printPValue(result_UD_CSTI, result_UD_CallMergeDataProcessLoneInnerMean07);
+        curve.addLine(result_UD_CallExtendData);//
+        curve.addLine(result_UD_DataThenCallProcessLoneInnerMean07);
+        double irPvalue = printPValue(result_ir, result_UD_CallExtendData);
+        double udPvalue = printPValue(result_UD_CSTI, result_UD_CallExtendData);
         String irPvalueStr = (irPvalue+"").substring(0, 5);
         String udPvalueStr = (udPvalue+"").substring(0, 5);
         double rate = Double.valueOf(System.getProperty("rate"));
@@ -130,52 +132,8 @@ public class BonusForLoneWithXml{
         curve.showChart(project.getProjectName()+"-"/*+irPvalueStr+"-"+udPvalueStr+"-"+rateStr*/);
         curve.curveStore(".",project.getProjectName()+"-"+percent+"-"+callEdgeScoreThreshold+"-"+
         		dataEdgeScoreThreshold+"-"+model+irPvalueStr+"-"+udPvalueStr);
-        getApAndMap(result_ir,result_UD_CSTI, result_UD_CallMergeDataProcessLoneInnerMean07);
+        getApAndMap(result_ir,result_UD_CSTI, result_UD_CallExtendData);
         
-//       String ud = result_UD_CSTI.getWilcoxonDataCol_fmeasure("UD");
-//       String innerMean7 = result_UD_CallThenDataProcessLoneInnerMean07.getWilcoxonDataCol_fmeasure("innerMean07");
-//       String ir = result_ir.getWilcoxonDataCol_fmeasure("IR");
-//       List<String> list = new LinkedList<String>();
-//       list.add(ud);
-//       list.add(innerMean7);
-//       list.add(ir);
-//       storeRFile(list);
-       
-        /*
-       System.out.println("---------------------------------------------");
-       List<Double> irPrecisionList = result_ir.getPrecisionAtRecallByTen();
-       List<Double> uDPrecisionList = result_UD_CSTI.getPrecisionAtRecallByTen();
-       List<Double> closenessPrecisionList = result_pruningeCall_Data_Dir.getPrecisionAtRecallByTen();
-       List<Double> udClosenessPrecisionList = result_UD_CallThenDataProcessLoneInnerMean07.getPrecisionAtRecallByTen();
-       Map<Integer,List<Double>> map = new HashMap<Integer,List<Double>>();
-       initMap(map);
-       int key = 1;
-       while(!irPrecisionList.isEmpty()){
-    	   map.get(key).add(irPrecisionList.remove(0));
-    	   map.get(key).add(uDPrecisionList.remove(0));
-    	   map.get(key).add(closenessPrecisionList.remove(0));
-    	   map.get(key).add(udClosenessPrecisionList.remove(0));
-    	   key++;
-       }
-       storePrecisionBaseOnRecall(map);
-       */
-//        compare(result_UD_CallThenDataProcessLoneInnerMean07,result_UD_CSTI);
-//        List<String> APList = new ArrayList<String>();
-//        List<String> MAPList = new ArrayList<String>();
-//        result_ir.showAveragePrecisionByRanklist();
-//        result_ir.showMeanAveragePrecisionByQuery();
-//        APList.add("result_ir"+result_ir.showAveragePrecisionByRanklist());
-//        APList.add("result_UD_CSTI"+result_UD_CSTI.showAveragePrecisionByRanklist());  
-//        APList.add("result_pruningeCall_Data_Dir"+result_pruningeCall_Data_Dir.showAveragePrecisionByRanklist()); 
-//        APList.add("result_UD_CallThenDataProcessLoneInnerMean07"+
-//        		result_UD_CallThenDataProcessLoneInnerMean07.showAveragePrecisionByRanklist());
-//        
-//        MAPList.add("result_ir"+result_ir.showMeanAveragePrecisionByQuery());
-//        MAPList.add("result_UD_CSTI"+result_UD_CSTI.showMeanAveragePrecisionByQuery());  
-//        MAPList.add("result_pruningeCall_Data_Dir"+result_pruningeCall_Data_Dir.showMeanAveragePrecisionByQuery()); 
-//        MAPList.add("result_UD_CallThenDataProcessLoneInnerMean07"+
-//        		result_UD_CallThenDataProcessLoneInnerMean07.showMeanAveragePrecisionByQuery());
-//        storeList(APList,MAPList);
     }
 
 	private void getApAndMap(Result result_ir,Result result_ud, Result result_cluster) {
@@ -185,7 +143,7 @@ public class BonusForLoneWithXml{
 		double pValue = printPValue(result_ud, result_cluster);
 		System.out.println("ir:"+ir_map);
 		System.out.println("ud:"+ud_map);
-		System.out.println("mergeCallData:"+cluster_map);
+		System.out.println("CallExtendData:"+cluster_map);
 		System.out.println("pValue:"+pValue);
 		System.out.println("----------------------------");
 //		Map<String,Double> udReqValue = result_ud.getAveragePrecisionByQuery();
@@ -390,11 +348,10 @@ public class BonusForLoneWithXml{
     	System.out.println("time cost:"+(endTime-startTime)*1.0/1000/60);
     }
 /**
- 0.3136539287247746
-ud_call_data:4658
+ 0.145985401459854
 ir:0.5680616767132588
 ud:0.5935984042437915
-cluster:0.6485420398424149
-pValue:3.902369426023208E-6
+mergeCallData:0.6007242381252754
+pValue:0.6356062499299993
  */
 }

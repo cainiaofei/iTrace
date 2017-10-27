@@ -633,8 +633,9 @@ public class UD_CallMergeData implements CSTI{
 						//System.out.println(dataBonus+":"+callBonus);
 						double localMaxScore = matrix_ud.getScoreForLink(req, vertexIdNameMap.get(subGraph.getMaxId()));
 						localMaxScore = maxScore;
-						validValueSum += (localMaxScore - matrix.getScoreForLink(req, loneVertexName))
-								* bonus;
+//						validValueSum += (localMaxScore - matrix.getScoreForLink(req, loneVertexName))
+//								* bonus;
+						validValueSum += maxScore * bonus;
 						double diff = (localMaxScore - matrix.getScoreForLink(req, loneVertexName))*(bonus-bonus1);
 						if(diff<0) {
 							System.out.println(localMaxScore+"-->"+matrix.getScoreForLink(req, loneVertexName));

@@ -30,10 +30,18 @@ public class UD_DataSubGraphWithBonusForLoneWithTrans implements CSTI{
 	private List<SubGraph> dataSubGraphList;
 	protected Map<Integer, String> vertexIdNameMap;
 	private Set<Integer> loneVertexSet = new HashSet<Integer>();
-	private SimilarityMatrix originMatrix;
 	private double percent;
 	private Map<String,Set<Integer>> reqMapLoneVertex = new HashMap<String,Set<Integer>>();
 	
+	
+	public UD_DataSubGraphWithBonusForLoneWithTrans(RelationInfo ri,Map<String,Set<String>> valid,
+			double percent){
+		dataSubGraphList = new StoreDataSubGraph().getSubGraphs(ri);
+		graphs = describeGraphWithMatrix(new CallDataRelationGraph(ri).dataEdgeScoreMap,ri.getVertexes().size());
+		vertexIdNameMap = ri.getVertexIdNameMap();
+		this.valid = valid;
+		this.percent = percent;
+	}
 	
 	public UD_DataSubGraphWithBonusForLoneWithTrans(RelationInfo ri,Map<String,Set<String>> valid,
 			SimilarityMatrix originMatrix,double percent){
@@ -41,7 +49,6 @@ public class UD_DataSubGraphWithBonusForLoneWithTrans implements CSTI{
 		graphs = describeGraphWithMatrix(new CallDataRelationGraph(ri).dataEdgeScoreMap,ri.getVertexes().size());
 		vertexIdNameMap = ri.getVertexIdNameMap();
 		this.valid = valid;
-		this.originMatrix = originMatrix;
 		this.percent = percent;
 	}
 	
