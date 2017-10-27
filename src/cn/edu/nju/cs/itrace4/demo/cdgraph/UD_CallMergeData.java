@@ -138,6 +138,9 @@ public class UD_CallMergeData implements CSTI{
 		 Set<String> targetArtifacts = matrix.targetArtifactsIds();
 		 //remove target artifacts which not corresponding with any source artifacts.
 		 filterSubGraphsList(targetArtifacts);
+		 filterSubGraphsList(targetArtifacts,callSubGraphList);
+		 filterSubGraphsList(targetArtifacts,dataSubGraphList);
+		 
 		 fillLoneVertex(loneVertexSet,callDataSubGraphList);
 		 int loneVertexSize = loneVertexSet.size();
 		 
@@ -146,6 +149,13 @@ public class UD_CallMergeData implements CSTI{
 			Collections.sort(callDataSubGraphList,new SortBySubGraph(vertexIdNameMap,matrix,req));
 			int maxId = callDataSubGraphList.get(0).getMaxId();
 			double maxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(maxId));
+			
+			/**
+			 * @date 2017/10.27 
+			 */
+			//maxScore = 0;
+			
+			
 			int index = 1;
 			int subGraphAmount = callDataSubGraphList.size() - loneVertexSize;
 			/**
@@ -199,15 +209,16 @@ public class UD_CallMergeData implements CSTI{
 					for(int vertexId:vertexList) {
 						String vertexName = vertexIdNameMap.get(vertexId);
 						double curValue = matrix.getScoreForLink(req, vertexName);
+						double preValue = curValue;
 						if(hasContainedThisLink(matrix_ud,req,vertexId)) {
-							curValue = matrix_ud.getScoreForLink(req, vertexName);
+							preValue = matrix_ud.getScoreForLink(req, vertexName);
 						}
 						if(!vertexName.equals(represent)){
 							int graphSize = subGraph.getVertexList().size();
-							curValue = Math.min(maxScore*0.9999, curValue+maxScore/(graphSize-1)*2);
+							curValue = Math.min(maxScore*0.9999, curValue+maxScore/(graphSize-1));
 						}
 						if(hasContainedThisLink(matrix_ud,req,vertexId)) {
-							matrix_ud.setScoreForLink(req, vertexName, curValue);
+							matrix_ud.setScoreForLink(req, vertexName, Math.max(preValue, curValue));
 						}
 						else{
 							matrix_ud.addLink(req, vertexName, curValue);
@@ -228,6 +239,13 @@ public class UD_CallMergeData implements CSTI{
 			reqMapLoneVertex.put(req, new HashSet<Integer>(loneVertexSet));
 		}//req
 		giveBonusForLoneRelativeVertexListBasedOnCallData(matrix, matrix_ud, callDataSubGraphList);
+		Set<Integer> onlyInCall = getInCallButNotData(callSubGraphList,dataSubGraphList);
+		Set<Integer> onlyInData = getInDataButNotCall(dataSubGraphList,callSubGraphList);
+		
+		routerLen = 6;
+		giveBonusForOnlyInDataLoneRelativeVertexList(matrix, matrix_ud, callSubGraphList,onlyInData);
+		routerLen = 2;
+		giveBonusForOnlyInCallLoneRelativeVertexList(matrix, matrix_ud, dataSubGraphList,onlyInCall);
 		
 		LinksList allLinks = matrix_ud.allLinks();
 		Collections.sort(allLinks, Collections.reverseOrder());
@@ -242,6 +260,192 @@ public class UD_CallMergeData implements CSTI{
 		return res;
 	}
 	
+	
+	
+	private void filterSubGraphsList(Set<String> set, List<SubGraph> graphList) {
+		for(SubGraph subGraph:graphList){
+			List<Integer> vertexList = subGraph.getVertexList();
+			Iterator<Integer> ite = vertexList.iterator();
+			while(ite.hasNext()){
+				if(!set.contains(vertexIdNameMap.get(ite.next()))){
+					ite.remove();
+				}
+			}
+		}
+		
+		Iterator<SubGraph> graphIte = graphList.iterator();
+		while(graphIte.hasNext()){
+			if(graphIte.next().getVertexList().size()==0){
+				graphIte.remove();
+			}
+		}
+		
+	}
+
+
+	private void giveBonusForOnlyInCallLoneRelativeVertexList(SimilarityMatrix matrix, SimilarityMatrix matrix_ud,
+			List<SubGraph> dataSubGraphList, Set<Integer> onlyInCall) {
+		for(String req:matrix.sourceArtifactsIds()){
+			Collections.sort(dataSubGraphList,new SortBySubGraph(vertexIdNameMap,matrix,req));
+			int maxId = dataSubGraphList.get(0).getMaxId();
+			double maxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(maxId));
+			
+			List<Integer> loneVertexList = fillWithLoneSet(reqMapLoneVertex.get(req));
+			Collections.sort(loneVertexList,new SortVertexByScore(vertexIdNameMap,matrix,req));
+			
+			for(int loneVertex:loneVertexList){
+				String loneVertexName = vertexIdNameMap.get(loneVertex);
+				if(hasContainedThisLink(matrix_ud, req, loneVertex)){///////the relative lone vertex is change.
+					continue;
+				}
+				double sum = 0;
+				double validSum = 0;
+				double validValueSum = 0;
+				for(SubGraph subGraph:dataSubGraphList){///subGraph
+					if(subGraph.getVertexList().size()==1||!subGraph.isVisited(req)){
+						continue;
+					}
+					double bonus = giveBonusForLonePoint(dataGraphs,subGraph,loneVertex,1);
+					
+					/**
+					 * @date 2017.10.27
+					 * outBonus 
+					 */
+					//bonus = 0;
+					
+					
+					if(subGraph.isVisited(req)){
+						sum += bonus;
+					}
+					if(subGraph.isValidWithThisReq(req)){
+						validSum += bonus;
+						/**
+						 * @date 2017.10.27 
+						 */
+						double localMaxScore = matrix_ud.getScoreForLink(req, vertexIdNameMap.get(subGraph.getMaxId()));
+						localMaxScore = maxScore;
+						
+						validValueSum += (localMaxScore-matrix.getScoreForLink(req, loneVertexName))
+								* bonus;
+					}
+				}///subGraph
+				double originValue = matrix.getScoreForLink(req, loneVertexName);
+				if(sum==0){
+					matrix_ud.setScoreForLink(req, loneVertexName, originValue);
+				}
+				else{
+					//double nowValue = originValue + validSum/sum*validValueSum;////maybe exist trouble
+					double nowValue = originValue + validValueSum;
+					nowValue = Math.min(nowValue, maxScore);
+					matrix_ud.setScoreForLink(req, loneVertexName, nowValue);
+				}
+			} 
+		}
+	}
+
+
+	private void giveBonusForOnlyInDataLoneRelativeVertexList(SimilarityMatrix matrix,
+			SimilarityMatrix matrix_ud,
+			List<SubGraph> callSubGraphList, Set<Integer> loneVertexSet) {
+		
+		for(String req:matrix.sourceArtifactsIds()){
+			Collections.sort(callSubGraphList,new SortBySubGraph(vertexIdNameMap,matrix,req));
+			int maxId = callSubGraphList.get(0).getMaxId();
+			double maxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(maxId));
+			
+			List<Integer> loneVertexList = fillWithLoneSet(loneVertexSet);
+			Collections.sort(loneVertexList,new SortVertexByScore(vertexIdNameMap,matrix,req));
+			
+			for(int loneVertex:loneVertexList){
+				String loneVertexName = vertexIdNameMap.get(loneVertex);
+				if(hasContainedThisLink(matrix_ud, req, loneVertex)){///////the relative lone vertex is change.
+					continue;
+				}
+				double sum = 0;
+				double validSum = 0;
+				double validValueSum = 0;
+				for(SubGraph subGraph:callSubGraphList){///subGraph
+					if(subGraph.getVertexList().size()==1||!subGraph.isVisited(req)){
+						continue;
+					}
+					double bonus = giveBonusForLonePoint(callGraphs,subGraph,loneVertex,1);
+					
+					/**
+					 * @date 2017.10.27
+					 * outBonus 
+					 */
+					//bonus = 0;
+					
+					if(subGraph.isVisited(req)){
+						sum += bonus;
+					}
+					if(subGraph.isValidWithThisReq(req)){
+						validSum += bonus;
+						
+						/**
+						 * @date 2017.10.27
+						 */
+						double localMaxScore = matrix_ud.getScoreForLink(req, vertexIdNameMap.get(subGraph.getMaxId()));
+						localMaxScore = maxScore;
+						
+						validValueSum += (localMaxScore-matrix.getScoreForLink(req, loneVertexName))
+								* bonus;
+					}
+				}///subGraph
+				double originValue = matrix.getScoreForLink(req, loneVertexName);
+				if(sum==0){
+					matrix_ud.setScoreForLink(req, loneVertexName, originValue);
+				}
+				else{
+					//double nowValue = originValue + validSum/sum*validValueSum;////maybe exist trouble
+					double nowValue = originValue + validValueSum;
+					nowValue = Math.min(nowValue, maxScore);
+					matrix_ud.setScoreForLink(req, loneVertexName, nowValue);
+				}
+			} 
+		}
+	}
+
+
+	private Set<Integer> getInDataButNotCall(List<SubGraph> dataSubGraphList, List<SubGraph> callSubGraphList) {
+		Set<Integer> inData = new HashSet<Integer>();
+		for(SubGraph subGraph:dataSubGraphList) {
+			for(int ele:subGraph.getVertexList()) {
+				inData.add(ele);
+			}
+		}
+		
+		for(SubGraph subGraph:callSubGraphList) {
+			for(int ele:subGraph.getVertexList()) {
+				if(inData.contains(ele)) {
+					inData.remove(ele);
+				}
+			}
+		}
+		return inData;
+	}
+
+
+	private Set<Integer> getInCallButNotData(List<SubGraph> callSubGraphList, 
+			List<SubGraph> dataSubGraphList) {
+		Set<Integer> inCall = new HashSet<Integer>();
+		for(SubGraph subGraph:callSubGraphList) {
+			for(int ele:subGraph.getVertexList()) {
+				inCall.add(ele);
+			}
+		}
+		
+		for(SubGraph subGraph:dataSubGraphList) {
+			for(int ele:subGraph.getVertexList()) {
+				if(inCall.contains(ele)) {
+					inCall.remove(ele);
+				}
+			}
+		}
+		return inCall;
+	}
+
+
 	private int allSize(Map<String, Set<String>> valid) {
 		int amount = 0;
 		for(String key:valid.keySet()){
@@ -403,15 +607,38 @@ public class UD_CallMergeData implements CSTI{
 					routerLen = 2;
 					double dataBonus = giveBonusForLonePoint(dataGraphs,subGraph,loneVertex,1);
 					
-					//double bonus = Math.max(callBonus, dataBonus);
+					if(callBonus!=0 && dataBonus!=0) {
+						System.out.println();
+					}
+					
+					double bonus1 = Math.max(callBonus, dataBonus);
 					double bonus = callBonus + dataBonus;
+					
+					/**
+					 * @date 2017.10.27
+					 * outBonus 
+					 */
+					//bonus = 0;
 					
 					if(subGraph.isVisited(req)){
 						sum += bonus;
 					}
 					if(subGraph.isValidWithThisReq(req)){
-						validValueSum += matrix_ud.getScoreForLink(req, vertexIdNameMap.get(subGraph.getMaxId()))
+						/**
+						 * @date 2017.10.27
+						 */
+//						if(callBonus!=0 && dataBonus!=0) {
+//							System.out.println(dataBonus+":"+callBonus);
+//						}
+						//System.out.println(dataBonus+":"+callBonus);
+						double localMaxScore = matrix_ud.getScoreForLink(req, vertexIdNameMap.get(subGraph.getMaxId()));
+						localMaxScore = maxScore;
+						validValueSum += (localMaxScore - matrix.getScoreForLink(req, loneVertexName))
 								* bonus;
+						double diff = (localMaxScore - matrix.getScoreForLink(req, loneVertexName))*(bonus-bonus1);
+						if(diff<0) {
+							System.out.println(localMaxScore+"-->"+matrix.getScoreForLink(req, loneVertexName));
+						}
 					}
 				}///subGraph
 				double originValue = matrix.getScoreForLink(req, loneVertexName);

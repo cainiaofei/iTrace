@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
-	<projectName>maven</projectName>
+	<projectName>Gantt</projectName>
 	<modelName>vsm</modelName>
-	<callEdgeScoreThreshold>0.5</callEdgeScoreThreshold>
-	<dataEdgeScoreThreshold>0.5</dataEdgeScoreThreshold>
+	<callEdgeScoreThreshold>0.4</callEdgeScoreThreshold>
+	<dataEdgeScoreThreshold>0.7</dataEdgeScoreThreshold>
 	<percent>1</percent>
-	<router>6</router>
+	<router>1</router>
 </config>

@@ -114,7 +114,6 @@ public class BonusForLoneWithXml{
         				dataEdgeScoreThreshold,MethodTypeProcessLone.InnerMean,percent,valid));//0.7
         
         //below closeness method
-        System.out.println("ud_call_data:"+this.getResultSize(result_UD_CallThenDataProcessLoneInnerMean07));
         
         MyVisualCurve curve = new MyVisualCurve();
         curve.addLine(result_ir);
@@ -128,7 +127,7 @@ public class BonusForLoneWithXml{
         String udPvalueStr = (udPvalue+"").substring(0, 5);
         double rate = Double.valueOf(System.getProperty("rate"));
         String rateStr = (rate+"").substring(0, 5);
-        curve.showChart(project.getProjectName()+"-"+irPvalueStr+"-"+udPvalueStr+"-"+rateStr);
+        curve.showChart(project.getProjectName()+"-"/*+irPvalueStr+"-"+udPvalueStr+"-"+rateStr*/);
         curve.curveStore(".",project.getProjectName()+"-"+percent+"-"+callEdgeScoreThreshold+"-"+
         		dataEdgeScoreThreshold+"-"+model+irPvalueStr+"-"+udPvalueStr);
         getApAndMap(result_ir,result_UD_CSTI, result_UD_CallMergeDataProcessLoneInnerMean07);
@@ -186,7 +185,7 @@ public class BonusForLoneWithXml{
 		double pValue = printPValue(result_ud, result_cluster);
 		System.out.println("ir:"+ir_map);
 		System.out.println("ud:"+ud_map);
-		System.out.println("cluster:"+cluster_map);
+		System.out.println("mergeCallData:"+cluster_map);
 		System.out.println("pValue:"+pValue);
 		System.out.println("----------------------------");
 //		Map<String,Double> udReqValue = result_ud.getAveragePrecisionByQuery();
@@ -390,5 +389,12 @@ public class BonusForLoneWithXml{
     	long endTime = System.currentTimeMillis();
     	System.out.println("time cost:"+(endTime-startTime)*1.0/1000/60);
     }
-
+/**
+ 0.3136539287247746
+ud_call_data:4658
+ir:0.5680616767132588
+ud:0.5935984042437915
+cluster:0.6485420398424149
+pValue:3.902369426023208E-6
+ */
 }
