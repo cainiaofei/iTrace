@@ -110,21 +110,20 @@ public class BonusForLoneWithXml{
         
         ri.setPruning(callEdgeScoreThreshold, dataEdgeScoreThreshold);
         valid = new HashMap<String,Set<String>>();
-        Result result_UD_CallExtendData = IR.compute(textDataset,model,
-        		new UD_CallExtendDataOutLevel(ri,callEdgeScoreThreshold,
-        				dataEdgeScoreThreshold,MethodTypeProcessLone.InnerMean,percent,valid));//0.7
-        
+        Result result_UD_CallDataDynamic = IR.compute(textDataset,model,
+        		new UD_CallDataDynamic(ri,callEdgeScoreThreshold,
+        				dataEdgeScoreThreshold,percent,valid));//0.7
         //below closeness method
         
         MyVisualCurve curve = new MyVisualCurve();
         curve.addLine(result_ir);
-        curve.addLine(result_UD_CSTI);
+        //curve.addLine(result_UD_CSTI);
         //curve.addLine(result_pruningeCall_Data_Dir);
-        curve.addLine(result_UD_CallThenDataProcessLoneInnerMean07);//累加 内部 直接平均
-        curve.addLine(result_UD_CallExtendData);//
-        curve.addLine(result_UD_DataThenCallProcessLoneInnerMean07);
-        double irPvalue = printPValue(result_ir, result_UD_CallExtendData);
-        double udPvalue = printPValue(result_UD_CSTI, result_UD_CallExtendData);
+        //curve.addLine(result_UD_CallThenDataProcessLoneInnerMean07);//累加 内部 直接平均
+        curve.addLine(result_UD_CallDataDynamic);//
+        //curve.addLine(result_UD_DataThenCallProcessLoneInnerMean07);
+        double irPvalue = printPValue(result_ir, result_UD_CallDataDynamic);
+        double udPvalue = printPValue(result_UD_CSTI, result_UD_CallDataDynamic);
         String irPvalueStr = (irPvalue+"").substring(0, 5);
         String udPvalueStr = (udPvalue+"").substring(0, 5);
         double rate = Double.valueOf(System.getProperty("rate"));
@@ -132,7 +131,7 @@ public class BonusForLoneWithXml{
         curve.showChart(project.getProjectName()+"-"/*+irPvalueStr+"-"+udPvalueStr+"-"+rateStr*/);
         curve.curveStore(".",project.getProjectName()+"-"+percent+"-"+callEdgeScoreThreshold+"-"+
         		dataEdgeScoreThreshold+"-"+model+irPvalueStr+"-"+udPvalueStr);
-        getApAndMap(result_ir,result_UD_CSTI, result_UD_CallExtendData);
+        getApAndMap(result_ir,result_UD_CSTI, result_UD_CallDataDynamic);
         
     }
 
