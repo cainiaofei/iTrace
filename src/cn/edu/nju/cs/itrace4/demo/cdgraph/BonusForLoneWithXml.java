@@ -127,7 +127,7 @@ public class BonusForLoneWithXml{
         String irPvalueStr = (irPvalue+"").substring(0, 5);
         String udPvalueStr = (udPvalue+"").substring(0, 5);
         double rate = Double.valueOf(System.getProperty("rate"));
-        String rateStr = (rate+"").substring(0, 5);
+        String rateStr = (rate+"").substring(0, 3);
         curve.showChart(project.getProjectName()+"-"/*+irPvalueStr+"-"+udPvalueStr+"-"+rateStr*/);
         curve.curveStore(".",project.getProjectName()+"-"+percent+"-"+callEdgeScoreThreshold+"-"+
         		dataEdgeScoreThreshold+"-"+model+irPvalueStr+"-"+udPvalueStr);

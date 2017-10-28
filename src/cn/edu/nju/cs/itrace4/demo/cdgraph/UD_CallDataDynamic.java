@@ -39,7 +39,7 @@ public class UD_CallDataDynamic implements CSTI{
 	private Map<String,Set<String>> valid;
 	private double percent;
 	private Set<Integer> allVertexIdList = new HashSet<Integer>();
-	private boolean hidden = false;
+	private boolean hidden = true;
 	private Set<Integer> absoluteLoneVertexSet = new HashSet<Integer>();
 	
 	private double callThreshold;
@@ -119,9 +119,7 @@ public class UD_CallDataDynamic implements CSTI{
 	
 	private Set<Integer> fillLoneVertex(SubGraph subGraph, Set<Integer> hasVisited,boolean hidden) {
 		Set<Integer> regionSet = new HashSet<Integer>();
-		for(int ele:subGraph.getVertexList()) {
-			regionSet.add(ele);
-		}
+		regionSet.addAll(subGraph.getVertexList());
 		if(hidden) {
 			regionSet.addAll(hasVisited);
 		}
@@ -151,14 +149,17 @@ public class UD_CallDataDynamic implements CSTI{
 	 */
 	public SimilarityMatrix processLoneVertexInnerMean(SimilarityMatrix matrix, TextDataset textDataset){
 		 SimilarityMatrix oracle = textDataset.getRtm();
-		 SimilarityMatrix matrix_ud = new SimilarityMatrix();
 		 //get all target artifacts
 		 Set<String> targetArtifacts = matrix.targetArtifactsIds();
 		 //remove target artifacts which not corresponding with any source artifacts.
 		 filterSubGraphsList(targetArtifacts,callDataSubGraphList);
-		 List<SubGraph> originCallDataSubGraphList = new ArrayList<SubGraph>(callDataSubGraphList);
 		 fillAbsoluteLoneVertexSet(absoluteLoneVertexSet,callDataSubGraphList);
+		 removeLoneVertexList(callDataSubGraphList);
+		 
+		 
 		 int loneVertexSize = absoluteLoneVertexSet.size();
+		 List<SubGraph> originCallDataSubGraphList = new ArrayList<SubGraph>(callDataSubGraphList);
+		 
 		 
 		 for(String req:matrix.sourceArtifactsIds()){
 			callDataSubGraphList = new ArrayList<SubGraph>(originCallDataSubGraphList);
@@ -168,8 +169,8 @@ public class UD_CallDataDynamic implements CSTI{
 			double maxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(maxId));
 			
 			int index = 1;
-			int subGraphAmount = callDataSubGraphList.size() - loneVertexSize;
-			
+			//int subGraphAmount = callDataSubGraphList.size() - loneVertexSize;
+			int subGraphAmount = callDataSubGraphList.size();
 			Set<Integer> hasVisitedRegion = new HashSet<Integer>();
 			//for(SubGraph subGraph:callDataSubGraphList){//subGraph
 			while(callDataSubGraphList.size()!=0) {
@@ -201,41 +202,24 @@ public class UD_CallDataDynamic implements CSTI{
 						String vertexName = vertexIdNameMap.get(vertexId);
 						double curValue = matrix.getScoreForLink(req, vertexName);
 						//double preValue = curValue;
-						if(hasContainedThisLink(matrix_ud,req,vertexId)) {
-							curValue = matrix_ud.getScoreForLink(req, vertexName);
-						}
 						if(!vertexName.equals(represent)){
 							int graphSize = subGraph.getVertexList().size();
 							curValue = Math.min(maxScore*0.9999, curValue+maxScore/(graphSize-1));
 						}
-						if(hasContainedThisLink(matrix_ud,req,vertexId)) {
-							matrix_ud.setScoreForLink(req, vertexName, curValue);
-						}
-						else{
-							matrix_ud.addLink(req, vertexName, curValue);
-						}
+						matrix.setScoreForLink(req, vertexName, curValue);
 					}
-				}
-				else{
-					for(int id:vertexList){
-						String vertexName = vertexIdNameMap.get(id);
-						double curValue = matrix.getScoreForLink(req,vertexName);
-						if(!hasContainedThisLink(matrix_ud,req,id)) {
-							matrix_ud.addLink(req, vertexName,curValue);//
-						}
-					}
+					Set<Integer> curLoneVertexList = fillLoneVertex(subGraph,
+							hasVisitedRegion,hidden);
+					giveBonusForLoneNotInThisRegion(matrix, subGraph,curLoneVertexList,req);
+					hasVisitedRegion.addAll(subGraph.getVertexList());
+					
 				}
 				index++;
-				Set<Integer> curLoneVertexList = fillLoneVertex(subGraph,
-						hasVisitedRegion,hidden);
-				hasVisitedRegion.addAll(subGraph.getVertexList());
-				giveBonusForLoneNotInThisRegion(matrix, matrix_ud, subGraph,
-						curLoneVertexList,req);
 				callDataSubGraphList.remove(0);
 			}///
 		}//req
 		
-		LinksList allLinks = matrix_ud.allLinks();
+		LinksList allLinks = matrix.allLinks();
 		Collections.sort(allLinks, Collections.reverseOrder());
 		SimilarityMatrix res = new SimilarityMatrix();
 		for(SingleLink link:allLinks){
@@ -243,20 +227,34 @@ public class UD_CallDataDynamic implements CSTI{
 		}
 		
 		double rate = allSize(valid)*1.0/res.allLinks().size(); 
-		System.out.println(rate);
+		System.out.println("ud_Dynamic:"+rate);
 		System.setProperty("rate", rate+"");
 		return res;
 	}
 	
 	
 	
-	private void giveBonusForLoneNotInThisRegion(SimilarityMatrix matrix, SimilarityMatrix matrix_ud, SubGraph subGraph,
+	private void removeLoneVertexList(List<SubGraph> callDataSubGraphList) {
+		Iterator<SubGraph> ite = callDataSubGraphList.iterator();
+		while(ite.hasNext()) {
+			SubGraph subGraph = ite.next();
+			if(subGraph.getVertexList().size()==1) {
+				ite.remove();
+			}
+		}
+	}
+
+
+	private void giveBonusForLoneNotInThisRegion(SimilarityMatrix matrix, SubGraph subGraph,
 			Set<Integer> curLoneVertexList,String req) {
+//		giveBonusBasedCallGraph(matrix, subGraph, curLoneVertexList,req);
+//		giveBonusBasedDataGraph(matrix, subGraph, curLoneVertexList,req);
+		
 		if(subGraph.getType().equals("call")) {
-			giveBonusBasedCallGraph(matrix, matrix_ud, subGraph, curLoneVertexList,req);
+			giveBonusBasedCallGraph(matrix, subGraph, curLoneVertexList,req);
 		}
 		else if(subGraph.getType().equals("data")) {
-			giveBonusBasedDataGraph(matrix, matrix_ud, subGraph, curLoneVertexList,req);
+			giveBonusBasedDataGraph(matrix, subGraph, curLoneVertexList,req);
 		}
 		else {
 			System.out.println("---------giveBonusForLoneNotInThisRegion-----------------");
@@ -266,7 +264,7 @@ public class UD_CallDataDynamic implements CSTI{
 	}
 
 
-	private void giveBonusBasedDataGraph(SimilarityMatrix matrix, SimilarityMatrix matrix_ud, SubGraph subGraph,
+	private void giveBonusBasedDataGraph(SimilarityMatrix matrix, SubGraph subGraph,
 			Set<Integer> curLoneVertexList, String req) {
 		Collections.sort(callSubGraphList, new SortBySubGraph(vertexIdNameMap, matrix, req));
 		int maxId = callSubGraphList.get(0).getMaxId();
@@ -279,25 +277,20 @@ public class UD_CallDataDynamic implements CSTI{
 			routerLen = 2;
 			double bonus = giveBonusForLonePointBasedDataGraph(dataGraphs, subGraph, loneVertex, 1);
 
-			double localMaxScore = matrix_ud.getScoreForLink(req, vertexIdNameMap.get(subGraph.getMaxId()));
+			double localMaxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(subGraph.getMaxId()));
 			//localMaxScore = maxScore;
 
 			double validValueSum = (localMaxScore) * bonus;
 			double originValue = matrix.getScoreForLink(req, loneVertexName);
 			double nowValue = originValue + validValueSum;
 			nowValue = Math.min(nowValue, maxScore);
-			if(hasContainedThisLink(matrix_ud, req, loneVertex)) {/////// the relative lone vertex is change.
-				matrix_ud.setScoreForLink(req, loneVertexName, nowValue);;
-			}
-			else {
-				matrix_ud.addLink(req, loneVertexName, nowValue);
-			}
+			matrix.setScoreForLink(req, loneVertexName, nowValue);
 		}
 		
 	}
 
 
-	private void giveBonusBasedCallGraph(SimilarityMatrix matrix, SimilarityMatrix matrix_ud, SubGraph subGraph,
+	private void giveBonusBasedCallGraph(SimilarityMatrix matrix, SubGraph subGraph,
 			Set<Integer> curLoneVertexList, String req) {
 
 		Collections.sort(callSubGraphList, new SortBySubGraph(vertexIdNameMap, matrix, req));
@@ -312,19 +305,14 @@ public class UD_CallDataDynamic implements CSTI{
 			routerLen = 3;
 			double bonus = giveBonusForLonePointBasedCallGraph(callGraphs, subGraph, loneVertex, 1);
 
-			double localMaxScore = matrix_ud.getScoreForLink(req, vertexIdNameMap.get(subGraph.getMaxId()));
+			double localMaxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(subGraph.getMaxId()));
 			//localMaxScore = maxScore;
 
 			double validValueSum = (localMaxScore) * bonus;
 			double originValue = matrix.getScoreForLink(req, loneVertexName);
 			double nowValue = originValue + validValueSum;
 			nowValue = Math.min(nowValue, maxScore);
-			if(hasContainedThisLink(matrix_ud, req, loneVertex)) {/////// the relative lone vertex is change.
-				matrix_ud.setScoreForLink(req, loneVertexName, nowValue);;
-			}
-			else {
-				matrix_ud.addLink(req, loneVertexName, nowValue);
-			}
+			matrix.setScoreForLink(req, loneVertexName, nowValue);
 		}
 	}
 

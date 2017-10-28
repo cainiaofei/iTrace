@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
-	<projectName>iTrust</projectName>
-	<modelName>vsm</modelName>
+	<projectName>gantt</projectName>
+	<modelName>jsd</modelName>
 	<callEdgeScoreThreshold>0.7</callEdgeScoreThreshold>
 	<dataEdgeScoreThreshold>0.7</dataEdgeScoreThreshold>
 	<percent>1</percent>
