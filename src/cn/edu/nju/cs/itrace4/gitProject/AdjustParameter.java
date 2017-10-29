@@ -17,6 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
+import cn.edu.nju.cs.itrace4.demo.exp.project.Gantt;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Infinispan;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Maven;
@@ -30,7 +31,7 @@ public class AdjustParameter {
 	
 	public void lookForParameter() throws InterruptedException, IOException, ClassNotFoundException {
 		System.setProperty("routerLen", 6 + "");
-		Project[] projects = { new Maven()/*, new Infinispan() */};
+		Project[] projects = { new Gantt()/*, new Infinispan() */};
 		String[] models = { "cn.edu.nju.cs.itrace4.core.ir.VSM", "cn.edu.nju.cs.itrace4.core.ir.JSD",
 				"cn.edu.nju.cs.itrace4.core.ir.LSI" };
 		List<Thread> threadList = new ArrayList<Thread>();
@@ -75,7 +76,7 @@ public class AdjustParameter {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		findBestParameter(0.06);
+		findBestParameter(0.05);
 		System.out.println("---terminal-----");
 	}
 
@@ -189,7 +190,7 @@ public class AdjustParameter {
 	public static void main(String[] args) throws InterruptedException, ClassNotFoundException, IOException {
 		AdjustParameter tool = new AdjustParameter();
 		tool.lookForParameter();
-//		tool.readObject();
-//		tool.findBestParameter(0.03);
+		tool.readObject();
+		tool.findBestParameter(0.05);
 	}
 }

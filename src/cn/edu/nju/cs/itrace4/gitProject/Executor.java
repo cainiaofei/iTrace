@@ -103,7 +103,7 @@ public class Executor implements Runnable{
 //        				dataThreshold,MethodTypeProcessLone.InnerMean,0.7,valid));//0.7
         Result result_UD_CallDataDynamic = IR.compute(textDataset,model,
         		new UD_CallDataDynamic(ri,callThreshold,
-        				dataThreshold,1,valid));//0.7
+        				dataThreshold,0.5,valid));//0.7
         
         double irPvalue = printPValue(result_ir, result_UD_CallDataDynamic);
         double udPvalue = printPValue(result_UD_CSTI, result_UD_CallDataDynamic);

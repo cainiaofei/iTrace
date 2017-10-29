@@ -21,6 +21,8 @@ import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
 import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.MethodTypeProcessLone;
 import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.UD_CallThenDataWithBonusForLone;
+import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataDynamic;
+import cn.edu.nju.cs.itrace4.demo.exp.project.Gantt;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Infinispan;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Maven;
@@ -34,7 +36,7 @@ public class GetApAndMap implements Runnable{
 	private String basePath;
 	private Project[] projects = new Project[3];
 	private String[] models = new String[3];
-	private double callThreshold = 0.4, dataThreshold = 0.7;
+	private double callThreshold = 0.5, dataThreshold = 0.7;
 	
 	public GetApAndMap(double percent,String basePath) {
 		this.percent = percent;
@@ -51,7 +53,7 @@ public class GetApAndMap implements Runnable{
 	public void initProjects(Project[] project){
 		project[0] = new Itrust();
 		project[1] = new Maven();
-		project[2] = new Infinispan();
+		project[2] = new Gantt();
 	}
 	
 	public void initModels(String[] models){
@@ -88,8 +90,8 @@ public class GetApAndMap implements Runnable{
 		          ri.setPruning(callThreshold, dataThreshold);
 		          Map<String,Set<String>> valid = new HashMap<String,Set<String>>();
 		          Result result_cluster = IR.compute(textDataset,model,
-		          		new UD_CallThenDataWithBonusForLone(ri,callThreshold,
-		          				dataThreshold,MethodTypeProcessLone.InnerMean,percent,valid));
+		          		new UD_CallDataDynamic(ri,callThreshold,
+		          				dataThreshold,percent,valid));//0.7
 		          retrieveData(model,result_ir,result_ud,result_cluster,modelMapData,textDataset);
 		      }
 		      //IR
