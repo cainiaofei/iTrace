@@ -116,7 +116,7 @@ public class BonusForLoneWithXml{
         //below closeness method
         
         MyVisualCurve curve = new MyVisualCurve();
-        curve.addLine(result_ir);
+        curve.addLine(result_ir);c
         curve.addLine(result_UD_CSTI);
         //curve.addLine(result_pruningeCall_Data_Dir);
         //curve.addLine(result_UD_CallThenDataProcessLoneInnerMean07);//累加 内部 直接平均
