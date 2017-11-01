@@ -23,6 +23,9 @@ import cn.edu.nju.cs.itrace4.core.ir.IRModelConst;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
 import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.MethodTypeProcessLone;
 import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.UD_CallThenDataWithBonusForLone;
+import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataDynamic;
+import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataOutLevel;
+import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataWithBonusForLone;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
 import cn.edu.nju.cs.itrace4.demo.visual.MyVisualCurve;
@@ -36,6 +39,7 @@ public class Executor implements Runnable{
 	private Project project;
 	private Map<String,Double> irPvalueMap;
 	private Map<String,Double> udPvalueMap;
+	private Map<String,Double> clusterMap;
 	private String basePath = "parameterMapData";
 	private String model;
 	
@@ -65,6 +69,18 @@ public class Executor implements Runnable{
 		this.udPvalueMap = udPvalueMap;
 	}
 	
+	public Executor(double callThreshold,double dataThreshold,Project project,
+			String model,Map<String,Double> irPvalueMap,
+			Map<String,Double> udPvalueMap, Map<String,Double> clusterMap) {
+		this.callThreshold = callThreshold;
+		this.dataThreshold = dataThreshold;
+		this.project = project;
+		this.model = model;
+		this.irPvalueMap = irPvalueMap;
+		this.udPvalueMap = udPvalueMap;
+		this.clusterMap = clusterMap;
+	}
+	
 	@Override
 	public void run() {
 		try {
@@ -82,36 +98,21 @@ public class Executor implements Runnable{
         ri.setPruning(callThreshold, dataThreshold);
         
         Map<String,Set<String>> valid = new HashMap<String,Set<String>>();
-        Result result_UD_CallThenDataProcessLoneInnerMean07 = IR.compute(textDataset,model,
-        		new UD_CallThenDataWithBonusForLone(ri,callThreshold,
-        				dataThreshold,MethodTypeProcessLone.InnerMean,0.7,valid));//0.7
+//        Result result_UD_CallThenDataProcessLoneInnerMean07 = IR.compute(textDataset,model,
+//        		new UD_CallThenDataWithBonusForLone(ri,callThreshold,
+//        				dataThreshold,MethodTypeProcessLone.InnerMean,0.7,valid));//0.7
+        Result result_UD_CallDataDynamic = IR.compute(textDataset,model,
+        		new UD_CallDataDynamic(ri,callThreshold,
+        				dataThreshold,1,valid));//0.7
         
-        //below closeness method
-//        class_relation.setPruning(Setting.callThreshold, Setting.dataThreshold);
-//        class_relationForO.setPruning(-1, -1);
-//        class_relationForAllDependencies.setPruning(-1, -1);
-
-//        Result result_pruningeCall_Data_Dir = IR.compute(textDataset, model, 
-//        		new PruningCall_Data_Connection_Closenss(class_relation, class_relationForO, 
-//        				class_relationForAllDependencies,
-//        				UseEdge.Call, 1.0, 1.0));
-        
-//        MyVisualCurve curve = new MyVisualCurve();
-//        curve.addLine(result_ir);
-//        curve.addLine(result_UD_CSTI);
-//        curve.addLine(result_pruningeCall_Data_Dir);
-//        curve.addLine(result_UD_CallThenDataProcessLoneInnerMean07);//累加 内部 直接平均
-        double irPvalue = printPValue(result_ir, result_UD_CallThenDataProcessLoneInnerMean07);
-        double udPvalue = printPValue(result_UD_CSTI, result_UD_CallThenDataProcessLoneInnerMean07);
+        double irPvalue = printPValue(result_ir, result_UD_CallDataDynamic);
+        double udPvalue = printPValue(result_UD_CSTI, result_UD_CallDataDynamic);
+        double map = result_UD_CallDataDynamic.getMeanAveragePrecisionByQuery();
         System.out.println(project.getProjectName()+"-"+callThreshold+"-"+dataThreshold+"-"+model+":"+irPvalue);
         System.out.println(project.getProjectName()+"-"+callThreshold+"-"+dataThreshold+"-"+model+":"+udPvalue);
         irPvalueMap.put(project.getProjectName()+"-"+callThreshold+"-"+dataThreshold+"-"+model, irPvalue);
         udPvalueMap.put(project.getProjectName()+"-"+callThreshold+"-"+dataThreshold+"-"+model, udPvalue);
-//        String irPvalueStr = (irPvalue+"").substring(0, 5);
-//        String udPvalueStr = (udPvalue+"").substring(0, 5);
-//        curve.showChart(project.getProjectName()+"-"+irPvalueStr+"-"+udPvalueStr);
-//        curve.showChart(project.getProjectName());
-//        store(curve);
+        clusterMap.put(project.getProjectName()+"-"+callThreshold+"-"+dataThreshold+"-"+model, map);
     }
 	
 	/**

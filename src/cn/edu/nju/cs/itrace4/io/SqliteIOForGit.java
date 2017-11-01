@@ -22,6 +22,12 @@ import java.util.Set;
  */
 public class SqliteIOForGit implements SqliteIOInterface{
 
+	private static String ucPath = "data/exp/Maven/uc";
+	
+	public static void setUCPath(String ucPath) {
+		SqliteIOForGit.ucPath = ucPath;
+	}
+	
     public static SimilarityMatrix readRTMFromDB(String path, Granularity granularity) {
         File dbFile = new File(path);
         if (!dbFile.exists()) {
@@ -199,7 +205,6 @@ public class SqliteIOForGit implements SqliteIOInterface{
      * @description get uc name list
      */
     private static List<String> getColumnsName() {
-    	String ucPath = "D:\\workspace\\eclipse-workspace\\iTrace4\\data\\exp\\Maven\\uc";
     	File ucDir = new File(ucPath);
     	File[] ucFiles = ucDir.listFiles();
     	List<String> ucNameList = new LinkedList<String>();
@@ -210,32 +215,5 @@ public class SqliteIOForGit implements SqliteIOInterface{
     	}
     	return ucNameList;
     }
-    
-
-//    private static List<String> getColumnsName(Statement stmt) {
-//        List<String> columnsNames = new ArrayList<>();
-//
-//        try {
-//            ResultSet rs = stmt.executeQuery("PRAGMA table_info(reqs)");
-//            while (rs.next()) {
-//                columnsNames.add(rs.getString(2));
-//            }
-//            rs.close();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//
-//        /*
-//        class
-//        UC1
-//        UC2
-//        ...
-//
-//        remove the word "class"
-//         */
-//        columnsNames.remove(0);
-//        return columnsNames;
-//    }
 
 }

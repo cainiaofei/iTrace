@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Set;
 
 public class GetSrc {
-	private String dbPath = "data\\exp\\Infinispan\\relation\\call.db";
 	private Set<String> nameInGraph;
 	
 	

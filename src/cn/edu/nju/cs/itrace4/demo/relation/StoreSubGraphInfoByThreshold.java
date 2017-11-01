@@ -15,10 +15,20 @@ import edu.uci.ics.jung.graph.Graph;
 public class StoreSubGraphInfoByThreshold {
 	
 	private CallDataRelationGraph cdGraph;
+	private double callThreshold = 0.4;
+	private double dataThreshold = 0.7;
+	
+	public StoreSubGraphInfoByThreshold() {}
+	
+	public StoreSubGraphInfoByThreshold(double callThreshold,double dataThreshold) {
+		this.callThreshold = callThreshold;
+		this.dataThreshold = dataThreshold;
+	}
 	
 	public List<SubGraph> getSubGraphs(RelationInfo ri){
         //会根据阈值进行pruning
         cdGraph = new CallDataRelationGraph(ri);
+        
         Graph<CodeVertex, CodeEdge> prunedGraph = cdGraph.getPrunedGraph();
         //序号和类名对应关系
         Map<Integer, String> vertexIdNameMap = ri.getVertexIdNameMap();
