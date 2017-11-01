@@ -1,29 +1,8 @@
-iTrust-0.7999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.VSM:0.07741744419431452
 
-iTrust-0.7999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:0.0024851456989962743
-iTrust-0.7999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:0.005157942905047744
-iTrust-0.7999999999999999-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.JSD:0.0024851456989962743
-iTrust-0.7999999999999999-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.JSD:0.005157942905047744
-iTrust-0.7-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.0024851456989962743
-iTrust-0.7-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.005157942905047744
-iTrust-0.7999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:0.22534065909303913
-iTrust-0.7999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:0.27160532152162153
-iTrust-0.7999999999999999-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:0.22534065909303913
-iTrust-0.7999999999999999-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:0.27160532152162153
 
 
 
 
-iTrust-0.7-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.22534065909303913
-iTrust-0.7-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.27160532152162153
-169
-170
-171
-172
-173
-174
-175
-176
 
 
 
@@ -60,8 +39,6 @@ iTrust-0.7-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.27160532152162
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
@@ -74,22 +51,15 @@ UD_CallData_406:
 
 
 
-we method call start--
-UD_CallData_406:
-we method call finish--
 
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
 
-we method call start--
 
-UD_CallData_406:
 
 
 
@@ -105,23 +75,24 @@ UD_CallData_406:
 
 
 
-we method call finish--
 
 
 
 
 
-we method call start--
 
-we method call finish--
 
+0.014925373134328358
 
-we method call start--
 
+Maven-0.2-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:0.78085832602009
+Maven-0.2-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:0.10869869091843987
+0.014925373134328358
+Maven-0.2-0.2-cn.edu.nju.cs.itrace4.core.ir.VSM:0.855460933129424
+Maven-0.2-0.2-cn.edu.nju.cs.itrace4.core.ir.VSM:0.3659147264638758
 
 
 
-UD_CallData_406:
 
 
 
@@ -130,10 +101,6 @@ UD_CallData_406:
 
 
 
-UD_CallData_406:
-iTrust-0.7999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.VSM:0.22174045427612088
-iTrust-0.7999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.VSM:0.279058500662717
-we method call finish--
 
 
 
@@ -147,41 +114,32 @@ we method call finish--
 
 
 
-we method call finish--
 
 
 
 
-iTrust-0.7999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.VSM:0.22174045427612088
-iTrust-0.7999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.VSM:0.279058500662717
 
 
 
 
 
+0.014925373134328358
 
 
 
 
+Maven-0.2-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:0.874560942967864
+Maven-0.2-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:0.3566247226824184
 
 
-we method call finish--
-iTrust-0.7999999999999999-0.4-cn.edu.nju.cs.itrace4.core.ir.VSM:0.22174045427612088
-iTrust-0.7999999999999999-0.4-cn.edu.nju.cs.itrace4.core.ir.VSM:0.279058500662717
 
 
 
 
-iTrust-0.7999999999999999-0.4-cn.edu.nju.cs.itrace4.core.ir.JSD:0.028288152011517114
-iTrust-0.7999999999999999-0.4-cn.edu.nju.cs.itrace4.core.ir.JSD:0.05032945196593179
-iTrust-0.7999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.JSD:0.028288152011517114
-iTrust-0.7999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.JSD:0.05032945196593179
 
 
 
 
-iTrust-0.7999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.JSD:0.028288152011517114
-iTrust-0.7999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.JSD:0.05032945196593179
 
 
 
@@ -190,19 +148,14 @@ iTrust-0.7999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.JSD:0.05032945196593
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
 
-we method call finish--
 
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
@@ -211,30 +164,32 @@ UD_CallData_406:
 
 
 
-we method call finish--
 
 
 
 
-iTrust-0.7999999999999999-0.4-cn.edu.nju.cs.itrace4.core.ir.LSI:0.13197850390937893
-iTrust-0.7999999999999999-0.4-cn.edu.nju.cs.itrace4.core.ir.LSI:0.16580859075513776
 
 
 
 
-iTrust-0.7999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:0.13197850390937893
-iTrust-0.7999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:0.16580859075513776
-177
-178
-179
-180
-181
-182
-183
-184
 
 
 
+0.08759124087591241
+iTrust-0.2-0.2-cn.edu.nju.cs.itrace4.core.ir.VSM:0.028642825152166772
+iTrust-0.2-0.2-cn.edu.nju.cs.itrace4.core.ir.VSM:0.8128311911284414
+0.08759124087591241
+0.08759124087591241
+iTrust-0.2-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:0.01217011499554772
+iTrust-0.2-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:0.8023579642123202
+iTrust-0.2-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:0.00548123936164941
+iTrust-0.2-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:0.33357791321616137
+0.0948905109489051
+iTrust-0.2-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.VSM:0.009611447197845714
+iTrust-0.2-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.VSM:0.49518783132252875
+0.0948905109489051
+iTrust-0.2-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.JSD:0.0023664323990998607
+iTrust-0.2-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.JSD:0.5752148095047953
 
 
 
@@ -268,20 +223,14 @@ iTrust-0.7999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:0.16580859075513
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
@@ -298,9 +247,6 @@ UD_CallData_406:
 
 
 
-we method call start--
-UD_CallData_406:
-we method call finish--
 
 
 
@@ -309,14 +255,10 @@ we method call finish--
 
 
 
-we method call start--
-we method call finish--
-we method call finish--
 
 
 
 
-UD_CallData_406:
 
 
 
@@ -330,10 +272,16 @@ UD_CallData_406:
 
 
 
+0.029850746268656716
 
 
 
 
+Maven-0.2-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.VSM:0.7970049191264056
+Maven-0.2-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.VSM:0.3531796297208538
+0.029850746268656716
+Maven-0.2-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.JSD:0.7944494792963015
+Maven-0.2-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.JSD:0.1180002055924586
 
 
 
@@ -341,14 +289,10 @@ UD_CallData_406:
 
 
 
-we method call finish--
 
 
 
 
-we method call finish--
-iTrust-0.7999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.VSM:0.22174045427612088
-iTrust-0.7999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.VSM:0.2746576022145837
 
 
 
@@ -357,29 +301,21 @@ iTrust-0.7999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.VSM:0.27465760221458
 
 
 
-iTrust-0.7999999999999999-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.22174045427612088
-iTrust-0.7999999999999999-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.2746576022145837
 
 
 
 
-iTrust-0.7999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.22174045427612088
-iTrust-0.7999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.2746576022145837
-iTrust-0.7999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.JSD:0.028288152011517114
-iTrust-0.7999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.JSD:0.047250011156848515
-iTrust-0.7999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.028288152011517114
-iTrust-0.7999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.047250011156848515
 
 
 
 
 
 
+0.029850746268656716
+Maven-0.2-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:0.8063932988863705
+Maven-0.2-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:0.33185192828816323
 
 
-we method call start--
-UD_CallData_406:
-we method call finish--
 
 
 
@@ -396,8 +332,6 @@ we method call finish--
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
@@ -406,11 +340,6 @@ UD_CallData_406:
 
 
 
-we method call start--
-iTrust-0.7999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.LSI:0.23266587028830876
-iTrust-0.7999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.LSI:0.28127683844778106
-UD_CallData_406:
-we method call finish--
 
 
 
@@ -418,8 +347,10 @@ we method call finish--
 
 
 
+0.029850746268656716
+Maven-0.2-0.4-cn.edu.nju.cs.itrace4.core.ir.VSM:0.7970049191264056
+Maven-0.2-0.4-cn.edu.nju.cs.itrace4.core.ir.VSM:0.3531796297208538
 
-we method call finish--
 
 
 
@@ -428,18 +359,6 @@ we method call finish--
 
 
 
-iTrust-0.7999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.LSI:0.23266587028830876
-iTrust-0.7999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.LSI:0.28127683844778106
-iTrust-0.7999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.23266587028830876
-iTrust-0.7999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.28127683844778106
-185
-186
-187
-188
-189
-190
-191
-192
 
 
 
@@ -451,6 +370,18 @@ iTrust-0.7999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0
 
 
 
+0.0948905109489051
+iTrust-0.2-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:0.005905867363385887
+iTrust-0.2-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:0.7713875264715506
+0.12408759124087591
+iTrust-0.2-0.4-cn.edu.nju.cs.itrace4.core.ir.VSM:4.576596969061249E-5
+iTrust-0.2-0.4-cn.edu.nju.cs.itrace4.core.ir.VSM:0.025263776350987255
+0.12408759124087591
+iTrust-0.2-0.4-cn.edu.nju.cs.itrace4.core.ir.JSD:3.6459373187419367E-5
+iTrust-0.2-0.4-cn.edu.nju.cs.itrace4.core.ir.JSD:0.222946217240516
+0.12408759124087591
+iTrust-0.2-0.4-cn.edu.nju.cs.itrace4.core.ir.LSI:8.43016462744504E-6
+iTrust-0.2-0.4-cn.edu.nju.cs.itrace4.core.ir.LSI:0.03233121072352117
 
 
 
@@ -468,8 +399,6 @@ iTrust-0.7999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
@@ -486,61 +415,49 @@ UD_CallData_406:
 
 
 
-we method call start--
 
 
 
 
-we method call start--
-UD_CallData_406:
 
-UD_CallData_406:
 
 
 
-we method call finish--
 
 
 
 
-we method call start--
 
 
-UD_CallData_406:
 
 
-we method call start--
 
 
 
 
-UD_CallData_406:
 
 
 
 
 
-we method call finish--
 
 
 
-we method call finish--
-we method call finish--
 
 
 
 
+0.029850746268656716
+Maven-0.2-0.4-cn.edu.nju.cs.itrace4.core.ir.JSD:0.7944494792963015
+Maven-0.2-0.4-cn.edu.nju.cs.itrace4.core.ir.JSD:0.1180002055924586
 
 
 
 
 
-we method call finish--
 
 
 
-iTrust-0.7999999999999999-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.21337848264050585
-iTrust-0.7999999999999999-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.26343797709608385
 
 
 
@@ -569,14 +486,6 @@ iTrust-0.7999999999999999-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0
 
 
 
-iTrust-0.8999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.VSM:0.21337848264050585
-iTrust-0.8999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.VSM:0.26343797709608385
-iTrust-0.8999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:0.03109091357776093
-iTrust-0.8999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:0.05376068301257042
-iTrust-0.7999999999999999-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.03109091357776093
-iTrust-0.7999999999999999-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.05376068301257042
-iTrust-0.7999999999999999-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.03109091357776093
-iTrust-0.7999999999999999-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.05376068301257042
 
 
 
@@ -589,14 +498,10 @@ iTrust-0.7999999999999999-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
@@ -605,14 +510,13 @@ UD_CallData_406:
 
 
 
-we method call start--
-UD_CallData_406:
-we method call finish--
 
 
+0.029850746268656716
+Maven-0.2-0.4-cn.edu.nju.cs.itrace4.core.ir.LSI:0.8063932988863705
+Maven-0.2-0.4-cn.edu.nju.cs.itrace4.core.ir.LSI:0.33185192828816323
 
 
-we method call finish--
 
 
 
@@ -625,29 +529,14 @@ we method call finish--
 
 
 
-we method call finish--
 
 
 
 
-iTrust-0.7999999999999999-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.23266587028830876
-iTrust-0.7999999999999999-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.28127683844778106
 
 
 
 
-iTrust-0.7999999999999999-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.23266587028830876
-iTrust-0.7999999999999999-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.28127683844778106
-iTrust-0.8999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:0.23266587028830876
-iTrust-0.8999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:0.28127683844778106
-193
-194
-195
-196
-197
-198
-199
-200
 
 
 
@@ -667,6 +556,24 @@ iTrust-0.8999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:0.28127683844778
 
 
 
+0.029850746268656716
+Maven-0.2-0.5-cn.edu.nju.cs.itrace4.core.ir.VSM:0.46286302806585955
+Maven-0.2-0.5-cn.edu.nju.cs.itrace4.core.ir.VSM:0.20306118454637823
+0.029850746268656716
+Maven-0.2-0.5-cn.edu.nju.cs.itrace4.core.ir.JSD:0.8149525065971884
+Maven-0.2-0.5-cn.edu.nju.cs.itrace4.core.ir.JSD:0.12141269720742442
+0.029850746268656716
+Maven-0.2-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:0.46219053563772383
+Maven-0.2-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:0.2150644350156362
+0.12408759124087591
+iTrust-0.2-0.5-cn.edu.nju.cs.itrace4.core.ir.VSM:4.576596969061249E-5
+iTrust-0.2-0.5-cn.edu.nju.cs.itrace4.core.ir.VSM:0.025263776350987255
+0.12408759124087591
+iTrust-0.2-0.5-cn.edu.nju.cs.itrace4.core.ir.JSD:3.6459373187419367E-5
+iTrust-0.2-0.5-cn.edu.nju.cs.itrace4.core.ir.JSD:0.222946217240516
+0.12408759124087591
+iTrust-0.2-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:8.43016462744504E-6
+iTrust-0.2-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:0.03233121072352117
 
 
 
@@ -684,8 +591,6 @@ iTrust-0.8999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:0.28127683844778
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
@@ -694,9 +599,6 @@ UD_CallData_406:
 
 
 
-we method call start--
-UD_CallData_406:
-we method call finish--
 
 
 
@@ -705,9 +607,6 @@ we method call finish--
 
 
 
-we method call start--
-we method call finish--
-UD_CallData_406:
 
 
 
@@ -721,8 +620,6 @@ UD_CallData_406:
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
@@ -734,7 +631,6 @@ UD_CallData_406:
 
 
 
-we method call finish--
 
 
 
@@ -747,9 +643,6 @@ we method call finish--
 
 
 
-we method call start--
-UD_CallData_406:
-we method call finish--
 
 
 
@@ -758,8 +651,6 @@ we method call finish--
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
@@ -768,14 +659,10 @@ UD_CallData_406:
 
 
 
-iTrust-0.8999999999999999-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.VSM:0.2354067632481498
-iTrust-0.8999999999999999-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.VSM:0.3022466576461723
 
 
 
 
-we method call finish--
-we method call finish--
 
 
 
@@ -784,14 +671,10 @@ we method call finish--
 
 
 
-iTrust-0.8999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.VSM:0.2354067632481498
-iTrust-0.8999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.VSM:0.3022466576461723
 
 
 
 
-iTrust-0.8999999999999999-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.JSD:0.030435550701033754
-iTrust-0.8999999999999999-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.JSD:0.05457001288732741
 
 
 
@@ -800,12 +683,6 @@ iTrust-0.8999999999999999-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.JSD:
 
 
 
-iTrust-0.8999999999999999-0.4-cn.edu.nju.cs.itrace4.core.ir.VSM:0.2354067632481498
-iTrust-0.8999999999999999-0.4-cn.edu.nju.cs.itrace4.core.ir.VSM:0.3022466576461723
-iTrust-0.8999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.JSD:0.030435550701033754
-iTrust-0.8999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.JSD:0.05457001288732741
-iTrust-0.8999999999999999-0.4-cn.edu.nju.cs.itrace4.core.ir.JSD:0.030435550701033754
-iTrust-0.8999999999999999-0.4-cn.edu.nju.cs.itrace4.core.ir.JSD:0.05457001288732741
 
 
 
@@ -814,9 +691,6 @@ iTrust-0.8999999999999999-0.4-cn.edu.nju.cs.itrace4.core.ir.JSD:0.05457001288732
 
 
 
-we method call start--
-UD_CallData_406:
-we method call finish--
 
 
 
@@ -826,8 +700,6 @@ we method call finish--
 
 
 
-iTrust-0.8999999999999999-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:0.25171347599439886
-iTrust-0.8999999999999999-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:0.2645028385811147
 
 
 
@@ -835,9 +707,6 @@ iTrust-0.8999999999999999-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:
 
 
 
-we method call start--
-UD_CallData_406:
-we method call finish--
 
 
 
@@ -846,16 +715,6 @@ we method call finish--
 
 
 
-iTrust-0.8999999999999999-0.4-cn.edu.nju.cs.itrace4.core.ir.LSI:0.25171347599439886
-iTrust-0.8999999999999999-0.4-cn.edu.nju.cs.itrace4.core.ir.LSI:0.2645028385811147
-201
-202
-203
-204
-205
-206
-207
-208
 
 
 
@@ -883,14 +742,35 @@ iTrust-0.8999999999999999-0.4-cn.edu.nju.cs.itrace4.core.ir.LSI:0.26450283858111
 
 
 
+0.029850746268656716
+Maven-0.2-0.6-cn.edu.nju.cs.itrace4.core.ir.VSM:0.4723349993087168
+Maven-0.2-0.6-cn.edu.nju.cs.itrace4.core.ir.VSM:0.21834996768615944
+0.029850746268656716
+Maven-0.2-0.6-cn.edu.nju.cs.itrace4.core.ir.JSD:0.8858825061004945
+Maven-0.2-0.6-cn.edu.nju.cs.itrace4.core.ir.JSD:0.12355075368770374
+0.029850746268656716
+Maven-0.2-0.6-cn.edu.nju.cs.itrace4.core.ir.LSI:0.482600911842083
+Maven-0.2-0.6-cn.edu.nju.cs.itrace4.core.ir.LSI:0.23056201717223135
+0.12408759124087591
+iTrust-0.2-0.6-cn.edu.nju.cs.itrace4.core.ir.LSI:8.43016462744504E-6
+iTrust-0.2-0.6-cn.edu.nju.cs.itrace4.core.ir.LSI:0.03233121072352117
+0.12408759124087591
+iTrust-0.2-0.6-cn.edu.nju.cs.itrace4.core.ir.VSM:4.576596969061249E-5
+iTrust-0.2-0.6-cn.edu.nju.cs.itrace4.core.ir.VSM:0.025263776350987255
+0.12408759124087591
+iTrust-0.2-0.6-cn.edu.nju.cs.itrace4.core.ir.JSD:3.6459373187419367E-5
+iTrust-0.2-0.6-cn.edu.nju.cs.itrace4.core.ir.JSD:0.222946217240516
+0.12408759124087591
+iTrust-0.2-0.7-cn.edu.nju.cs.itrace4.core.ir.VSM:4.576596969061249E-5
+iTrust-0.2-0.7-cn.edu.nju.cs.itrace4.core.ir.VSM:0.025263776350987255
+0.12408759124087591
+iTrust-0.2-0.7-cn.edu.nju.cs.itrace4.core.ir.JSD:3.6459373187419367E-5
+iTrust-0.2-0.7-cn.edu.nju.cs.itrace4.core.ir.JSD:0.222946217240516
 
-we method call start--
-UD_CallData_406:
 
 
 
 
-we method call finish--
 
 
 
@@ -901,10 +781,8 @@ we method call finish--
 
 
 
-we method call start--
 
 
-UD_CallData_406:
 
 
 
@@ -913,24 +791,18 @@ UD_CallData_406:
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
 
-we method call finish--
 
 
 
 
-we method call finish--
 
 
 
@@ -939,10 +811,7 @@ we method call finish--
 
 
 
-we method call start--
-we method call finish--
 
-UD_CallData_406:
 
 
 
@@ -970,9 +839,6 @@ UD_CallData_406:
 
 
 
-iTrust-0.8999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.VSM:0.4066039260552693
-we method call finish--
-iTrust-0.8999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.VSM:0.41425122819195237
 
 
 
@@ -981,18 +847,10 @@ iTrust-0.8999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.VSM:0.41425122819195
 
 
 
-iTrust-0.8999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.4066039260552693
-iTrust-0.8999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.41425122819195237
 
 
 
 
-iTrust-0.8999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.JSD:0.07842582624591511
-iTrust-0.8999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.JSD:0.08817588407192423
-iTrust-0.8999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.VSM:0.4066039260552693
-iTrust-0.8999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.VSM:0.41425122819195237
-iTrust-0.8999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.JSD:0.07842582624591511
-iTrust-0.8999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.JSD:0.08817588407192423
 
 
 
@@ -1001,20 +859,14 @@ iTrust-0.8999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.JSD:0.08817588407192
 
 
 
-we method call start--
 
 
 
 
-UD_CallData_406:
 
 
 
 
-we method call start--
-UD_CallData_406:
-we method call finish--
-we method call finish--
 
 
 
@@ -1039,13 +891,6 @@ we method call finish--
 
 
 
-we method call start--
-UD_CallData_406:
-iTrust-0.8999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.LSI:0.48214199972565785
-iTrust-0.8999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.LSI:0.49590700061785464
-iTrust-0.8999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:0.48214199972565785
-iTrust-0.8999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:0.49590700061785464
-we method call finish--
 
 
 
@@ -1054,16 +899,6 @@ we method call finish--
 
 
 
-iTrust-0.8999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.LSI:0.48214199972565785
-iTrust-0.8999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.LSI:0.49590700061785464
-209
-210
-211
-212
-213
-214
-215
-216
 
 
 
@@ -1096,11 +931,33 @@ iTrust-0.8999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.LSI:0.49590700061785
 
 
 
-we method call start--
 
-UD_CallData_406:
 
 
+0.029850746268656716
+Maven-0.2-0.7-cn.edu.nju.cs.itrace4.core.ir.VSM:0.28176109292480733
+Maven-0.2-0.7-cn.edu.nju.cs.itrace4.core.ir.VSM:0.11593790320452535
+0.029850746268656716
+Maven-0.2-0.7-cn.edu.nju.cs.itrace4.core.ir.JSD:0.3759492087831231
+Maven-0.2-0.7-cn.edu.nju.cs.itrace4.core.ir.JSD:0.025599823180039085
+0.029850746268656716
+Maven-0.2-0.7-cn.edu.nju.cs.itrace4.core.ir.LSI:0.2917491611570997
+Maven-0.2-0.7-cn.edu.nju.cs.itrace4.core.ir.LSI:0.1441380207104348
+0.029850746268656716
+Maven-0.2-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.28176109292480733
+Maven-0.2-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.11593790320452535
+0.12408759124087591
+iTrust-0.2-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:4.576596969061249E-5
+iTrust-0.2-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.025263776350987255
+0.12408759124087591
+iTrust-0.2-0.7-cn.edu.nju.cs.itrace4.core.ir.LSI:8.43016462744504E-6
+iTrust-0.2-0.7-cn.edu.nju.cs.itrace4.core.ir.LSI:0.03233121072352117
+0.12408759124087591
+iTrust-0.2-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:3.6459373187419367E-5
+iTrust-0.2-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.222946217240516
+0.12408759124087591
+iTrust-0.2-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:8.43016462744504E-6
+iTrust-0.2-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.03233121072352117
 
 
 
@@ -1110,8 +967,6 @@ UD_CallData_406:
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
@@ -1120,25 +975,15 @@ UD_CallData_406:
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
 
 
-we method call start--
 
 
 
-we method call start--
-UD_CallData_406:
-UD_CallData_406:
-we method call finish--
-we method call finish--
-we method call finish--
 
-we method call finish--
 
 
 
@@ -1146,7 +991,6 @@ we method call finish--
 
 
 
-we method call finish--
 
 
 
@@ -1187,20 +1031,10 @@ we method call finish--
 
 
 
-iTrust-0.8999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.07641965021301916
-iTrust-0.8999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.0866081626460925
-iTrust-0.8999999999999999-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.07641965021301916
-iTrust-0.8999999999999999-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.0866081626460925
-iTrust-0.8999999999999999-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.07641965021301916
-iTrust-0.8999999999999999-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.0866081626460925
 
 
 
 
-iTrust-0.8999999999999999-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.3675259042962735
-iTrust-0.8999999999999999-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.37231197298296237
-iTrust-0.8999999999999999-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.3675259042962735
-iTrust-0.8999999999999999-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.37231197298296237
 
 
 
@@ -1213,20 +1047,14 @@ iTrust-0.8999999999999999-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
 
-we method call start--
-UD_CallData_406:
-we method call finish--
 
 
 
 
-we method call finish--
 
 
 
@@ -1243,17 +1071,10 @@ we method call finish--
 
 
 
-iTrust-0.8999999999999999-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.44182628291319004
-iTrust-0.8999999999999999-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.45404432663765504
 
 
 
 
-we method call start--
-UD_CallData_406:
-iTrust-0.8999999999999999-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.44182628291319004
-iTrust-0.8999999999999999-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.45404432663765504
-we method call finish--
 
 
 
@@ -1262,16 +1083,6 @@ we method call finish--
 
 
 
-iTrust-0.8999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.44182628291319004
-iTrust-0.8999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.45404432663765504
-217
-218
-219
-220
-221
-222
-223
-224
 
 
 
@@ -1308,20 +1119,38 @@ iTrust-0.8999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
 
-we method call start--
-UD_CallData_406:
-we method call finish--
 
 
 
+0.029850746268656716
+Maven-0.2-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.3759492087831231
+Maven-0.2-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.025599823180039085
+0.029850746268656716
+Maven-0.2-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.2917491611570997
+Maven-0.2-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.1441380207104348
+0.029850746268656716
+0.029850746268656716
+Maven-0.2-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.28176109292480733
+Maven-0.2-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.11593790320452535
+Maven-0.2-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.3759492087831231
+Maven-0.2-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.025599823180039085
+0.029850746268656716
+Maven-0.2-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.2917491611570997
+Maven-0.2-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.1441380207104348
+0.12408759124087591
+iTrust-0.2-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:8.43016462744504E-6
+iTrust-0.2-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.03233121072352117
+0.12408759124087591
+iTrust-0.2-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:4.576596969061249E-5
+iTrust-0.2-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.025263776350987255
+0.12408759124087591
+iTrust-0.2-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:3.6459373187419367E-5
+iTrust-0.2-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.222946217240516
 
-we method call finish--
 
 
 
@@ -1342,8 +1171,6 @@ we method call finish--
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
@@ -1352,15 +1179,12 @@ UD_CallData_406:
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
 
 
 
-we method call finish--
 
 
 
@@ -1371,11 +1195,6 @@ we method call finish--
 
 
 
-we method call start--
-UD_CallData_406:
-iTrust-0.9999999999999999-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.VSM:0.6654674690352302
-iTrust-0.9999999999999999-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.VSM:0.674905143333892
-we method call finish--
 
 
 
@@ -1388,25 +1207,19 @@ we method call finish--
 
 
 
-we method call start--
 
 
 
 
-UD_CallData_406:
 
 
 
 
-we method call finish--
 
 
 
 
-iTrust-0.9999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.VSM:0.1463494469733304
-iTrust-0.9999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.VSM:0.1498407521133478
 
-we method call finish--
 
 
 
@@ -1417,19 +1230,14 @@ we method call finish--
 
 
 
+0.014925373134328358
+Maven-0.30000000000000004-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:0.5291766255950334
+Maven-0.30000000000000004-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:0.06161965523354588
 
 
 
 
 
-iTrust-0.9999999999999999-0.4-cn.edu.nju.cs.itrace4.core.ir.JSD:0.030435550701033754
-iTrust-0.9999999999999999-0.4-cn.edu.nju.cs.itrace4.core.ir.JSD:0.03737117914453252
-iTrust-0.9999999999999999-0.4-cn.edu.nju.cs.itrace4.core.ir.VSM:0.2354067632481498
-iTrust-0.9999999999999999-0.4-cn.edu.nju.cs.itrace4.core.ir.VSM:0.24135686287347358
-iTrust-0.9999999999999999-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.JSD:0.030435550701033754
-iTrust-0.9999999999999999-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.JSD:0.03737117914453252
-iTrust-0.9999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:0.030435550701033754
-iTrust-0.9999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:0.03737117914453252
 
 
 
@@ -1438,9 +1246,6 @@ iTrust-0.9999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:0.03737117914453
 
 
 
-we method call start--
-UD_CallData_406:
-we method call finish--
 
 
 
@@ -1449,8 +1254,6 @@ we method call finish--
 
 
 
-iTrust-0.9999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:0.15382604481840323
-iTrust-0.9999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:0.1617387705392841
 
 
 
@@ -1459,27 +1262,17 @@ iTrust-0.9999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:0.16173877053928
 
 
 
-we method call start--
-UD_CallData_406:
-we method call finish--
 
 
 
 
 
 
+0.014925373134328358
 
+Maven-0.30000000000000004-0.2-cn.edu.nju.cs.itrace4.core.ir.VSM:0.578691287788862
+Maven-0.30000000000000004-0.2-cn.edu.nju.cs.itrace4.core.ir.VSM:0.2545789019659954
 
-iTrust-0.9999999999999999-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:0.15382604481840323
-iTrust-0.9999999999999999-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:0.1617387705392841
-225
-226
-227
-228
-229
-230
-231
-232
 
 
 
@@ -1508,12 +1301,12 @@ iTrust-0.9999999999999999-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:
 
 
 
-we method call start--
-UD_CallData_406:
-we method call finish--
 
 
 
+0.014925373134328358
+Maven-0.30000000000000004-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:0.6015462432193074
+Maven-0.30000000000000004-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:0.25550065927949395
 
 
 
@@ -1527,8 +1320,6 @@ we method call finish--
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
@@ -1536,11 +1327,22 @@ UD_CallData_406:
 
 
 
+0.13138686131386862
+iTrust-0.30000000000000004-0.2-cn.edu.nju.cs.itrace4.core.ir.VSM:4.794147022852352E-5
+iTrust-0.30000000000000004-0.2-cn.edu.nju.cs.itrace4.core.ir.VSM:0.016265291308968814
+0.13138686131386862
+iTrust-0.30000000000000004-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:5.550555504884628E-7
+iTrust-0.30000000000000004-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:0.033091052625625096
+0.13138686131386862
+iTrust-0.30000000000000004-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:2.26209095373658E-5
+iTrust-0.30000000000000004-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:0.0333643233951149
+0.15328467153284672
+iTrust-0.30000000000000004-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.VSM:2.5102353827674284E-5
+iTrust-0.30000000000000004-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.VSM:0.009645051824513806
+0.15328467153284672
+iTrust-0.30000000000000004-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.JSD:2.127577093834109E-6
+iTrust-0.30000000000000004-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.JSD:0.07976067278708478
 
-we method call start--
-UD_CallData_406:
-we method call finish--
-we method call finish--
 
 
 
@@ -1549,8 +1351,6 @@ we method call finish--
 
 
 
-iTrust-0.9999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.VSM:0.4066039260552693
-iTrust-0.9999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.VSM:0.41425122819195237
 
 
 
@@ -1575,20 +1375,14 @@ iTrust-0.9999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.VSM:0.41425122819195
 
 
 
-we method call start--
-UD_CallData_406:
 
-we method call finish--
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
 
-we method call finish--
 
 
 
@@ -1601,18 +1395,10 @@ we method call finish--
 
 
 
-iTrust-0.9999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.VSM:0.2821675157330391
-iTrust-0.9999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.VSM:0.2877775583164891
-iTrust-0.9999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.VSM:0.2821675157330391
-iTrust-0.9999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.VSM:0.2877775583164891
-iTrust-0.9999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.JSD:0.07842582624591511
-iTrust-0.9999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.JSD:0.08817588407192423
 
 
 
 
-iTrust-0.9999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.JSD:0.07842582624591511
-iTrust-0.9999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.JSD:0.08817588407192423
 
 
 
@@ -1625,9 +1411,6 @@ iTrust-0.9999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.JSD:0.08817588407192
 
 
 
-we method call start--
-UD_CallData_406:
-we method call finish--
 
 
 
@@ -1644,10 +1427,6 @@ we method call finish--
 
 
 
-we method call start--
-UD_CallData_406:
-iTrust-0.9999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:0.25171347599439886
-iTrust-0.9999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:0.2645028385811147
 
 
 
@@ -1656,14 +1435,10 @@ iTrust-0.9999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:0.26450283858111
 
 
 
-we method call start--
-UD_CallData_406:
-we method call finish--
 
 
 
 
-we method call finish--
 
 
 
@@ -1676,18 +1451,6 @@ we method call finish--
 
 
 
-iTrust-0.9999999999999999-0.4-cn.edu.nju.cs.itrace4.core.ir.LSI:0.25171347599439886
-iTrust-0.9999999999999999-0.4-cn.edu.nju.cs.itrace4.core.ir.LSI:0.2645028385811147
-iTrust-0.9999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.LSI:0.25171347599439886
-iTrust-0.9999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.LSI:0.2645028385811147
-233
-234
-235
-236
-237
-238
-239
-240
 
 
 
@@ -1720,8 +1483,6 @@ iTrust-0.9999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.LSI:0.26450283858111
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
@@ -1734,15 +1495,10 @@ UD_CallData_406:
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
 
-we method call start--
-UD_CallData_406:
-we method call finish--
 
 
 
@@ -1751,30 +1507,47 @@ we method call finish--
 
 
 
-we method call start--
 
 
 
+0.029850746268656716
+Maven-0.30000000000000004-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.JSD:0.6092540651997561
+Maven-0.30000000000000004-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.JSD:0.07715165963274118
+0.029850746268656716
+Maven-0.30000000000000004-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.VSM:0.5569938404101915
+Maven-0.30000000000000004-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.VSM:0.2522846372196599
+0.029850746268656716
+Maven-0.30000000000000004-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:0.574922153681448
+Maven-0.30000000000000004-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:0.25365946042145504
+0.15328467153284672
+iTrust-0.30000000000000004-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:8.418368246249183E-6
+iTrust-0.30000000000000004-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:0.015973599503812205
+0.17518248175182483
+iTrust-0.30000000000000004-0.4-cn.edu.nju.cs.itrace4.core.ir.JSD:3.365981144288641E-8
+iTrust-0.30000000000000004-0.4-cn.edu.nju.cs.itrace4.core.ir.JSD:0.005223367912760941
+0.17518248175182483
+iTrust-0.30000000000000004-0.4-cn.edu.nju.cs.itrace4.core.ir.VSM:1.1385035337797288E-7
+iTrust-0.30000000000000004-0.4-cn.edu.nju.cs.itrace4.core.ir.VSM:1.7900665601901355E-4
+0.17518248175182483
+iTrust-0.30000000000000004-0.4-cn.edu.nju.cs.itrace4.core.ir.LSI:2.0386651948602197E-8
+iTrust-0.30000000000000004-0.4-cn.edu.nju.cs.itrace4.core.ir.LSI:3.57859705320193E-4
+0.08955223880597014
+Maven-0.30000000000000004-0.4-cn.edu.nju.cs.itrace4.core.ir.VSM:0.95773939534764
+Maven-0.30000000000000004-0.4-cn.edu.nju.cs.itrace4.core.ir.VSM:0.594647064866358
 
 
 
 
 
-UD_CallData_406:
 
-we method call finish--
 
 
 
-we method call start--
 
-we method call finish--
 
 
 
-UD_CallData_406:
 
-we method call finish--
 
 
 
@@ -1783,7 +1556,6 @@ we method call finish--
 
 
 
-we method call finish--
 
 
 
@@ -1815,16 +1587,6 @@ we method call finish--
 
 
 
-iTrust-0.9999999999999999-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.3675259042962735
-iTrust-0.9999999999999999-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.37231197298296237
-iTrust-0.9999999999999999-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.07641965021301916
-iTrust-0.9999999999999999-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.0866081626460925
-iTrust-0.9999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.3675259042962735
-iTrust-0.9999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.37231197298296237
-iTrust-0.9999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.07641965021301916
-iTrust-0.9999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.0866081626460925
-iTrust-0.9999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.JSD:0.07641965021301916
-iTrust-0.9999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.JSD:0.0866081626460925
 
 
 
@@ -1833,9 +1595,6 @@ iTrust-0.9999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.JSD:0.08660816264609
 
 
 
-we method call start--
-UD_CallData_406:
-we method call finish--
 
 
 
@@ -1848,12 +1607,10 @@ we method call finish--
 
 
 
-we method call start--
 
 
 
 
-UD_CallData_406:
 
 
 
@@ -1862,11 +1619,7 @@ UD_CallData_406:
 
 
 
-we method call start--
-UD_CallData_406:
-we method call finish--
 
-we method call finish--
 
 
 
@@ -1882,18 +1635,6 @@ we method call finish--
 
 
 
-iTrust-0.9999999999999999-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.48214199972565785
-iTrust-0.9999999999999999-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.49590700061785464
-iTrust-0.9999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.LSI:0.48214199972565785
-iTrust-0.9999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.LSI:0.49590700061785464
-iTrust-0.9999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.48214199972565785
-iTrust-0.9999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.49590700061785464
-241
-242
-243
-dirPath:data/exp/Maven/uc
-dirPath:data/exp/Maven/class/code
-Read 107 trace links from rtm.
 
 
 
@@ -1902,11 +1643,6 @@ Read 107 trace links from rtm.
 
 
 
-244
-245
-246
-247
-248
 
 
 
@@ -1917,11 +1653,8 @@ Read 107 trace links from rtm.
 
 
 
-we method call start--
-UD_CallData_406:
 
 
-we method call finish--
 
 
 
@@ -1942,9 +1675,6 @@ we method call finish--
 
 
 
-we method call start--
-UD_CallData_406:
-we method call finish--
 
 
 
@@ -1954,23 +1684,17 @@ we method call finish--
 
 
 
-iTrust-0.9999999999999999-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.3675259042962735
-iTrust-0.9999999999999999-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.37231197298296237
 
 
 
 
-we method call start--
 
 
 
-we method call start--
 
 
 
 
-UD_CallData_406:
-UD_CallData_406:
 
 
 
@@ -1978,6 +1702,30 @@ UD_CallData_406:
 
 
 
+0.17518248175182483
+iTrust-0.30000000000000004-0.5-cn.edu.nju.cs.itrace4.core.ir.VSM:1.1385035337797288E-7
+iTrust-0.30000000000000004-0.5-cn.edu.nju.cs.itrace4.core.ir.VSM:1.7900665601901355E-4
+0.17518248175182483
+iTrust-0.30000000000000004-0.5-cn.edu.nju.cs.itrace4.core.ir.JSD:3.365981144288641E-8
+iTrust-0.30000000000000004-0.5-cn.edu.nju.cs.itrace4.core.ir.JSD:0.005223367912760941
+0.17518248175182483
+iTrust-0.30000000000000004-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:2.0386651948602197E-8
+iTrust-0.30000000000000004-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:3.57859705320193E-4
+0.08955223880597014
+Maven-0.30000000000000004-0.4-cn.edu.nju.cs.itrace4.core.ir.LSI:0.9788622813614484
+Maven-0.30000000000000004-0.4-cn.edu.nju.cs.itrace4.core.ir.LSI:0.5756750510379287
+0.08955223880597014
+Maven-0.30000000000000004-0.4-cn.edu.nju.cs.itrace4.core.ir.JSD:0.8373076001805663
+Maven-0.30000000000000004-0.4-cn.edu.nju.cs.itrace4.core.ir.JSD:0.3531796297208538
+0.08955223880597014
+Maven-0.30000000000000004-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:0.7090426425806922
+Maven-0.30000000000000004-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:0.3313021511828492
+0.08955223880597014
+0.08955223880597014
+Maven-0.30000000000000004-0.5-cn.edu.nju.cs.itrace4.core.ir.JSD:0.9463092633050668
+Maven-0.30000000000000004-0.5-cn.edu.nju.cs.itrace4.core.ir.JSD:0.3252935055745152
+Maven-0.30000000000000004-0.5-cn.edu.nju.cs.itrace4.core.ir.VSM:0.6342087109612096
+Maven-0.30000000000000004-0.5-cn.edu.nju.cs.itrace4.core.ir.VSM:0.2907397785209257
 
 
 
@@ -1986,7 +1734,6 @@ UD_CallData_406:
 
 
 
-we method call start--
 
 
 
@@ -1996,15 +1743,8 @@ we method call start--
 
 
 
-we method call start--
-UD_CallData_406:
-UD_CallData_406:
-iTrust-0.9999999999999999-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.07641965021301916
-iTrust-0.9999999999999999-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.0866081626460925
-we method call finish--
 
 
-we method call finish--
 
 
 
@@ -2019,9 +1759,7 @@ we method call finish--
 
 
 
-we method call finish--
 
-we method call finish--
 
 
 
@@ -2033,18 +1771,10 @@ we method call finish--
 
 
 
-Maven-0.2-0.2-cn.edu.nju.cs.itrace4.core.ir.VSM:0.13934970123459756
 
-Maven-0.2-0.2-cn.edu.nju.cs.itrace4.core.ir.VSM:0.5584774069950772
 
 
 
-Maven-0.2-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.VSM:0.13934970123459756
-Maven-0.2-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.VSM:0.5584774069950772
-Maven-0.2-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.JSD:0.41018831601063244
-Maven-0.2-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.JSD:0.35260750049152423
-Maven-0.2-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:0.41018831601063244
-Maven-0.2-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:0.35260750049152423
 
 
 
@@ -2053,9 +1783,6 @@ Maven-0.2-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:0.35260750049152423
 
 
 
-we method call start--
-UD_CallData_406:
-we method call finish--
 
 
 
@@ -2072,11 +1799,6 @@ we method call finish--
 
 
 
-we method call start--
-UD_CallData_406:
-iTrust-0.9999999999999999-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.44182628291319004
-iTrust-0.9999999999999999-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.45404432663765504
-we method call finish--
 
 
 
@@ -2085,16 +1807,6 @@ we method call finish--
 
 
 
-Maven-0.2-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:0.3700261627445368
-Maven-0.2-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:0.5006787039276395
-249
-250
-251
-252
-253
-254
-255
-256
 
 
 
@@ -2123,8 +1835,6 @@ Maven-0.2-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:0.5006787039276395
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
@@ -2143,23 +1853,16 @@ UD_CallData_406:
 
 
 
-we method call start--
 
 
-we method call start--
-UD_CallData_406:
-we method call finish--
 
-UD_CallData_406:
 
 
 
-we method call start--
 
 
 
 
-UD_CallData_406:
 
 
 
@@ -2172,21 +1875,15 @@ UD_CallData_406:
 
 
 
-we method call start--
-UD_CallData_406:
 
 
-we method call finish--
 
 
 
-we method call finish--
 
 
 
 
-Maven-0.2-0.4-cn.edu.nju.cs.itrace4.core.ir.VSM:0.06443597845176238
-Maven-0.2-0.4-cn.edu.nju.cs.itrace4.core.ir.VSM:0.11904209322554526
 
 
 
@@ -2195,10 +1892,32 @@ Maven-0.2-0.4-cn.edu.nju.cs.itrace4.core.ir.VSM:0.11904209322554526
 
 
 
-we method call finish--
 
 
-we method call finish--
+0.18248175182481752
+iTrust-0.30000000000000004-0.6-cn.edu.nju.cs.itrace4.core.ir.JSD:5.572350970162122E-8
+iTrust-0.30000000000000004-0.6-cn.edu.nju.cs.itrace4.core.ir.JSD:0.006535903589395902
+0.18248175182481752
+iTrust-0.30000000000000004-0.6-cn.edu.nju.cs.itrace4.core.ir.VSM:5.333439858080532E-8
+iTrust-0.30000000000000004-0.6-cn.edu.nju.cs.itrace4.core.ir.VSM:1.117637055931194E-4
+0.18248175182481752
+iTrust-0.30000000000000004-0.7-cn.edu.nju.cs.itrace4.core.ir.JSD:5.572350970162122E-8
+iTrust-0.30000000000000004-0.7-cn.edu.nju.cs.itrace4.core.ir.JSD:0.006535903589395902
+0.18248175182481752
+iTrust-0.30000000000000004-0.6-cn.edu.nju.cs.itrace4.core.ir.LSI:1.0511152351273668E-8
+iTrust-0.30000000000000004-0.6-cn.edu.nju.cs.itrace4.core.ir.LSI:2.5241273962999417E-4
+0.18248175182481752
+iTrust-0.30000000000000004-0.7-cn.edu.nju.cs.itrace4.core.ir.VSM:5.333439858080532E-8
+iTrust-0.30000000000000004-0.7-cn.edu.nju.cs.itrace4.core.ir.VSM:1.117637055931194E-4
+0.08955223880597014
+Maven-0.30000000000000004-0.6-cn.edu.nju.cs.itrace4.core.ir.JSD:0.9559802887085738
+Maven-0.30000000000000004-0.6-cn.edu.nju.cs.itrace4.core.ir.JSD:0.29225473458830475
+0.08955223880597014
+Maven-0.30000000000000004-0.6-cn.edu.nju.cs.itrace4.core.ir.VSM:0.6547969327621808
+Maven-0.30000000000000004-0.6-cn.edu.nju.cs.itrace4.core.ir.VSM:0.31989301110586954
+0.08955223880597014
+Maven-0.30000000000000004-0.6-cn.edu.nju.cs.itrace4.core.ir.LSI:0.7197517920103774
+Maven-0.30000000000000004-0.6-cn.edu.nju.cs.itrace4.core.ir.LSI:0.34805159957286
 
 
 
@@ -2224,14 +1943,6 @@ we method call finish--
 
 
 
-Maven-0.2-0.5-cn.edu.nju.cs.itrace4.core.ir.VSM:0.06443597845176238
-Maven-0.2-0.5-cn.edu.nju.cs.itrace4.core.ir.VSM:0.11904209322554526
-Maven-0.2-0.6-cn.edu.nju.cs.itrace4.core.ir.VSM:0.06443597845176238
-Maven-0.2-0.6-cn.edu.nju.cs.itrace4.core.ir.VSM:0.11904209322554526
-Maven-0.2-0.4-cn.edu.nju.cs.itrace4.core.ir.JSD:0.11314861840572965
-Maven-0.2-0.4-cn.edu.nju.cs.itrace4.core.ir.JSD:0.4853588238839017
-Maven-0.2-0.5-cn.edu.nju.cs.itrace4.core.ir.JSD:0.11314861840572965
-Maven-0.2-0.5-cn.edu.nju.cs.itrace4.core.ir.JSD:0.4853588238839017
 
 
 
@@ -2240,30 +1951,22 @@ Maven-0.2-0.5-cn.edu.nju.cs.itrace4.core.ir.JSD:0.4853588238839017
 
 
 
-we method call start--
 
 
 
 
-UD_CallData_406:
 
 
 
 
-we method call start--
 
 
 
 
 
-UD_CallData_406:
 
 
 
-we method call start--
-UD_CallData_406:
-we method call finish--
-we method call finish--
 
 
 
@@ -2280,7 +1983,6 @@ we method call finish--
 
 
 
-we method call finish--
 
 
 
@@ -2289,20 +1991,6 @@ we method call finish--
 
 
 
-Maven-0.2-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:0.2912441758244261
-Maven-0.2-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:0.3825317481493056
-Maven-0.2-0.4-cn.edu.nju.cs.itrace4.core.ir.LSI:0.2912441758244261
-Maven-0.2-0.4-cn.edu.nju.cs.itrace4.core.ir.LSI:0.3825317481493056
-Maven-0.2-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:0.2912441758244261
-Maven-0.2-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:0.3825317481493056
-257
-258
-259
-260
-261
-262
-263
-264
 
 
 
@@ -2331,9 +2019,6 @@ Maven-0.2-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:0.3825317481493056
 
 
 
-we method call start--
-UD_CallData_406:
-we method call finish--
 
 
 
@@ -2343,7 +2028,6 @@ we method call finish--
 
 
 
-we method call start--
 
 
 
@@ -2351,7 +2035,6 @@ we method call start--
 
 
 
-UD_CallData_406:
 
 
 
@@ -2367,20 +2050,12 @@ UD_CallData_406:
 
 
 
-we method call start--
 
-we method call start--
-UD_CallData_406:
-UD_CallData_406:
-Maven-0.2-0.7-cn.edu.nju.cs.itrace4.core.ir.VSM:0.10869869091843987
-Maven-0.2-0.7-cn.edu.nju.cs.itrace4.core.ir.VSM:0.18708714936508675
 
 
 
 
-we method call finish--
 
-we method call finish--
 
 
 
@@ -2388,7 +2063,6 @@ we method call finish--
 
 
 
-we method call finish--
 
 
 
@@ -2403,8 +2077,6 @@ we method call finish--
 
 
 
-Maven-0.2-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.10869869091843987
-Maven-0.2-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.18708714936508675
 
 
 
@@ -2414,9 +2086,32 @@ Maven-0.2-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.187087149365086
 
 
 
+0.18248175182481752
+iTrust-0.30000000000000004-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:5.572350970162122E-8
+iTrust-0.30000000000000004-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.006535903589395902
+0.18248175182481752
+iTrust-0.30000000000000004-0.7-cn.edu.nju.cs.itrace4.core.ir.LSI:1.0511152351273668E-8
+iTrust-0.30000000000000004-0.7-cn.edu.nju.cs.itrace4.core.ir.LSI:2.5241273962999417E-4
+0.18248175182481752
+iTrust-0.30000000000000004-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:5.333439858080532E-8
+iTrust-0.30000000000000004-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:1.117637055931194E-4
+0.18248175182481752
+iTrust-0.30000000000000004-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:1.0511152351273668E-8
+iTrust-0.30000000000000004-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:2.5241273962999417E-4
+0.08955223880597014
+Maven-0.30000000000000004-0.7-cn.edu.nju.cs.itrace4.core.ir.VSM:0.5839874964144225
+Maven-0.30000000000000004-0.7-cn.edu.nju.cs.itrace4.core.ir.VSM:0.2676948169466209
+0.08955223880597014
+Maven-0.30000000000000004-0.7-cn.edu.nju.cs.itrace4.core.ir.LSI:0.6452608128421267
+Maven-0.30000000000000004-0.7-cn.edu.nju.cs.itrace4.core.ir.LSI:0.2827493318177159
+0.08955223880597014
+Maven-0.30000000000000004-0.7-cn.edu.nju.cs.itrace4.core.ir.JSD:0.7884954028299112
+Maven-0.30000000000000004-0.7-cn.edu.nju.cs.itrace4.core.ir.JSD:0.11645080384095852
+0.08955223880597014
+Maven-0.30000000000000004-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.5839874964144225
+Maven-0.30000000000000004-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.2676948169466209
 
 
-we method call start--
 
 
 
@@ -2424,12 +2119,6 @@ we method call start--
 
 
 
-UD_CallData_406:
-Maven-0.2-0.7-cn.edu.nju.cs.itrace4.core.ir.JSD:0.16255700863321065
-Maven-0.2-0.7-cn.edu.nju.cs.itrace4.core.ir.JSD:0.6563918300696314
-we method call finish--
-Maven-0.2-0.6-cn.edu.nju.cs.itrace4.core.ir.JSD:0.16255700863321065
-Maven-0.2-0.6-cn.edu.nju.cs.itrace4.core.ir.JSD:0.6563918300696314
 
 
 
@@ -2438,8 +2127,6 @@ Maven-0.2-0.6-cn.edu.nju.cs.itrace4.core.ir.JSD:0.6563918300696314
 
 
 
-Maven-0.2-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.16255700863321065
-Maven-0.2-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.6563918300696314
 
 
 
@@ -2448,8 +2135,6 @@ Maven-0.2-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.656391830069631
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
@@ -2458,9 +2143,6 @@ UD_CallData_406:
 
 
 
-we method call start--
-UD_CallData_406:
-we method call finish--
 
 
 
@@ -2473,26 +2155,18 @@ we method call finish--
 
 
 
-we method call finish--
 
 
 
 
-we method call start--
 
-UD_CallData_406:
 
 
 
-Maven-0.2-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.13671061420397623
-Maven-0.2-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.25550065927949395
 
 
 
 
-Maven-0.2-0.6-cn.edu.nju.cs.itrace4.core.ir.LSI:0.13671061420397623
-Maven-0.2-0.6-cn.edu.nju.cs.itrace4.core.ir.LSI:0.25550065927949395
-we method call finish--
 
 
 
@@ -2501,16 +2175,6 @@ we method call finish--
 
 
 
-Maven-0.2-0.7-cn.edu.nju.cs.itrace4.core.ir.LSI:0.13671061420397623
-Maven-0.2-0.7-cn.edu.nju.cs.itrace4.core.ir.LSI:0.25550065927949395
-265
-266
-267
-268
-269
-270
-271
-272
 
 
 
@@ -2543,8 +2207,6 @@ Maven-0.2-0.7-cn.edu.nju.cs.itrace4.core.ir.LSI:0.25550065927949395
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
@@ -2557,14 +2219,10 @@ UD_CallData_406:
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
@@ -2573,21 +2231,15 @@ UD_CallData_406:
 
 
 
-we method call start--
 
 
 
 
-UD_CallData_406:
 
 
-we method call finish--
-we method call finish--
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
@@ -2608,15 +2260,11 @@ UD_CallData_406:
 
 
 
-we method call finish--
 
 
 
-we method call start--
 
-UD_CallData_406:
 
-we method call finish--
 
 
 
@@ -2630,11 +2278,32 @@ we method call finish--
 
 
 
+0.18248175182481752
+iTrust-0.30000000000000004-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:5.572350970162122E-8
+iTrust-0.30000000000000004-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.006535903589395902
+0.18248175182481752
+iTrust-0.30000000000000004-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:5.333439858080532E-8
+iTrust-0.30000000000000004-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:1.117637055931194E-4
+0.18248175182481752
+iTrust-0.30000000000000004-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:1.0511152351273668E-8
+iTrust-0.30000000000000004-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:2.5241273962999417E-4
+0.08955223880597014
+Maven-0.30000000000000004-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.7884954028299112
+Maven-0.30000000000000004-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.11645080384095852
+0.08955223880597014
+Maven-0.30000000000000004-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.6452608128421267
+Maven-0.30000000000000004-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.2827493318177159
+0.08955223880597014
+Maven-0.30000000000000004-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.6452608128421267
+Maven-0.30000000000000004-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.2827493318177159
+0.08955223880597014
+Maven-0.30000000000000004-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.5839874964144225
+Maven-0.30000000000000004-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.2676948169466209
+0.08955223880597014
+Maven-0.30000000000000004-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.7884954028299112
+Maven-0.30000000000000004-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.11645080384095852
 
 
-Maven-0.2-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.11826000441707019
-Maven-0.2-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.21020317596895122
-we method call finish--
 
 
 
@@ -2642,8 +2311,6 @@ we method call finish--
 
 
 
-Maven-0.30000000000000004-0.2-cn.edu.nju.cs.itrace4.core.ir.VSM:0.1569832882578489
-Maven-0.30000000000000004-0.2-cn.edu.nju.cs.itrace4.core.ir.VSM:0.2947914255550119
 
 
 
@@ -2652,23 +2319,14 @@ Maven-0.30000000000000004-0.2-cn.edu.nju.cs.itrace4.core.ir.VSM:0.29479142555501
 
 
 
-we method call finish--
 
 
 
 
 
-Maven-0.2-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.1569832882578489
-Maven-0.2-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.2947914255550119
 
 
 
-Maven-0.2-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.4588362654779198
-Maven-0.2-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.9313791897358811
-Maven-0.2-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.4588362654779198
-Maven-0.2-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.9313791897358811
-Maven-0.30000000000000004-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:0.3735730003858765
-Maven-0.30000000000000004-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:0.9445517028196015
 
 
 
@@ -2677,30 +2335,22 @@ Maven-0.30000000000000004-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:0.94455170281960
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
 
-we method call finish--
 
 
 
 
-we method call start--
 
 
 
 
-UD_CallData_406:
 
 
 
 
-Maven-0.2-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.4521688325089701
-Maven-0.2-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.6162284168939426
-we method call finish--
 
 
 
@@ -2709,16 +2359,6 @@ we method call finish--
 
 
 
-Maven-0.2-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.4521688325089701
-Maven-0.2-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.6162284168939426
-273
-274
-275
-276
-277
-278
-279
-280
 
 
 
@@ -2763,22 +2403,14 @@ Maven-0.2-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.616228416893942
 
 
 
-we method call start--
-we method call start--
 
-UD_CallData_406:
-UD_CallData_406:
 
 
 
 
-we method call start--
 
 
 
-we method call start--
-UD_CallData_406:
-UD_CallData_406:
 
 
 
@@ -2787,10 +2419,6 @@ UD_CallData_406:
 
 
 
-we method call start--
-UD_CallData_406:
-we method call finish--
-we method call finish--
 
 
 
@@ -2800,12 +2428,10 @@ we method call finish--
 
 
 
-we method call finish--
 
 
 
 
-we method call finish--
 
 
 
@@ -2824,8 +2450,13 @@ we method call finish--
 
 
 
+0.029850746268656716
+Maven-0.4-0.2-cn.edu.nju.cs.itrace4.core.ir.VSM:0.46219053563772383
+Maven-0.4-0.2-cn.edu.nju.cs.itrace4.core.ir.VSM:0.20266965341855592
+0.029850746268656716
+Maven-0.4-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:0.19762971480426572
+Maven-0.4-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:0.01639360717234488
 
-we method call finish--
 
 
 
@@ -2845,17 +2476,25 @@ we method call finish--
 
 
 
+0.029850746268656716
+Maven-0.4-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:0.4909001508020665
+Maven-0.4-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:0.21424864747133177
+0.13138686131386862
+iTrust-0.4-0.2-cn.edu.nju.cs.itrace4.core.ir.VSM:6.424974007160944E-5
+iTrust-0.4-0.2-cn.edu.nju.cs.itrace4.core.ir.VSM:0.01985956423587159
+0.13138686131386862
+iTrust-0.4-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:6.180172314001927E-7
+iTrust-0.4-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:0.036553798254626464
+0.13138686131386862
+iTrust-0.4-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:2.8777805090264562E-5
+iTrust-0.4-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:0.03862335429407447
+0.15328467153284672
+iTrust-0.4-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.VSM:2.7365940510861262E-5
+iTrust-0.4-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.VSM:0.010574595395235475
+0.15328467153284672
+iTrust-0.4-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.JSD:1.987073798594673E-6
+iTrust-0.4-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.JSD:0.08322995563853493
 
-Maven-0.30000000000000004-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.VSM:0.03753643572209238
-Maven-0.30000000000000004-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.VSM:0.0705591516296988
-Maven-0.30000000000000004-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.JSD:0.06177339882251425
-Maven-0.30000000000000004-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.JSD:0.30664979736673936
-Maven-0.30000000000000004-0.5-cn.edu.nju.cs.itrace4.core.ir.VSM:0.03753643572209238
-Maven-0.30000000000000004-0.5-cn.edu.nju.cs.itrace4.core.ir.VSM:0.0705591516296988
-Maven-0.30000000000000004-0.4-cn.edu.nju.cs.itrace4.core.ir.VSM:0.03753643572209238
-Maven-0.30000000000000004-0.4-cn.edu.nju.cs.itrace4.core.ir.VSM:0.0705591516296988
-Maven-0.30000000000000004-0.4-cn.edu.nju.cs.itrace4.core.ir.JSD:0.06177339882251425
-Maven-0.30000000000000004-0.4-cn.edu.nju.cs.itrace4.core.ir.JSD:0.30664979736673936
 
 
 
@@ -2864,8 +2503,6 @@ Maven-0.30000000000000004-0.4-cn.edu.nju.cs.itrace4.core.ir.JSD:0.30664979736673
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
@@ -2874,9 +2511,6 @@ UD_CallData_406:
 
 
 
-we method call start--
-UD_CallData_406:
-we method call finish--
 
 
 
@@ -2890,14 +2524,9 @@ we method call finish--
 
 
 
-we method call start--
 
 
 
-UD_CallData_406:
-Maven-0.30000000000000004-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:0.1106590402183526
-Maven-0.30000000000000004-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:0.19457414898677772
-we method call finish--
 
 
 
@@ -2906,27 +2535,14 @@ we method call finish--
 
 
 
-we method call finish--
 
 
 
 
-Maven-0.30000000000000004-0.4-cn.edu.nju.cs.itrace4.core.ir.LSI:0.1106590402183526
-Maven-0.30000000000000004-0.4-cn.edu.nju.cs.itrace4.core.ir.LSI:0.19457414898677772
 
 
 
 
-Maven-0.30000000000000004-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:0.1106590402183526
-Maven-0.30000000000000004-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:0.19457414898677772
-281
-282
-283
-284
-285
-286
-287
-288
 
 
 
@@ -2955,19 +2571,14 @@ Maven-0.30000000000000004-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:
 
 
 
-we method call start--
 
 
 
 
-UD_CallData_406:
 
 
 
 
-we method call start--
-UD_CallData_406:
-we method call finish--
 
 
 
@@ -2984,23 +2595,18 @@ we method call finish--
 
 
 
-we method call start--
 
 
 
 
-UD_CallData_406:
 
 
 
 
-we method call finish--
 
 
 
 
-Maven-0.30000000000000004-0.6-cn.edu.nju.cs.itrace4.core.ir.VSM:0.06852299590725161
-Maven-0.30000000000000004-0.6-cn.edu.nju.cs.itrace4.core.ir.VSM:0.09595504012987732
 
 
 
@@ -3015,23 +2621,16 @@ Maven-0.30000000000000004-0.6-cn.edu.nju.cs.itrace4.core.ir.VSM:0.09595504012987
 
 
 
-we method call start--
 
 
-we method call start--
 
 
 
 
-UD_CallData_406:
-UD_CallData_406:
-Maven-0.30000000000000004-0.7-cn.edu.nju.cs.itrace4.core.ir.VSM:0.09078268986438065
-Maven-0.30000000000000004-0.7-cn.edu.nju.cs.itrace4.core.ir.VSM:0.13183109832223683
 
 
 
 
-we method call finish--
 
 
 
@@ -3040,8 +2639,6 @@ we method call finish--
 
 
 
-we method call finish--
-we method call finish--
 
 
 
@@ -3058,12 +2655,6 @@ we method call finish--
 
 
 
-Maven-0.30000000000000004-0.5-cn.edu.nju.cs.itrace4.core.ir.JSD:0.049919598024366435
-Maven-0.30000000000000004-0.5-cn.edu.nju.cs.itrace4.core.ir.JSD:0.16861996061856066
-Maven-0.30000000000000004-0.6-cn.edu.nju.cs.itrace4.core.ir.JSD:0.049919598024366435
-Maven-0.30000000000000004-0.6-cn.edu.nju.cs.itrace4.core.ir.JSD:0.16861996061856066
-Maven-0.30000000000000004-0.7-cn.edu.nju.cs.itrace4.core.ir.JSD:0.049919598024366435
-Maven-0.30000000000000004-0.7-cn.edu.nju.cs.itrace4.core.ir.JSD:0.16861996061856066
 
 
 
@@ -3071,9 +2662,31 @@ Maven-0.30000000000000004-0.7-cn.edu.nju.cs.itrace4.core.ir.JSD:0.16861996061856
 
 
 
+0.15328467153284672
+iTrust-0.4-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:8.004052325305687E-6
+iTrust-0.4-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:0.017281068592398766
+0.07462686567164178
+Maven-0.4-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.JSD:0.4292690087462234
+Maven-0.4-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.JSD:0.05572481553284512
+0.07462686567164178
+Maven-0.4-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.VSM:0.5689158031733141
+Maven-0.4-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.VSM:0.2753946839885345
+0.07462686567164178
+Maven-0.4-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:0.6287128995798774
+Maven-0.4-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:0.28772573925836464
+0.17518248175182483
+iTrust-0.4-0.4-cn.edu.nju.cs.itrace4.core.ir.JSD:5.647925925161036E-8
+iTrust-0.4-0.4-cn.edu.nju.cs.itrace4.core.ir.JSD:0.00641810167571751
+0.17518248175182483
+iTrust-0.4-0.4-cn.edu.nju.cs.itrace4.core.ir.VSM:1.6083524109954498E-7
+iTrust-0.4-0.4-cn.edu.nju.cs.itrace4.core.ir.VSM:2.2732211174189773E-4
+0.17518248175182483
+iTrust-0.4-0.4-cn.edu.nju.cs.itrace4.core.ir.LSI:3.1756663868749694E-8
+iTrust-0.4-0.4-cn.edu.nju.cs.itrace4.core.ir.LSI:4.690375271229812E-4
+0.13432835820895522
+Maven-0.4-0.4-cn.edu.nju.cs.itrace4.core.ir.VSM:0.059949288549636354
+Maven-0.4-0.4-cn.edu.nju.cs.itrace4.core.ir.VSM:0.2582798390150337
 
-we method call start--
-UD_CallData_406:
 
 
 
@@ -3082,8 +2695,6 @@ UD_CallData_406:
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
@@ -3092,15 +2703,11 @@ UD_CallData_406:
 
 
 
-we method call start--
-UD_CallData_406:
-we method call finish--
 
 
 
 
 
-we method call finish--
 
 
 
@@ -3112,11 +2719,6 @@ we method call finish--
 
 
 
-Maven-0.30000000000000004-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:0.06936544742541023
-Maven-0.30000000000000004-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:0.1251734976495188
-we method call finish--
-Maven-0.30000000000000004-0.7-cn.edu.nju.cs.itrace4.core.ir.LSI:0.06936544742541023
-Maven-0.30000000000000004-0.7-cn.edu.nju.cs.itrace4.core.ir.LSI:0.1251734976495188
 
 
 
@@ -3125,16 +2727,6 @@ Maven-0.30000000000000004-0.7-cn.edu.nju.cs.itrace4.core.ir.LSI:0.12517349764951
 
 
 
-Maven-0.30000000000000004-0.6-cn.edu.nju.cs.itrace4.core.ir.LSI:0.06936544742541023
-Maven-0.30000000000000004-0.6-cn.edu.nju.cs.itrace4.core.ir.LSI:0.1251734976495188
-289
-290
-291
-292
-293
-294
-295
-296
 
 
 
@@ -3167,8 +2759,6 @@ Maven-0.30000000000000004-0.6-cn.edu.nju.cs.itrace4.core.ir.LSI:0.12517349764951
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
@@ -3177,8 +2767,6 @@ UD_CallData_406:
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
@@ -3188,23 +2776,18 @@ UD_CallData_406:
 
 
 
-we method call start--
 
 
 
-UD_CallData_406:
-we method call finish--
 
 
 
 
-we method call start--
 
 
 
 
 
-UD_CallData_406:
 
 
 
@@ -3215,20 +2798,15 @@ UD_CallData_406:
 
 
 
-we method call start--
 
 
 
 
 
-UD_CallData_406:
 
 
 
 
-we method call start--
-we method call finish--
-UD_CallData_406:
 
 
 
@@ -3237,9 +2815,6 @@ UD_CallData_406:
 
 
 
-we method call finish--
-Maven-0.30000000000000004-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.41018831601063244
-Maven-0.30000000000000004-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.5291766255950334
 
 
 
@@ -3256,15 +2831,11 @@ Maven-0.30000000000000004-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0
 
 
 
-we method call finish--
 
 
 
 
-Maven-0.30000000000000004-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.41018831601063244
-Maven-0.30000000000000004-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.5291766255950334
 
-we method call finish--
 
 
 
@@ -3276,23 +2847,38 @@ we method call finish--
 
 
 
-Maven-0.30000000000000004-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.41018831601063244
-Maven-0.30000000000000004-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.5291766255950334
-we method call finish--
 
 
 
 
-Maven-0.30000000000000004-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.19647978863241822
-Maven-0.30000000000000004-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.458167052448205
 
 
 
+0.17518248175182483
+iTrust-0.4-0.5-cn.edu.nju.cs.itrace4.core.ir.VSM:1.6083524109954498E-7
+iTrust-0.4-0.5-cn.edu.nju.cs.itrace4.core.ir.VSM:2.2732211174189773E-4
+0.17518248175182483
+iTrust-0.4-0.5-cn.edu.nju.cs.itrace4.core.ir.JSD:5.647925925161036E-8
+iTrust-0.4-0.5-cn.edu.nju.cs.itrace4.core.ir.JSD:0.00641810167571751
+0.17518248175182483
+iTrust-0.4-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:3.1756663868749694E-8
+iTrust-0.4-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:4.690375271229812E-4
+0.13432835820895522
+Maven-0.4-0.4-cn.edu.nju.cs.itrace4.core.ir.LSI:0.04776876151547905
+Maven-0.4-0.4-cn.edu.nju.cs.itrace4.core.ir.LSI:0.27104510903772294
+0.13432835820895522
+Maven-0.4-0.4-cn.edu.nju.cs.itrace4.core.ir.JSD:0.2832443311846188
+Maven-0.4-0.4-cn.edu.nju.cs.itrace4.core.ir.JSD:0.9208545214079953
+0.13432835820895522
+Maven-0.4-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:0.04629787429570917
+Maven-0.4-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:0.20621327896708042
+0.13432835820895522
+Maven-0.4-0.5-cn.edu.nju.cs.itrace4.core.ir.VSM:0.05460408299884507
+Maven-0.4-0.5-cn.edu.nju.cs.itrace4.core.ir.VSM:0.19381570220352962
+0.13432835820895522
+Maven-0.4-0.5-cn.edu.nju.cs.itrace4.core.ir.JSD:0.13964533771486076
+Maven-0.4-0.5-cn.edu.nju.cs.itrace4.core.ir.JSD:0.7230581269281101
 
-Maven-0.30000000000000004-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.19647978863241822
-Maven-0.30000000000000004-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.458167052448205
-Maven-0.30000000000000004-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.19647978863241822
-Maven-0.30000000000000004-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.458167052448205
 
 
 
@@ -3301,24 +2887,18 @@ Maven-0.30000000000000004-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0
 
 
 
-we method call start--
 
 
 
 
-UD_CallData_406:
 
 
 
 
-we method call start--
-UD_CallData_406:
-we method call finish--
 
 
 
 
-we method call finish--
 
 
 
@@ -3331,18 +2911,6 @@ we method call finish--
 
 
 
-Maven-0.30000000000000004-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.08463520267285696
-Maven-0.30000000000000004-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.16930396142388537
-Maven-0.30000000000000004-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.08463520267285696
-Maven-0.30000000000000004-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.16930396142388537
-297
-298
-299
-300
-301
-302
-303
-304
 
 
 
@@ -3371,8 +2939,6 @@ Maven-0.30000000000000004-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
@@ -3389,20 +2955,14 @@ UD_CallData_406:
 
 
 
-we method call start--
 
 
 
 
 
 
-we method call start--
-UD_CallData_406:
 
 
-we method call start--
-UD_CallData_406:
-UD_CallData_406:
 
 
 
@@ -3411,17 +2971,11 @@ UD_CallData_406:
 
 
 
-we method call start--
-UD_CallData_406:
 
 
 
 
-we method call finish--
-we method call finish--
-we method call finish--
 
-we method call finish--
 
 
 
@@ -3461,25 +3015,14 @@ we method call finish--
 
 
 
-we method call finish--
 
 
 
 
-Maven-0.4-0.4-cn.edu.nju.cs.itrace4.core.ir.VSM:0.00429052053409821
-Maven-0.4-0.4-cn.edu.nju.cs.itrace4.core.ir.VSM:0.006612216039478059
-Maven-0.4-0.2-cn.edu.nju.cs.itrace4.core.ir.VSM:0.00429052053409821
-Maven-0.4-0.2-cn.edu.nju.cs.itrace4.core.ir.VSM:0.006612216039478059
-Maven-0.4-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.VSM:0.00429052053409821
-Maven-0.4-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.VSM:0.006612216039478059
-Maven-0.4-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:0.011577027314573619
-Maven-0.4-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:0.048017688226949594
 
 
 
 
-Maven-0.4-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.JSD:0.011577027314573619
-Maven-0.4-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.JSD:0.048017688226949594
 
 
 
@@ -3488,9 +3031,6 @@ Maven-0.4-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.JSD:0.04801768822694
 
 
 
-we method call start--
-UD_CallData_406:
-we method call finish--
 
 
 
@@ -3503,4739 +3043,22 @@ we method call finish--
 
 
 
-Maven-0.4-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:0.23794259902687998
-Maven-0.4-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:0.31508299179984256
 
 
 
-
-
-we method call start--
-
-
-
-UD_CallData_406:
-
-
-
-
-we method call start--
-UD_CallData_406:
-we method call finish--
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-
-
-
-
-Maven-0.4-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:0.23794259902687998
-Maven-0.4-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:0.31508299179984256
-Maven-0.30000000000000004-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.23794259902687998
-Maven-0.30000000000000004-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.31508299179984256
-305
-306
-307
-308
-309
-310
-311
-312
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-
-
-
-
-we method call start--
-UD_CallData_406:
-UD_CallData_406:
-we method call finish--
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-Maven-0.4-0.4-cn.edu.nju.cs.itrace4.core.ir.JSD:0.0024692192749677165
-Maven-0.4-0.4-cn.edu.nju.cs.itrace4.core.ir.JSD:0.010530620656243165
-
-
-
-
-we method call finish--
-
-Maven-0.4-0.5-cn.edu.nju.cs.itrace4.core.ir.VSM:0.0024964099338362126
-Maven-0.4-0.5-cn.edu.nju.cs.itrace4.core.ir.VSM:0.0035126999401233843
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-
-
-
-
-Maven-0.4-0.6-cn.edu.nju.cs.itrace4.core.ir.VSM:0.0024964099338362126
-Maven-0.4-0.6-cn.edu.nju.cs.itrace4.core.ir.VSM:0.0035126999401233843
-Maven-0.4-0.6-cn.edu.nju.cs.itrace4.core.ir.JSD:0.0024692192749677165
-Maven-0.4-0.6-cn.edu.nju.cs.itrace4.core.ir.JSD:0.010530620656243165
-Maven-0.4-0.5-cn.edu.nju.cs.itrace4.core.ir.JSD:0.0024692192749677165
-Maven-0.4-0.5-cn.edu.nju.cs.itrace4.core.ir.JSD:0.010530620656243165
-
-
-
-
-
-
-
-
-
-we method call start--
-
-
-
-UD_CallData_406:
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-we method call finish--
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-Maven-0.4-0.4-cn.edu.nju.cs.itrace4.core.ir.LSI:0.002560923307106555
-Maven-0.4-0.4-cn.edu.nju.cs.itrace4.core.ir.LSI:0.004519660154314211
-Maven-0.4-0.6-cn.edu.nju.cs.itrace4.core.ir.LSI:0.002560923307106555
-Maven-0.4-0.6-cn.edu.nju.cs.itrace4.core.ir.LSI:0.004519660154314211
-we method call finish--
-
-
-
-
-
-
-
-
-Maven-0.4-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:0.002560923307106555
-Maven-0.4-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:0.004519660154314211
-313
-314
-315
-316
-317
-318
-319
-320
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-
-UD_CallData_406:
-
-
-
-we method call start--
-
-UD_CallData_406:
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-we method call start--
-we method call finish--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-we method call finish--
-
-
-
-
-Maven-0.4-0.7-cn.edu.nju.cs.itrace4.core.ir.VSM:0.0017893648436818968
-
-
-
-
-Maven-0.4-0.7-cn.edu.nju.cs.itrace4.core.ir.VSM:0.0028860859580908554
-
-we method call finish--
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-
-Maven-0.4-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.0017893648436818968
-Maven-0.4-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.0028860859580908554
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-Maven-0.4-0.7-cn.edu.nju.cs.itrace4.core.ir.JSD:0.0031570437833082082
-Maven-0.4-0.7-cn.edu.nju.cs.itrace4.core.ir.JSD:0.009630773491736293
-Maven-0.4-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.0031570437833082082
-Maven-0.4-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.009630773491736293
-
-
-
-
-Maven-0.4-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.0017893648436818968
-Maven-0.4-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.0028860859580908554
-Maven-0.4-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.0031570437833082082
-Maven-0.4-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.009630773491736293
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-
-
-
-
-we method call start--
-UD_CallData_406:
-UD_CallData_406:
-we method call finish--
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-
-
-
-
-Maven-0.4-0.7-cn.edu.nju.cs.itrace4.core.ir.LSI:0.003271773091765065
-Maven-0.4-0.7-cn.edu.nju.cs.itrace4.core.ir.LSI:0.005742470204704478
-Maven-0.4-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.003271773091765065
-Maven-0.4-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.005742470204704478
-321
-322
-323
-324
-325
-326
-327
-328
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-
-
-
-we method call start--
-UD_CallData_406:
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-
-
-
-
-UD_CallData_406:
-
-
-
-
-we method call start--
-we method call finish--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-we method call finish--
-
-Maven-0.5-0.2-cn.edu.nju.cs.itrace4.core.ir.VSM:0.003600766371236259
-Maven-0.5-0.2-cn.edu.nju.cs.itrace4.core.ir.VSM:0.005723082138643724
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Maven-0.4-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.003600766371236259
-Maven-0.4-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.005723082138643724
-Maven-0.5-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.VSM:0.003600766371236259
-Maven-0.5-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.VSM:0.005723082138643724
-we method call finish--
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-
-
-
-Maven-0.5-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:0.007066607680545946
-Maven-0.5-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:0.02396933203309666
-Maven-0.4-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.007066607680545946
-Maven-0.4-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.02396933203309666
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-we method call finish--
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-Maven-0.4-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.004245976761557208
-Maven-0.4-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.005959681547335488
-Maven-0.4-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.004245976761557208
-Maven-0.4-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.005959681547335488
-we method call finish--
-
-
-
-
-
-
-
-
-Maven-0.5-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:0.004245976761557208
-Maven-0.5-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:0.005959681547335488
-329
-330
-331
-332
-333
-334
-335
-336
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-
-we method call start--
-
-
-
-UD_CallData_406:
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-
-
-
-we method call start--
-UD_CallData_406:
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-we method call finish--
-Maven-0.5-0.4-cn.edu.nju.cs.itrace4.core.ir.VSM:0.0021955865055230343
-Maven-0.5-0.4-cn.edu.nju.cs.itrace4.core.ir.VSM:0.002844758090278354
-
-
-
-
-we method call finish--
-Maven-0.5-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.JSD:0.0018786026713297902
-Maven-0.5-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.JSD:0.0032139419527056393
-
-
-
-
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-Maven-0.5-0.4-cn.edu.nju.cs.itrace4.core.ir.JSD:0.0018786026713297902
-Maven-0.5-0.4-cn.edu.nju.cs.itrace4.core.ir.JSD:0.0032139419527056393
-Maven-0.5-0.5-cn.edu.nju.cs.itrace4.core.ir.VSM:0.0021955865055230343
-Maven-0.5-0.5-cn.edu.nju.cs.itrace4.core.ir.VSM:0.002844758090278354
-Maven-0.5-0.5-cn.edu.nju.cs.itrace4.core.ir.JSD:0.0018786026713297902
-Maven-0.5-0.5-cn.edu.nju.cs.itrace4.core.ir.JSD:0.0032139419527056393
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-we method call finish--
-
-
-
-
-
-
-
-
-we method call finish--
-Maven-0.5-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:0.0024245030653899137
-Maven-0.5-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:0.003500280278887361
-
-we method call finish--
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Maven-0.5-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:0.0024245030653899137
-Maven-0.5-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:0.003500280278887361
-Maven-0.5-0.4-cn.edu.nju.cs.itrace4.core.ir.LSI:0.0024245030653899137
-Maven-0.5-0.4-cn.edu.nju.cs.itrace4.core.ir.LSI:0.003500280278887361
-337
-338
-339
-340
-341
-342
-343
-344
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-
-
-
-
-UD_CallData_406:
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-
-
-
-
-UD_CallData_406:
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-Maven-0.5-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.0017560926748695202
-Maven-0.5-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.002328724806181853
-we method call finish--
-we method call finish--
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Maven-0.5-0.7-cn.edu.nju.cs.itrace4.core.ir.VSM:0.0017560926748695202
-Maven-0.5-0.7-cn.edu.nju.cs.itrace4.core.ir.VSM:0.002328724806181853
-
-
-
-
-Maven-0.5-0.6-cn.edu.nju.cs.itrace4.core.ir.VSM:0.0017560926748695202
-Maven-0.5-0.6-cn.edu.nju.cs.itrace4.core.ir.VSM:0.002328724806181853
-Maven-0.5-0.7-cn.edu.nju.cs.itrace4.core.ir.JSD:0.0017693326871548887
-Maven-0.5-0.7-cn.edu.nju.cs.itrace4.core.ir.JSD:0.003225433113049852
-Maven-0.5-0.6-cn.edu.nju.cs.itrace4.core.ir.JSD:0.0017693326871548887
-Maven-0.5-0.6-cn.edu.nju.cs.itrace4.core.ir.JSD:0.003225433113049852
-we method call finish--
-
-
-
-
-
-
-
-
-Maven-0.5-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.0017693326871548887
-Maven-0.5-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.003225433113049852
-
-
-
-
-
-
-
-
-
-we method call start--
-
-
-
-UD_CallData_406:
-
-
-
-
-we method call start--
-UD_CallData_406:
-we method call finish--
-we method call finish--
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Maven-0.5-0.6-cn.edu.nju.cs.itrace4.core.ir.LSI:0.0020238997821345607
-Maven-0.5-0.6-cn.edu.nju.cs.itrace4.core.ir.LSI:0.0030025793218328763
-Maven-0.5-0.7-cn.edu.nju.cs.itrace4.core.ir.LSI:0.0020238997821345607
-Maven-0.5-0.7-cn.edu.nju.cs.itrace4.core.ir.LSI:0.0030025793218328763
-345
-346
-347
-348
-349
-350
-351
-352
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-
-UD_CallData_406:
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-we method call finish--
-we method call finish--
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Maven-0.5-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.007425595137040106
-Maven-0.5-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.008686837835865824
-Maven-0.6-0.2-cn.edu.nju.cs.itrace4.core.ir.VSM:0.007425595137040106
-Maven-0.6-0.2-cn.edu.nju.cs.itrace4.core.ir.VSM:0.008686837835865824
-we method call finish--
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-Maven-0.5-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.007425595137040106
-Maven-0.5-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.008686837835865824
-
-
-
-
-Maven-0.5-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.0017693326871548887
-Maven-0.5-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.003225433113049852
-Maven-0.5-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.0017693326871548887
-Maven-0.5-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.003225433113049852
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-we method call finish--
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-Maven-0.5-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.0023372865336034666
-Maven-0.5-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.0032834524617087646
-we method call finish--
-
-
-
-
-Maven-0.5-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.0023372865336034666
-Maven-0.5-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.0032834524617087646
-
-
-
-
-Maven-0.5-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.0023372865336034666
-Maven-0.5-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.0032834524617087646
-353
-354
-355
-356
-357
-358
-359
-360
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-
-
-
-
-
-UD_CallData_406:
-
-
-
-
-
-
-
-we method call start--
-
-
-
-
-UD_CallData_406:
-we method call start--
-
-
-
-we method call start--
-UD_CallData_406:
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-
-
-
-
-we method call finish--
-we method call finish--
-
-we method call finish--
-
-
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call finish--
-Maven-0.6-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.JSD:0.005063248322720607
-Maven-0.6-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.JSD:0.012096185424593484
-
-
-
-
-Maven-0.6-0.4-cn.edu.nju.cs.itrace4.core.ir.VSM:0.0019572851564584066
-Maven-0.6-0.4-cn.edu.nju.cs.itrace4.core.ir.VSM:0.002533090274652153
-Maven-0.6-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.VSM:0.0019572851564584066
-Maven-0.6-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.VSM:0.002533090274652153
-
-
-
-
-Maven-0.6-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:0.005063248322720607
-Maven-0.6-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:0.012096185424593484
-Maven-0.6-0.4-cn.edu.nju.cs.itrace4.core.ir.JSD:0.005063248322720607
-Maven-0.6-0.4-cn.edu.nju.cs.itrace4.core.ir.JSD:0.012096185424593484
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-we method call finish--
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-Maven-0.6-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:0.00806037863975765
-Maven-0.6-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:0.009912236461329901
-
-
-
-we method call finish--
-
-
-
-
-Maven-0.6-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:0.00806037863975765
-Maven-0.6-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:0.009912236461329901
-
-
-
-
-Maven-0.6-0.4-cn.edu.nju.cs.itrace4.core.ir.LSI:0.00806037863975765
-Maven-0.6-0.4-cn.edu.nju.cs.itrace4.core.ir.LSI:0.009912236461329901
-361
-362
-363
-364
-365
-366
-367
-368
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-we method call start--
-
-
-
-
-we method call start--
-UD_CallData_406:
-UD_CallData_406:
-
-
-
-
-
-
-
-
-Maven-0.6-0.5-cn.edu.nju.cs.itrace4.core.ir.VSM:0.0034387792776343785
-Maven-0.6-0.5-cn.edu.nju.cs.itrace4.core.ir.VSM:0.004335487632769343
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-Maven-0.6-0.7-cn.edu.nju.cs.itrace4.core.ir.VSM:0.0034387792776343785
-Maven-0.6-0.7-cn.edu.nju.cs.itrace4.core.ir.VSM:0.004335487632769343
-we method call finish--
-
-Maven-0.6-0.6-cn.edu.nju.cs.itrace4.core.ir.VSM:0.0034387792776343785
-Maven-0.6-0.6-cn.edu.nju.cs.itrace4.core.ir.VSM:0.004335487632769343
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-we method call finish--
-Maven-0.6-0.5-cn.edu.nju.cs.itrace4.core.ir.JSD:0.004994349993661005
-Maven-0.6-0.5-cn.edu.nju.cs.itrace4.core.ir.JSD:0.005665271638410012
-
-
-
-
-
-
-
-
-
-
-
-
-Maven-0.6-0.7-cn.edu.nju.cs.itrace4.core.ir.JSD:0.004994349993661005
-Maven-0.6-0.7-cn.edu.nju.cs.itrace4.core.ir.JSD:0.005665271638410012
-Maven-0.6-0.6-cn.edu.nju.cs.itrace4.core.ir.JSD:0.004994349993661005
-Maven-0.6-0.6-cn.edu.nju.cs.itrace4.core.ir.JSD:0.005665271638410012
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-we method call finish--
-
-
-
-
-
-
-
-
-we method call finish--
-
-Maven-0.6-0.6-cn.edu.nju.cs.itrace4.core.ir.LSI:0.006205059293881778
-Maven-0.6-0.6-cn.edu.nju.cs.itrace4.core.ir.LSI:0.007775318815110292
-
-
-
-
-
-
-
-Maven-0.6-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:0.006205059293881778
-Maven-0.6-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:0.007775318815110292
-369
-370
-371
-372
-373
-374
-375
-376
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-we method call finish--
-
-
-
-
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-Maven-0.6-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.0038096496391702987
-Maven-0.6-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.004662409617074289
-we method call finish--
-Maven-0.6-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.0038096496391702987
-Maven-0.6-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.004662409617074289
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-we method call finish--
-
-Maven-0.6-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.0038096496391702987
-Maven-0.6-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.004662409617074289
-
-
-
-Maven-0.6-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.005402393660983312
-Maven-0.6-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.006081255729525168
-
-
-
-
-Maven-0.6-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.005402393660983312
-Maven-0.6-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.006081255729525168
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-we method call finish--
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-
-
-
-Maven-0.6-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.0054763545892534266
-Maven-0.6-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.007376803498606886
-Maven-0.6-0.7-cn.edu.nju.cs.itrace4.core.ir.LSI:0.0054763545892534266
-Maven-0.6-0.7-cn.edu.nju.cs.itrace4.core.ir.LSI:0.007376803498606886
-we method call finish--
-
-
-
-
-
-
-
-
-Maven-0.6-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.0054763545892534266
-Maven-0.6-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.007376803498606886
-377
-378
-379
-380
-381
-382
-383
-384
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-we method call finish--
-
-we method call finish--
-
-
-
-
-
-
-
-
-Maven-0.6-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.024176764067393417
-Maven-0.6-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.025454328848799505
-
-
-
-
-
-
-
-we method call finish--
-we method call finish--
-
-
-
-
-
-
-
-
-
-
-
-
-Maven-0.7-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.VSM:0.012953743852423677
-Maven-0.7-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.VSM:0.015383772740681288
-Maven-0.7-0.2-cn.edu.nju.cs.itrace4.core.ir.VSM:0.012953743852423677
-
-
-
-
-Maven-0.7-0.2-cn.edu.nju.cs.itrace4.core.ir.VSM:0.015383772740681288
-Maven-0.7-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.JSD:0.024176764067393417
-Maven-0.7-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.JSD:0.025454328848799505
-Maven-0.7-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:0.024176764067393417
-Maven-0.7-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:0.025454328848799505
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-we method call finish--
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-Maven-0.6-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.015059546618087713
-Maven-0.6-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.016996425396663656
-
-
-
-
-Maven-0.7-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:0.015059546618087713
-Maven-0.7-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:0.016996425396663656
-we method call finish--
-
-
-
-
-
-
-
-
-Maven-0.7-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:0.015059546618087713
-Maven-0.7-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:0.016996425396663656
-385
-386
-387
-388
-389
-390
-391
-392
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-
-UD_CallData_406:
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-Maven-0.7-0.4-cn.edu.nju.cs.itrace4.core.ir.VSM:0.013361016344767843
-Maven-0.7-0.4-cn.edu.nju.cs.itrace4.core.ir.VSM:0.014831656281366661
-we method call finish--
-we method call finish--
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Maven-0.7-0.4-cn.edu.nju.cs.itrace4.core.ir.JSD:0.02197847967589193
-Maven-0.7-0.4-cn.edu.nju.cs.itrace4.core.ir.JSD:0.022299946816430747
-Maven-0.7-0.5-cn.edu.nju.cs.itrace4.core.ir.JSD:0.02197847967589193
-Maven-0.7-0.5-cn.edu.nju.cs.itrace4.core.ir.JSD:0.022299946816430747
-Maven-0.7-0.6-cn.edu.nju.cs.itrace4.core.ir.VSM:0.013361016344767843
-Maven-0.7-0.6-cn.edu.nju.cs.itrace4.core.ir.VSM:0.014831656281366661
-we method call finish--
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-Maven-0.7-0.5-cn.edu.nju.cs.itrace4.core.ir.VSM:0.013361016344767843
-Maven-0.7-0.5-cn.edu.nju.cs.itrace4.core.ir.VSM:0.014831656281366661
-Maven-0.7-0.6-cn.edu.nju.cs.itrace4.core.ir.JSD:0.02197847967589193
-Maven-0.7-0.6-cn.edu.nju.cs.itrace4.core.ir.JSD:0.022299946816430747
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-
-
-we method call start--
-UD_CallData_406:
-UD_CallData_406:
-we method call finish--
-we method call finish--
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Maven-0.7-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:0.01010392696675886
-Maven-0.7-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:0.012286539488372545
-Maven-0.7-0.4-cn.edu.nju.cs.itrace4.core.ir.LSI:0.01010392696675886
-Maven-0.7-0.4-cn.edu.nju.cs.itrace4.core.ir.LSI:0.012286539488372545
-393
-394
-395
-396
-397
-398
-399
-400
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-we method call start--
-
-
-UD_CallData_406:
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-we method call start--
-
-UD_CallData_406:
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-we method call finish--
-we method call finish--
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-Maven-0.7-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.013237662252820232
-Maven-0.7-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.01303430854177151
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-
-
-
-
-Maven-0.7-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.009599943882087326
-Maven-0.7-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.010766955542915369
-Maven-0.7-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.009599943882087326
-Maven-0.7-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.010766955542915369
-Maven-0.7-0.7-cn.edu.nju.cs.itrace4.core.ir.JSD:0.013237662252820232
-Maven-0.7-0.7-cn.edu.nju.cs.itrace4.core.ir.JSD:0.01303430854177151
-Maven-0.7-0.7-cn.edu.nju.cs.itrace4.core.ir.VSM:0.009599943882087326
-Maven-0.7-0.7-cn.edu.nju.cs.itrace4.core.ir.VSM:0.010766955542915369
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-we method call finish--
-
-
-
-
-
-
-
-
-Maven-0.7-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.014876989710416696
-Maven-0.7-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.018044406817542057
-we method call finish--
-
-
-
-
-
-
-
-
-Maven-0.7-0.7-cn.edu.nju.cs.itrace4.core.ir.LSI:0.014876989710416696
-Maven-0.7-0.7-cn.edu.nju.cs.itrace4.core.ir.LSI:0.018044406817542057
-we method call finish--
-
-
-
-
-
-
-
-
-Maven-0.7-0.6-cn.edu.nju.cs.itrace4.core.ir.LSI:0.014876989710416696
-Maven-0.7-0.6-cn.edu.nju.cs.itrace4.core.ir.LSI:0.018044406817542057
-401
-402
-403
-404
-405
-406
-407
-408
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-
-UD_CallData_406:
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-we method call finish--
-
-
-
-
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-Maven-0.7999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.VSM:0.031863453908150235
-Maven-0.7999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.VSM:0.03302594177650469
-
-
-
-
-Maven-0.7999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:0.028027441691829618
-Maven-0.7999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:0.029892586955361584
-we method call finish--
-we method call finish--
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Maven-0.7-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.028027441691829618
-Maven-0.7-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.029892586955361584
-Maven-0.7-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.028027441691829618
-Maven-0.7-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.029892586955361584
-Maven-0.7-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.031863453908150235
-Maven-0.7-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.03302594177650469
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-we method call finish--
-
-
-
-
-
-
-
-
-we method call finish--
-
-Maven-0.7999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:0.04068145645033379
-Maven-0.7999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:0.04521989779485648
-
-
-
-
-
-
-
-Maven-0.7-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.04068145645033379
-Maven-0.7-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.04521989779485648
-we method call finish--
-
-
-
-
-
-
-
-
-Maven-0.7-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.04068145645033379
-Maven-0.7-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.04521989779485648
-409
-410
-411
-412
-413
-414
-415
-416
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-Maven-0.7999999999999999-0.4-cn.edu.nju.cs.itrace4.core.ir.VSM:0.006723281089612528
-Maven-0.7999999999999999-0.4-cn.edu.nju.cs.itrace4.core.ir.VSM:0.007724471201908691
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-Maven-0.7999999999999999-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.VSM:0.006723281089612528
-Maven-0.7999999999999999-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.VSM:0.007724471201908691
-we method call finish--
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-we method call finish--
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Maven-0.7999999999999999-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.JSD:0.009849063426814691
-Maven-0.7999999999999999-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.JSD:0.010233547702896443
-Maven-0.7999999999999999-0.4-cn.edu.nju.cs.itrace4.core.ir.JSD:0.009849063426814691
-Maven-0.7999999999999999-0.4-cn.edu.nju.cs.itrace4.core.ir.JSD:0.010233547702896443
-Maven-0.7999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.VSM:0.006723281089612528
-Maven-0.7999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.VSM:0.007724471201908691
-Maven-0.7999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.JSD:0.009849063426814691
-Maven-0.7999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.JSD:0.010233547702896443
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-we method call finish--
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-Maven-0.7999999999999999-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:0.0045826082804586036
-Maven-0.7999999999999999-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:0.005627024493514514
-Maven-0.7999999999999999-0.4-cn.edu.nju.cs.itrace4.core.ir.LSI:0.0045826082804586036
-Maven-0.7999999999999999-0.4-cn.edu.nju.cs.itrace4.core.ir.LSI:0.005627024493514514
-417
-418
-419
-420
-421
-422
-423
-424
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-
-UD_CallData_406:
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call finish--
-we method call finish--
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-Maven-0.7999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.VSM:0.008943586595813287
-Maven-0.7999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.VSM:0.00966169133758943
-
-
-
-
-Maven-0.7999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.VSM:0.008943586595813287
-Maven-0.7999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.VSM:0.00966169133758943
-we method call finish--
-
-Maven-0.7999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.006723281089612528
-Maven-0.7999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.007724471201908691
-
-
-
-
-
-
-
-Maven-0.7999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.JSD:0.009849063426814691
-Maven-0.7999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.JSD:0.010233547702896443
-Maven-0.7999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.JSD:0.009849063426814691
-Maven-0.7999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.JSD:0.010233547702896443
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-we method call finish--
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Maven-0.7999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.LSI:0.014876989710416696
-Maven-0.7999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.LSI:0.018044406817542057
-Maven-0.7999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:0.014876989710416696
-Maven-0.7999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:0.018044406817542057
-we method call finish--
-
-
-
-
-
-
-
-
-Maven-0.7999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.LSI:0.014876989710416696
-Maven-0.7999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.LSI:0.018044406817542057
-425
-426
-427
-428
-429
-430
-431
-432
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-we method call start--
-
-
-
-UD_CallData_406:
-
-
-
-
-we method call start--
-UD_CallData_406:
-we method call finish--
-we method call finish--
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Maven-0.7999999999999999-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.028027441691829618
-Maven-0.7999999999999999-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.029892586955361584
-we method call finish--
-
-Maven-0.7999999999999999-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.031863453908150235
-Maven-0.7999999999999999-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.03302594177650469
-
-
-
-
-
-
-
-
-
-
-
-Maven-0.7999999999999999-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.028027441691829618
-Maven-0.7999999999999999-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.029892586955361584
-we method call finish--
-we method call finish--
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Maven-0.7999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.028027441691829618
-Maven-0.7999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.029892586955361584
-Maven-0.7999999999999999-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.031863453908150235
-Maven-0.7999999999999999-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.03302594177650469
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-we method call finish--
-
-
-
-
-
-
-
-
-Maven-0.7999999999999999-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.015666555149968887
-Maven-0.7999999999999999-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.018424346373940994
-we method call finish--
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-Maven-0.7999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.015666555149968887
-Maven-0.7999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.018424346373940994
-Maven-0.7999999999999999-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.015666555149968887
-Maven-0.7999999999999999-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.018424346373940994
-433
-434
-435
-436
-437
-438
-439
-440
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-
-
-UD_CallData_406:
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-we method call finish--
-
-UD_CallData_406:
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-
-
-
-
-
-Maven-0.8999999999999999-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.VSM:0.00824661706188939
-Maven-0.8999999999999999-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.VSM:0.009569202294292267
-
-
-
-we method call finish--
-Maven-0.8999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.VSM:0.00824661706188939
-Maven-0.8999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.VSM:0.009569202294292267
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-Maven-0.8999999999999999-0.4-cn.edu.nju.cs.itrace4.core.ir.VSM:0.00824661706188939
-Maven-0.8999999999999999-0.4-cn.edu.nju.cs.itrace4.core.ir.VSM:0.009569202294292267
-Maven-0.8999999999999999-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.JSD:0.03329930549757314
-Maven-0.8999999999999999-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.JSD:0.03794343507046416
-we method call finish--
-Maven-0.8999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:0.03329930549757314
-Maven-0.8999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:0.03794343507046416
-
-
-
-
-
-
-
-
-Maven-0.8999999999999999-0.4-cn.edu.nju.cs.itrace4.core.ir.JSD:0.03329930549757314
-Maven-0.8999999999999999-0.4-cn.edu.nju.cs.itrace4.core.ir.JSD:0.03794343507046416
-
-
-
-
-
-
-
-
-we method call start--
-
-UD_CallData_406:
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-we method call finish--
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-
-
-
-
-Maven-0.8999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:0.03584788425692661
-Maven-0.8999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:0.04569635777736314
-Maven-0.8999999999999999-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:0.03584788425692661
-Maven-0.8999999999999999-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:0.04569635777736314
-441
-442
-443
-444
-445
-446
-447
-448
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-we method call start--
-UD_CallData_406:
-we method call finish--
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call finish--
-we method call finish--
-
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-Maven-0.8999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.VSM:0.016996425396663656
-Maven-0.8999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.VSM:0.019148555991468825
-
-
-
-
-
-
-
-Maven-0.8999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.VSM:0.016996425396663656
-Maven-0.8999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.VSM:0.019148555991468825
-
-
-
-
-Maven-0.8999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.JSD:0.04324140650257307
-Maven-0.8999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.JSD:0.046540340599043786
-Maven-0.8999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.VSM:0.016996425396663656
-Maven-0.8999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.VSM:0.019148555991468825
-Maven-0.8999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.JSD:0.04324140650257307
-Maven-0.8999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.JSD:0.046540340599043786
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-
-we method call start--
-
-UD_CallData_406:
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-we method call finish--
-
-
-
-
-
-
-
-
-Maven-0.8999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:0.03239555397828879
-Maven-0.8999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:0.03814833833095234
-we method call finish--
-we method call finish--
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Maven-0.8999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.LSI:0.03239555397828879
-Maven-0.8999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.LSI:0.03814833833095234
-Maven-0.8999999999999999-0.4-cn.edu.nju.cs.itrace4.core.ir.LSI:0.03239555397828879
-Maven-0.8999999999999999-0.4-cn.edu.nju.cs.itrace4.core.ir.LSI:0.03814833833095234
-449
-450
-451
-452
-453
-454
-455
-456
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-
-
-
-
-we method call start--
-
-UD_CallData_406:
-
-
-
-UD_CallData_406:
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-
-
-
-we method call start--
-UD_CallData_406:
-UD_CallData_406:
-
-
-
-
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-we method call finish--
-
-
-
-Maven-0.8999999999999999-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.026040630668889134
-Maven-0.8999999999999999-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.02964340963619126
-
-
-
-
-we method call finish--
-
-Maven-0.8999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.026040630668889134
-Maven-0.8999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.02964340963619126
-
-
-
-
-
-
-
-
-
-
-
-Maven-0.8999999999999999-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.05629232870775725
-Maven-0.8999999999999999-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.060552297173603366
-Maven-0.8999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.JSD:0.05629232870775725
-Maven-0.8999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.JSD:0.060552297173603366
-Maven-0.8999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.05629232870775725
-Maven-0.8999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.060552297173603366
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-we method call finish--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call finish--
-Maven-0.8999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.03195161342984471
-Maven-0.8999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.03703291607639777
-
-
-
-
-
-
-
-
-Maven-0.8999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.LSI:0.03195161342984471
-Maven-0.8999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.LSI:0.03703291607639777
-we method call finish--
-
-
-
-
-
-
-
-
-Maven-0.8999999999999999-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.03195161342984471
-Maven-0.8999999999999999-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.03703291607639777
-457
-458
-459
-460
-461
-462
-463
-464
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-
-
-UD_CallData_406:
-
-
-
-
-we method call start--
-
-
-
-we method call start--
-UD_CallData_406:
-
-UD_CallData_406:
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-we method call finish--
-
-Maven-0.9999999999999999-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.VSM:0.23882174946812829
-Maven-0.9999999999999999-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.VSM:0.2582798390150337
-
-
-
-Maven-0.9999999999999999-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.JSD:0.142027834721293
-Maven-0.9999999999999999-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.JSD:0.14967454119162327
-we method call finish--
-
-we method call finish--
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-
-
-
-
-Maven-0.8999999999999999-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.23882174946812829
-Maven-0.8999999999999999-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.2582798390150337
-Maven-0.8999999999999999-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.0948584514138553
-Maven-0.8999999999999999-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.10044322282003448
-Maven-0.9999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.VSM:0.23882174946812829
-Maven-0.9999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.VSM:0.2582798390150337
-Maven-0.9999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:0.142027834721293
-Maven-0.9999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.JSD:0.14967454119162327
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-
-
-
-we method call start--
-UD_CallData_406:
-UD_CallData_406:
-we method call finish--
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-
-
-
-
-Maven-0.8999999999999999-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.06953495431717943
-Maven-0.8999999999999999-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.07958385423243144
-Maven-0.9999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:0.06953495431717943
-Maven-0.9999999999999999-0.2-cn.edu.nju.cs.itrace4.core.ir.LSI:0.07958385423243144
-465
-466
-467
-468
-469
-470
-471
-472
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-
-
-
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-
-
-
-we method call start--
-UD_CallData_406:
-UD_CallData_406:
-we method call finish--
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call finish--
-
-we method call finish--
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-Maven-0.9999999999999999-0.4-cn.edu.nju.cs.itrace4.core.ir.VSM:0.06317142867043911
-Maven-0.9999999999999999-0.4-cn.edu.nju.cs.itrace4.core.ir.VSM:0.06902745165221288
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Maven-0.9999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.VSM:0.06317142867043911
-Maven-0.9999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.VSM:0.06902745165221288
-Maven-0.9999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.JSD:0.11491742983814468
-Maven-0.9999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.JSD:0.12544556297446607
-Maven-0.9999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.VSM:0.06317142867043911
-Maven-0.9999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.VSM:0.06902745165221288
-Maven-0.9999999999999999-0.4-cn.edu.nju.cs.itrace4.core.ir.JSD:0.11491742983814468
-Maven-0.9999999999999999-0.4-cn.edu.nju.cs.itrace4.core.ir.JSD:0.12544556297446607
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-we method call finish--
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-we method call finish--
-
-
-
-
-Maven-0.9999999999999999-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:0.023288999644033526
-Maven-0.9999999999999999-0.30000000000000004-cn.edu.nju.cs.itrace4.core.ir.LSI:0.029560748437975255
-
-
-
-
-Maven-0.9999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:0.023288999644033526
-Maven-0.9999999999999999-0.5-cn.edu.nju.cs.itrace4.core.ir.LSI:0.029560748437975255
-we method call finish--
-
-
-
-
-
-
-
-
-Maven-0.9999999999999999-0.4-cn.edu.nju.cs.itrace4.core.ir.LSI:0.023288999644033526
-Maven-0.9999999999999999-0.4-cn.edu.nju.cs.itrace4.core.ir.LSI:0.029560748437975255
-473
-474
-475
-476
-477
-478
-479
-480
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-we method call start--
-
-
-
-UD_CallData_406:
-
-
-
-
-
-
-we method call start--
-
-UD_CallData_406:
-
-
-
-we method call start--
-UD_CallData_406:
-we method call finish--
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call finish--
-we method call finish--
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-Maven-0.9999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.JSD:0.09141670333206331
-
-
-
-
-
-
-
-
-
-Maven-0.9999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.JSD:0.08828192113626099
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-
-
-
-
-Maven-0.9999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.09141670333206331
-Maven-0.9999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.08828192113626099
-Maven-0.9999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.JSD:0.09141670333206331
-Maven-0.9999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.JSD:0.08828192113626099
-Maven-0.9999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.VSM:0.09099363355858014
-Maven-0.9999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.VSM:0.10251676064581405
-Maven-0.9999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.09099363355858014
-Maven-0.9999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.10251676064581405
-
-
-
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-
-
-
-we method call start--
-UD_CallData_406:
-UD_CallData_406:
-we method call finish--
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-Maven-0.9999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.LSI:0.05228486901582136
-Maven-0.9999999999999999-0.6-cn.edu.nju.cs.itrace4.core.ir.LSI:0.05964965676156654
-we method call finish--
-
-
-
-
-
-
-
-
-
-
-
-
-Maven-0.9999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.LSI:0.05228486901582136
-Maven-0.9999999999999999-0.7-cn.edu.nju.cs.itrace4.core.ir.LSI:0.05964965676156654
-Maven-0.9999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.05228486901582136
-Maven-0.9999999999999999-0.7999999999999999-cn.edu.nju.cs.itrace4.core.ir.LSI:0.05964965676156654
-481
-482
-483
-484
-485
-486
-dirPath:data/exp/Infinispan/uc
-dirPath:data/exp/Infinispan/class/code
-
-
-
-
-
-
-
-
-
-
-
-
-Read 755 trace links from rtm.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-we method call start--
-
-UD_CallData_406:
-
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-we method call start--
-UD_CallData_406:
-
-
-
-
-
-
-
-
-
-we method call start--
-
-
-
-UD_CallData_406:
-we method call finish--
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-
-
-
-
-we method call finish--
-
-
-
-
-Maven-0.9999999999999999-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.09141670333206331
-Maven-0.9999999999999999-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.08828192113626099
-
-
-
-
-
-
-
-
-we method call finish--
-487
-
-Maven-0.9999999999999999-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.09099363355858014
-Maven-0.9999999999999999-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.10251676064581405
-
-
-
-488
-
-
-
-
-Maven-0.9999999999999999-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.09099363355858014
-Maven-0.9999999999999999-0.9999999999999999-cn.edu.nju.cs.itrace4.core.ir.VSM:0.10251676064581405
-Maven-0.9999999999999999-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.09141670333206331
-Maven-0.9999999999999999-0.8999999999999999-cn.edu.nju.cs.itrace4.core.ir.JSD:0.08828192113626099
+0.18248175182481752
+iTrust-0.4-0.6-cn.edu.nju.cs.itrace4.core.ir.JSD:9.541068812866495E-8
+iTrust-0.4-0.6-cn.edu.nju.cs.itrace4.core.ir.JSD:0.008065913651504851
+0.18248175182481752
+iTrust-0.4-0.6-cn.edu.nju.cs.itrace4.core.ir.VSM:8.396633692214373E-8
+iTrust-0.4-0.6-cn.edu.nju.cs.itrace4.core.ir.VSM:1.4907224982617815E-4
+0.18248175182481752
+iTrust-0.4-0.7-cn.edu.nju.cs.itrace4.core.ir.JSD:9.541068812866495E-8
+iTrust-0.4-0.7-cn.edu.nju.cs.itrace4.core.ir.JSD:0.008065913651504851
+0.18248175182481752
+iTrust-0.4-0.6-cn.edu.nju.cs.itrace4.core.ir.LSI:1.698155804183697E-8
+iTrust-0.4-0.6-cn.edu.nju.cs.itrace4.core.ir.LSI:3.336268065481934E-4
+0.18248175182481752
+iTrust-0.4-0.7-cn.edu.nju.cs.itrace4.core.ir.VSM:8.396633692214373E-8
+iTrust-0.4-0.7-cn.edu.nju.cs.itrace4.core.ir.VSM:1.4907224982617815E-4
 

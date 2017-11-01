@@ -7,4 +7,9 @@ output/
 *.rar
 *.xml
 *.png
-
+*.out
+data_old/
+图片/
+*csv
+*.txt
+*.DS_Store
