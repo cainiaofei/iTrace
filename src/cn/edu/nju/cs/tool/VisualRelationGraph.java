@@ -17,6 +17,8 @@ import cn.edu.nju.cs.itrace4.visual.IRForVisual;
 import edu.uci.ics.jung.algorithms.layout.FRLayout;
 import edu.uci.ics.jung.graph.DirectedSparseGraph;
 import edu.uci.ics.jung.graph.Graph;
+import edu.uci.ics.jung.graph.SparseGraph;
+import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.visualization.GraphZoomScrollPane;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.DefaultModalGraphMouse;
@@ -157,8 +159,14 @@ public class VisualRelationGraph {
     }
 
     private void graphConvert() {
-        g = new DirectedSparseGraph();
-
+        //g = new DirectedSparseGraph();
+    	/**
+    	 * @author zzf
+    	 * @date 2017.11.2
+    	 * @description use different kinds of edges to represent data and call edge. 
+    	 */
+    	g = new SparseGraph<Integer,Integer>();
+    	
         Map<Integer, CodeVertex> vertexMap = relationGraph.getVertexes();
 
         for (Integer id : vertexMap.keySet()) {
@@ -174,10 +182,11 @@ public class VisualRelationGraph {
             Number weight = ((CallEdge) codeEdge).getCallRelationSize();
 
             Integer edgeId = edgeFactory.create();
-            g.addEdge(edgeId, v1, v2);
+            g.addEdge(edgeId, v1, v2,EdgeType.DIRECTED);
             callEdges.put(edgeId, new Pair<Integer, Integer>(v1, v2));
             if (weight == null) weight = 0.0;
             edgeRelationWeightsMap.put(edgeId, weight);
+            
         }
 
         for (CodeEdge codeEdge : relationGraph.getDataEdges()) {
@@ -187,7 +196,11 @@ public class VisualRelationGraph {
 //            Number weight = ((DataEdge) codeEdge).getSharedDataFieldSize();
             Number weight = ((DataEdge) codeEdge).getDataRelationSizeByUniqueType();
             Integer edgeId = edgeFactory.create();
-            g.addEdge(edgeId, v1, v2);
+            
+            //g.addEdge(edgeId, v1, v2);
+            g.addEdge(edgeId, v1,v2,EdgeType.UNDIRECTED);
+            
+            
             if (weight == null) weight = 0.0;
             edgeRelationWeightsMap.put(edgeId, weight);
         }
@@ -413,7 +426,7 @@ public class VisualRelationGraph {
             FileInputStream fis = new FileInputStream(class_relationInfo);
             ObjectInputStream ois = new ObjectInputStream(fis);
             RelationInfo ri = (RelationInfo) ois.readObject();
-            ri.setPruning(0.7, 2.0);
+            ri.setPruning(0.7, 0.3);
 
            // System.out.println(ri.getRelationGraphFile());
 

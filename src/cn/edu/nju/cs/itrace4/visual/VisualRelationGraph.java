@@ -106,7 +106,7 @@ public class VisualRelationGraph {
         dataEdges = new LinkedHashMap<>();
         call_data_Edges = new LinkedHashMap<>();
 
-//        this.LAYOUT_FILE = "data/exp/Maven/relation/PersistentLayoutDemo.out";
+//        this.LAYOUT_FILE = "data/exp/iTrust/relation/PersistentLayoutDemo.out";
         this.LAYOUT_FILE = layoutPath;
 
         edgeFactory = new Factory<Integer>() {
@@ -140,7 +140,7 @@ public class VisualRelationGraph {
         dataEdges = new LinkedHashMap<>();
         call_data_Edges = new LinkedHashMap<>();
 
-//        this.LAYOUT_FILE = "data/exp/Maven/relation/PersistentLayoutDemo.out";
+//        this.LAYOUT_FILE = "data/exp/iTrust/relation/PersistentLayoutDemo.out";
         this.LAYOUT_FILE = layoutPath;
 
         edgeFactory = new Factory<Integer>() {
@@ -381,7 +381,7 @@ public class VisualRelationGraph {
     }
 
     public static void main(String[] args) throws IOException {
-        String class_relationInfo = "data/exp/Maven/relation/CLASS_relationInfo.ser";
+        String class_relationInfo = "data/exp/iTrust/relation/CLASS_relationInfo.ser";
 
         try {
             FileInputStream fis = new FileInputStream(class_relationInfo);
@@ -391,13 +391,13 @@ public class VisualRelationGraph {
 
             //System.out.println(ri.getRelationGraphFile());
 
-            String rtmClassPath = "data/exp/Maven/rtm/RTM_CLASS.txt";
-            String ucPath = "data/exp/Maven/uc";
-            String classDirPath = "data/exp/Maven/class/code";
+            String rtmClassPath = "data/exp/iTrust/rtm/RTM_CLASS.txt";
+            String ucPath = "data/exp/iTrust/uc";
+            String classDirPath = "data/exp/iTrust/class/code";
             TextDataset textDataset = new TextDataset(ucPath, classDirPath, rtmClassPath);
 
             CallDataRelationGraph cdGraph = new CallDataRelationGraph(ri);
-            String layoutPath = "data/exp/Maven/relation/PersistentLayoutDemo.out";
+            String layoutPath = "data/exp/iTrust/relation/PersistentLayoutDemo.out";
             VisualRelationGraph visualRelationGraph = new VisualRelationGraph(textDataset, cdGraph, layoutPath);
             visualRelationGraph.show();
 
