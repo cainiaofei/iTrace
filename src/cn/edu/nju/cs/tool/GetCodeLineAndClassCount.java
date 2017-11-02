@@ -39,9 +39,9 @@ public class GetCodeLineAndClassCount {
 	}
 	
 	public static void main(String[] args) throws IOException {
-		String path = "./data/exp/Maven/maven-master";
+		String path = "./src/cn/edu/nju/cs/tool";
 		GetCodeLineAndClassCount tool = new GetCodeLineAndClassCount();
 		int res = tool.process(path);
-		System.out.println(res*1.0/1000);
+		System.out.println(res);
 	}
 }
