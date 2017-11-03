@@ -22,7 +22,7 @@ import java.util.Set;
  */
 public class SqliteIOForGit implements SqliteIOInterface{
 
-	private static String ucPath = "data/exp/Maven/uc";
+	private static String ucPath;
 	
 	public static void setUCPath(String ucPath) {
 		SqliteIOForGit.ucPath = ucPath;
@@ -50,8 +50,8 @@ public class SqliteIOForGit implements SqliteIOInterface{
             // Store columns from table reqs
             columnsList = getColumnsName();
             /*
-            Store trace links from RTM in text format, such as
-            UC1 AuthDAO
+             * Store trace links from RTM in text format, such as
+             * UC1 AuthDAO
              */
             contents = getTracesInRTM(stmt, columnsList);
 
@@ -102,7 +102,7 @@ public class SqliteIOForGit implements SqliteIOInterface{
      */
     private static String getTracesInRTM(Statement stmt, List<String> columnsList) {
     	StringBuilder sb = new StringBuilder();
-    	String sql = "select request as uc, file_path as className from final";
+    	String sql = "select request as uc, file_path as className from rtm";
     	int number = 1;
     	try {
     		ResultSet rs = stmt.executeQuery(sql);
