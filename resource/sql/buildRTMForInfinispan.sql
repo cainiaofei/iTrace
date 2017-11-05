@@ -1,7 +1,7 @@
   create table init_rtm
    as select * from
    (
-         select issue_id, request, group_concat(file_path,"和") as file_path,
+         select issue_id, summary, description, group_concat(file_path,"和") as file_path,
      group_concat(message," ") as message
      from
      (
@@ -11,7 +11,7 @@
         and (sum_added_lines - sum_removed_lines) >= 5 and file_path like '%java'
       ) as commit_file,
       (
-        select issue.issue_id, commit_hash,summary||description as request
+        select issue.issue_id, commit_hash,summary, description 
         from  issue, change_set_link
         where issue.issue_id=change_set_link.issue_id and issue_type in ('Feature Request') 
         and resolved_date is not null and priority in ('Major','Critical')
