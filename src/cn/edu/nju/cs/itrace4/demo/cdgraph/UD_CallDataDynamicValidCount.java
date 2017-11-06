@@ -26,7 +26,7 @@ import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 import cn.edu.nju.cs.itrace4.relation.graph.CodeEdge;
 import javafx.util.Pair;
 
-public class UD_CallDataDynamicCount implements CSTI {
+public class UD_CallDataDynamicValidCount implements CSTI{
 	private int routerLen;
 	private double[][] callGraphs;
 	private double[][] dataGraphs;
@@ -37,7 +37,7 @@ public class UD_CallDataDynamicCount implements CSTI {
 	
 	protected Map<Integer, String> vertexIdNameMap;
 	private Map<String,Set<String>> valid;
-	private int verifyCount;
+	private int validCount;
 	private Set<Integer> allVertexIdList = new HashSet<Integer>();
 	private boolean hidden = true;
 	private Set<Integer> absoluteLoneVertexSet = new HashSet<Integer>();
@@ -50,8 +50,8 @@ public class UD_CallDataDynamicCount implements CSTI {
 	private SimilarityMatrix matrix;
 	private int countThreshold = 2;
 	
-	public UD_CallDataDynamicCount(RelationInfo ri,double callThreshold,double dataThreshold,
-			int verifyCount,Map<String,Set<String>> valid){
+	public UD_CallDataDynamicValidCount(RelationInfo ri,double callThreshold,double dataThreshold,
+			int validCount,Map<String,Set<String>> valid){
 		this.callThreshold = callThreshold;
 		this.dataThreshold = dataThreshold;
 		
@@ -67,7 +67,7 @@ public class UD_CallDataDynamicCount implements CSTI {
 		dataGraphs = describeDataGraphWithMatrix(new CallDataRelationGraph(ri).dataEdgeScoreMap,ri.getVertexes().size());
 		vertexIdNameMap = ri.getVertexIdNameMap();
 		this.valid = valid;
-		this.verifyCount = verifyCount;
+		this.validCount = validCount;
 		this.routerLen = Integer.valueOf(System.getProperty("routerLen"));
 		if(routerLen==0) {
 			System.err.println("---err---");
@@ -189,7 +189,7 @@ public class UD_CallDataDynamicCount implements CSTI {
 				//regard the max score in this subGraph as represent
 				int localMaxId = subGraph.getMaxId();
 				String represent = vertexIdNameMap.get(localMaxId);
-				if(index<=verifyCount){
+				if(index<=validCount){
 					if(valid.containsKey(req)){
 						valid.get(req).add(represent);
 					}
@@ -199,7 +199,7 @@ public class UD_CallDataDynamicCount implements CSTI {
 					}
 					subGraph.setVisited(req);
 				}
-				if(oracle.isLinkAboveThreshold(req,represent)&&index<=verifyCount){
+				if(oracle.isLinkAboveThreshold(req,represent)&&index<=validCount){
 					subGraph.addReq(req);
 					
 					for(int vertexId:vertexList) {
@@ -222,9 +222,9 @@ public class UD_CallDataDynamicCount implements CSTI {
 					 * @date 2017.10.30 
 					 */
 					//hasVisitedRegion.add(subGraph.getMaxId());
-					
+					index++;
 				}
-				index++;
+//				index++;
 				callDataSubGraphList.remove(0);
 			}///
 		}//req
@@ -596,7 +596,7 @@ public class UD_CallDataDynamicCount implements CSTI {
 	@Override
 	public String getAlgorithmName() {
 		// TODO Auto-generated method stub
-		return "UD_CallDataDynamicCount_"+callThreshold+"_"+dataThreshold;
+		return "UD_CallDataDynamicValidCount_"+callThreshold+"_"+dataThreshold;
 	}
 
 	@Override

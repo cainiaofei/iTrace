@@ -106,14 +106,27 @@ public class BonusForLoneWithXml{
 //        				0.7,MethodTypeProcessLone.InnerMean,percent,valid));//0.7
         
         ri.setPruning(callEdgeScoreThreshold, dataEdgeScoreThreshold);
-        valid = new HashMap<String,Set<String>>();
-        Result result_UD_CallDataDynamic = IR.compute(textDataset,model,
+        Result result_UD_CallDataDynamic1 = IR.compute(textDataset,model,
         		new UD_CallDataDynamic(ri,callEdgeScoreThreshold,
         				dataEdgeScoreThreshold,percent,valid));//0.7
         //below closeness method
         
+        ri.setPruning(0.6, 0.7);
+        System.out.println("------------------UD_CallDataDynamicCount---------------------");
+        valid = new HashMap<String,Set<String>>();
+        Result result_UD_CallDataDynamic2 = IR.compute(textDataset,model,
+        		new UD_CallDataDynamicCount(ri,0.6,
+        				0.7,2,valid));//0.7
+        
+        System.out.println("------------------UD_CallDataDynamicValidCount---------------------");
+        valid = new HashMap<String,Set<String>>();
+        Result result_UD_CallDataDynamic = IR.compute(textDataset,model,
+        		new UD_CallDataDynamicValidCount(ri,0.8,
+        				0.8,2,valid));//0.7
         MyVisualCurve curve = new MyVisualCurve();
         curve.addLine(result_ir);
+        curve.addLine(result_UD_CallDataDynamic1);
+        curve.addLine(result_UD_CallDataDynamic2);
         curve.addLine(result_UD_CSTI);
         //curve.addLine(result_pruningeCall_Data_Dir);
         //curve.addLine(result_UD_CallThenDataProcessLoneInnerMean07);//累加 内部 直接平均

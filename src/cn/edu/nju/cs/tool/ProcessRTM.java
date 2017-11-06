@@ -1,7 +1,11 @@
 package cn.edu.nju.cs.tool;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -43,9 +47,41 @@ public class ProcessRTM {
 		System.out.println("count:"+count);
 	}
 
+	
+	public void analyzeRTM(String rtmPath) throws IOException {
+		Map<String,Set<String>> classMapReq = new HashMap<String,Set<String>>();
+		BufferedReader br = new BufferedReader(new FileReader(new File(rtmPath)));
+		String line = null;
+		while((line=br.readLine())!=null) {
+			String[] strs = line.split("\\s+");
+			if(!classMapReq.containsKey(strs[1])) {
+				classMapReq.put(strs[1], new HashSet<String>());
+			}
+			classMapReq.get(strs[1]).add(strs[0]);
+		}
+		br.close();
+		
+		analyzeClassMapReq(classMapReq);
+	}
+	
+	
+	private void analyzeClassMapReq(Map<String, Set<String>> classMapReq) throws IOException {
+		BufferedWriter bw = new BufferedWriter(new FileWriter(new File("./data/exp/iTrust/rtm/rtmAnalyze.txt")));
+		for(String className:classMapReq.keySet()) {
+			StringBuilder sb = new StringBuilder();
+			sb.append(className);
+			sb.append(" : ");
+			sb.append(classMapReq.get(className).size());
+			bw.write(sb.toString());
+			bw.newLine();
+		}
+		bw.close();
+	}
+
 	public static void main(String[] args) throws IOException {
 		String rtmPath = "./data/exp/iTrust/rtm/RTM_CLASS.txt"; 
 		ProcessRTM tool = new ProcessRTM();
-		tool.process(rtmPath);
+		tool.analyzeRTM(rtmPath);
+		//tool.process(rtmPath);
 	}
 }

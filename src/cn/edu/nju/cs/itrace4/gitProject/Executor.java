@@ -24,6 +24,7 @@ import cn.edu.nju.cs.itrace4.core.metrics.Result;
 import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.MethodTypeProcessLone;
 import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.UD_CallThenDataWithBonusForLone;
 import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataDynamic;
+import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataDynamicCount;
 import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataOutLevel;
 import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataWithBonusForLone;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
@@ -101,8 +102,12 @@ public class Executor implements Runnable{
 //        Result result_UD_CallThenDataProcessLoneInnerMean07 = IR.compute(textDataset,model,
 //        		new UD_CallThenDataWithBonusForLone(ri,callThreshold,
 //        				dataThreshold,MethodTypeProcessLone.InnerMean,0.7,valid));//0.7
+//        Result result_UD_CallDataDynamic = IR.compute(textDataset,model,
+//        		new UD_CallDataDynamic(ri,callThreshold,
+//        				dataThreshold,1,valid));//0.7
+        
         Result result_UD_CallDataDynamic = IR.compute(textDataset,model,
-        		new UD_CallDataDynamic(ri,callThreshold,
+        		new UD_CallDataDynamicCount(ri,callThreshold,
         				dataThreshold,1,valid));//0.7
         
         double irPvalue = printPValue(result_ir, result_UD_CallDataDynamic);

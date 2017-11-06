@@ -426,7 +426,7 @@ public class VisualRelationGraph {
             FileInputStream fis = new FileInputStream(class_relationInfo);
             ObjectInputStream ois = new ObjectInputStream(fis);
             RelationInfo ri = (RelationInfo) ois.readObject();
-            ri.setPruning(1, 0.6);
+            ri.setPruning(0.0, 0.0);
 
            // System.out.println(ri.getRelationGraphFile());
 
