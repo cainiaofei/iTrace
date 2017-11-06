@@ -133,6 +133,11 @@ public class BonusForLoneWithXml{
         Result result_UD_CallDataDynamicSecondDefaultValid = IR.compute(textDataset,model,
         		new UD_CallDataDynamicSecondDefaultValid(ri,0.6,
         				0.7,1,valid));//0.7
+        valid = new HashMap<String,Set<String>>();
+        Result result_UD_CallDataDynamicLastDefaultFailure = IR.compute(textDataset,model,
+        		new UD_CallDataDynamicLastDefaultFailure(ri,0.6,
+        				0.7,0.7,valid,0.3));//0.7
+        
         MyVisualCurve curve = new MyVisualCurve();
         curve.addLine(result_ir);
         curve.addLine(result_UD_CallDataDynamic1);
@@ -140,6 +145,7 @@ public class BonusForLoneWithXml{
         curve.addLine(result_UD_CSTI);
         curve.addLine(result_UD_CallDataDynamicFirstDefaultValid);
         curve.addLine(result_UD_CallDataDynamicSecondDefaultValid);
+        curve.addLine(result_UD_CallDataDynamicLastDefaultFailure);
         //curve.addLine(result_pruningeCall_Data_Dir);
         //curve.addLine(result_UD_CallThenDataProcessLoneInnerMean07);//累加 内部 直接平均
         curve.addLine(result_UD_CallDataDynamic);//
