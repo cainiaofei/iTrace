@@ -131,9 +131,9 @@ public class BonusForLoneWithXml{
         String udMapStr = (udMap+"").substring(0,4);
         String clusterMapStr = (clusterMap+"").substring(0, 4);
         
-        curve.showChart(project.getProjectName()+"-"+udPvalueStr+"-"+rateStr+"udMap"+udMapStr
-        		+"cluster"+clusterMapStr);
-//        curve.curveStore("./图片",project.getProjectName()+"-"+percent+"-"+callEdgeScoreThreshold+"-"+
+        curve.showChart(project.getProjectName()+"-"+udPvalueStr+"-rate:"+rateStr+"udMAP:"+udMapStr
+        		+"cluster:"+clusterMapStr);
+//        curve.curveStore("./备份/infinispan数据收集_2017_11_05",project.getProjectName()+"-"+percent+"-"+callEdgeScoreThreshold+"-"+
 //        		dataEdgeScoreThreshold+"-"+model+irPvalueStr+"-"+udPvalueStr);
         getApAndMap(result_ir,result_UD_CSTI, result_UD_CallDataDynamic);
         

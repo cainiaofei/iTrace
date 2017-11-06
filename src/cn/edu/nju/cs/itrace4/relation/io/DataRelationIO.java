@@ -249,7 +249,6 @@ public class DataRelationIO implements DataRelationIOInterface{
     private static DataRelationList getDataRelationAccessListSameFiled(String accessFieldIdentify, List<String> methodList) {
         DataRelationList dataRelationList = new DataRelationList();
 
-
         String type = accessFieldIdentify.split("#")[0];
         String hashcode = accessFieldIdentify.split("#")[1];
 
