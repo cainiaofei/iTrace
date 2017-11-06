@@ -416,7 +416,6 @@ public class VisualRelationGraph {
         content.add(controls, BorderLayout.SOUTH);
         frame.pack();
         frame.setVisible(true);
-
     }
 
     public static void main(String[] args) throws IOException {
@@ -426,7 +425,7 @@ public class VisualRelationGraph {
             FileInputStream fis = new FileInputStream(class_relationInfo);
             ObjectInputStream ois = new ObjectInputStream(fis);
             RelationInfo ri = (RelationInfo) ois.readObject();
-            ri.setPruning(0.0, 0.0);
+            ri.setPruning(0.3, 1.1);
 
            // System.out.println(ri.getRelationGraphFile());
 
