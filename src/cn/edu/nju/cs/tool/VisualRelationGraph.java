@@ -296,8 +296,10 @@ public class VisualRelationGraph {
             }
         });
 
-        vv.getRenderContext().setVertexFillPaintTransformer(new PickableVertexPaintTransformer<Integer>(vv.getPickedVertexState(), Color.white, Color.yellow));
-        vv.getRenderContext().setEdgeDrawPaintTransformer(new PickableEdgePaintTransformer<Integer>(vv.getPickedEdgeState(), Color.black, Color.lightGray));
+        vv.getRenderContext().setVertexFillPaintTransformer(new PickableVertexPaintTransformer<Integer>(vv.
+        		getPickedVertexState(), Color.white, Color.yellow));
+        vv.getRenderContext().setEdgeDrawPaintTransformer(new PickableEdgePaintTransformer<Integer>(vv.
+        		getPickedEdgeState(), Color.black, Color.lightGray));
 
         vv.setBackground(Color.white);
 

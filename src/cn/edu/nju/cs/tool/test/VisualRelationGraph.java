@@ -102,7 +102,7 @@ public class VisualRelationGraph {
 
         vertexNameMap = new HashMap<>();
         vertexIndexMap = new HashMap<>();
-        edgeRelationWeightsMap = new HashMap<>();
+        edgeRelationWeightsMap = new HashMap<Integer,Number>();
 
         ucRelatedCodes = new ArrayList<>();
         ucHighScoresCodes = new ArrayList<>();
