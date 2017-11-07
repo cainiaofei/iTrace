@@ -53,6 +53,12 @@ import java.util.List;
  */
 public class VisualRelationGraph {
 
+	/**
+	 * @date 2017.11.07
+	 * @description used to rank 
+	 */
+	Map<String,Integer> rank = new HashMap<String,Integer>();
+	
     private RelationGraph relationGraph;
 
     private Graph<Integer, Integer> g;
@@ -217,13 +223,15 @@ public class VisualRelationGraph {
 
         vv.getRenderContext().setVertexLabelTransformer(new Transformer<Integer, String>() {
             public String transform(Integer v) {
-                String similarity = "";
-                String code = vertexNameMap.get(v);
-
-                if (!currentUC.equals("")) {
-                    similarity = String.valueOf(matrix.getScoreForLink(currentUC, code));
-                }
-                return (vertexNameMap.get(v)) + "\n" + similarity;
+            	String name = vertexNameMap.get(v);
+            	if(!rank.isEmpty()) {
+            		double curScore = matrix.getScoreForLink(currentUC, name);
+            		String scoreStr = String.format("%.4f", curScore);
+            		return scoreStr+"_"+rank.get(name);
+            	}
+            	else {
+            		return "";
+            	}
             }
         });
 
@@ -371,6 +379,22 @@ public class VisualRelationGraph {
                     ucRelatedCodes.add(link.getTargetArtifactId());
                 }
 
+                /**
+                 * @author zzf
+                 * @date 2017.11.07 
+                 */
+                LinksList linksForCurReq = new LinksList();
+                Map<String,Double> targetMapScore = matrix.getLinksForSourceId(uc);
+                linksForCurReq.clear();
+                for(String target:targetMapScore.keySet()) {
+                	linksForCurReq.add(new SingleLink(uc,target,matrix.getScoreForLink(uc, target)));
+                }
+                Collections.sort(linksForCurReq,Collections.reverseOrder());
+                int index = 1;
+                for(SingleLink link:linksForCurReq) {
+                	rank.put(link.getTargetArtifactId(), index++);
+                }
+                
                 vv.repaint();
             }
 
@@ -427,7 +451,7 @@ public class VisualRelationGraph {
             FileInputStream fis = new FileInputStream(class_relationInfo);
             ObjectInputStream ois = new ObjectInputStream(fis);
             RelationInfo ri = (RelationInfo) ois.readObject();
-            ri.setPruning(0.3, 1.1);
+            ri.setPruning(0.0, 1.5);
 
            // System.out.println(ri.getRelationGraphFile());
 

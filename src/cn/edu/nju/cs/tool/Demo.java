@@ -40,6 +40,8 @@ public class Demo {
 			}
 		});
 		
+		vv.getRenderContext().setVertexIconTransformer(vertexIconTransformer);
+		
 		vv.getRenderContext().setVertexFillPaintTransformer(new Transformer<Integer,Paint>(){
 			@Override
 			public Paint transform(Integer input) {
