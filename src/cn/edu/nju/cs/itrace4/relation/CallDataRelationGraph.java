@@ -535,6 +535,15 @@ public class CallDataRelationGraph extends RelationGraph {
         CodeVertex caller = callEdge.getSource();
         CodeVertex callee = callEdge.getTarget();
 
+        /**
+         * @author zzf 
+         * @date 2017.11.07
+         * @description for debug 
+         */
+        if(caller.getId()==100 && callee.getId()==55) {
+        	System.out.println("debug");
+        }
+        
         int calllerWeight = 0;
 
         for (CodeEdge codeEdge : dirGraph.getOutEdges(caller)) {
@@ -551,6 +560,14 @@ public class CallDataRelationGraph extends RelationGraph {
 
         int frequency = callEdge.getCallRelationSize();
 
+        /**
+         * @date 2017.11.07
+         * @author zzf
+         * @description change temporary.
+         * */
+        //double score = 1.0 * frequency / (calllerWeight*0.35+0.65*callleeWeight);
+        
+        
         double score = 2.0 * frequency / (calllerWeight + callleeWeight);
         return score;
     }
