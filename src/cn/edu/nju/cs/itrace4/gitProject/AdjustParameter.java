@@ -17,6 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
+import cn.edu.nju.cs.itrace4.demo.exp.project.Gantt;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Infinispan;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Maven;
@@ -26,10 +27,11 @@ import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 public class AdjustParameter {
 	private Map<String, Double> irPvalueMap = new ConcurrentHashMap<String, Double>();
 	private Map<String, Double> udPvalueMap = new ConcurrentHashMap<String, Double>();
-
+	private Map<String, Double> clusterMap = new ConcurrentHashMap<String, Double>();
+	
 	public void lookForParameter() throws InterruptedException, IOException, ClassNotFoundException {
 		System.setProperty("routerLen", 6 + "");
-		Project[] projects = { new Itrust(), new Maven(), new Infinispan() };
+		Project[] projects = { new Gantt() , new Maven(), new Itrust()};
 		String[] models = { "cn.edu.nju.cs.itrace4.core.ir.VSM", "cn.edu.nju.cs.itrace4.core.ir.JSD",
 				"cn.edu.nju.cs.itrace4.core.ir.LSI" };
 		List<Thread> threadList = new ArrayList<Thread>();
@@ -48,7 +50,7 @@ public class AdjustParameter {
 						ai.getAndIncrement();
 						//System.out.println(ai);
 						Executor executor = new Executor(callThreshold, dataThreshold, project, model, irPvalueMap,
-								udPvalueMap);
+								udPvalueMap,clusterMap);
 						executor.init(textDataset,
 								ri/* ,class_relation,class_relationForO,class_relationForAllDependencies */);
 						Thread cur = new Thread(executor);
@@ -74,25 +76,48 @@ public class AdjustParameter {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		findBestParameter(0.0588);
-		System.out.println("-------all sub thread over");
-		findBestParameter(0.0888);
+		findBestParameter(0.06);
 		System.out.println("---terminal-----");
 	}
 
+//	public void findBestParameter(double threshold) {
+//		Map<String, List<Double>> irMap = reArrange(irPvalueMap);
+//		Map<String, List<Double>> udMap = reArrange(udPvalueMap);
+//		Map<String, List<Double>> cluster = reArrange(clusterMap);
+//		
+//		for (String str : irMap.keySet()) {
+//			List<Double> irList = irMap.get(str);
+//			List<Double> udList = udMap.get(str);
+//			boolean allLessThanThreshold = true;
+//			for (double val : irList) {
+//				if (val > threshold) {
+//					allLessThanThreshold = false;
+//					break;
+//				}
+//			}
+//			for (double val : udList) {
+//				if (val > threshold) {
+//					allLessThanThreshold = false;
+//					break;
+//				}
+//			}
+//			if (allLessThanThreshold) {
+//				System.out.println(str);
+//				System.out.println("--------------");
+//				System.out.println(str);
+//				System.out.println(irList.toString());
+//				System.out.println(udList.toString());
+//			}
+//		}
+//	}
+	
 	public void findBestParameter(double threshold) {
-		Map<String, List<Double>> irMap = reArrange(irPvalueMap);
 		Map<String, List<Double>> udMap = reArrange(udPvalueMap);
-		for (String str : irMap.keySet()) {
-			List<Double> irList = irMap.get(str);
+		Map<String, List<Double>> cluster = reArrange(clusterMap);
+		
+		for (String str : udMap.keySet()) {
 			List<Double> udList = udMap.get(str);
 			boolean allLessThanThreshold = true;
-			for (double val : irList) {
-				if (val > threshold) {
-					allLessThanThreshold = false;
-					break;
-				}
-			}
 			for (double val : udList) {
 				if (val > threshold) {
 					allLessThanThreshold = false;
@@ -102,11 +127,19 @@ public class AdjustParameter {
 			if (allLessThanThreshold) {
 				System.out.println(str);
 				System.out.println("--------------");
-				System.out.println(str);
-				System.out.println(irList.toString());
 				System.out.println(udList.toString());
 			}
 		}
+	}
+
+	private boolean mapOk(List<Double> list) {
+		double threshold = 0.048;
+		for(double ele:list) {
+			if(ele>threshold) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**
@@ -121,9 +154,6 @@ public class AdjustParameter {
 			if (!map.containsKey(callDataIden)) {
 				map.put(callDataIden, new LinkedList<Double>());
 			}
-			if(callDataIden.equals("0.4-0.7")){
-				System.out.println(key+":"+pvalueMap.get(key));
-			}
 			map.get(callDataIden).add(pvalueMap.get(key));
 		}
 		return map;
@@ -136,8 +166,8 @@ public class AdjustParameter {
 	}
 
 	private void storeExcel() throws FileNotFoundException, IOException {
-		ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(new File("irPvalueMap.out")));
-		out.writeObject(irPvalueMap);
+		ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(new File("clusterMap.out")));
+		out.writeObject(clusterMap);
 		out = new ObjectOutputStream(new FileOutputStream(new File("udPvalueMap.out")));
 		out.writeObject(udPvalueMap);
 		out.close();
@@ -150,8 +180,8 @@ public class AdjustParameter {
 	 * @throws ClassNotFoundException 
 	 */
 	public void readObject() throws FileNotFoundException, IOException, ClassNotFoundException{
-		ObjectInputStream in = new ObjectInputStream(new FileInputStream(new File("irPvalueMap.out")));
-		irPvalueMap = (Map<String, Double>) in.readObject();
+		ObjectInputStream in = new ObjectInputStream(new FileInputStream(new File("clusterMap.out")));
+		clusterMap = (Map<String, Double>) in.readObject();
 		in = new ObjectInputStream(new FileInputStream(new File("udPvalueMap.out")));
 		udPvalueMap = (Map<String, Double>) in.readObject();
 		in.close();
@@ -159,8 +189,8 @@ public class AdjustParameter {
 	
 	public static void main(String[] args) throws InterruptedException, ClassNotFoundException, IOException {
 		AdjustParameter tool = new AdjustParameter();
-//		tool.lookForParameter();
+		tool.lookForParameter();
 		tool.readObject();
-		tool.findBestParameter(0.09);
+		tool.findBestParameter(0.05);
 	}
 }

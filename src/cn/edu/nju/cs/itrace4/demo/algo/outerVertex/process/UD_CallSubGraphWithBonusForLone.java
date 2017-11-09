@@ -16,6 +16,7 @@ import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
 import cn.edu.nju.cs.itrace4.core.document.SingleLink;
 import cn.edu.nju.cs.itrace4.core.document.StringHashSet;
 import cn.edu.nju.cs.itrace4.demo.algo.SortBySubGraph;
+import cn.edu.nju.cs.itrace4.demo.algo.SortVertexByScore;
 import cn.edu.nju.cs.itrace4.demo.relation.StoreCallSubGraph;
 import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
 import cn.edu.nju.cs.itrace4.relation.CallDataRelationGraph;
@@ -31,6 +32,7 @@ public class UD_CallSubGraphWithBonusForLone implements CSTI{
 	private Set<Integer> loneVertexSet = new HashSet<Integer>();
 	private Map<String,Set<String>> valid;
 	private double percent;
+	private Map<String,Set<Integer>> reqMapLoneVertex = new HashMap<String,Set<Integer>>();
 	
 	//@date 2017.10.25
 	private int areaCount = 2;
@@ -358,9 +360,11 @@ public class UD_CallSubGraphWithBonusForLone implements CSTI{
 		return res;
 	}
 	
-	
-	/*
-	 * mean in inner  
+	/**
+	 * @author zzf
+	 * @date 2017.10.26
+	 * @description use map to arrange req and relevant lone vertex, Because it has different vertext list
+	 * 	about different req. 
 	 */
 	public SimilarityMatrix processLoneVertexInnerMean(SimilarityMatrix matrix, TextDataset textDataset){
 		 SimilarityMatrix oracle = textDataset.getRtm();
@@ -371,6 +375,7 @@ public class UD_CallSubGraphWithBonusForLone implements CSTI{
 		 filterSubGraphsList(targetArtifacts);
 		 fillLoneVertex(loneVertexSet,callSubGraphList);
 		 int loneVertexSize = loneVertexSet.size();
+		 
 		 for(String req:matrix.sourceArtifactsIds()){
 			 //@date 2017.10.25
 			 minInnerBonus = Integer.MAX_VALUE;
@@ -381,6 +386,14 @@ public class UD_CallSubGraphWithBonusForLone implements CSTI{
 			double maxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(maxId));
 			int index = 1;
 			int subGraphAmount = callSubGraphList.size() - loneVertexSize;
+			/**
+			 * @author zzf
+			 * @date 2017.10.26
+			 * @description new add lonevertex 
+			 */
+			loneVertexSet.clear();
+			fillLoneVertex(loneVertexSet,callSubGraphList);
+			
 			for(SubGraph subGraph:callSubGraphList){
 				/**
 				 * @author zzf
@@ -393,20 +406,14 @@ public class UD_CallSubGraphWithBonusForLone implements CSTI{
 				////////////////////////////////////////////////////////////////////////////////////
 				
 				List<Integer> vertexList = subGraph.getVertexList();
-//				if(vertexList.size()==1){/////
-//					continue;
-//				}
-				/**
-				 * @author zzf
-				 * @date 2017.10.25
-				 * @description the vertex number of area is no less than 3 
-				 */
-				if(vertexList.size()<areaCount) {
+				Collections.sort(vertexList, new SortVertexByScore(vertexIdNameMap,matrix,req));
+				if(vertexList.size()==1){
 					continue;
 				}
 				
 				//regard the max score in this subGraph as represent
-				String represent = vertexIdNameMap.get(subGraph.getMaxId());
+				int localMaxId = subGraph.getMaxId();
+				String represent = vertexIdNameMap.get(localMaxId);
 				double representValue = matrix.getScoreForLink(req, represent);
 				double maxScoreInThisSubGraph = representValue;
 				if(index<subGraphAmount*percent){
@@ -419,26 +426,44 @@ public class UD_CallSubGraphWithBonusForLone implements CSTI{
 					}
 					subGraph.setVisited(req);
 				}
+				/**
+				 * @author zzf 
+				 * @date 2017.10.26
+				 * @description regard more than percent as lone vertex. 
+				 */
+				else {
+					for(int id:vertexList) {
+						loneVertexSet.add(id);
+					}
+					index++;
+					continue;
+				}
 				if(oracle.isLinkAboveThreshold(req,represent)&&index<subGraphAmount*percent){
 					subGraph.addReq(req);
-					Map<String,Double> vertexMapWeight = new HashMap<String,Double>();
-					giveBonusForNeighbor(subGraph,subGraph.getMaxId(),vertexMapWeight);
 					
-					for(String vertexName:vertexMapWeight.keySet()){
+					/**
+					 * @author zzf
+					 * @date 2017/10/25
+					 * @description stable sort 
+					 */
+					for(int vertexId:vertexList) {
+						String vertexName = vertexIdNameMap.get(vertexId);
 						double curValue = matrix.getScoreForLink(req, vertexName);
 						if(!vertexName.equals(represent)){
 							int graphSize = subGraph.getVertexList().size();
+<<<<<<< HEAD
 							
 							double originValue = curValue;
 							curValue = Math.min(maxScore, curValue+maxScore/(graphSize-1));
 							//curValue = Math.min(localMaxScore, curValue+localMaxScore/(graphSize-1));
 							minInnerBonus = Math.min(minInnerBonus, curValue-originValue);
+=======
+							curValue = Math.min(maxScore*0.9999, curValue+maxScore/(graphSize-1));
+>>>>>>> master
 							maxScoreInThisSubGraph = Math.max(maxScoreInThisSubGraph, curValue);
 						}
 						matrix_ud.addLink(req, vertexName,curValue);
 					}
-					
-					matrix_ud.addLink(req, represent, representValue);
 				}
 				else{
 					for(int id:vertexList){
@@ -448,6 +473,7 @@ public class UD_CallSubGraphWithBonusForLone implements CSTI{
 				}
 				index++;
 			}///
+			reqMapLoneVertex.put(req, new HashSet<Integer>(loneVertexSet));
 		}//req
 		 //this.giveBonusForLoneVertexListUsingNewEquation(matrix, matrix_ud, callSubGraphList);
 		giveBonusForLoneRelativeVertexList(matrix, matrix_ud, callSubGraphList);
@@ -462,6 +488,207 @@ public class UD_CallSubGraphWithBonusForLone implements CSTI{
 		return res;
 	}
 	
+	
+	
+	/**
+	 * @author zzf
+	 * @date 2017.10.25 
+	 * @description ensure stable sort.
+	 */
+//	public SimilarityMatrix processLoneVertexInnerMean(SimilarityMatrix matrix, TextDataset textDataset){
+//		 SimilarityMatrix oracle = textDataset.getRtm();
+//		 SimilarityMatrix matrix_ud = new SimilarityMatrix();
+//		 //get all target artifacts
+//		 Set<String> targetArtifacts = matrix.targetArtifactsIds();
+//		 //remove target artifacts which not corresponding with any source artifacts.
+//		 filterSubGraphsList(targetArtifacts);
+//		 fillLoneVertex(loneVertexSet,callSubGraphList);
+//		 int loneVertexSize = loneVertexSet.size();
+//		 
+//		 for(String req:matrix.sourceArtifactsIds()){
+//			//it will get maxId for every subGraph after sort.
+//			Collections.sort(callSubGraphList,new SortBySubGraph(vertexIdNameMap,matrix,req));
+//			int maxId = callSubGraphList.get(0).getMaxId();
+//			double maxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(maxId));
+//			int index = 1;
+//			int subGraphAmount = callSubGraphList.size() - loneVertexSize;
+//			/**
+//			 * @author zzf
+//			 * @date 2017.10.26
+//			 * @description new add lonevertex 
+//			 */
+//			loneVertexSet.clear();
+//			fillLoneVertex(loneVertexSet,callSubGraphList);
+//			
+//			
+//			for(SubGraph subGraph:callSubGraphList){
+//				List<Integer> vertexList = subGraph.getVertexList();
+//				Collections.sort(vertexList, new SortVertexByScore(vertexIdNameMap,matrix,req));
+//				if(vertexList.size()==1){
+//					continue;
+//				}
+//				//regard the max score in this subGraph as represent
+//				int localMaxId = subGraph.getMaxId();
+//				String represent = vertexIdNameMap.get(localMaxId);
+//				double representValue = matrix.getScoreForLink(req, represent);
+//				double maxScoreInThisSubGraph = representValue;
+//				if(index<subGraphAmount*percent){
+//					if(valid.containsKey(req)){
+//						valid.get(req).add(represent);
+//					}
+//					else{
+//						valid.put(req, new HashSet<String>());
+//						valid.get(req).add(represent);
+//					}
+//					subGraph.setVisited(req);
+//				}
+//				/**
+//				 * @author zzf 
+//				 * @date 2017.10.26
+//				 * @description regard more than percent as lone vertex. 
+//				 */
+//				else {
+//					for(int id:vertexList) {
+//						loneVertexSet.add(id);
+//					}
+//					index++;
+//					continue;
+//				}
+//				if(oracle.isLinkAboveThreshold(req,represent)&&index<subGraphAmount*percent){
+//					subGraph.addReq(req);
+//					
+//					/**
+//					 * @author zzf
+//					 * @date 2017/10/25
+//					 * @description stable sort 
+//					 */
+//					for(int vertexId:vertexList) {
+//						String vertexName = vertexIdNameMap.get(vertexId);
+//						double curValue = matrix.getScoreForLink(req, vertexName);
+//						if(!vertexName.equals(represent)){
+//							int graphSize = subGraph.getVertexList().size();
+//							curValue = Math.min(maxScore*0.9999, curValue+maxScore/(graphSize-1));
+//							maxScoreInThisSubGraph = Math.max(maxScoreInThisSubGraph, curValue);
+//						}
+//						matrix_ud.addLink(req, vertexName,curValue);
+//					}
+//				}
+//				else{
+//					for(int id:vertexList){
+//						double curValue = matrix.getScoreForLink(req, vertexIdNameMap.get(id));
+//						matrix_ud.addLink(req, vertexIdNameMap.get(id),curValue);//
+//					}
+//				}
+//				index++;
+//			}///
+//		}//req
+//		 //this.giveBonusForLoneVertexListUsingNewEquation(matrix, matrix_ud, callSubGraphList);
+//		giveBonusForLoneRelativeVertexList(matrix, matrix_ud, callSubGraphList);
+//		//giveBonusForLoneVertexList(matrix,matrix_ud,callSubGraphList); 
+//		
+//		LinksList allLinks = matrix_ud.allLinks();
+//		Collections.sort(allLinks, Collections.reverseOrder());
+//		SimilarityMatrix res = new SimilarityMatrix();
+//		for(SingleLink link:allLinks){
+//			res.addLink(link.getSourceArtifactId(), link.getTargetArtifactId(),link.getScore());
+//		}
+//		return res;
+//	}
+	
+	
+	
+	
+	/*
+	 * mean in inner  
+	 */
+//	public SimilarityMatrix processLoneVertexInnerMean(SimilarityMatrix matrix, TextDataset textDataset){
+//		 SimilarityMatrix oracle = textDataset.getRtm();
+//		 SimilarityMatrix matrix_ud = new SimilarityMatrix();
+//		 //get all target artifacts
+//		 Set<String> targetArtifacts = matrix.targetArtifactsIds();
+//		 //remove target artifacts which not corresponding with any source artifacts.
+//		 filterSubGraphsList(targetArtifacts);
+//		 fillLoneVertex(loneVertexSet,callSubGraphList);
+//		 int loneVertexSize = loneVertexSet.size();
+//		 
+//		 matrix.allLinks();
+//		 for(String req:matrix.sourceArtifactsIds()){
+//			//it will get maxId for every subGraph after sort.
+//			Collections.sort(callSubGraphList,new SortBySubGraph(vertexIdNameMap,matrix,req));
+//			int maxId = callSubGraphList.get(0).getMaxId();
+//			double maxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(maxId));
+//			int index = 1;
+//			int subGraphAmount = callSubGraphList.size() - loneVertexSize;
+//			for(SubGraph subGraph:callSubGraphList){
+//				List<Integer> vertexList = subGraph.getVertexList();
+//				if(vertexList.size()==1){
+//					continue;
+//				}
+//				//regard the max score in this subGraph as represent
+//				String represent = vertexIdNameMap.get(subGraph.getMaxId());
+//				double representValue = matrix.getScoreForLink(req, represent);
+//				double maxScoreInThisSubGraph = representValue;
+//				if(index<subGraphAmount*percent){
+//					if(valid.containsKey(req)){
+//						valid.get(req).add(represent);
+//					}
+//					else{
+//						valid.put(req, new HashSet<String>());
+//						valid.get(req).add(represent);
+//					}
+//					subGraph.setVisited(req);
+//				}
+//				if(oracle.isLinkAboveThreshold(req,represent)&&index<subGraphAmount*percent){
+//					subGraph.addReq(req);
+//					
+//					/**
+//					 * @author zzf
+//					 * @date 2017/10/25
+//					 * @description stable sort 
+//					 */
+//					for(int vertexId:vertexList) {
+//						String vertexName = "";
+//					}
+//					
+////					Map<String,Double> vertexMapWeight = new HashMap<String,Double>();
+////					giveBonusForNeighbor(subGraph,subGraph.getMaxId(),vertexMapWeight);
+////					for(String vertexName:vertexMapWeight.keySet()){
+////						double curValue = matrix.getScoreForLink(req, vertexName);
+////						if(!vertexName.equals(represent)){
+////							int graphSize = subGraph.getVertexList().size();
+////							curValue = Math.min(maxScore*0.9999, curValue+maxScore/(graphSize-1));
+////							//curValue = Math.min(maxScore, curValue+maxScore/allWeight*curWeight);
+////							maxScoreInThisSubGraph = Math.max(maxScoreInThisSubGraph, curValue);
+////						}
+////						matrix_ud.addLink(req, vertexName,curValue);
+////					}
+////					
+////					matrix_ud.addLink(req, represent, representValue);
+//					
+//					
+//				}
+//				else{
+//					for(int id:vertexList){
+//						double curValue = matrix.getScoreForLink(req, vertexIdNameMap.get(id));
+//						matrix_ud.addLink(req, vertexIdNameMap.get(id),curValue);//
+//					}
+//				}
+//				index++;
+//			}///
+//		}//req
+//		 //this.giveBonusForLoneVertexListUsingNewEquation(matrix, matrix_ud, callSubGraphList);
+//		giveBonusForLoneRelativeVertexList(matrix, matrix_ud, callSubGraphList);
+//		//giveBonusForLoneVertexList(matrix,matrix_ud,callSubGraphList); 
+//		
+//		LinksList allLinks = matrix_ud.allLinks();
+//		Collections.sort(allLinks, Collections.reverseOrder());
+//		SimilarityMatrix res = new SimilarityMatrix();
+//		for(SingleLink link:allLinks){
+//			res.addLink(link.getSourceArtifactId(), link.getTargetArtifactId(),link.getScore());
+//		}
+//		return res;
+//	}
+//	
 	/**
 	 * maybe give bonus two times.  
 	 */
@@ -825,15 +1052,24 @@ public class UD_CallSubGraphWithBonusForLone implements CSTI{
 		
 	}
 	
+	
+	/**
+	 * @author zzf
+	 * @date 2017.10.26
+	 * @description new method to process lonevetex for different data struct. 
+	 */
 	private void giveBonusForLoneRelativeVertexList(SimilarityMatrix matrix, SimilarityMatrix matrix_ud,
 			List<SubGraph> subGraphList) {
 		for(String req:matrix.sourceArtifactsIds()){
-			
 			Collections.sort(callSubGraphList,new SortBySubGraph(vertexIdNameMap,matrix,req));
 			int maxId = callSubGraphList.get(0).getMaxId();
 			double maxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(maxId));
 			
-			for(int loneVertex:loneVertexSet){
+			List<Integer> loneVertexList = fillWithLoneSet(reqMapLoneVertex.get(req));
+			Collections.sort(loneVertexList,new SortVertexByScore(vertexIdNameMap,matrix,req));
+			
+			//for(int loneVertex:loneVertexList){////
+		    for(int loneVertex:loneVertexSet){////
 				String loneVertexName = vertexIdNameMap.get(loneVertex);
 				if(hasContainedThisLink(matrix_ud, req, loneVertex)){///////the relative lone vertex is change.
 					continue;
@@ -873,6 +1109,64 @@ public class UD_CallSubGraphWithBonusForLone implements CSTI{
 			} 
 		}
 		
+	}
+	
+	
+//	private void giveBonusForLoneRelativeVertexList(SimilarityMatrix matrix, SimilarityMatrix matrix_ud,
+//			List<SubGraph> subGraphList) {
+//		for(String req:matrix.sourceArtifactsIds()){
+//			
+//			Collections.sort(callSubGraphList,new SortBySubGraph(vertexIdNameMap,matrix,req));
+//			int maxId = callSubGraphList.get(0).getMaxId();
+//			double maxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(maxId));
+//			
+//			List<Integer> loneVertexList = fillWithLoneSet(loneVertexSet);
+//			Collections.sort(loneVertexList,new SortVertexByScore(vertexIdNameMap,matrix,req));
+//			
+//			for(int loneVertex:loneVertexList){
+//				String loneVertexName = vertexIdNameMap.get(loneVertex);
+//				if(hasContainedThisLink(matrix_ud, req, loneVertex)){///////the relative lone vertex is change.
+//					continue;
+//				}
+//				double sum = 0;
+//				double validSum = 0;
+//				double validValueSum = 0;
+//				for(SubGraph subGraph:subGraphList){///subGraph
+//					if(subGraph.getVertexList().size()==1||!subGraph.isVisited(req)){
+//						continue;
+//					}
+//					double bonus = giveBonusForLonePoint(graphs,subGraph,loneVertex,1);
+//					if(subGraph.isVisited(req)){
+//						sum += bonus;
+//					}
+//					if(subGraph.isValidWithThisReq(req)){
+//						validSum += bonus;
+//						validValueSum += matrix_ud.getScoreForLink(req, vertexIdNameMap.get(subGraph.getMaxId()))
+//								* bonus;
+//					}
+//				}///subGraph
+//				double originValue = matrix.getScoreForLink(req, loneVertexName);
+//				if(sum==0){
+//					matrix_ud.addLink(req, loneVertexName, originValue);
+//				}
+//				else{
+//					//double nowValue = originValue + validSum/sum*validValueSum;////maybe exist trouble
+//					double nowValue = originValue + validValueSum;
+//					nowValue = Math.min(nowValue, maxScore);
+//					matrix_ud.addLink(req, loneVertexName, nowValue);
+//				}
+//			} 
+//		}
+//		
+//	}
+
+
+	private List<Integer> fillWithLoneSet(Set<Integer> loneVertexSet) {
+		List<Integer> list = new LinkedList<Integer>();
+		for(int ele:loneVertexSet) {
+			list.add(ele);
+		}
+		return list;
 	}
 
 

@@ -850,7 +850,7 @@ public abstract class Result implements Serializable {
             double p = curve.get(id + "_Precision");
 
             double r = curve.get(id + "_Recall");
-            if (r > gap) {
+            if (r >= gap) {
 //                System.out.println("Precision: " + p + " @Recall: " + r);
                 System.out.println(p);
                 precisionList.add(p);
@@ -952,4 +952,139 @@ public abstract class Result implements Serializable {
 
         return result;
     }
+
+	public List<Double> getPrecisionAtRecallByTen(Map<String, Set<String>> valid) {
+		List<Double> precisionList = new ArrayList<>();
+		
+		PrecisionRecallCurve curve = getPrecisionRecallCurve(valid);
+		
+		List<String> pointId = new ArrayList<>();
+		for (String key : curve.keySet()) {
+			String id = key.split("_")[0];
+			if (!pointId.contains(id)) {
+				pointId.add(id);
+			}
+		}
+		double gap = 0.1;
+		System.out.println(curve.getName());
+		for (String id : pointId) {
+			double p = curve.get(id + "_Precision");
+			double r = curve.get(id + "_Recall");
+			if (r > gap) {
+				// System.out.println("Precision: " + p + " @Recall: " + r);
+				System.out.println(p);
+				precisionList.add(p);
+				gap += 0.1;
+			}
+		}
+		return precisionList;
+	}
+
+	/**
+	 * @author zzf <tiaozhanzhe668@163.com> 
+	 * @date 2017.10.30
+	 * @description place links which have been verified by users in front of others.
+	 */
+	private PrecisionRecallCurve getPrecisionRecallCurve(Map<String, Set<String>> visited) {
+		PrecisionRecallCurve precisionRecallCurve = new PrecisionRecallCurve();
+        precisionRecallCurve.setName(resultName);
+        precisionRecallCurve.setCutParameter(cutParameter);
+
+        oracle.setThreshold(0.0);
+        int correct = 0;
+
+        int TP = 0;
+        int TN = 0;
+        int FP = 0;
+        int FN = 0;
+
+        LinksList allLinks = matrix.allLinks();
+        Collections.sort(allLinks, Collections.reverseOrder());
+        
+        sortBaseOnUserVerify(allLinks, visited);
+        
+        int linkNumber = 0;
+        for (SingleLink link : allLinks) {
+            String source = link.getSourceArtifactId();
+            String target = link.getTargetArtifactId();
+            if (matrix.isLinkAboveThreshold(source, target)) {
+                if (oracle.isLinkAboveThreshold(source, target)) {
+                    correct++;
+                    TP++;
+                } else {
+                    FP++;
+                }
+                linkNumber++;
+                double precision = correct / (double) linkNumber;
+                precisionRecallCurve.put(String.format("%03d_Precision", linkNumber), precision);
+                double recall = correct / (double) oracle.count();
+                precisionRecallCurve.put(String.format("%03d_Recall", linkNumber), recall);
+                LinksDistributed linksDistributed = new LinksDistributed(TP, FP, TN, FN);
+                linksDistributedAtRecall.put(recall, linksDistributed);
+            } else {
+                if (oracle.isLinkAboveThreshold(link.getSourceArtifactId(), link.getTargetArtifactId())) {
+                    FN++;
+                }
+                TN++;
+            }
+        }
+        return precisionRecallCurve;
+	}
+	
+	/**
+	 * @author zzf
+	 * @date 2017.10.29
+	 */
+	private void sortBaseOnUserVerify(LinksList allLinks, Map<String, Set<String>> visited) {
+		LinksList userVerify = new LinksList();
+		LinksList remains = new LinksList();
+		for(SingleLink link:allLinks) {//for
+			String source = link.getSourceArtifactId();
+			String target = link.getTargetArtifactId();
+			if(visited.get(source).contains(target)) {
+				userVerify.add(link);
+			}
+			else {
+				remains.add(link);
+			}
+		}//for
+		
+		allLinks.clear();
+		allLinks.addAll(userVerify);
+		allLinks.addAll(remains);
+	}
+
+	public List<Integer> getFalsePositiveAtRecallByTen(Map<String, Set<String>> visited) {
+		LinksList allLinks = matrix.allLinks();
+		// LinksList allLinks = matrix.getLinksAboveThreshold();
+		Collections.sort(allLinks, Collections.reverseOrder());
+		sortBaseOnUserVerify(allLinks, visited);
+
+		int currentLink = 0;
+		int correctSoFar = 0;
+
+		List<Integer> fpList = new ArrayList<>();
+
+		int fp = 0;
+
+		double gap = 0.1;
+		for (SingleLink singleLink : allLinks) {
+			currentLink++;
+			if (oracle.isLinkAboveThreshold(singleLink.getSourceArtifactId(), singleLink.getTargetArtifactId())) {
+				correctSoFar++;
+				double recall = (double) correctSoFar / (double) oracle.count();
+				double precision = (double) correctSoFar / (double) currentLink;
+				if (recall > gap) {
+					System.out.println("False Positive: " + fp + " @Recall: " + recall);
+					// System.out.println(fp);
+					fpList.add(fp);
+					// System.out.println("Precision: " + precision + " @Recall: " + recall);
+					gap += 0.1;
+				}
+			} else {
+				fp++;
+			}
+		}
+		return fpList;
+	}
 }

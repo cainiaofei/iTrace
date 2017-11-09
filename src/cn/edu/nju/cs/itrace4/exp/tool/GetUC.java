@@ -21,7 +21,7 @@ public class GetUC {
 		con = DriverManager.getConnection("jdbc:sqlite:" + InfinispanRtmDB);
 		con.setAutoCommit(false);
 		stmt = con.createStatement();
-		String sql = "select request as requirement from final";
+		String sql = "select request as requirement from rtm";
 		ResultSet rs = stmt.executeQuery(sql);
 		int number = 1;
 		while(rs.next()) {

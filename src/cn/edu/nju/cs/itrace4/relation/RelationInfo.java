@@ -131,8 +131,10 @@ public class RelationInfo implements Serializable {
             if (dataRelation.isUsage()) {
                 // the overlap things here??
 
-                if (artifactCollection.containsKey(dataRelation.getCallerClass()) && artifactCollection.containsKey(dataRelation.getCalleeClass())) {
-                    if (dataRelation.getCallerClass() != dataRelation.getCalleeClass()) {
+                if (artifactCollection.containsKey(dataRelation.getCallerClass()) && 
+                		artifactCollection.containsKey(dataRelation.getCalleeClass())) {
+                	//if(dataRelation.getCallerClass()!=dataRelation.getCalleeClass()) {
+                    if (!dataRelation.getCallerClass().equals(dataRelation.getCalleeClass())) {
                         String u = dataRelation.getCallerClass() + "#" + dataRelation.getCalleeClass();
                         if (!usag.contains(u)) {
                             CallRelation cr = new CallRelation(dataRelation.getCallerClass(), dataRelation.getCalleeClass(), 
@@ -164,7 +166,11 @@ public class RelationInfo implements Serializable {
 
         callRelationPairList = new ArrayList<>();
         List<String> callRelationById = new ArrayList<>();
-        for (CallRelation cr : callRelationList) {
+        
+        /**
+         * call prune
+         */
+        for (CallRelation cr : callRelationList) {//call for
             String caller;
             String callee;
             if (granularity.equals(Granularity.CLASS)) {
@@ -206,7 +212,7 @@ public class RelationInfo implements Serializable {
 //                    System.out.println(relationIdFormat + " class call relation is duplicated.");
                 }
             }
-        }
+        }//call for
 
         relationGraphFile.append("*Arcs Data");
         relationGraphFile.append("\n");
@@ -216,9 +222,12 @@ public class RelationInfo implements Serializable {
 
         System.out.println(" dataRelationPairList = " + dataRelationPairList.size() );
         int count = 0;
-        for (DataRelation dr : dataRelationList) {
+        
+        /**
+         * data prune 
+         */
+        for (DataRelation dr : dataRelationList) {//data for
             if (!dr.isUsage()) {
-
                 String caller;
                 String callee;
                 if (granularity.equals(Granularity.CLASS)) {
@@ -264,7 +273,8 @@ public class RelationInfo implements Serializable {
 
                 }
             }
-        }
+        }//data for
+        
         noDuplicatedDataStatic();
 
         relationGraphFile.append("*Arcs Usage");

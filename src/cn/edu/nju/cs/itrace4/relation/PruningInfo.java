@@ -72,11 +72,11 @@ public class PruningInfo {
             List<String> retrievedSecondPiece = new ArrayList<>();
             List<String> retrievedCodes = new ArrayList<>();
 
-
             for (int i = 0; i < candidateSeeds.size(); i++) {
                 if (i == 0) {
                     List<CodeVertex> connectedVertex = new ArrayList<>();
-                    ((CallDataRelationGraph) relationGraph).searhNeighbourConnectedGraphByPruning(relationGraph.getCodeVertexByName(candidateSeeds.get(i)), connectedVertex);
+                    ((CallDataRelationGraph) relationGraph).searhNeighbourConnectedGraphByPruning(relationGraph.
+                    		getCodeVertexByName(candidateSeeds.get(i)), connectedVertex);
 //                    ((CallDataRelationGraph) relationGraph).searhNeighbourVertexByPruning(relationGraph.getCodeVertexByName(candidateSeeds.get(i)), connectedVertex);
                     for (CodeVertex codeVertex : connectedVertex) {
                         retrievedFirstPiece.add(codeVertex.getName());

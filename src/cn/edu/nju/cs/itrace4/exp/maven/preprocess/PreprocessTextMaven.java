@@ -7,6 +7,7 @@ import cn.edu.nju.cs.itrace4.exp.tool.GetSrc;
 import cn.edu.nju.cs.itrace4.exp.tool.GetUC;
 import cn.edu.nju.cs.itrace4.exp.tool.RTMProcess;
 import cn.edu.nju.cs.itrace4.exp.tool.TransferTXT;
+import cn.edu.nju.cs.itrace4.parser.SourceTargetUnion;
 import cn.edu.nju.cs.itrace4.parser.SourceTargetUnionForGit;
 import cn.edu.nju.cs.itrace4.preprocess.BatchingPreprocess;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
@@ -35,7 +36,7 @@ public class PreprocessTextMaven {
     
     private static String relationDirPath = projectPath + "relation";
     
-    private static String masterPath = projectPath+"Maven-master";
+    private static String masterPath = projectPath+"maven-master";
     private static String graphDBPath = relationDirPath + File.separator + "call.db";
     
     
@@ -83,7 +84,6 @@ public class PreprocessTextMaven {
     	PreprocessTextMaven MavenProcess = new PreprocessTextMaven(rtmDBFilePath);
     	MavenProcess.cleanData();
     	MavenProcess.arrangeData();
-    	
     	SourceTargetUnionForGit union = new SourceTargetUnionForGit(ucDirPath, srcDirPath, rtmDBFilePath, Granularity.CLASS,classDirPath,methodDirPath);
 
         BatchingPreprocess preprocess = new BatchingPreprocess(ucDirPath, classDirPath, methodDirPath);
@@ -93,4 +93,14 @@ public class PreprocessTextMaven {
         RelationInfo rg = new RelationInfo(classDirPath, relationDirPath, Granularity.CLASS);
         rg.showMessage();
     }
+	
+//	public static void main(String[] args) {
+//        SourceTargetUnion union = new SourceTargetUnion(ucDirPath, srcDirPath, rtmDBFilePath, Granularity.CLASS,classDirPath,methodDirPath);
+//
+//        BatchingPreprocess preprocess = new BatchingPreprocess(ucDirPath, classDirPath, methodDirPath);
+//        preprocess.doProcess();
+//
+//        RelationInfo rg = new RelationInfo(classDirPath, relationDirPath, Granularity.CLASS);
+//        rg.showMessage();
+//    }
 }

@@ -8,6 +8,7 @@ import java.util.Set;
 
 public class SubGraph {
 	//顶点集合
+	private String type;
 	private List<Integer> vertexList;
 	private int maxId;
 	private Set<String> set;
@@ -16,6 +17,14 @@ public class SubGraph {
 	private Set<String> visited;
 	//2017/8/12 增加一个属性  为了使用新方法 这里的距离和传统意义的距离还不一样 越大越紧密
 	private double closenessDistanceFromMaxSubGraph;
+	
+	public void SetType(String type) {
+		this.type = type;
+	}
+	
+	public String getType() {
+		return type;
+	}
 	
 	public SubGraph(List<Integer> vertexList){
 		this.vertexList = vertexList;

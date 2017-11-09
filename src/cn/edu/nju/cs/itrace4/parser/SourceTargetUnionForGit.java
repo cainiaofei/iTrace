@@ -25,6 +25,7 @@ public class SourceTargetUnionForGit implements SourceTargetUnionInterface{
 
     public SourceTargetUnionForGit(String ucDirPath, String srcDirPath, String rtmDBFilePath, Granularity granularity, 
     		String classDirPath, String methodDirPath) {
+    	SqliteIOForGit.setUCPath(ucDirPath);
         SimilarityMatrix rtm_class = SqliteIOForGit.readRTMFromDB(rtmDBFilePath, Granularity.CLASS);
         //SimilarityMatrix rtm_method = SqliteIO.readRTMFromDB(rtmDBFilePath, Granularity.METHOD);
 
