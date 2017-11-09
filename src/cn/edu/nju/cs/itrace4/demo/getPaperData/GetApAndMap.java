@@ -19,9 +19,8 @@ import cn.edu.nju.cs.itrace4.core.algo.UD_CSTI;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
-import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.MethodTypeProcessLone;
-import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.UD_CallThenDataWithBonusForLone;
-import cn.edu.nju.cs.itrace4.demo.exp.project.Infinispan;
+import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataDynamic;
+import cn.edu.nju.cs.itrace4.demo.exp.project.Gantt;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Maven;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
@@ -34,7 +33,7 @@ public class GetApAndMap implements Runnable{
 	private String basePath;
 	private Project[] projects = new Project[3];
 	private String[] models = new String[3];
-	private double callThreshold = 0.4, dataThreshold = 0.7;
+	private double callThreshold = 0.6, dataThreshold = 0.7;
 	
 	public GetApAndMap(double percent,String basePath) {
 		this.percent = percent;
@@ -51,7 +50,7 @@ public class GetApAndMap implements Runnable{
 	public void initProjects(Project[] project){
 		project[0] = new Itrust();
 		project[1] = new Maven();
-		project[2] = new Infinispan();
+		project[2] = new Gantt();
 	}
 	
 	public void initModels(String[] models){
@@ -88,9 +87,9 @@ public class GetApAndMap implements Runnable{
 		          ri.setPruning(callThreshold, dataThreshold);
 		          Map<String,Set<String>> valid = new HashMap<String,Set<String>>();
 		          Result result_cluster = IR.compute(textDataset,model,
-		          		new UD_CallThenDataWithBonusForLone(ri,callThreshold,
-		          				dataThreshold,MethodTypeProcessLone.InnerMean,percent,valid));
-		          retrieveData(model,result_ir,result_ud,result_cluster,modelMapData,textDataset);
+		          		new UD_CallDataDynamic(ri,callThreshold,
+		          				dataThreshold,percent,valid));//0.7
+		          retrieveData(model,result_ir,result_ud,result_cluster,modelMapData,textDataset,valid);
 		      }
 		      //IR
 		      List<String> irList = modelMapData.get("IR");
@@ -133,7 +132,8 @@ public class GetApAndMap implements Runnable{
 	}
 
 	private void retrieveData(String model, Result result_ir, Result result_ud, Result result_cluster,
-			Map<String, List<String>> modelMapData,TextDataset textDataset) {
+			Map<String, List<String>> modelMapData,TextDataset textDataset,
+			Map<String,Set<String>> valid) {
 		//IR
 		double irApValue = result_ir.getAveragePrecisionByRanklist();
 		String irAp = String.format("%.2f", irApValue*100);
@@ -173,7 +173,8 @@ public class GetApAndMap implements Runnable{
 		String clusterMap = String.format("%.2f", clusterMapValue*100);
 		String clusterPvalueStr = "_";
 		String clusterCliff = "_";
-		String rate = System.getProperty("rate");
+		//String rate = System.getProperty("rate");
+		String rate = (allSize(valid)*1.0 / result_ir.matrix.allLinks().size())+"";
 		String clusterRate = rate.substring(0,Math.min(6,rate.length()));
 		if(!modelMapData.containsKey("CLUSTER")) {
 			modelMapData.put("CLUSTER",new ArrayList<String>());
@@ -183,6 +184,15 @@ public class GetApAndMap implements Runnable{
 		clusterList.add(clusterCliff);clusterList.add(clusterRate);
 	}
 
+
+	private int allSize(Map<String, Set<String>> valid) {
+		int amount = 0;
+		for(String key:valid.keySet()){
+			amount += valid.get(key).size();
+		}
+		return amount;
+	}
+	
 	@Override
 	public void run() {
 		try {

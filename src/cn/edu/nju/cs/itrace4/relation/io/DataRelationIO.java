@@ -26,6 +26,10 @@ public class DataRelationIO implements DataRelationIOInterface{
 
         faList = relationParser(relationDBDirFile.getPath() + "/test1.db", DataRelationType.FieldAccess);
         fmList = relationParser(relationDBDirFile.getPath() + "/test2.db", DataRelationType.FieldModification);
+        /**
+         * @date 2017/10/31  
+         * @description 暂时注释掉
+         * */
         ppList = relationParser(relationDBDirFile.getPath() + "/test3.db", DataRelationType.ParameterPass);
 
         return getDataRelationList(faList, fmList, ppList);
@@ -49,6 +53,11 @@ public class DataRelationIO implements DataRelationIOInterface{
             dataRelationList.add(dr);
         }
 
+        /**
+         * @author zzf 
+         * @date 2017/10/31
+         * @description  暂时注释掉pp!!!!!!!!! 后面记得去掉注释 
+         */
         for (FieldMonitor pp : ppList) {
             fieldMonitorsList.add(pp);
         }
@@ -239,7 +248,6 @@ public class DataRelationIO implements DataRelationIOInterface{
 
     private static DataRelationList getDataRelationAccessListSameFiled(String accessFieldIdentify, List<String> methodList) {
         DataRelationList dataRelationList = new DataRelationList();
-
 
         String type = accessFieldIdentify.split("#")[0];
         String hashcode = accessFieldIdentify.split("#")[1];

@@ -6,7 +6,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -59,26 +58,22 @@ public class RTMProcess {
 		Connection con = getDBConn(dbPath);
 		String sql = "select * from init_rtm where issue_id=";
 		Set<String> visited = new HashSet<String>();
-		Statement stat = con.createStatement();
-		stat.execute("delete from final");
+		Statement stmt = con.createStatement();
 		con.setAutoCommit(false);
 		for(List<Integer> subGraph:subGraphList) {
 			StringBuilder request = new StringBuilder();
 			StringBuilder code = new StringBuilder();
 			for(int id:subGraph) {
 				String issueId = idMapName.get(id);
-				ResultSet rs = stat.executeQuery(sql+"'"+issueId+"'");
-				while(rs.next()) {
-					visited.add(rs.getString("issue_id").trim());
-					request.append(rs.getString("request")+" ");
-					code.append(rs.getString("file_path")+"和");
-				}
+				ResultSet rs = stmt.executeQuery(sql+"'"+issueId+"'");
+				visited.add(rs.getString("issue_id").trim());
+				request.append(rs.getString("request")+" ");
+				code.append(rs.getString("file_path")+"和");
 			}//inner for loop
 			if(request.length()>0) {
 				request = filter(request.toString().toCharArray());
-				String insertSql = "insert into final (request,file_path) values (" + "'" + 
+				String insertSql = "insert into rtm (request,file_path) values (" + "'" + 
 	            		request.toString() + "',"+"'"+code.toString() + "')";
-				Statement stmt = con.createStatement();
 				//System.out.println("insert:"+insertSql);
 		        stmt.executeUpdate(insertSql);
 		        count_log++;
@@ -87,8 +82,7 @@ public class RTMProcess {
 		
 		// remain isolated record.
 		sql = "select * from init_rtm";
-		ResultSet rs = stat.executeQuery(sql);
-		Statement stmt = con.createStatement();
+		ResultSet rs = stmt.executeQuery(sql);
 		while(rs.next()) {
 			String issueId = rs.getString("issue_id").trim();
 			if(visited.contains(issueId)) {
@@ -99,7 +93,7 @@ public class RTMProcess {
 				String request = rs.getString("request");
 				request = filter(request.toCharArray()).toString();
 				String code = rs.getString("file_path");
-				String insertSql = "insert into final (request,file_path) values (" + "'" + 
+				String insertSql = "insert into rtm (request,file_path) values (" + "'" + 
 	            		request + "',"+"'"+code + "')";
 				//Statement stmt = con.createStatement();
 		        stmt.executeUpdate(insertSql);

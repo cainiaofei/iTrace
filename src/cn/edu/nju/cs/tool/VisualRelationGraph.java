@@ -17,6 +17,8 @@ import cn.edu.nju.cs.itrace4.visual.IRForVisual;
 import edu.uci.ics.jung.algorithms.layout.FRLayout;
 import edu.uci.ics.jung.graph.DirectedSparseGraph;
 import edu.uci.ics.jung.graph.Graph;
+import edu.uci.ics.jung.graph.SparseGraph;
+import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.visualization.GraphZoomScrollPane;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.DefaultModalGraphMouse;
@@ -109,7 +111,7 @@ public class VisualRelationGraph {
         dataEdges = new LinkedHashMap<>();
         call_data_Edges = new LinkedHashMap<>();
 
-//        this.LAYOUT_FILE = "data/exp/Gantt/relation/PersistentLayoutDemo.out";
+//        this.LAYOUT_FILE = "data/exp/iTrust/relation/PersistentLayoutDemo.out";
         this.LAYOUT_FILE = layoutPath;
 
         edgeFactory = new Factory<Integer>() {
@@ -143,7 +145,7 @@ public class VisualRelationGraph {
         dataEdges = new LinkedHashMap<>();
         call_data_Edges = new LinkedHashMap<>();
 
-//        this.LAYOUT_FILE = "data/exp/Gantt/relation/PersistentLayoutDemo.out";
+//        this.LAYOUT_FILE = "data/exp/iTrust/relation/PersistentLayoutDemo.out";
         this.LAYOUT_FILE = layoutPath;
 
         edgeFactory = new Factory<Integer>() {
@@ -157,8 +159,14 @@ public class VisualRelationGraph {
     }
 
     private void graphConvert() {
-        g = new DirectedSparseGraph();
-
+        //g = new DirectedSparseGraph();
+    	/**
+    	 * @author zzf
+    	 * @date 2017.11.2
+    	 * @description use different kinds of edges to represent data and call edge. 
+    	 */
+    	g = new SparseGraph<Integer,Integer>();
+    	
         Map<Integer, CodeVertex> vertexMap = relationGraph.getVertexes();
 
         for (Integer id : vertexMap.keySet()) {
@@ -174,10 +182,11 @@ public class VisualRelationGraph {
             Number weight = ((CallEdge) codeEdge).getCallRelationSize();
 
             Integer edgeId = edgeFactory.create();
-            g.addEdge(edgeId, v1, v2);
+            g.addEdge(edgeId, v1, v2,EdgeType.DIRECTED);
             callEdges.put(edgeId, new Pair<Integer, Integer>(v1, v2));
             if (weight == null) weight = 0.0;
             edgeRelationWeightsMap.put(edgeId, weight);
+            
         }
 
         for (CodeEdge codeEdge : relationGraph.getDataEdges()) {
@@ -187,7 +196,11 @@ public class VisualRelationGraph {
 //            Number weight = ((DataEdge) codeEdge).getSharedDataFieldSize();
             Number weight = ((DataEdge) codeEdge).getDataRelationSizeByUniqueType();
             Integer edgeId = edgeFactory.create();
-            g.addEdge(edgeId, v1, v2);
+            
+            //g.addEdge(edgeId, v1, v2);
+            g.addEdge(edgeId, v1,v2,EdgeType.UNDIRECTED);
+            
+            
             if (weight == null) weight = 0.0;
             edgeRelationWeightsMap.put(edgeId, weight);
         }
@@ -283,8 +296,10 @@ public class VisualRelationGraph {
             }
         });
 
-        vv.getRenderContext().setVertexFillPaintTransformer(new PickableVertexPaintTransformer<Integer>(vv.getPickedVertexState(), Color.white, Color.yellow));
-        vv.getRenderContext().setEdgeDrawPaintTransformer(new PickableEdgePaintTransformer<Integer>(vv.getPickedEdgeState(), Color.black, Color.lightGray));
+        vv.getRenderContext().setVertexFillPaintTransformer(new PickableVertexPaintTransformer<Integer>(vv.
+        		getPickedVertexState(), Color.white, Color.yellow));
+        vv.getRenderContext().setEdgeDrawPaintTransformer(new PickableEdgePaintTransformer<Integer>(vv.
+        		getPickedEdgeState(), Color.black, Color.lightGray));
 
         vv.setBackground(Color.white);
 
@@ -403,28 +418,27 @@ public class VisualRelationGraph {
         content.add(controls, BorderLayout.SOUTH);
         frame.pack();
         frame.setVisible(true);
-
     }
 
     public static void main(String[] args) throws IOException {
-        String class_relationInfo = "data/exp/Gantt/relation/CLASS_relationInfo.ser";
+        String class_relationInfo = "data/exp/iTrust/relation/CLASS_relationInfo_whole.ser";
 
         try {
             FileInputStream fis = new FileInputStream(class_relationInfo);
             ObjectInputStream ois = new ObjectInputStream(fis);
             RelationInfo ri = (RelationInfo) ois.readObject();
-            ri.setPruning(0.7, 2.0);
+            ri.setPruning(0.3, 1.1);
 
            // System.out.println(ri.getRelationGraphFile());
 
-            String rtmClassPath = "data/exp/Gantt/rtm/RTM_CLASS.txt";
-            String ucPath = "data/exp/Gantt/uc";
-            String classDirPath = "data/exp/Gantt/class/graph/code";
+            String rtmClassPath = "data/exp/iTrust/rtm/RTM_CLASS.txt";
+            String ucPath = "data/exp/iTrust/uc";
+            String classDirPath = "data/exp/iTrust/class/graph/code";
             TextDataset textDataset = new TextDataset(ucPath, classDirPath, rtmClassPath);
             
             
             CallDataRelationGraph cdGraph = new CallDataRelationGraph(ri);
-            String layoutPath = "data/exp/Gantt/relation/PersistentLayoutDemo.out";
+            String layoutPath = "data/exp/iTrust/relation/PersistentLayoutDemo.out";
             VisualRelationGraph visualRelationGraph = new VisualRelationGraph(textDataset, cdGraph, layoutPath);
             visualRelationGraph.show();
 

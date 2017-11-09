@@ -1,0 +1,61 @@
+package cn.edu.nju.cs.itrace4.core.algo.legacy;
+
+import cn.edu.nju.cs.itrace4.core.algo.CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.UseEdge;
+import cn.edu.nju.cs.itrace4.core.algo.icse.PruningCall_Data_Connection_ICSE;
+import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
+import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
+import cn.edu.nju.cs.itrace4.relation.RelationInfo;
+import javafx.util.Pair;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by niejia on 15/5/13.
+ */
+public class Pruning_UD_Call_Data_ICSE implements CSTI {
+
+    private CSTI ud_csti;
+    private CSTI pruning_csti;
+
+
+    public Pruning_UD_Call_Data_ICSE(RelationInfo prunedRelationInfo, RelationInfo fullRelationInfo, UseEdge useEdge, Double bonus_thresholdForCall, Double bonus_thresholdForData) {
+        pruning_csti = new PruningCall_Data_Connection_ICSE(prunedRelationInfo, fullRelationInfo, useEdge, bonus_thresholdForCall, bonus_thresholdForData);
+        ud_csti = new UD_Weight_Call_Data_II_CSTI(fullRelationInfo);
+    }
+
+
+    @Override
+    public SimilarityMatrix improve(SimilarityMatrix matrix, TextDataset textDataset, SimilarityMatrix similarityMatrix) {
+        return ud_csti.improve(pruning_csti.improve(matrix, textDataset), textDataset);
+    }
+
+    @Override
+    public SimilarityMatrix improve(SimilarityMatrix matrix, TextDataset textDataset) {
+        return null;
+    }
+
+    @Override
+    public String getAlgorithmName() {
+        return "Pruning_UD_Call_Data_CSTI";
+    }
+
+    @Override
+    public List<Pair<String, String>> getAlgorithmParameters() {
+        List parameters = new ArrayList();
+        Pair<String, String> p = new Pair<>("None", "");
+        parameters.add(p);
+        return parameters;
+    }
+
+    @Override
+    public String getDetails() {
+        return null;
+    }
+
+    @Override
+    public List<String> getCorrectImprovedTargetsList() {
+        return null;
+    }
+}

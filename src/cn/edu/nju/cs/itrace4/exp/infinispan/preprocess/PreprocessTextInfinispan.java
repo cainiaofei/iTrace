@@ -5,7 +5,6 @@ import java.io.File;
 import cn.edu.nju.cs.itrace4.core.type.Granularity;
 import cn.edu.nju.cs.itrace4.exp.tool.GetSrc;
 import cn.edu.nju.cs.itrace4.exp.tool.GetUC;
-import cn.edu.nju.cs.itrace4.exp.tool.RTMProcess;
 import cn.edu.nju.cs.itrace4.exp.tool.TransferTXT;
 import cn.edu.nju.cs.itrace4.parser.SourceTargetUnionForGit;
 import cn.edu.nju.cs.itrace4.preprocess.BatchingPreprocess;
@@ -17,11 +16,11 @@ import cn.edu.nju.cs.itrace4.relation.RelationInfo;
  * @descrition copy from <code>PreprocessTextjHotDraw</code> 
  */
 public class PreprocessTextInfinispan {
+	private GenerateRTM getRTM;
 	private GetUC getUC = new GetUC();
 	private GetSrc getOriginSrc = new GetSrc();
 	private TransferTXT getSrc = new TransferTXT();
 	//private TableFormatNormalize generateCallGraph = new TableFormatNormalize();
-	private RTMProcess rtmProcess = new RTMProcess();
 	
 	
 	private static String projectPath = "data/exp/Infinispan/";
@@ -39,16 +38,11 @@ public class PreprocessTextInfinispan {
     private static String graphDBPath = relationDirPath + File.separator + "call.db";
     
     
-    public PreprocessTextInfinispan(String rtmDBFilePath) {
-    	try {
-			//generateCallGraph.generateFormatTable(callDBPath);
-			rtmProcess.generateFinalRTM(rtmDBFilePath);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+    public PreprocessTextInfinispan() {
+    	getRTM = new GenerateRTM(rtmDBFilePath);
     }
     
-    public void cleanData() {
+    private void cleanData() {
     	deleteFileInDir(srcDirPath);
     	deleteFileInDir(classDirPath);
     	deleteFileInDir(ucDirPath);
@@ -63,7 +57,9 @@ public class PreprocessTextInfinispan {
 	}
 
 	public void arrangeData() {
+		getRTM.buildRTMTable();
     	try {
+    		cleanData();
 			getUC.getUCFromDB(ucDirPath,rtmDBFilePath);
 			String originPath = srcDirPath;
 	    	String targetPath = classDirPath;
@@ -74,14 +70,20 @@ public class PreprocessTextInfinispan {
 		}
     }
     
-    public static void main(String[] args) {
+	
+	public static void main(String[] args) {
         /*
          * @author zzf <tiaozhanzhe668@163.com>
-         * @date 2017/10/11
-         * @description:为了搞清楚<code>预处理</code>和 <code>序列化</code>的整体流程，先把无关的注释掉
+         * @date 2017/11/3
+         * @description:
+         *              step1:  get rtm from Infinispan-req
+         *              step2:  get src from code-master
+         *              step3:  get uc from rtm
+         *              step4:  get relation info
+         *              step5:  get union between class,uc,ri and rtm.
+         *              step6:  process txt. 
          */
-    	PreprocessTextInfinispan infinispanProcess = new PreprocessTextInfinispan(rtmDBFilePath);
-    	infinispanProcess.cleanData();
+    	PreprocessTextInfinispan infinispanProcess = new PreprocessTextInfinispan();
     	infinispanProcess.arrangeData();
     	
     	SourceTargetUnionForGit union = new SourceTargetUnionForGit(ucDirPath, srcDirPath, rtmDBFilePath, Granularity.CLASS,classDirPath,methodDirPath);
@@ -93,4 +95,24 @@ public class PreprocessTextInfinispan {
         RelationInfo rg = new RelationInfo(classDirPath, relationDirPath, Granularity.CLASS);
         rg.showMessage();
     }
+	
+//    public static void main(String[] args) {
+//        /*
+//         * @author zzf <tiaozhanzhe668@163.com>
+//         * @date 2017/10/11
+//         * @description:为了搞清楚<code>预处理</code>和 <code>序列化</code>的整体流程，先把无关的注释掉
+//         */
+//    	PreprocessTextInfinispan infinispanProcess = new PreprocessTextInfinispan(rtmDBFilePath);
+//    	infinispanProcess.cleanData();
+//    	infinispanProcess.arrangeData();
+//    	
+//    	SourceTargetUnionForGit union = new SourceTargetUnionForGit(ucDirPath, srcDirPath, rtmDBFilePath, Granularity.CLASS,classDirPath,methodDirPath);
+//
+//        BatchingPreprocess preprocess = new BatchingPreprocess(ucDirPath, classDirPath, methodDirPath);
+//        preprocess.doProcess();
+//        
+//        System.setProperty("projectType", "git");
+//        RelationInfo rg = new RelationInfo(classDirPath, relationDirPath, Granularity.CLASS);
+//        rg.showMessage();
+//    }
 }

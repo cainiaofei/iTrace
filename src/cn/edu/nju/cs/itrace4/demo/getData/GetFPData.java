@@ -21,8 +21,10 @@ import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
 import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.MethodTypeProcessLone;
 import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.UD_CallThenDataWithBonusForLone;
+import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataDynamic;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
 import cn.edu.nju.cs.itrace4.demo.exp.project.JhotDraw;
+import cn.edu.nju.cs.itrace4.demo.exp.project.Maven;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Gantt;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
 import cn.edu.nju.cs.itrace4.demo.tool.CliffAnalyze;
@@ -33,7 +35,7 @@ public class GetFPData{
 	private Map<Integer,String> projectMap = new HashMap<Integer,String>();
 	private Map<Integer,String> modelMap = new HashMap<Integer,String>();
 	private CliffAnalyze cliffAnalyze;
-	
+	private double callThreshold = 0.6, dataThreshold = 0.7;
 	
 	public GetFPData() throws ParserConfigurationException, SAXException, IOException{
 		initProjectMap();
@@ -61,8 +63,8 @@ public class GetFPData{
 	
 	public void initProjects(Project[] project){
 		project[0] = new Itrust();
-		project[1] = new Gantt();
-		project[2] = new JhotDraw();
+		project[1] = new Maven();
+		project[2] = new Gantt();
 	}
 	
 	public void start() throws Exception{
@@ -74,8 +76,12 @@ public class GetFPData{
 	}
 
 	public void doTask(Project[] projects,String[] models) throws Exception{
-		BufferedWriter bw = new BufferedWriter(new FileWriter(new File("out"+File.separator+
-				"fp_compare1.csv")));
+		BufferedWriter bw = new BufferedWriter(new FileWriter(new File("fp"+File.separator+
+				"fp_compare.csv")));
+		String firstLine = getFirstLine();
+		String secondLine = getSecondLine();
+		bw.write(firstLine);
+		bw.write(secondLine);
 		for(int projectIndex = 0; projectIndex < projects.length;projectIndex++){
 			  Project project = projects[projectIndex];
 			  TextDataset textDataset = new TextDataset(project.getUcPath(), project.getClassDirPath(), 
@@ -88,19 +94,40 @@ public class GetFPData{
 		      for(int modelIndex = 0; modelIndex<models.length;modelIndex++){
 		    	  String model = models[modelIndex];
 		          Result result_ir = IR.compute(textDataset, model, new None_CSTI());
-		          ri.setPruning(0.6, 0.6);
+		          ri.setPruning(callThreshold, dataThreshold);
 		          Map<String,Set<String>> valid = new HashMap<String,Set<String>>();
-		          Result result_UD_CallThenDataProcessLoneInnerMean = IR.compute(textDataset,model,
-		          		new UD_CallThenDataWithBonusForLone(ri,0.6,
-		          				0.6,MethodTypeProcessLone.InnerMean,1,valid));
+		          Result result_UD_CallDataDynamic = IR.compute(textDataset,model,
+		          		new UD_CallDataDynamic(ri,callThreshold,
+		          				dataThreshold,1,valid));//0.7
 		          ri.setPruning(0,0);
 		          bw.write(projectMap.get(projectIndex)+";"+modelMap.get(modelIndex)+";");
-		          compare(result_UD_CallThenDataProcessLoneInnerMean,result_ir,bw,project,model,textDataset);
+		          compare(result_UD_CallDataDynamic,result_ir,bw,project,model,textDataset);
 		      }
 		}///outer for loop
 		bw.close();
 	}
 	
+	private String getSecondLine() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(";;");
+		for(int i = 1; i <= 10;i++) {
+			sb.append("Precision;FP;");
+		}
+		sb.append("\n");
+		return sb.toString();
+	}
+
+	private String getFirstLine() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(";;");
+		for(int i = 1; i <= 10;i++) {
+			int percent = 10 * i;
+			sb.append("Recall("+percent+"%);;");
+		}
+		sb.append("\n");
+		return sb.toString();
+	}
+
 	private void compare(Result ours, Result compareTo,BufferedWriter bw,
 			Project project,String model,TextDataset textDataset) throws IOException {
         List<Double> oursPrecisionList = ours.getPrecisionAtRecallByTen();
@@ -120,20 +147,21 @@ public class GetFPData{
             bw.write(fpDiff+"%;");
             
             //p-value
-            String name = project.getProjectName()+"_"+(i+1)*10+model;
-            String our = ours.getWilcoxonDataCol_fmeasure(name);
-            String notice = "print("+project.getProjectName()+"_"+(i+1)*10+model+")";
-            String command = "wilcox.test("+name+","+irName+")";
-            //cliff
-            bw.write("_;");
-            double cliff = cliffAnalyze.doCliff(ours, compareTo,textDataset.getRtm());
-            String cliffValue = String.format("%.2f", cliff*100)+"%";
-            bw.write(cliffValue+";");
+//            String name = project.getProjectName()+"_"+(i+1)*10+model;
+//            String our = ours.getWilcoxonDataCol_fmeasure(name);
+//            String notice = "print("+project.getProjectName()+"_"+(i+1)*10+model+")";
+//            String command = "wilcox.test("+name+","+irName+")";
+//            //cliff
+//            bw.write("_;");
+//            double cliff = cliffAnalyze.doCliff(ours, compareTo,textDataset.getRtm());
+//            String cliffValue = String.format("%.2f", cliff*100)+"%";
+//            bw.write(cliffValue+";");
         }
         bw.newLine();
     }
 	
 	public static void main(String[] args) throws Exception {
+		System.setProperty("routerLen", "6");
 		long startTime = System.currentTimeMillis();
 		GetFPData bonusForLoneBoot = new GetFPData();
     	bonusForLoneBoot.start();
