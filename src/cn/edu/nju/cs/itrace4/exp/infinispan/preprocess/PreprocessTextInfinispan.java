@@ -3,6 +3,7 @@ package cn.edu.nju.cs.itrace4.exp.infinispan.preprocess;
 import java.io.File;
 
 import cn.edu.nju.cs.itrace4.core.type.Granularity;
+import cn.edu.nju.cs.itrace4.exp.infinispan.tool.RTMProcess;
 import cn.edu.nju.cs.itrace4.exp.tool.GetSrc;
 import cn.edu.nju.cs.itrace4.exp.tool.GetUC;
 import cn.edu.nju.cs.itrace4.exp.tool.TransferTXT;

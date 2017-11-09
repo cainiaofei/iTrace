@@ -216,7 +216,6 @@ public class UD_CallDataDynamic implements CSTI{
 							hasVisitedRegion,hidden);
 					giveBonusForLoneNotInThisRegion(matrix, subGraph,curLoneVertexList,req);
 					hasVisitedRegion.addAll(subGraph.getVertexList());
-					
 					/**
 					 * @author zzf
 					 * @date 2017.10.30 
