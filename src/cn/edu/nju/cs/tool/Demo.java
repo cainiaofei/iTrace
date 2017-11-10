@@ -40,7 +40,7 @@ public class Demo {
 			}
 		});
 		
-		vv.getRenderContext().setVertexIconTransformer(vertexIconTransformer);
+		//vv.getRenderContext().setVertexIconTransformer(vertexIconTransformer);
 		
 		vv.getRenderContext().setVertexFillPaintTransformer(new Transformer<Integer,Paint>(){
 			@Override
