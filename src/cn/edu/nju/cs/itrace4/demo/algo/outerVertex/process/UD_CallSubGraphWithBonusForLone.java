@@ -34,6 +34,10 @@ public class UD_CallSubGraphWithBonusForLone implements CSTI{
 	private double percent;
 	private Map<String,Set<Integer>> reqMapLoneVertex = new HashMap<String,Set<Integer>>();
 	
+	//@date 2017.10.25
+	private int areaCount = 2;
+	private double minInnerBonus = Integer.MAX_VALUE;
+	
 	public UD_CallSubGraphWithBonusForLone(RelationInfo ri,Map<String,Set<String>> valid,double percent){
 		callSubGraphList = new StoreCallSubGraph().getSubGraphs(ri);
 		graphs = describeGraphWithMatrix(new CallDataRelationGraph(ri).callEdgeScoreMap,ri.getVertexes().size());
@@ -49,9 +53,21 @@ public class UD_CallSubGraphWithBonusForLone implements CSTI{
 	
 	
 	private void fillLoneVertex(Set<Integer> loneVertexSet, List<SubGraph> callSubGraphList) {
-		for(SubGraph subGraph:callSubGraphList){
-			if(subGraph.getVertexList().size()==1){
-				loneVertexSet.add(subGraph.getVertexList().get(0));
+//		for(SubGraph subGraph:callSubGraphList){
+//			if(subGraph.getVertexList().size()==1){
+//				loneVertexSet.add(subGraph.getVertexList().get(0));
+//			}
+//		}
+		/**
+		 * @author zzf <tiaozhanzhe668@163.com>
+		 * @date 2017.10.25
+		 * @description the area has at least three points.
+		 */
+		for(SubGraph subGraph:callSubGraphList) {
+			if(subGraph.getVertexList().size()<areaCount) {
+				for(int id:subGraph.getVertexList()) {
+					loneVertexSet.add(id);
+				}
 			}
 		}
 	}
@@ -361,6 +377,9 @@ public class UD_CallSubGraphWithBonusForLone implements CSTI{
 		 int loneVertexSize = loneVertexSet.size();
 		 
 		 for(String req:matrix.sourceArtifactsIds()){
+			 //@date 2017.10.25
+			 minInnerBonus = Integer.MAX_VALUE;
+			 ///////////////////////////////
 			//it will get maxId for every subGraph after sort.
 			Collections.sort(callSubGraphList,new SortBySubGraph(vertexIdNameMap,matrix,req));
 			int maxId = callSubGraphList.get(0).getMaxId();
@@ -376,11 +395,22 @@ public class UD_CallSubGraphWithBonusForLone implements CSTI{
 			fillLoneVertex(loneVertexSet,callSubGraphList);
 			
 			for(SubGraph subGraph:callSubGraphList){
+				/**
+				 * @author zzf
+				 * @date 2017.10.25
+				 * @description use local max
+				 **/
+				int localMaxId = subGraph.getMaxId();
+				double localMaxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(localMaxId));
+				
+				////////////////////////////////////////////////////////////////////////////////////
+				
 				List<Integer> vertexList = subGraph.getVertexList();
 				Collections.sort(vertexList, new SortVertexByScore(vertexIdNameMap,matrix,req));
 				if(vertexList.size()==1){
 					continue;
 				}
+				
 				//regard the max score in this subGraph as represent
 				int localMaxId = subGraph.getMaxId();
 				String represent = vertexIdNameMap.get(localMaxId);
@@ -421,7 +451,15 @@ public class UD_CallSubGraphWithBonusForLone implements CSTI{
 						double curValue = matrix.getScoreForLink(req, vertexName);
 						if(!vertexName.equals(represent)){
 							int graphSize = subGraph.getVertexList().size();
+<<<<<<< HEAD
+							
+							double originValue = curValue;
+							curValue = Math.min(maxScore, curValue+maxScore/(graphSize-1));
+							//curValue = Math.min(localMaxScore, curValue+localMaxScore/(graphSize-1));
+							minInnerBonus = Math.min(minInnerBonus, curValue-originValue);
+=======
 							curValue = Math.min(maxScore*0.9999, curValue+maxScore/(graphSize-1));
+>>>>>>> master
 							maxScoreInThisSubGraph = Math.max(maxScoreInThisSubGraph, curValue);
 						}
 						matrix_ud.addLink(req, vertexName,curValue);
@@ -1044,6 +1082,7 @@ public class UD_CallSubGraphWithBonusForLone implements CSTI{
 						continue;
 					}
 					double bonus = giveBonusForLonePoint(graphs,subGraph,loneVertex,1);
+					
 					if(subGraph.isVisited(req)){
 						sum += bonus;
 					}
@@ -1059,6 +1098,10 @@ public class UD_CallSubGraphWithBonusForLone implements CSTI{
 				}
 				else{
 					//double nowValue = originValue + validSum/sum*validValueSum;////maybe exist trouble
+					/**
+					 * @date 2017.10.25 
+					 */
+					//validValueSum = Math.min(validValueSum, minInnerBonus);
 					double nowValue = originValue + validValueSum;
 					nowValue = Math.min(nowValue, maxScore);
 					matrix_ud.addLink(req, loneVertexName, nowValue);
