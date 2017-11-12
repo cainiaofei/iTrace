@@ -115,7 +115,8 @@ public class UDCallThenData implements CSTI{
 				getInnerVertexProcessWithCallSubGraphObj(innerMethodWithCallClass);
 		innerMethodWithData = innerVertexProcessWithDataFactory.
 				getInnerVertexProcessWithDataSubGraphObj(innerMethodWithDataClass);
-		this.outerMethodWithCall = this.outerVertexProcessWithCallFactory.get
+		this.outerMethodWithCall = this.outerVertexProcessWithCallFactory.
+				getOuterVertexProcessWithCallSubGraph(innerMethodWithCallClass);
 		
 	}
 
