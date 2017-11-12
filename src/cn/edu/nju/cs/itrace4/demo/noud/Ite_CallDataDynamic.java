@@ -173,11 +173,6 @@ public class Ite_CallDataDynamic implements CSTI {
 				int localMaxId = subGraph.getMaxId();
 				String represent = vertexIdNameMap.get(localMaxId);
 				
-				if(subGraph.getVertexList().size()<countThreshold*1) {
-					index++;
-					continue;
-				}
-				
 				for (int vertexId : vertexList) {
 					String vertexName = vertexIdNameMap.get(vertexId);
 					double curValue = matrix.getScoreForLink(req, vertexName);
