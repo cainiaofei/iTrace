@@ -137,9 +137,8 @@ public class UD_CallDataDynamicCount implements CSTI {
 	@Override
 	public SimilarityMatrix improve(SimilarityMatrix matrix, TextDataset textDataset,
 			SimilarityMatrix similarityMatrix) {
-		this.matrix = matrix;
-		filterSubGraphsList(matrix.targetArtifactsIds(),callSubGraphList);
-		filterSubGraphsList(matrix.targetArtifactsIds(),dataSubGraphList);
+//		filterSubGraphsList(matrix.targetArtifactsIds(),callSubGraphList);
+//		filterSubGraphsList(matrix.targetArtifactsIds(),dataSubGraphList);
 		return processLoneVertexInnerMean(matrix,textDataset);
 	}
 	

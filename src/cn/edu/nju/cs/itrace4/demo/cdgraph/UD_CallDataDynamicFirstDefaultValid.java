@@ -137,9 +137,6 @@ public class UD_CallDataDynamicFirstDefaultValid implements CSTI{
 	@Override
 	public SimilarityMatrix improve(SimilarityMatrix matrix, TextDataset textDataset,
 			SimilarityMatrix similarityMatrix) {
-		this.matrix = matrix;
-		filterSubGraphsList(matrix.targetArtifactsIds(),callSubGraphList);
-		filterSubGraphsList(matrix.targetArtifactsIds(),dataSubGraphList);
 		return processLoneVertexInnerMean(matrix,textDataset);
 	}
 	
@@ -161,9 +158,7 @@ public class UD_CallDataDynamicFirstDefaultValid implements CSTI{
 		 removeLoneVertexList(callDataSubGraphList);
 		 
 		 
-		 int loneVertexSize = absoluteLoneVertexSet.size();
 		 List<SubGraph> originCallDataSubGraphList = new ArrayList<SubGraph>(callDataSubGraphList);
-		 
 		 
 		 for(String req:matrix.sourceArtifactsIds()){
 			callDataSubGraphList = new ArrayList<SubGraph>(originCallDataSubGraphList);
@@ -175,7 +170,6 @@ public class UD_CallDataDynamicFirstDefaultValid implements CSTI{
 			boolean isFirst = true;
 			int index = 1;
 			//int subGraphAmount = callDataSubGraphList.size() - loneVertexSize;
-			int subGraphAmount = callDataSubGraphList.size();
 			Set<Integer> hasVisitedRegion = new HashSet<Integer>();
 			//for(SubGraph subGraph:callDataSubGraphList){//subGraph
 			while(callDataSubGraphList.size()!=0) {
@@ -184,7 +178,7 @@ public class UD_CallDataDynamicFirstDefaultValid implements CSTI{
 				List<Integer> vertexList = subGraph.getVertexList();
 				Collections.sort(vertexList, new SortVertexByScore(vertexIdNameMap,matrix,req));
 				if(vertexList.size()<countThreshold){
-					callDataSubGraphList.remove(0);
+//					callDataSubGraphList.remove(0);
 					continue;
 				}
 				//regard the max score in this subGraph as represent
