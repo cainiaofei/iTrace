@@ -66,6 +66,12 @@ public class RTMProcess {
 			for(int id:subGraph) {
 				String issueId = idMapName.get(id);
 				ResultSet rs = stmt.executeQuery(sql+"'"+issueId+"'");
+				/**
+				 * issueId may not in init_rtm 
+				 */
+				if(!rs.next()) {
+					continue;
+				}
 				visited.add(rs.getString("issue_id").trim());
 				request.append(rs.getString("request")+" ");
 				code.append(rs.getString("file_path")+"和");

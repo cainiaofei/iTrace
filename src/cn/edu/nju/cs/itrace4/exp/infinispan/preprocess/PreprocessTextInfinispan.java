@@ -92,7 +92,7 @@ public class PreprocessTextInfinispan {
         BatchingPreprocess preprocess = new BatchingPreprocess(ucDirPath, classDirPath, methodDirPath);
         preprocess.doProcess();
         
-        System.setProperty("projectType", "git");
+        //System.setProperty("projectType", "git");
         RelationInfo rg = new RelationInfo(classDirPath, relationDirPath, Granularity.CLASS);
         rg.showMessage();
     }

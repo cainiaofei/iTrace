@@ -1,10 +1,13 @@
 package cn.edu.nju.cs.itrace4.exp.maven.preprocess;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.HashSet;
 
 import cn.edu.nju.cs.itrace4.core.type.Granularity;
 import cn.edu.nju.cs.itrace4.exp.tool.GetSrc;
 import cn.edu.nju.cs.itrace4.exp.tool.GetUC;
+import cn.edu.nju.cs.itrace4.exp.tool.PruneBaseRI;
 import cn.edu.nju.cs.itrace4.exp.tool.RTMProcess;
 import cn.edu.nju.cs.itrace4.exp.tool.TransferTXT;
 import cn.edu.nju.cs.itrace4.parser.SourceTargetUnion;
@@ -75,7 +78,7 @@ public class PreprocessTextMaven {
 		}
     }
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         /*
          * @author zzf <tiaozhanzhe668@163.com>
          * @date 2017/10/11
@@ -84,13 +87,15 @@ public class PreprocessTextMaven {
     	PreprocessTextMaven MavenProcess = new PreprocessTextMaven(rtmDBFilePath);
     	MavenProcess.cleanData();
     	MavenProcess.arrangeData();
+    	
     	SourceTargetUnionForGit union = new SourceTargetUnionForGit(ucDirPath, srcDirPath, rtmDBFilePath, Granularity.CLASS,classDirPath,methodDirPath);
 
         BatchingPreprocess preprocess = new BatchingPreprocess(ucDirPath, classDirPath, methodDirPath);
         preprocess.doProcess();
         
-        System.setProperty("projectType", "git");
+        //System.setProperty("projectType", "git");
         RelationInfo rg = new RelationInfo(classDirPath, relationDirPath, Granularity.CLASS);
+        PruneBaseRI.pruneBaseRT("./data/exp/Maven", new HashSet<String>(rg.getVertexIdNameMap().values()));
         rg.showMessage();
     }
 	
