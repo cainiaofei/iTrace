@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.exp.infinispan.preprocess;
+package cn.edu.nju.cs.itrace4.preprocess.rawdata.db;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -33,11 +33,12 @@ public class GenerateRTM {
 	private Map<Integer,String> idMapName = new HashMap<Integer,String>();
 	private Set<String> mergeStringSet = new HashSet<String>();
 	
-	public GenerateRTM(String dbPath) {
+	public GenerateRTM(String dbPath, String dbProperty,String sqlFile) {
 		this.dbPath = dbPath;
 		driver = "org.sqlite.JDBC";
-		dbProperty = "resource/infinispanDB.property";
-		sqlFile = "resource/sql/buildRTMForInfinispan.sql";
+		this.dbProperty = dbProperty;
+		this.sqlFile = sqlFile;
+		//sqlFile = "resource/sql/buildRTMForInfinispan.sql";
 		sqlOperate = new SqliteOperation();
 		sqlOperate.buildConnection(driver, dbPath);
 		fillMergeSet();
@@ -140,7 +141,7 @@ public class GenerateRTM {
 			for(int id:subGraph) {
 				String issueId = idMapName.get(id);
 				ResultSet rs = sqlOperate.executeQuery(sql+"'"+issueId+"'");
-				if(!rs.next()) {
+				if(!rs.next()) {//there no exist this issue in init_rtm, may be filter by some case contraint.
 					continue;
 				}
 				actualCount++;

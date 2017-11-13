@@ -27,7 +27,7 @@ public class GetSrc {
 	}
 	
 	
-	public Set<String> getGraphRelevantCode(String dbPath){
+	private Set<String> getGraphRelevantCode(String dbPath){
 		Set<String> set = new HashSet<String>();
 		Connection con;
         Statement stmt;
@@ -76,7 +76,7 @@ public class GetSrc {
 		return null;
 	}
 
-	public void getSrcFromProject(String originPath,String targetPath) throws IOException {
+	private void getSrcFromProject(String originPath,String targetPath) throws IOException {
 		File dir = new File(originPath);
 		if(dir.isDirectory()) {
 			if(!dir.getName().equals("test")) {
