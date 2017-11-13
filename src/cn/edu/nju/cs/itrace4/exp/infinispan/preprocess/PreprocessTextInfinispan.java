@@ -3,12 +3,12 @@ package cn.edu.nju.cs.itrace4.exp.infinispan.preprocess;
 import java.io.File;
 
 import cn.edu.nju.cs.itrace4.core.type.Granularity;
-import cn.edu.nju.cs.itrace4.exp.infinispan.tool.RTMProcess;
 import cn.edu.nju.cs.itrace4.exp.tool.GetSrc;
 import cn.edu.nju.cs.itrace4.exp.tool.GetUC;
 import cn.edu.nju.cs.itrace4.exp.tool.TransferTXT;
 import cn.edu.nju.cs.itrace4.parser.SourceTargetUnionForGit;
 import cn.edu.nju.cs.itrace4.preprocess.BatchingPreprocess;
+import cn.edu.nju.cs.itrace4.preprocess.rawdata.db.GenerateRTM;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 
 /**
@@ -38,9 +38,12 @@ public class PreprocessTextInfinispan {
     private static String masterPath = projectPath+"infinispan-master";
     private static String graphDBPath = relationDirPath + File.separator + "call.db";
     
+    private String dbProperty = "resource/infinispanDB.property";
+    private String sqlFile = "resource/sql/buildRTMForInfinispan.sql";
+    
     
     public PreprocessTextInfinispan() {
-    	getRTM = new GenerateRTM(rtmDBFilePath);
+    	getRTM = new GenerateRTM(rtmDBFilePath, dbProperty, sqlFile);
     }
     
     private void cleanData() {

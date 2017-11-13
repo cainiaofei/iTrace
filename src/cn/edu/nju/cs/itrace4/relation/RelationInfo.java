@@ -114,13 +114,14 @@ public class RelationInfo implements Serializable {
          * @date 2017/10/19
          * @description judge whether this project is git. 
          */
-        String type = System.getProperty("projectType");
-        if(type!=null && type.equals("git")) {
-        	 relationPairParser(CallRelationIOForGit.parser(callDBPath), DataRelationIOForGit.parser(dataDBPath));
-        }
-        else {
-        	 relationPairParser(CallRelationIO.parser(callDBPath), DataRelationIO.parser(relationDirPath));
-        }
+        relationPairParser(CallRelationIO.parser(callDBPath), DataRelationIO.parser(relationDirPath));
+//        String type = System.getProperty("projectType");
+//        if(type!=null && type.equals("git")) {
+//        	 relationPairParser(CallRelationIOForGit.parser(callDBPath), DataRelationIOForGit.parser(dataDBPath));
+//        }
+//        else {
+//        	
+//        }
     }
 
     private void relationPairParser(CallRelationList callRelationList, DataRelationList dataRelationList) {
