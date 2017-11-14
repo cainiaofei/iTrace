@@ -61,7 +61,6 @@ public class RelationInfo implements Serializable {
          
     	
         String callDBPath = relationDirPath + "/call.db";
-        String dataDBPath = relationDirPath + "/call.db";
         this.relationDirPath = relationDirPath;
         this.isPruning = false;
 

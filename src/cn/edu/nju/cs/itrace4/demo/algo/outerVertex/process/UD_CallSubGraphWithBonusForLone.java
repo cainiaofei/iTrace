@@ -401,7 +401,6 @@ public class UD_CallSubGraphWithBonusForLone implements CSTI{
 				 * @description use local max
 				 **/
 				int localMaxId = subGraph.getMaxId();
-				double localMaxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(localMaxId));
 				
 				////////////////////////////////////////////////////////////////////////////////////
 				
@@ -412,7 +411,6 @@ public class UD_CallSubGraphWithBonusForLone implements CSTI{
 				}
 				
 				//regard the max score in this subGraph as represent
-				int localMaxId = subGraph.getMaxId();
 				String represent = vertexIdNameMap.get(localMaxId);
 				double representValue = matrix.getScoreForLink(req, represent);
 				double maxScoreInThisSubGraph = representValue;
@@ -451,15 +449,7 @@ public class UD_CallSubGraphWithBonusForLone implements CSTI{
 						double curValue = matrix.getScoreForLink(req, vertexName);
 						if(!vertexName.equals(represent)){
 							int graphSize = subGraph.getVertexList().size();
-<<<<<<< HEAD
-							
-							double originValue = curValue;
-							curValue = Math.min(maxScore, curValue+maxScore/(graphSize-1));
-							//curValue = Math.min(localMaxScore, curValue+localMaxScore/(graphSize-1));
-							minInnerBonus = Math.min(minInnerBonus, curValue-originValue);
-=======
 							curValue = Math.min(maxScore*0.9999, curValue+maxScore/(graphSize-1));
->>>>>>> master
 							maxScoreInThisSubGraph = Math.max(maxScoreInThisSubGraph, curValue);
 						}
 						matrix_ud.addLink(req, vertexName,curValue);

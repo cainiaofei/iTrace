@@ -39,7 +39,8 @@ public class Maven implements Project{
 	
 	@Override
 	public String getClass_RelationInfoPath() {
-		return class_relationInfoPath;
+		//return class_relationInfoPath;
+		return class_relationInfoPathWhole;
 	}
 	
 	@Override

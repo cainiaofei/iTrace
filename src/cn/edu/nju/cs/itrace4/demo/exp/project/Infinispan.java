@@ -12,7 +12,6 @@ public class Infinispan implements Project{
 	public String jsExpExportPath_ICSME = "data/exp/Infinispan/icsme_result/js";
 	public String lsiExpExportPath_ICSME = "data/exp/Infinispan/icsme_result/lsi";
 	public String projectName = "Infinispan";
-	
 	public String getProjectPath() {
 		return projectPath;
 	}
@@ -36,10 +35,10 @@ public class Infinispan implements Project{
 	public String getClassDirPath() {
 		return classDirPath;
 	}
-	
 	@Override
 	public String getClass_RelationInfoPath() {
-		return class_relationInfoPath;
+		//return class_relationInfoPath;
+		return class_relationInfoPathWhole;
 	}
 	
 	@Override

@@ -154,7 +154,7 @@ public class GenerateRTM {
 			if(actualCount<2 && description.length()<8) {
 				continue;
 			}
-			if(request.length()>0) {
+			if(code.length()>0) {
 				request.append(summary+" "+description);
 				request = filter(request.toString().toCharArray());
 				String insertSql = "insert into rtm (request,file_path) values (" + "'" + 
