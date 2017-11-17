@@ -47,8 +47,8 @@ public class SortBySubGraph implements Comparator<SubGraph>{
 		int maxId = sub1.getVertexList().get(0);
 		List<Integer> vertexList = sub1.getVertexList();
 		for(int i = 0; i<vertexList.size(); i++){
-			System.out.println(vertexList.get(i));
-			System.out.println(vertexIdNameMap.get(vertexList.get(i)));
+//			System.out.println(vertexList.get(i));
+//			System.out.println(vertexIdNameMap.get(vertexList.get(i)));
 			double curScore = matrix.getScoreForLink(target,vertexIdNameMap.get(vertexList.get(i)));
 			maxScore = Math.max(maxScore, curScore);
 			if(Math.abs(curScore-maxScore)<=0.000000000001){

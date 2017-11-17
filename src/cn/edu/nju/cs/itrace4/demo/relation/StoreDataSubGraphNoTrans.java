@@ -12,8 +12,7 @@ import cn.edu.nju.cs.itrace4.relation.graph.CodeVertex;
 import edu.uci.ics.jung.graph.Graph;
 
 public class StoreDataSubGraphNoTrans extends StoreSubGraphInfoByThreshold{
-private MyCallDataRelationGraph myCdGraph;
-	
+	private MyCallDataRelationGraph myCdGraph;
 
 	public List<SubGraph> getSubGraphs(RelationInfo ri,Map<Integer,Set<Integer>>
 		vertexMapDataRelated){
