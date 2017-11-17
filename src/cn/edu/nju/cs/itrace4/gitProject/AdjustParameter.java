@@ -12,14 +12,11 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Gantt;
-import cn.edu.nju.cs.itrace4.demo.exp.project.Infinispan;
-import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Maven;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
@@ -31,14 +28,14 @@ public class AdjustParameter {
 	
 	public void lookForParameter() throws InterruptedException, IOException, ClassNotFoundException {
 		System.setProperty("routerLen", 6 + "");
-		Project[] projects = { new Gantt() , new Maven(), new Itrust()};
+		Project[] projects = { new Gantt() , new Maven(), /*new Itrust()*/};
 		String[] models = { "cn.edu.nju.cs.itrace4.core.ir.VSM", "cn.edu.nju.cs.itrace4.core.ir.JSD",
 				"cn.edu.nju.cs.itrace4.core.ir.LSI" };
 		List<Thread> threadList = new ArrayList<Thread>();
 		AtomicInteger ai = new AtomicInteger();
 
-		for (double callThreshold = 0.2; callThreshold < 0.99; callThreshold += 0.1) {
-			for (double dataThreshold = 0.2; dataThreshold < 0.99; dataThreshold += 0.1) {
+		for (double callThreshold = 0.5; callThreshold < 0.99; callThreshold += 0.1) {
+			for (double dataThreshold = 0.5; dataThreshold < 1.00; dataThreshold += 0.1) {
 				for (Project project : projects) {
 					for (String model : models) {
 						TextDataset textDataset = new TextDataset(project.getUcPath(), project.getClassDirPath(),
@@ -51,8 +48,7 @@ public class AdjustParameter {
 						//System.out.println(ai);
 						Executor executor = new Executor(callThreshold, dataThreshold, project, model, irPvalueMap,
 								udPvalueMap,clusterMap);
-						executor.init(textDataset,
-								ri/* ,class_relation,class_relationForO,class_relationForAllDependencies */);
+						executor.init(textDataset,ri);
 						Thread cur = new Thread(executor);
 						cur.start();
 						threadList.add(cur);
@@ -189,8 +185,8 @@ public class AdjustParameter {
 	
 	public static void main(String[] args) throws InterruptedException, ClassNotFoundException, IOException {
 		AdjustParameter tool = new AdjustParameter();
-		tool.lookForParameter();
+		//tool.lookForParameter();
 		tool.readObject();
-		tool.findBestParameter(0.05);
+		tool.findBestParameter(0.15);
 	}
 }

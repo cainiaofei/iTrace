@@ -26,6 +26,7 @@ import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.UD_CallThenDataWithBo
 import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataDynamic;
 import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataDynamicCount;
 import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataOutLevel;
+import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataTreatEqual;
 import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataWithBonusForLone;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
@@ -99,20 +100,14 @@ public class Executor implements Runnable{
         ri.setPruning(callThreshold, dataThreshold);
         
         Map<String,Set<String>> valid = new HashMap<String,Set<String>>();
-//        Result result_UD_CallThenDataProcessLoneInnerMean07 = IR.compute(textDataset,model,
-//        		new UD_CallThenDataWithBonusForLone(ri,callThreshold,
-//        				dataThreshold,MethodTypeProcessLone.InnerMean,0.7,valid));//0.7
-//        Result result_UD_CallDataDynamic = IR.compute(textDataset,model,
-//        		new UD_CallDataDynamic(ri,callThreshold,
-//        				dataThreshold,1,valid));//0.7
         
-        Result result_UD_CallDataDynamic = IR.compute(textDataset,model,
-        		new UD_CallDataDynamicCount(ri,callThreshold,
+        Result result_UD_CallDataTreatEqual = IR.compute(textDataset,model,
+        		new UD_CallDataTreatEqual(ri,callThreshold,
         				dataThreshold,1,valid));//0.7
         
-        double irPvalue = printPValue(result_ir, result_UD_CallDataDynamic);
-        double udPvalue = printPValue(result_UD_CSTI, result_UD_CallDataDynamic);
-        double map = result_UD_CallDataDynamic.getMeanAveragePrecisionByQuery();
+        double irPvalue = printPValue(result_ir, result_UD_CallDataTreatEqual);
+        double udPvalue = printPValue(result_UD_CSTI, result_UD_CallDataTreatEqual);
+        double map = result_UD_CallDataTreatEqual.getMeanAveragePrecisionByQuery();
         System.out.println(project.getProjectName()+"-"+callThreshold+"-"+dataThreshold+"-"+model+":"+irPvalue);
         System.out.println(project.getProjectName()+"-"+callThreshold+"-"+dataThreshold+"-"+model+":"+udPvalue);
         irPvalueMap.put(project.getProjectName()+"-"+callThreshold+"-"+dataThreshold+"-"+model, irPvalue);
