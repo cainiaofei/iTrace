@@ -16,7 +16,7 @@ import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 
 public class TransferTXT {
 	
-	Set<String> set = new HashSet<String>();
+	//Set<String> set = new HashSet<String>();
 	
 	public TransferTXT() /*throws IOException, ClassNotFoundException*/ {
 //		 FileInputStream fis = new FileInputStream("data/exp/iTrust/relation/CLASS_relationInfo_whole.ser");
@@ -50,10 +50,6 @@ public class TransferTXT {
 		}
 		else {
 			name = name.substring(0, name.lastIndexOf("."))+".txt";
-		}
-		if(!set.contains(name.substring(0, name.lastIndexOf('.')))) {
-			br.close();
-			return ;
 		}
 		BufferedWriter bw = new BufferedWriter(new FileWriter(target+File.separator+name));
 		String line = null;

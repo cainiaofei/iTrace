@@ -66,7 +66,9 @@ public class PreprocessTextMaven {
 			getUC.getUCFromDB(ucDirPath,rtmDBFilePath);
 			String originPath = srcDirPath;
 	    	String targetPath = classDirPath;
-	    	getOriginSrc.getSrcFromMasterBasedOnGraphDB(masterPath, srcDirPath, graphDBPath);
+	    	//getOriginSrc.getSrcFromMasterBasedOnGraphDB(masterPath, srcDirPath, graphDBPath);
+	    	getOriginSrc.getSrcFromMasterBasedOnGraphDBNewFormatDB(masterPath,originPath,graphDBPath,"callGraph",
+	    			"caller","callee");
 	    	getSrc.transferTXT(originPath, targetPath);
 		} catch (Exception e) {
 			e.printStackTrace();

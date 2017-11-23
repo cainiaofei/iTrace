@@ -34,7 +34,8 @@ import javafx.util.Pair;
  */
 public class UD_CallDataTreatEqual implements CSTI{
 	
-	private int routerLen;
+	private int callRouterLen = 6;
+	private int dataRouterLen = 2;
 	private double[][] callGraphs;
 	private double[][] dataGraphs;
 	
@@ -120,7 +121,9 @@ public class UD_CallDataTreatEqual implements CSTI{
 						//double preValue = curValue;
 						if(!vertexName.equals(represent)){
 							int graphSize = subGraph.getVertexList().size();
-							curValue = Math.min(maxScore*0.9999, curValue+maxScore/(graphSize-1));
+							//
+							//curValue = Math.min(maxScore*0.9999, curValue+maxScore/(graphSize-1));
+							curValue = Math.min(maxScore*0.9999, curValue+maxScore/(graphSize));
 						}
 						matrix.setScoreForLink(req, vertexName, curValue);
 					}
@@ -169,8 +172,10 @@ public class UD_CallDataTreatEqual implements CSTI{
 	             Set<Integer> visited = new HashSet<Integer>();
 	             visited.add(loneVertex);
 	             curRoute.add(loneVertex);
-	             getAllRoutesFromOuterToInnerByDfs(graphs,loneVertex,curRoute,allRoutes,vertexInGraph,visited,vertex); 
-	             getAllRoutesFromInnerToOuterByDfs(graphs,loneVertex,curRoute,allRoutes,vertexInGraph,visited,vertex);
+	             getAllRoutesFromOuterToInnerByDfs(graphs,loneVertex,curRoute,allRoutes,vertexInGraph,
+	            		 visited,vertex,callRouterLen); 
+	             getAllRoutesFromInnerToOuterByDfs(graphs,loneVertex,curRoute,allRoutes,vertexInGraph,
+	            		 visited,vertex,callRouterLen);
 	             double curMaxBonus = 0;
 	             for(List<Integer> route:allRoutes){
 	            	 double geometryMean = geometricMean(graphs,route);//
@@ -192,7 +197,7 @@ public class UD_CallDataTreatEqual implements CSTI{
 	}
 	
 	private void getAllRoutesFromOuterToInnerByDfs(double[][] graphs, int curVertex, List<Integer> curRoute,List<List<Integer>> allRoutes,
-			Set<Integer> vertexInGraph, Set<Integer> visited, int target) {
+			Set<Integer> vertexInGraph, Set<Integer> visited, int target,int routerLen) {
 		 if(curVertex==target){
 	            allRoutes.add(new LinkedList<Integer>(curRoute));
 	     }
@@ -207,7 +212,7 @@ public class UD_CallDataTreatEqual implements CSTI{
 	            	}
 	                visited.add(i);
 	                curRoute.add(i);
-	                getAllRoutesFromOuterToInnerByDfs(graphs,i,curRoute,allRoutes,vertexInGraph,visited,target);
+	                getAllRoutesFromOuterToInnerByDfs(graphs,i,curRoute,allRoutes,vertexInGraph,visited,target,routerLen);
 	                curRoute.remove(curRoute.size()-1);
 	                visited.remove(i);
 	            }
@@ -226,12 +231,12 @@ public class UD_CallDataTreatEqual implements CSTI{
 		for (int loneVertex : loneVertexList) {
 			String loneVertexName = vertexIdNameMap.get(loneVertex);
 			
-			routerLen = 6;
 			double bonus = giveBonusForLonePointBasedCallGraph(callGraphs, subGraph, loneVertex, 1);
 
 			double localMaxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(subGraph.getMaxId()));
 
-			double validValueSum = (localMaxScore) * bonus;
+			double validValueSum = maxScore * bonus;
+			//double validValueSum = (localMaxScore) * bonus;
 			double originValue = matrix.getScoreForLink(req, loneVertexName);
 			double nowValue = originValue + validValueSum;
 			nowValue = Math.min(nowValue, maxScore);
@@ -305,12 +310,11 @@ public class UD_CallDataTreatEqual implements CSTI{
 		Collections.sort(loneVertexList, new SortVertexByScore(vertexIdNameMap, matrix, req));
 		for (int loneVertex : loneVertexList) {
 			String loneVertexName = vertexIdNameMap.get(loneVertex);
-			routerLen = 2;
 			double bonus = giveBonusForLonePointBasedDataGraph(dataGraphs, subGraph, loneVertex, 1);
-
 			double localMaxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(subGraph.getMaxId()));
-
-			double validValueSum = (localMaxScore) * bonus;
+			//double validValueSum = (localMaxScore) * bonus;
+			double validValueSum = maxScore * bonus;
+			
 			double originValue = matrix.getScoreForLink(req, loneVertexName);
 			double nowValue = originValue + validValueSum;
 			nowValue = Math.min(nowValue, maxScore);
@@ -329,8 +333,10 @@ public class UD_CallDataTreatEqual implements CSTI{
 			Set<Integer> visited = new HashSet<Integer>();
 			visited.add(loneVertex);
 			curRoute.add(loneVertex);
-			getAllRoutesFromOuterToInnerByDfs(graphs, loneVertex, curRoute, allRoutes, vertexInGraph, visited, vertex);
-			getAllRoutesFromInnerToOuterByDfs(graphs, loneVertex, curRoute, allRoutes, vertexInGraph, visited, vertex);
+			getAllRoutesFromOuterToInnerByDfs(graphs, loneVertex, curRoute, allRoutes, 
+					vertexInGraph, visited, vertex,dataRouterLen);
+			getAllRoutesFromInnerToOuterByDfs(graphs, loneVertex, curRoute, allRoutes, 
+					vertexInGraph, visited, vertex,dataRouterLen);
 			double curMaxBonus = 0;
 			for (List<Integer> route : allRoutes) {
 				double geometryMean = geometricMean(graphs, route);//
@@ -343,7 +349,7 @@ public class UD_CallDataTreatEqual implements CSTI{
 	}
 	
 	private void getAllRoutesFromInnerToOuterByDfs(double[][] graphs, int curVertex, List<Integer> curRoute,List<List<Integer>> allRoutes,
-			Set<Integer> vertexInGraph, Set<Integer> visited, int target) {
+			Set<Integer> vertexInGraph, Set<Integer> visited, int target,int routerLen) {
 		 if(curVertex==target){
 	            allRoutes.add(new LinkedList<Integer>(curRoute));
 	     }
@@ -358,7 +364,7 @@ public class UD_CallDataTreatEqual implements CSTI{
 	            	}
 	                visited.add(i);
 	                curRoute.add(i);
-	                getAllRoutesFromInnerToOuterByDfs(graphs,i,curRoute,allRoutes,vertexInGraph,visited,target);
+	                getAllRoutesFromInnerToOuterByDfs(graphs,i,curRoute,allRoutes,vertexInGraph,visited,target,routerLen);
 	                curRoute.remove(curRoute.size()-1);
 	                visited.remove(i);
 	            }

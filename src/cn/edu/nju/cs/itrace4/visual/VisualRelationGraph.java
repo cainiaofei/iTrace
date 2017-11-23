@@ -381,13 +381,13 @@ public class VisualRelationGraph {
     }
 
     public static void main(String[] args) throws IOException {
-        String class_relationInfo = "data/exp/iTrust/relation/CLASS_relationInfo.ser";
+        String class_relationInfo = "data/exp/iTrust/relation/CLASS_relationInfo_whole.ser";
 
         try {
             FileInputStream fis = new FileInputStream(class_relationInfo);
             ObjectInputStream ois = new ObjectInputStream(fis);
             RelationInfo ri = (RelationInfo) ois.readObject();
-            ri.setPruning(0.6, 0.6);
+            ri.setPruning(0.8, 0.8);
 
             //System.out.println(ri.getRelationGraphFile());
 

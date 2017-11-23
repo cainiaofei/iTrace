@@ -43,9 +43,22 @@ public class CallRelationIO implements CallRelationIOInterface{
             while (rs.next()) {
                 String callerInDB = rs.getString("caller").trim();
                 String calleeInDB = rs.getString("callee").trim();
-
+                
+                /**
+                 * @author zzf
+                 * @date 2017.11.20
+                 * @description there are two formats in call.db  Lorg... and org ...
+                 * unify them and transfer Lorg... to org...
+                 */
+                if(callerInDB.startsWith("L")) {
+                	callerInDB = callerInDB.substring(1);
+                }
+                if(calleeInDB.startsWith("L")) {
+                	calleeInDB = calleeInDB.substring(1);
+                }
+                
+                
                 String callerMethod = sqlFormatToIdFormatInCallDB(callerInDB);
-//                System.out.println(" callerMethod = " + callerMethod );
                 String calleeMethod = sqlFormatToIdFormatInCallDB(calleeInDB);
                 String callerClass = callerMethod.split("#")[0];
                 String calleeClass = calleeMethod.split("#")[0];

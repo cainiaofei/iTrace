@@ -17,6 +17,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Gantt;
+import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Maven;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
@@ -28,7 +29,7 @@ public class AdjustParameter {
 	
 	public void lookForParameter() throws InterruptedException, IOException, ClassNotFoundException {
 		System.setProperty("routerLen", 6 + "");
-		Project[] projects = { new Gantt() , new Maven(), /*new Itrust()*/};
+		Project[] projects = { new Gantt() , new Itrust(), /*new Maven()*/};
 		String[] models = { "cn.edu.nju.cs.itrace4.core.ir.VSM", "cn.edu.nju.cs.itrace4.core.ir.JSD",
 				"cn.edu.nju.cs.itrace4.core.ir.LSI" };
 		List<Thread> threadList = new ArrayList<Thread>();
@@ -185,8 +186,9 @@ public class AdjustParameter {
 	
 	public static void main(String[] args) throws InterruptedException, ClassNotFoundException, IOException {
 		AdjustParameter tool = new AdjustParameter();
-		//tool.lookForParameter();
+		tool.lookForParameter();
 		tool.readObject();
 		tool.findBestParameter(0.15);
 	}
 }
+//[0.058532477738937, 5.440001369614869E-4, 0.8007007655983734, 0.12151119191356541, 0.43406576879888925]

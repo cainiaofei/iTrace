@@ -22,6 +22,7 @@ import cn.edu.nju.cs.itrace4.core.metrics.Result;
 import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.MethodTypeProcessLone;
 import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.UD_CallThenDataWithBonusForLone;
 import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataDynamic;
+import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataTreatEqual;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
 import cn.edu.nju.cs.itrace4.demo.exp.project.JhotDraw;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Maven;
@@ -35,7 +36,7 @@ public class GetFPData{
 	private Map<Integer,String> projectMap = new HashMap<Integer,String>();
 	private Map<Integer,String> modelMap = new HashMap<Integer,String>();
 	private CliffAnalyze cliffAnalyze;
-	private double callThreshold = 0.6, dataThreshold = 0.7;
+	private double callThreshold = 0.8, dataThreshold = 0.8;
 	private double percent = 1;
 	
 	public GetFPData() throws ParserConfigurationException, SAXException, IOException{
@@ -101,13 +102,12 @@ public class GetFPData{
 		          Result result_ir = IR.compute(textDataset, model, new None_CSTI());
 		          ri.setPruning(callThreshold, dataThreshold);
 		          Map<String,Set<String>> valid = new HashMap<String,Set<String>>();
-		          Result result_UD_CallDataDynamic = IR.compute(textDataset,model,
-		          		new UD_CallDataDynamic(ri,callThreshold,
-		          				dataThreshold,percent,valid));//0.7
+		          Result result_UD_CallDataTreatEqual = IR.compute(textDataset,model,
+		          		new UD_CallDataTreatEqual(ri,callThreshold,dataThreshold,percent,valid));//0.7
 		          System.out.println("allSize:"+allSize(valid));
 		          ri.setPruning(0,0);
 		          bw.write(projectMap.get(projectIndex)+";"+modelMap.get(modelIndex)+";");
-		          compare(result_UD_CallDataDynamic,result_ir,bw,project,model,textDataset,valid);
+		          compare(result_UD_CallDataTreatEqual,result_ir,bw,project,model,textDataset,valid);
 		      }
 		}///outer for loop
 		bw.close();
@@ -126,6 +126,7 @@ public class GetFPData{
 		sb.append(";;");
 		for(int i = 1; i <= 10;i++) {
 			sb.append("Precision;FP;");
+			sb.append("Precision1;FP1;");
 		}
 		sb.append("\n");
 		return sb.toString();
@@ -133,10 +134,10 @@ public class GetFPData{
 
 	private String getFirstLine() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(";;");
+		sb.append(";;;");
 		for(int i = 1; i <= 10;i++) {
 			int percent = 10 * i;
-			sb.append("Recall("+percent+"%);;");
+			sb.append("Recall("+percent+"%);;;;");
 		}
 		sb.append("\n");
 		return sb.toString();
@@ -153,6 +154,7 @@ public class GetFPData{
 		 */
 		List<Double> oursPrecisionList = ours.getPrecisionAtRecallByTen(valid);
         List<Double> compareToPrecisionList = compareTo.getPrecisionAtRecallByTen();
+        List<Double> oursNowPrecisionList = ours.getPrecisionAtRecallByTen();
         
         //List<Integer> oursFP = ours.getFalsePositiveAtRecallByTen();
         /**
@@ -162,12 +164,17 @@ public class GetFPData{
          */
         List<Integer> oursFP = ours.getFalsePositiveAtRecallByTen(valid);
         List<Integer> compareFP = compareTo.getFalsePositiveAtRecallByTen();
+        List<Integer> oursNowFP = ours.getFalsePositiveAtRecallByTen();
         for (int i = 0; i < oursPrecisionList.size(); i++) {
             double ourPrecision = oursPrecisionList.get(i);
+            double ourNowPrecision = oursNowPrecisionList.get(i);
             double theirPrecision = compareToPrecisionList.get(i);
             String precisionDiff = String.format("%.2f",(ourPrecision-theirPrecision)*100);
-            bw.write(precisionDiff+"%;");
+            
+            String nowPrecisionDiff = String.format("%.2f",(ourNowPrecision-theirPrecision)*100);
+            
             int ourFP = oursFP.get(i);
+            int ourNowFP = oursNowFP.get(i);
             int theirFP = compareFP.get(i); 
             //String fpDiff = String.format("%.2f",(ourFP-theirFP)*1.0/ourFP*100);
             /**
@@ -175,12 +182,21 @@ public class GetFPData{
              * @date 2017.10.30 
              */
             double fpDiff = ourFP - theirFP;
+            double nowFpDiff = ourNowFP - theirFP;
+            
             String fpDiffStr = fpDiff+";";
+            String nowDiffStr = nowFpDiff + ";";
             if(fpDiff>0) {
             	fpDiffStr = "+" + fpDiffStr;
             }
+            if(nowFpDiff>0) {
+            	nowDiffStr = "+" + nowDiffStr;
+            }
             
+            bw.write(nowPrecisionDiff+"%;");
             //bw.write(fpDiff+"%;");
+            bw.write(nowDiffStr);
+            bw.write(precisionDiff+"%;");
             bw.write(fpDiffStr);
         }
         bw.newLine();

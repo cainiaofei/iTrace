@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
-	<projectName>gantt</projectName>
-	<modelName>VSM</modelName>
-	<callEdgeScoreThreshold>0.5</callEdgeScoreThreshold>
+	<projectName>iTrust</projectName>
+	<modelName>lsi</modelName>
+	<callEdgeScoreThreshold>0.8</callEdgeScoreThreshold>
 	<dataEdgeScoreThreshold>0.8</dataEdgeScoreThreshold>
-	<percent>1</percent>
+	<percent>0.4</percent>
 	<router>6</router>
 </config>
