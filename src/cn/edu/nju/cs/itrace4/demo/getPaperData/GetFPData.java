@@ -23,6 +23,7 @@ import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.MethodTypeProcessLone
 import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.UD_CallThenDataWithBonusForLone;
 import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataDynamic;
 import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataTreatEqual;
+import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataTreatEqualCount;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
 import cn.edu.nju.cs.itrace4.demo.exp.project.JhotDraw;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Maven;
@@ -82,8 +83,8 @@ public class GetFPData{
 	}
 
 	public void doTask(Project[] projects,String[] models) throws Exception{
-		BufferedWriter bw = new BufferedWriter(new FileWriter(new File("fp"+File.separator+
-				percent+"_fp_compare.csv")));
+		BufferedWriter bw = new BufferedWriter(new FileWriter(new File("fp_verifyCountThree"+File.separator+
+				(int)(percent*10)+"_fp_compare.csv")));
 		String firstLine = getFirstLine();
 		String secondLine = getSecondLine();
 		bw.write(firstLine);
@@ -92,7 +93,7 @@ public class GetFPData{
 			  Project project = projects[projectIndex];
 			  TextDataset textDataset = new TextDataset(project.getUcPath(), project.getClassDirPath(), 
 		        		project.getRtmClassPath());
-		      FileInputStream fis = new FileInputStream(project.getClass_RelationInfoPath());
+		      FileInputStream fis = new FileInputStream(project.getClass_RelationInfoPathWhole());
 		      ObjectInputStream ois = new ObjectInputStream(fis);
 		      RelationInfo ri = (RelationInfo) ois.readObject();
 		      ois.close();
@@ -103,11 +104,17 @@ public class GetFPData{
 		          ri.setPruning(callThreshold, dataThreshold);
 		          Map<String,Set<String>> valid = new HashMap<String,Set<String>>();
 		          Result result_UD_CallDataTreatEqual = IR.compute(textDataset,model,
-		          		new UD_CallDataTreatEqual(ri,callThreshold,dataThreshold,percent,valid));//0.7
+		          		new UD_CallDataTreatEqualCount(ri,callThreshold,dataThreshold,
+		          				(int)(percent*10),valid));//0.7
 		          System.out.println("allSize:"+allSize(valid));
 		          ri.setPruning(0,0);
 		          bw.write(projectMap.get(projectIndex)+";"+modelMap.get(modelIndex)+";");
 		          compare(result_UD_CallDataTreatEqual,result_ir,bw,project,model,textDataset,valid);
+		          
+		          double rate = Double.valueOf(System.getProperty("rate"));
+		          String rateStr = (rate+"").substring(0, Math.min(5, (rate+"").length()));
+		          bw.write(rateStr+";");
+		          bw.newLine();
 		      }
 		}///outer for loop
 		bw.close();
@@ -128,7 +135,7 @@ public class GetFPData{
 			sb.append("Precision;FP;");
 			sb.append("Precision1;FP1;");
 		}
-		sb.append("\n");
+		sb.append("rate;\n");
 		return sb.toString();
 	}
 
@@ -199,7 +206,6 @@ public class GetFPData{
             bw.write(precisionDiff+"%;");
             bw.write(fpDiffStr);
         }
-        bw.newLine();
     }
 	
 	public static void main(String[] args) throws Exception {
