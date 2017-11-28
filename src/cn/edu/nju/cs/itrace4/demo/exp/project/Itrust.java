@@ -50,8 +50,8 @@ public class Itrust implements Project{
 		return method_relationInfoPath;
 	}
 	public String getClass_RelationInfoPath() {
-		return class_relationInfoPath;
-		//return class_relationInfoPathWhole;
+		//return class_relationInfoPath;
+		return class_relationInfoPathWhole;
 	}
 	public String getClass_RelationInfoPathWhole() {
 		return class_relationInfoPathWhole;
