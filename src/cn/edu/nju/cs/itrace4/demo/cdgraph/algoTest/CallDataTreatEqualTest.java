@@ -88,13 +88,15 @@ public class CallDataTreatEqualTest{
         
         Map<String,Set<String>> valid = new HashMap<String,Set<String>>();
         
-        ri.setPruning(0.6, 0.7);
+        callEdgeScoreThreshold = 0.6;
+        dataEdgeScoreThreshold = 0.7;
+        ri.setPruning(callEdgeScoreThreshold, dataEdgeScoreThreshold);
         Result result_UD_CallDataDynamic = IR.compute(textDataset,model,
         		new UD_CallDataDynamic(ri,callEdgeScoreThreshold,
         				dataEdgeScoreThreshold,percent,valid));//0.7
        
-        callEdgeScoreThreshold = 0.6;
-        dataEdgeScoreThreshold = 0.8;
+        callEdgeScoreThreshold = 0.8;
+        dataEdgeScoreThreshold = 0.9;
         ri.setPruning(callEdgeScoreThreshold, dataEdgeScoreThreshold);
         valid = new HashMap<String,Set<String>>();
         Result result_UD_CallDataTreatEqual = IR.compute(textDataset,model,
@@ -109,7 +111,9 @@ public class CallDataTreatEqualTest{
         curve.addLine(result_UD_CallDataDynamic);
         double rate = Double.valueOf(System.getProperty("rate"));
         String rateStr = (rate+"").substring(0, 5);
-        double ud_pValue = printPValue(result_UD_CSTI,result_UD_CallDataTreatEqual);
+        
+        double ud_pValue = printPValue(result_UD_CallDataDynamic,result_UD_CSTI);
+        //double ud_pValue = printPValue(result_UD_CallDataTreatEqual,result_UD_CSTI);
         curve.showChart(project.getProjectName()+"rate:"+rateStr+"_ud_pV:"+ud_pValue);
         
     }

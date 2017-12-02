@@ -89,6 +89,7 @@ public class PreprocessTextMaven {
     	PreprocessTextMaven mavenProcess = new PreprocessTextMaven();
     	mavenProcess.arrangeData();
     	
+    	System.out.println("----");
     	SourceTargetUnionForGit union = new SourceTargetUnionForGit(ucDirPath, srcDirPath, rtmDBFilePath, Granularity.CLASS,classDirPath,methodDirPath);
 
         BatchingPreprocess preprocess = new BatchingPreprocess(ucDirPath, classDirPath, methodDirPath);

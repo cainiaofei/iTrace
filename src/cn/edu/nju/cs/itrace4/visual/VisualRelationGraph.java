@@ -73,6 +73,22 @@ public class VisualRelationGraph {
 
     private String currentUC = "";
     private List<String> ucRelatedCodes;
+    
+    /***
+     * @date 2017.12.02
+     * @author zzf
+     * @description display four kinds of module with different colors.
+     */
+    private List<String> uc4RelatedCodes = new LinkedList<String>();
+    private List<String> uc9RelatedCodes = new LinkedList<String>();
+    private List<String> uc38RelatedCodes = new LinkedList<String>();
+    private List<String> uc15RelatedCodes = new LinkedList<String>();
+    
+    /**
+     * only show call dependency between vertex which we need. 
+     */
+    private Set<Integer> set = new HashSet<Integer>();
+    
     private List<String> ucHighScoresCodes;
     private List<String> ucList;
 
@@ -117,6 +133,37 @@ public class VisualRelationGraph {
                 return i++;
             }
         };
+        
+        //fill vertexIndexMapName
+        init(reverse(relationGraph.getRelationInfo().getVertexIdNameMap()));
+    }
+    
+    private Map<String,Integer> reverse(Map<Integer,String> map){
+    	Map<String,Integer> result = new HashMap<String,Integer>();
+    	for(int key:map.keySet()) {
+    		result.put(map.get(key), key);
+    	}
+    	return result;
+    }
+    
+    private void init(Map<String,Integer> vertexIndexMap) {
+    	 for (SingleLink link : textDataset.getRtm().getLinksAboveThresholdForSourceArtifact("UC4")) {
+    		 System.out.println(vertexIndexMap.get(link.getTargetArtifactId()));
+    		 set.add(vertexIndexMap.get(link.getTargetArtifactId()));
+         }
+         for (SingleLink link : textDataset.getRtm().getLinksAboveThresholdForSourceArtifact("UC9")) {
+        	 System.out.println(link.getTargetArtifactId());
+        	 set.add(vertexIndexMap.get(link.getTargetArtifactId()));
+         }
+         for (SingleLink link : textDataset.getRtm().getLinksAboveThresholdForSourceArtifact("UC15")) {
+        	 System.out.println(link.getTargetArtifactId());
+        	 set.add(vertexIndexMap.get(link.getTargetArtifactId()));
+         }
+         for (SingleLink link : textDataset.getRtm().getLinksAboveThresholdForSourceArtifact("UC38")) {
+        	 System.out.println(link.getTargetArtifactId());
+        	 set.add(vertexIndexMap.get(link.getTargetArtifactId()));
+         }
+         System.out.println("set size:"+set.size());
     }
 
     public VisualRelationGraph(TextDataset textDataset, RelationGraph relationGraph, String layoutPath, String model) {
@@ -171,7 +218,10 @@ public class VisualRelationGraph {
             Number weight = ((CallEdge) codeEdge).getCallRelationSize();
 
             Integer edgeId = edgeFactory.create();
-            g.addEdge(edgeId, v1, v2);
+            if(set.contains(v1)&&set.contains(v2)) {
+            	g.addEdge(edgeId, v1, v2);
+            }
+           // g.addEdge(edgeId, v1, v2);
             callEdges.put(edgeId, new Pair<Integer, Integer>(v1, v2));
             if (weight == null) weight = 0.0;
             edgeRelationWeightsMap.put(edgeId, weight);
@@ -182,7 +232,10 @@ public class VisualRelationGraph {
             Integer v2 = relationGraph.getVertexIdByName(codeEdge.getTarget().getName());
             Number weight = ((DataEdge) codeEdge).getDataRelationSizeByUniqueType();
             Integer edgeId = edgeFactory.create();
-            g.addEdge(edgeId, v1, v2);
+            if(set.contains(v1)&&set.contains(v2)) {
+            	g.addEdge(edgeId, v1, v2);
+            }
+           // g.addEdge(edgeId, v1, v2);
             if (weight == null) weight = 0.0;
             edgeRelationWeightsMap.put(edgeId, weight);
         }
@@ -236,20 +289,21 @@ public class VisualRelationGraph {
                             g.setColor(Color.yellow);
                         } else if (ucRelatedCodes.size() != 0) {
                             String v = vertexNameMap.get(cv);
-                            if (ucRelatedCodes.contains(v) && firstValidHighestScoreTarget.equals(v)) {
-                                g.setColor(Color.RED);
-                            } else if (firstValidHighestScoreTarget.equals(v)) {
-                                g.setColor(Color.GRAY);
-                            } else if (ucRelatedCodes.contains(v) && secondHighestScoreTarget.equals(v)) {
-                                g.setColor(Color.ORANGE);
-                            } else if (secondHighestScoreTarget.equals(v)) {//之前是contains
-                                g.setColor(Color.GRAY);
-                            } else if (ucRelatedCodes.contains(v)) {
-                                g.setColor(Color.BLUE);
-                            } else {
-                                g.setColor(Color.BLACK);
+                            if (uc4RelatedCodes.contains(v)) {
+                            	g.setColor(Color.BLUE);
+                            } 
+                            else if (uc9RelatedCodes.contains(v)) {
+                            	g.setColor(Color.GREEN);
+                            } 
+                            else if (uc15RelatedCodes.contains(v)) {
+                            	g.setColor(Color.YELLOW);
+                            } 
+                            else if (uc38RelatedCodes.contains(v)) {
+                            	g.setColor(Color.RED);
+                            } 
+                            else {
+                            	g.setColor(Color.BLACK);
                             }
-
                         } else {
                             g.setColor(Color.BLACK);
                         }
@@ -342,6 +396,19 @@ public class VisualRelationGraph {
                 for (SingleLink link : textDataset.getRtm().getLinksAboveThresholdForSourceArtifact(uc)) {
                     ucRelatedCodes.add(link.getTargetArtifactId());
                 }
+                System.out.println("uc:--------"+uc+"--------------");
+                for (SingleLink link : textDataset.getRtm().getLinksAboveThresholdForSourceArtifact("UC4")) {
+                    uc4RelatedCodes.add(link.getTargetArtifactId());
+                }
+                for (SingleLink link : textDataset.getRtm().getLinksAboveThresholdForSourceArtifact("UC9")) {
+                    uc9RelatedCodes.add(link.getTargetArtifactId());
+                }
+                for (SingleLink link : textDataset.getRtm().getLinksAboveThresholdForSourceArtifact("UC15")) {
+                    uc15RelatedCodes.add(link.getTargetArtifactId());
+                }
+                for (SingleLink link : textDataset.getRtm().getLinksAboveThresholdForSourceArtifact("UC38")) {
+                    uc38RelatedCodes.add(link.getTargetArtifactId());
+                }
 
                 vv.repaint();
             }
@@ -381,13 +448,13 @@ public class VisualRelationGraph {
     }
 
     public static void main(String[] args) throws IOException {
-        String class_relationInfo = "data/exp/iTrust/relation/CLASS_relationInfo.ser";
+        String class_relationInfo = "data/exp/iTrust/relation/CLASS_relationInfo_whole.ser";
 
         try {
             FileInputStream fis = new FileInputStream(class_relationInfo);
             ObjectInputStream ois = new ObjectInputStream(fis);
             RelationInfo ri = (RelationInfo) ois.readObject();
-            ri.setPruning(0.6, 0.6);
+            ri.setPruning(0.0, 10.0);
 
             //System.out.println(ri.getRelationGraphFile());
 
