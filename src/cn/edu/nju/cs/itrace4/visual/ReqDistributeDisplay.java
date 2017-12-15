@@ -48,7 +48,7 @@ import java.util.List;
 /**
  * Created by niejia on 15/3/1.
  */
-public class VisualRelationGraph {
+public class ReqDistributeDisplay {
 
     private RelationGraph relationGraph;
 
@@ -102,7 +102,7 @@ public class VisualRelationGraph {
     private Map<Integer, Pair<Integer, Integer>> call_data_Edges;
     private Result result;
 
-    public VisualRelationGraph(TextDataset textDataset, RelationGraph relationGraph, String layoutPath) {
+    public ReqDistributeDisplay(TextDataset textDataset, RelationGraph relationGraph, String layoutPath) {
         this.relationGraph = relationGraph;
         this.textDataset = textDataset;
         this.result = IR.compute(textDataset, IRModelConst.VSM, new None_CSTI());
@@ -168,7 +168,7 @@ public class VisualRelationGraph {
          System.out.println("set size:"+set.size());
     }
 
-    public VisualRelationGraph(TextDataset textDataset, RelationGraph relationGraph, String layoutPath, String model) {
+    public ReqDistributeDisplay(TextDataset textDataset, RelationGraph relationGraph, String layoutPath, String model) {
         this.relationGraph = relationGraph;
         this.textDataset = textDataset;
         this.result = IR.compute(textDataset, model, new None_CSTI());
@@ -470,8 +470,8 @@ public class VisualRelationGraph {
 
             CallDataRelationGraph cdGraph = new CallDataRelationGraph(ri);
             String layoutPath = "data/exp/iTrust/relation/PersistentLayoutDemo.out";
-            VisualRelationGraph visualRelationGraph = new VisualRelationGraph(textDataset, cdGraph, layoutPath);
-            visualRelationGraph.show();
+            ReqDistributeDisplay ReqDistributeDisplay = new ReqDistributeDisplay(textDataset, cdGraph, layoutPath);
+            ReqDistributeDisplay.show();
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

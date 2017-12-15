@@ -453,13 +453,13 @@ public class VisualRelationGraph {
             RelationInfo ri = (RelationInfo) ois.readObject();
             ri.setPruning(0.8, 0.9);
 
+            //ri.showMessage();
            // System.out.println(ri.getRelationGraphFile());
 
             String rtmClassPath = "data/exp/Maven/rtm/RTM_CLASS.txt";
             String ucPath = "data/exp/Maven/uc";
             String classDirPath = "data/exp/Maven/class/graph/code";
             TextDataset textDataset = new TextDataset(ucPath, classDirPath, rtmClassPath);
-            
             
             CallDataRelationGraph cdGraph = new CallDataRelationGraph(ri);
             String layoutPath = "data/exp/Maven/relation/PersistentLayoutDemo.out";

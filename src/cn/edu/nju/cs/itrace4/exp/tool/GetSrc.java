@@ -26,6 +26,11 @@ public class GetSrc {
 		getSrcFromProject(masterPath, targetPath);
 	}
 	
+	public void getSrcFromMasterBasedOnGraphDBNewFormatDB(String masterPath,String targetPath, String dbPath,
+			String tableName,String caller,String callee) throws IOException {
+		nameInGraph = getGraphRelevantCodeFromNewFormatDB(dbPath,tableName,caller,callee);
+		getSrcFromProject(masterPath, targetPath);
+	}
 	
 	private Set<String> getGraphRelevantCode(String dbPath){
 		Set<String> set = new HashSet<String>();
@@ -41,8 +46,8 @@ public class GetSrc {
             String sql = "select * from graph";
             ResultSet rs = stmt.executeQuery(sql);
             while(rs.next()) {
-            	String former = rs.getString("source");
-            	String latter = rs.getString("sink");
+            	String former = rs.getString("source");//source
+            	String latter = rs.getString("sink");//sink
             	if(!former.contains("tutorial")) {
             		String formerName = getNameFromFullClassName(former);
             		set.add(formerName);
@@ -63,6 +68,112 @@ public class GetSrc {
         }
 		return set;
 	}
+	
+	
+	private Set<String> getGraphRelevantCodeFromNewFormatDB(String dbPath,
+			String tableName,String caller,String callee){
+		Set<String> set = new HashSet<String>();
+		Connection con;
+        Statement stmt;
+
+        try {
+            Class.forName("org.sqlite.JDBC");
+            con = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
+            con.setAutoCommit(false);
+            stmt = con.createStatement();
+            
+            String sql = "select * from "+tableName;
+            ResultSet rs = stmt.executeQuery(sql);
+            while(rs.next()) {
+            	String former = rs.getString(caller);//source
+            	String latter = rs.getString(callee);//sink
+            	/**
+            	 * @author zzf
+            	 * @date 2017.11.20
+            	 * @description  there exists two class formats, Lorg.. and org.. Unify these two formats and 
+            	 * 	transfer Lorg.. to org.. 
+            	 */
+            	if(former.startsWith("L")) {
+            		former = former.substring(1);
+            	}
+            	if(latter.startsWith("L")) {
+            		latter = latter.substring(1);
+            	}
+            	
+            	if(!former.contains("tutorial")) {
+            		String formerName = getNameFromFullClassName(former);
+            		set.add(formerName);
+            	}
+            	
+            	if(!latter.contains("tutorial")) {
+            		String latterName = getNameFromFullClassName(latter);
+                	set.add(latterName);
+            	}
+            }
+            
+            stmt.close();
+            con.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+		return set;
+	}
+	
+	private Set<String> getAllGraphRelevantCodeFromNewFormatDB(String basePath,
+			String tableName,String caller,String callee){
+		Set<String> set = new HashSet<String>();
+		Connection con;
+        Statement stmt;
+
+        try {
+            Class.forName("org.sqlite.JDBC");
+            con = DriverManager.getConnection("jdbc:sqlite:" + basePath+File.separator+"call.db");
+            con.setAutoCommit(false);
+            stmt = con.createStatement();
+            
+            String sql = "select * from "+tableName;
+            ResultSet rs = stmt.executeQuery(sql);
+            while(rs.next()) {
+            	String former = rs.getString(caller);//source
+            	String latter = rs.getString(callee);//sink
+            	/**
+            	 * @author zzf
+            	 * @date 2017.11.20
+            	 * @description  there exists two class formats, Lorg.. and org.. Unify these two formats and 
+            	 * 	transfer Lorg.. to org.. 
+            	 */
+            	if(former.startsWith("L")) {
+            		former = former.substring(1);
+            	}
+            	if(latter.startsWith("L")) {
+            		latter = latter.substring(1);
+            	}
+            	
+            	if(!former.contains("tutorial")) {
+            		String formerName = getNameFromFullClassName(former);
+            		set.add(formerName);
+            	}
+            	
+            	if(!latter.contains("tutorial")) {
+            		String latterName = getNameFromFullClassName(latter);
+                	set.add(latterName);
+            	}
+            }
+            
+            stmt.close();
+            con.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+		return set;
+	}
+	
 	
 	private String getNameFromFullClassName(String fullName) {
 		String[] args = fullName.split("\\.|\\_|\\$");
