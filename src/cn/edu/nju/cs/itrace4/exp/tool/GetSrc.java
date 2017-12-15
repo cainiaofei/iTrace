@@ -182,9 +182,14 @@ public class GetSrc {
 				return arg;
 			}
 		}
-		System.err.println("---err--");
-		System.exit(-1);
-		return null;
+		
+		System.out.println(fullName);
+		System.err.println("---err--methodName:getNameFromFullClassName()："+args[args.length-2]);
+		//System.exit(-1);
+		/**
+		 * org.apache.pig.piggybank.evaluation.math.toDegrees.-init-()V
+		 */
+		return args[args.length-2];
 	}
 
 	private void getSrcFromProject(String originPath,String targetPath) throws IOException {

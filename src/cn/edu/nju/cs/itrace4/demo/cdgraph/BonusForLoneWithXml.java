@@ -28,6 +28,7 @@ import cn.edu.nju.cs.itrace4.demo.FileParse.XmlParse;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
 import cn.edu.nju.cs.itrace4.demo.exp.project.JhotDraw;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Maven;
+import cn.edu.nju.cs.itrace4.demo.exp.project.Pig;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Gantt;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Infinispan;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
@@ -78,6 +79,7 @@ public class BonusForLoneWithXml{
 		projectMap.put("jhotdraw", new JhotDraw());
 		projectMap.put("maven", new Maven());
 		projectMap.put("infinispan", new Infinispan());
+		projectMap.put("pig", new Pig());
 	}
 
 
