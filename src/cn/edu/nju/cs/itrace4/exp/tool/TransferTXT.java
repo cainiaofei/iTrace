@@ -51,10 +51,6 @@ public class TransferTXT {
 		else {
 			name = name.substring(0, name.lastIndexOf("."))+".txt";
 		}
-//		if(!set.contains(name.substring(0, name.lastIndexOf('.')))) {
-//			br.close();
-//			return ;
-//		}
 		BufferedWriter bw = new BufferedWriter(new FileWriter(target+File.separator+name));
 		String line = null;
 		while((line=br.readLine())!=null) {

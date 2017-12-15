@@ -459,10 +459,7 @@ public class VisualRelationGraph {
             FileInputStream fis = new FileInputStream(class_relationInfo);
             ObjectInputStream ois = new ObjectInputStream(fis);
             RelationInfo ri = (RelationInfo) ois.readObject();
-            ri.setPruning(0.0, 0.0);
-
-            //System.out.println(ri.getRelationGraphFile());
-
+            ri.setPruning(0.8, 0.8);
             String rtmClassPath = "data/exp/iTrust/rtm/RTM_CLASS.txt";
             String ucPath = "data/exp/iTrust/uc";
             String classDirPath = "data/exp/iTrust/class/code";

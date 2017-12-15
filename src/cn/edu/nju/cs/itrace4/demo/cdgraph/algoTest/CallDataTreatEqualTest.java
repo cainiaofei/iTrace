@@ -78,13 +78,13 @@ public class CallDataTreatEqualTest{
         TextDataset textDataset = new TextDataset(project.getUcPath(), project.getClassDirPath(), 
         		project.getRtmClassPath());
 
-        FileInputStream fis = new FileInputStream(project.getClass_RelationInfoPath());
+        FileInputStream fis = new FileInputStream(project.getClass_RelationInfoPathWhole());
         ObjectInputStream ois = new ObjectInputStream(fis);
         RelationInfo ri = (RelationInfo) ois.readObject();
         ois.close();
         
         Result result_ir = IR.compute(textDataset, model, new None_CSTI());
-        Result result_UD_CSTI = IR.compute(textDataset,model, new UD_CSTI(ri));
+        Result result_UD_CSTI = IR.compute(textDataset, model, new UD_CSTI(ri));
         
         Map<String,Set<String>> valid = new HashMap<String,Set<String>>();
         
@@ -108,7 +108,6 @@ public class CallDataTreatEqualTest{
         curve.addLine(result_ir);
         curve.addLine(result_UD_CSTI);
         curve.addLine(result_UD_CallDataTreatEqual);
-        curve.addLine(result_UD_CallDataDynamic);
         double rate = Double.valueOf(System.getProperty("rate"));
         String rateStr = (rate+"").substring(0, 5);
         

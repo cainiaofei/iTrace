@@ -24,10 +24,8 @@ public class Setting {
     public static double callThreshold = 0.7;
     public static double dataThreshold = 0.9;
 //    public static double dataThreshold = 0.2;
-
 //    public static final int LSI_K = 125;
-    public static final int LSI_K = 100;//100
-
+    public static final int LSI_K = 85;///100
 //    public static final int LSI_K = 105;
 
     public static String serializeName = "relationInfo_whole.ser";
