@@ -21,11 +21,12 @@ import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
 import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.MethodTypeProcessLone;
 import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.UD_CallThenDataWithBonusForLone;
+import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataTreatEqualCount;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
 import cn.edu.nju.cs.itrace4.demo.exp.project.JhotDraw;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Maven;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Gantt;
-import cn.edu.nju.cs.itrace4.demo.exp.project.Infinispan;
+import cn.edu.nju.cs.itrace4.demo.exp.project.Gantt;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
 import cn.edu.nju.cs.itrace4.demo.tool.CliffAnalyze;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
@@ -46,7 +47,7 @@ public class GetAPAndMAPAllPercent{
 	public void initProjectMap(){
 		projectMap.put(0, "iTrust");
 		projectMap.put(1, "Maven");
-		projectMap.put(2, "Infinispan");
+		projectMap.put(2, "Gantt");
 	}
 	
 	public void initModelMap(){
@@ -64,7 +65,7 @@ public class GetAPAndMAPAllPercent{
 	public void initProjects(Project[] project){
 		project[0] = new Itrust();
 		project[1] = new Maven();
-		project[2] = new Infinispan();
+		project[2] = new Gantt();
 	}
 	
 	public void start() throws Exception{
@@ -91,22 +92,22 @@ public class GetAPAndMAPAllPercent{
 		      for(int modelIndex = 0; modelIndex<models.length;modelIndex++){
 		    	  String model = models[modelIndex];
 		          Result result_ir = IR.compute(textDataset, model, new None_CSTI());
-		          ri.setPruning(0.6, 0.6);
+		          ri.setPruning(0.8, 0.8);
 		          for(int percent = 1; percent <= 10;percent++){
 		        	   Map<String,Set<String>> valid = new HashMap<String,Set<String>>();
-				          Result result_UD_CallThenDataProcessLoneInnerMean = IR.compute(textDataset,model,
-				          		new UD_CallThenDataWithBonusForLone(ri,0.6,
-				          				0.6,MethodTypeProcessLone.InnerMean,percent*1.0/10,valid));
+		        	   Result result_UD_CallDataTreatEqual = IR.compute(textDataset,model,
+		   	        		new UD_CallDataTreatEqualCount(ri,0.8,
+		   	        			0.8,6,valid));//0.7
 				       bw.write(projectMap.get(projectIndex)+";"+"CLUSTER;"+modelMap.get(modelIndex)+";");
-				       double apValue = result_UD_CallThenDataProcessLoneInnerMean.getAveragePrecisionByRanklist();
+				       double apValue = result_UD_CallDataTreatEqual.getAveragePrecisionByRanklist();
 				       String ap = String.format("%.2f", apValue);
-				       double mapValue = result_UD_CallThenDataProcessLoneInnerMean.getMeanAveragePrecisionByQuery();
+				       double mapValue = result_UD_CallDataTreatEqual.getMeanAveragePrecisionByQuery();
 				       String map = String.format("%.2f", mapValue);
 				       bw.write(ap+";"+map+";"+"_"+";");
-				       double cliffValue = cliffAnalyze.doCliff(result_UD_CallThenDataProcessLoneInnerMean, result_ir, textDataset.getRtm());
+				       double cliffValue = cliffAnalyze.doCliff(result_UD_CallDataTreatEqual, result_ir, textDataset.getRtm());
 				       String cliff = String.format("%.2f", cliffValue);
 				       bw.write(cliff+";");
-				       compare(result_UD_CallThenDataProcessLoneInnerMean,result_ir,cpBw,project,model,percent);
+				       compare(result_UD_CallDataTreatEqual,result_ir,cpBw,project,model,percent);
 		          }
 		          bw.newLine();
 		      }

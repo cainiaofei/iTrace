@@ -113,6 +113,7 @@ public class UD_CallDataTreatEqualCount implements CSTI{
 							int graphSize = subGraph.getVertexList().size();
 							//
 							//curValue = Math.min(maxScore*0.9999, curValue+maxScore/(graphSize-1));
+							//curValue = Math.min(maxScore*0.9999, curValue+maxScore/(graphSize));
 							curValue = Math.min(maxScore*0.9999, curValue+maxScore/(graphSize));
 						}
 						matrix.setScoreForLink(req, vertexName, curValue);

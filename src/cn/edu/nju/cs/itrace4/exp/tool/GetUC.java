@@ -14,11 +14,10 @@ import java.util.Set;
 public class GetUC {
 	
 	public void getUCFromDB(String targetPath,String dbPath) throws Exception {
-		String InfinispanRtmDB = dbPath;
 		Connection con;
 		Statement stmt;
 		Class.forName("org.sqlite.JDBC");
-		con = DriverManager.getConnection("jdbc:sqlite:" + InfinispanRtmDB);
+		con = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
 		con.setAutoCommit(false);
 		stmt = con.createStatement();
 		String sql = "select request as requirement from rtm";
@@ -140,10 +139,10 @@ public class GetUC {
 		return text.substring(text.indexOf("]")+1);
 	}
 
-	public static void main(String[] args) throws Exception {
-		GetUC tool = new GetUC();
-		//String targetPath = "D:\\workspace\\eclipse-workspace\\iTrace4\\data\\exp\\Infinispan\\uc";
-		String targetPath = "D:\\workspace\\eclipse-workspace\\iTrace4\\data\\exp\\Infinispan\\test\\uc";
-		tool.getUCFromDB(targetPath,"");
-	}
+//	public static void main(String[] args) throws Exception {
+//		GetUC tool = new GetUC();
+//		//String targetPath = "D:\\workspace\\eclipse-workspace\\iTrace4\\data\\exp\\Infinispan\\uc";
+//		String targetPath = "D:\\workspace\\eclipse-workspace\\iTrace4\\data\\exp\\Infinispan\\test\\uc";
+//		tool.getUCFromDB(targetPath,"");
+//	}
 }

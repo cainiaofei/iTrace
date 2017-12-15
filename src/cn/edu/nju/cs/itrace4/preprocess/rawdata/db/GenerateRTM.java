@@ -56,6 +56,9 @@ public class GenerateRTM {
 		//Infinispan中的几个新类型
 		mergeStringSet.add("Superset");
 		mergeStringSet.add("Cloners (old)");
+		//Pig太大了增加几个新类型
+		mergeStringSet.add("Required");
+		mergeStringSet.add("Regression");
 	}
 	
 	private void clean() {
@@ -177,7 +180,7 @@ public class GenerateRTM {
 				visited.add(issueId);
 				String summary = rs.getString("summary");
 				String description = rs.getString("description");
-				if(description.length()<3) {
+				if(description==null||description.length()<3) {
 					continue;
 				}
 				String request = summary + " " + description;

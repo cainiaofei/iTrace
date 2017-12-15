@@ -27,6 +27,7 @@ import cn.edu.nju.cs.itrace4.demo.exp.project.Infinispan;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
 import cn.edu.nju.cs.itrace4.demo.exp.project.JhotDraw;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Maven;
+import cn.edu.nju.cs.itrace4.demo.exp.project.Pig;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
 import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
 import cn.edu.nju.cs.itrace4.demo.visual.MyVisualCurve;
@@ -70,6 +71,7 @@ public class CallDataTreatEqualCountTest {
 			projectMap.put("jhotdraw", new JhotDraw());
 			projectMap.put("maven", new Maven());
 			projectMap.put("infinispan", new Infinispan());
+			projectMap.put("pig", new Pig());
 		}
 
 
@@ -90,7 +92,7 @@ public class CallDataTreatEqualCountTest {
 	        valid = new HashMap<String,Set<String>>();
 	        Result result_UD_CallDataTreatEqual = IR.compute(textDataset,model,
 	        		new UD_CallDataTreatEqualCount(ri,callEdgeScoreThreshold,
-	        			dataEdgeScoreThreshold,100,valid));//0.7
+	        			dataEdgeScoreThreshold,60,valid));//0.7
 	        
 	        
 	        MyVisualCurve curve = new MyVisualCurve();
@@ -100,8 +102,17 @@ public class CallDataTreatEqualCountTest {
 	        double rate = Double.valueOf(System.getProperty("rate"));
 	        String rateStr = (rate+"").substring(0, Math.min(5, (rate+"").length()));
 	        double ud_pValue = printPValue(result_UD_CallDataTreatEqual,result_UD_CSTI);
-	        curve.showChart(project.getProjectName()+"rate:"+rateStr+"_ud_pV:"+ud_pValue);
-	        
+	        double ir_pValue = printPValue(result_UD_CallDataTreatEqual,result_ir);
+	        curve.showChart(project.getProjectName()+"rate:"+rateStr+"_ir_pV:"+ir_pValue);
+	        System.out.println("----------------IR AP/MAP-------------");
+	        System.out.println("AP:"+result_ir.getAveragePrecisionByRanklist());
+	        System.out.println("MAP:"+result_ir.getMeanAveragePrecisionByQuery());
+	        System.out.println("----------------UD AP/MAP-------------");
+	        System.out.println("AP:"+result_UD_CSTI.getAveragePrecisionByRanklist());
+	        System.out.println("MAP:"+result_UD_CSTI.getMeanAveragePrecisionByQuery());
+	        System.out.println("----------------Cluster AP/MAP-------------");
+	        System.out.println("AP:"+result_UD_CallDataTreatEqual.getAveragePrecisionByRanklist());
+	        System.out.println("MAP:"+result_UD_CallDataTreatEqual.getMeanAveragePrecisionByQuery());
 	    }
 
 		private double printPValue(Result ours, Result compareTo) {

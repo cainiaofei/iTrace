@@ -124,7 +124,7 @@ public class VisualRelationGraph {
         dataEdges = new LinkedHashMap<>();
         call_data_Edges = new LinkedHashMap<>();
 
-//        this.LAYOUT_FILE = "data/exp/iTrust/relation/PersistentLayoutDemo.out";
+//        this.LAYOUT_FILE = "data/exp/Pig/relation/PersistentLayoutDemo.out";
         this.LAYOUT_FILE = layoutPath;
 
         edgeFactory = new Factory<Integer>() {
@@ -189,7 +189,7 @@ public class VisualRelationGraph {
         dataEdges = new LinkedHashMap<>();
         call_data_Edges = new LinkedHashMap<>();
 
-//        this.LAYOUT_FILE = "data/exp/iTrust/relation/PersistentLayoutDemo.out";
+//        this.LAYOUT_FILE = "data/exp/Pig/relation/PersistentLayoutDemo.out";
         this.LAYOUT_FILE = layoutPath;
 
         edgeFactory = new Factory<Integer>() {
@@ -453,23 +453,23 @@ public class VisualRelationGraph {
     }
 
     public static void main(String[] args) throws IOException {
-        String class_relationInfo = "data/exp/iTrust/relation/CLASS_relationInfo_whole.ser";
+        String class_relationInfo = "data/exp/Pig/relation/CLASS_relationInfo_whole.ser";
 
         try {
             FileInputStream fis = new FileInputStream(class_relationInfo);
             ObjectInputStream ois = new ObjectInputStream(fis);
             RelationInfo ri = (RelationInfo) ois.readObject();
-            ri.setPruning(0.8, 0.8);
+            ri.setPruning(0.9, 0.9);
 
             //System.out.println(ri.getRelationGraphFile());
 
-            String rtmClassPath = "data/exp/iTrust/rtm/RTM_CLASS.txt";
-            String ucPath = "data/exp/iTrust/uc";
-            String classDirPath = "data/exp/iTrust/class/code";
+            String rtmClassPath = "data/exp/Pig/rtm/RTM_CLASS.txt";
+            String ucPath = "data/exp/Pig/uc";
+            String classDirPath = "data/exp/Pig/class/code";
             TextDataset textDataset = new TextDataset(ucPath, classDirPath, rtmClassPath);
 
             CallDataRelationGraph cdGraph = new CallDataRelationGraph(ri);
-            String layoutPath = "data/exp/iTrust/relation/PersistentLayoutDemo.out";
+            String layoutPath = "data/exp/Pig/relation/PersistentLayoutDemo.out";
             VisualRelationGraph visualRelationGraph = new VisualRelationGraph(textDataset, cdGraph, layoutPath);
             visualRelationGraph.show();
 
