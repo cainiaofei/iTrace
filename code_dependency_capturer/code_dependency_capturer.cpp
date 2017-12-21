@@ -37,9 +37,9 @@ sqlite3 *dbCG = NULL;
 
 //String Buffer
 #define BUFFERROW 400000
-#define FDBSIZE 750
-#define PDBSIZE 750
-#define CDBSIZE 750//改大了
+#define FDBSIZE 1000
+#define PDBSIZE 1000
+#define CDBSIZE 1000//改大了
 
 static char FaDBBuffer[BUFFERROW][FDBSIZE];
 static int FaBufferCount = 0;
@@ -238,7 +238,7 @@ tdFieldAccess(jvmtiEnv *jvmti_env,
 			method_signature
 		);
 		int size = strlen(FaDBBuffer[FaBufferCount]);
-		if (size > 750) {
+		if (size > FDBSIZE) {
 			cout << FaDBBuffer[FaBufferCount] << " : " << size;
 			exit(0);
 		}
@@ -408,7 +408,7 @@ tdFieldModification(jvmtiEnv *jvmti_env,
 		nHashcode
 	);
 	int size = strlen(FmDBBuffer[FmBufferCount]);
-	if (size > 750) {
+	if (size > FDBSIZE) {
 		cout << FmDBBuffer[FmBufferCount] << " : " << size << endl;
 		exit(0);
 	}
@@ -552,7 +552,7 @@ tdMethodEntry(jvmtiEnv *jvmti_env,
 				threadID
 			);
 			int size = strlen(CgDBBuffer[CgBufferCount]);
-			if (size > 750) {
+			if (size > FDBSIZE) {
 				cout << CgDBBuffer[CgBufferCount] << " : " << size << endl;
 				exit(0);
 			}
@@ -631,7 +631,7 @@ tdMethodExit(jvmtiEnv *jvmti_env,
 				threadID
 			);
 			int size = strlen(CgDBBuffer[CgBufferCount]);
-			if (size > 750) {
+			if (size > FDBSIZE) {
 				cout << CgDBBuffer[CgBufferCount] << " : " << size << endl;
 				exit(0);
 			}
@@ -684,7 +684,7 @@ tdMethodExit(jvmtiEnv *jvmti_env,
 						method_signature
 					);
 					int size = strlen(PpDBBuffer[PpBufferCount]);
-					if (size > 750) {
+					if (size > FDBSIZE) {
 						cout << PpDBBuffer[PpBufferCount] << " : " << size << endl;
 						exit(0);
 					}
@@ -731,7 +731,7 @@ tdMethodExit(jvmtiEnv *jvmti_env,
 					method_signature
 				);
 				int size = strlen(PpDBBuffer[PpBufferCount]);
-				if (size > 750) {
+				if (size > FDBSIZE) {
 					cout << PpDBBuffer[PpBufferCount] << " : " << size << endl;
 					exit(0);
 				}
