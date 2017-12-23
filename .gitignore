@@ -14,9 +14,6 @@ data_old/
 *.txt
 *.DS_Store
 备份/
-<<<<<<< HEAD
 *.ser
-=======
 fp/
 fp_verifyCountThree/
->>>>>>> a781a17d87266cbd34df25b4a11910cdccc12f08
