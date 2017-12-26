@@ -493,6 +493,17 @@ public class CallDataRelationGraph extends RelationGraph {
 
     // max min
     private void normalizeDataEdge(Map<CodeEdge, Double> codeEdgeScoreMap) {
+    	/**
+    	 * @date 2017.10.26
+    	 * @author zzf
+    	 * @description if codeEdgeScoreMap is empty return, and remember we have to judge whether list is empty before fetch elements
+    	 * from it.
+    	 */
+    	if(codeEdgeScoreMap.isEmpty()) {
+    		return ;
+    	}
+    	
+    	
         dataEdgeScoreValues = new ArrayList<>();
         for (Double v : codeEdgeScoreMap.values()) {
             dataEdgeScoreValues.add(v);

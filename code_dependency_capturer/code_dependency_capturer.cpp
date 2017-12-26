@@ -471,7 +471,7 @@ tdClassPrepare(jvmtiEnv *jvmti_env,
 	check_jvmti_error(jvmti_env, error, "Cannot getClassFields");
 
 	
-	if (strstr(signature, "pig") != NULL) {//::FOR iTrust
+	if (strstr(signature, "maven") != NULL) {//::FOR iTrust
 		for (int i = 0; i < fieldCount; i++)
 		{
 			jfieldID field = *(fields + i);
@@ -530,7 +530,7 @@ tdMethodEntry(jvmtiEnv *jvmti_env,
 		check_jvmti_error(jvmti_env, error, "Cannot getClassSignature");
 
 		
-		if (strstr(klass_signature, "pig") != NULL) {//::FOR iTrust
+		if (strstr(klass_signature, "maven") != NULL) {//::FOR iTrust
 																	//if(strstr(klass_signature, "Lsample") !=NULL){
 
 			error = (*jvmti_env).GetMethodName(method, &method_name, &method_signature, NULL);
@@ -609,7 +609,7 @@ tdMethodExit(jvmtiEnv *jvmti_env,
 		check_jvmti_error(jvmti_env, error, "Cannot getClassSignature");
 
 		
-		if (strstr(klass_signature, "pig") != NULL) {//::FOR iTrust
+		if (strstr(klass_signature, "maven") != NULL) {//::FOR iTrust
 
 			error = (*jvmti_env).GetObjectHashCode(thread, &threadHashcode);
 			check_jvmti_error(jvmti_env, error, "Cannot get MethodName");

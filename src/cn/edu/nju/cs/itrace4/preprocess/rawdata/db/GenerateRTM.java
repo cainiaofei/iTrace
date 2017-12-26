@@ -44,6 +44,8 @@ public class GenerateRTM {
 		fillMergeSet();
 	}
 	
+	public GenerateRTM() {}
+	
 	private void fillMergeSet() {
 		mergeStringSet.add("Duplicate");
 		mergeStringSet.add("Supercedes");
@@ -62,13 +64,13 @@ public class GenerateRTM {
 	}
 	
 	private void clean() {
-			if(tableExist("rtm")) {
-				removeTable("rtm");
-			}
-			sqlOperate.executeSql("create table rtm(request text, file_path text)");
-			if(tableExist("init_rtm")) {
-				removeTable("init_rtm");
-			}
+		if(tableExist("rtm")) {
+			removeTable("rtm");
+		}
+		sqlOperate.executeSql("create table rtm(request text, file_path text)");
+		if(tableExist("init_rtm")) {
+			removeTable("init_rtm");
+		}
 	}
 
 	private void removeTable(String table) {
@@ -129,7 +131,7 @@ public class GenerateRTM {
 		buildFinalRtm(dbPath,subGraphList);
 	}
 	
-	private void buildFinalRtm(String dbPath,List<List<Integer>> subGraphList) throws SQLException {
+	protected void buildFinalRtm(String dbPath,List<List<Integer>> subGraphList) throws SQLException {
 		int count_log = 0;
 		String sql = "select * from init_rtm where issue_id=";
 		Set<String> visited = new HashSet<String>();
