@@ -46,9 +46,17 @@ public class Demo {
 		}
 	}
 	
+	
+	public String getClassName(String str) {
+		String temp = str.substring(0, str.indexOf("("));
+		return temp.substring(0,temp.lastIndexOf('.'));
+	}
+	
 	public static void main(String[] args){
 		Demo demo = new Demo();
-		demo.process();
+		//demo.process();
+		String str = "xx.YY.cc(dd).xxx";
+		System.out.println(demo.getClassName(str));
 	}
 }
 

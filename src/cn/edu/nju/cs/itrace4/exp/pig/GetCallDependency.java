@@ -17,7 +17,7 @@ import cn.edu.nju.cs.itrace4.exp.tool.getCallerDB.GetCallDependencyThisThread;
 
 public class GetCallDependency {
 	private String sqlDriver = "org.sqlite.JDBC";
-	private String dbPath = "/media/zzf/软件/workspace/sqliteOutput/CallGraph.db";
+	private String dbPath = "data/exp/Pig/relation/CallGraph.db";
 	private String tableName = "callGraph";
 
 	public void getCallDependency() {
@@ -36,6 +36,17 @@ public class GetCallDependency {
 				threads.add(thread);
 			}
 		}//for
+		/*
+		 *@date: 2017.12.25
+		 *@description: it must wait all threads stop.
+		 */ 
+		for(Thread thread:threads) {
+			try {
+				thread.join();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 		try {
 			serialize(callRelationSet);
 		} catch (IOException e) {

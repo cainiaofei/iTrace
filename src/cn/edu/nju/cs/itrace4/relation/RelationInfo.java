@@ -130,7 +130,6 @@ public class RelationInfo implements Serializable {
         for (DataRelation dataRelation : dataRelationList) {
             if (dataRelation.isUsage()) {
                 // the overlap things here??
-
                 if (artifactCollection.containsKey(dataRelation.getCallerClass()) && 
                 		artifactCollection.containsKey(dataRelation.getCalleeClass())) {
                 	//if(dataRelation.getCallerClass()!=dataRelation.getCalleeClass()) {
@@ -169,6 +168,7 @@ public class RelationInfo implements Serializable {
         
         /**
          * call prune
+         * 实际发生的调用　--- 所属的依赖类型
          */
         for (CallRelation cr : callRelationList) {//call for
             String caller;

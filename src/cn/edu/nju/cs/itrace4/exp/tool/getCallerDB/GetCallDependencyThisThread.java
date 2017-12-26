@@ -63,7 +63,12 @@ public class GetCallDependencyThisThread implements Runnable{
 			else {//exit
 				stack.pop();
 				if(!stack.isEmpty()) {
-					callRelationSet.add(stack.peek()+"#"+identify);
+					String callerFullName = stack.peek();
+					String classMethodName = callerFullName.substring(0, callerFullName.indexOf("("));
+					String callerClassName = classMethodName.substring(0,classMethodName.lastIndexOf('.'));
+					if(!callerClassName.equals(classSignature)) {
+						callRelationSet.add(callerFullName+"#"+identify);
+					}
 				}
 			}
 		}//while
