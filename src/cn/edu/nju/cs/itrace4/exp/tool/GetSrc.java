@@ -43,7 +43,7 @@ public class GetSrc {
             con.setAutoCommit(false);
             stmt = con.createStatement();
             
-            String sql = "select * from graph";
+            String sql = "select * from callGraph";
             ResultSet rs = stmt.executeQuery(sql);
             while(rs.next()) {
             	String former = rs.getString("source");//source
