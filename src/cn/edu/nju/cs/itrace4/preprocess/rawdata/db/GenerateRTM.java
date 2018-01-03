@@ -30,7 +30,7 @@ public class GenerateRTM {
 	private String sqlFile;
 	
 	private Map<String,Integer> nameMapId = new HashMap<String,Integer>();
-	private Map<Integer,String> idMapName = new HashMap<Integer,String>();
+	protected Map<Integer,String> idMapName = new HashMap<Integer,String>();
 	private Set<String> mergeStringSet = new HashSet<String>();
 	
 	public GenerateRTM(String dbPath, String dbProperty,String sqlFile) {
@@ -124,7 +124,7 @@ public class GenerateRTM {
 		return sb.toString();
 	}
 	
-	private void generateFinalRTM(String dbPath) throws SQLException {
+	protected void generateFinalRTM(String dbPath) throws SQLException {
 		initMap(dbPath);
 		int[][] graphs = buildGraphs(dbPath);
 		List<List<Integer>> subGraphList = getSubGraphList(graphs);

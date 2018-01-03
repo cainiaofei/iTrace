@@ -27,6 +27,7 @@ import cn.edu.nju.cs.itrace4.demo.exp.project.Infinispan;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
 import cn.edu.nju.cs.itrace4.demo.exp.project.JhotDraw;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Maven;
+import cn.edu.nju.cs.itrace4.demo.exp.project.Maven_Cluster;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Pig;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
 import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
@@ -72,6 +73,7 @@ public class CallDataTreatEqualCountTest {
 			projectMap.put("maven", new Maven());
 			projectMap.put("infinispan", new Infinispan());
 			projectMap.put("pig", new Pig());
+			projectMap.put("maven_cluster", new Maven_Cluster());
 		}
 
 
@@ -103,7 +105,7 @@ public class CallDataTreatEqualCountTest {
 	        String rateStr = (rate+"").substring(0, Math.min(5, (rate+"").length()));
 	        double ud_pValue = printPValue(result_UD_CallDataTreatEqual,result_UD_CSTI);
 	        double ir_pValue = printPValue(result_UD_CallDataTreatEqual,result_ir);
-	        curve.showChart(project.getProjectName()+"rate:"+rateStr+"_ir_pV:"+ir_pValue);
+	        curve.showChart(project.getProjectName()+"rate:"+rateStr+"ud_pValue:"+ud_pValue);
 	        System.out.println("----------------IR AP/MAP-------------");
 	        System.out.println("AP:"+result_ir.getAveragePrecisionByRanklist());
 	        System.out.println("MAP:"+result_ir.getMeanAveragePrecisionByQuery());

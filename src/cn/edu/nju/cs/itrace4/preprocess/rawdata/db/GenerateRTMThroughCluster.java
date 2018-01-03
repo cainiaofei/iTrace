@@ -13,21 +13,21 @@ import java.util.Map;
 
 public class GenerateRTMThroughCluster extends GenerateRTM{
 	private SqliteOperation sqlOperate;
-	private String clusterFilePath;
+	private String clusterFilePath = "data/exp/Maven_Cluster/clusterFile/s_d_100d.txt";
 	private Map<Integer,List<Integer>> classMapEleSet = new HashMap<Integer,List<Integer>>();
-	private Map<Integer,String> idMapName = new HashMap<Integer,String>();
+	//private Map<Integer,String> idMapName = new HashMap<Integer,String>();
 	private String dbPath;
 	private String driver;
 	
 	public GenerateRTMThroughCluster(String dbPath, String dbProperty, String sqlFile) {
-		super();
+		super(dbPath,dbProperty,sqlFile);
 		this.dbPath = dbPath;
 		driver = "org.sqlite.JDBC";
 		sqlOperate = new SqliteOperation();
 		sqlOperate.buildConnection(driver, dbPath);
 	}
 	
-	private void generateFinalRTM(String dbPath) throws SQLException {
+	protected void generateFinalRTM(String dbPath) throws SQLException {
 		initMap();
 		List<List<Integer>> subGraphList = null;
 		try {

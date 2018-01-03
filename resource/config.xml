@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
-	<projectName>pig</projectName>
-	<modelName>vsm</modelName>
-	<callEdgeScoreThreshold>0.9</callEdgeScoreThreshold>
-	<dataEdgeScoreThreshold>0.9</dataEdgeScoreThreshold>
+	<projectName>Maven_cluster</projectName>
+	<modelName>jsd</modelName>
+	<callEdgeScoreThreshold>0.8</callEdgeScoreThreshold>
+	<dataEdgeScoreThreshold>0.8</dataEdgeScoreThreshold>
 	<percent>0.4</percent>
 	<router>6</router>
 </config>

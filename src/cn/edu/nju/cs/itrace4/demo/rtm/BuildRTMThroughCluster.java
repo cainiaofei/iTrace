@@ -6,7 +6,7 @@ public class BuildRTMThroughCluster implements BuildRTM{
 
 	private String dbPath;
 	
-	public List<String> 
+	//public List<String> 
 	
 	@Override
 	public List<String> filterIssueList(String dbPath, String tableName, String sql) {
