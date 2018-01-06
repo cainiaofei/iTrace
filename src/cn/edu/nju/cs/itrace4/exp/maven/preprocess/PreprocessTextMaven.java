@@ -25,7 +25,7 @@ public class PreprocessTextMaven {
 	private TransferTXT getSrc = new TransferTXT();
 	//private TableFormatNormalize generateCallGraph = new TableFormatNormalize();
 	
-	private static String projectPath = "data/exp/Maven_Cluster/";
+	private static String projectPath = "data/exp/Maven_Cluster_40/";
 
     private static String rtmDBFilePath = projectPath + "rtm/Maven-req.db";
     private static String srcDirPath = projectPath + "src";
@@ -94,7 +94,6 @@ public class PreprocessTextMaven {
     	PreprocessTextMaven mavenProcess = new PreprocessTextMaven();
     	mavenProcess.arrangeData();
     	
-    	System.out.println("----");
     	SourceTargetUnionForGit union = new SourceTargetUnionForGit(ucDirPath, srcDirPath, rtmDBFilePath, Granularity.CLASS,classDirPath,methodDirPath);
 
         BatchingPreprocess preprocess = new BatchingPreprocess(ucDirPath, classDirPath, methodDirPath);

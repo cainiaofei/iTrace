@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class GenerateRTMThroughCluster extends GenerateRTM{
 	private SqliteOperation sqlOperate;
-	private String clusterFilePath = "data/exp/Maven_Cluster/clusterFile/s_d_100d.txt";
+	private String clusterFilePath = "data/exp/Maven_Cluster_40/clusterFile/s_d_40d.txt";
 	private Map<Integer,List<Integer>> classMapEleSet = new HashMap<Integer,List<Integer>>();
 	//private Map<Integer,String> idMapName = new HashMap<Integer,String>();
 	private String dbPath;
