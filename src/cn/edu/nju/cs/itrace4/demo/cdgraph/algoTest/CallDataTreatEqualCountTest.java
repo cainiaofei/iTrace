@@ -86,6 +86,9 @@ public class CallDataTreatEqualCountTest {
 	        FileInputStream fis = new FileInputStream(project.getClass_RelationInfoPathWhole());
 	        ObjectInputStream ois = new ObjectInputStream(fis);
 	        RelationInfo ri = (RelationInfo) ois.readObject();
+	        
+	        ri.showMessage();
+	        
 	        ois.close();
 	        
 	        Result result_ir = IR.compute(textDataset, model, new None_CSTI());
