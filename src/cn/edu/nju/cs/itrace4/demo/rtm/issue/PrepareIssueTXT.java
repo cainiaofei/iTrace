@@ -38,7 +38,7 @@ public class PrepareIssueTXT {
 	public void generateIssueTXT(String driverName,String issueTablePath,String tableName,
 			String[] params,String issueTXTPath) throws SQLException, IOException {
 		BufferedWriter bw = new BufferedWriter(new FileWriter(new File(issueTXTPath+File.separator+
-				"result_issue_type.txt")));
+				"result_issue_type_pig.txt")));
 		init(driverName,issueTablePath,tableName,params,issueTXTPath);
 		String sql = buildSelectSql(params,tableName);
 		ResultSet rs = sqlOperate.executeQuery(sql);
@@ -88,7 +88,7 @@ public class PrepareIssueTXT {
 	public static void main(String[] args) throws SQLException, IOException {
 		PrepareIssueTXT prepareIssueTXT = new PrepareIssueTXT();
 		String driverName = "org.sqlite.JDBC";
-		String issueTablePath = "data/exp/Maven/rtm/Maven-req.db";
+		String issueTablePath = "data/exp/Pig/rtm/Pig-req.db";
 		String tableName = "issue";
 		String[] params = {"issue_type","summary","description"};
 		String issueTXTPath = "../cluster_python/code/data";
