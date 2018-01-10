@@ -18,14 +18,14 @@ import cn.edu.nju.cs.itrace4.relation.RelationInfo;
  * @descrition copy from <code>PreprocessTextjHotDraw</code> 
  */
 public class PreprocessTextMaven {
-	//private GenerateRTM getRTM;
-	private GenerateRTMThroughCluster getRTM;
+	private GenerateRTM getRTM;
+	//private GenerateRTMThroughCluster getRTM;
 	private GetUC getUC = new GetUC();
 	private GetSrc getOriginSrc = new GetSrc();
 	private TransferTXT getSrc = new TransferTXT();
 	//private TableFormatNormalize generateCallGraph = new TableFormatNormalize();
 	
-	private static String projectPath = "data/exp/Maven_Cluster_40/";
+	private static String projectPath = "data/exp/Maven_TestCase/";
 
     private static String rtmDBFilePath = projectPath + "rtm/Maven-req.db";
     private static String srcDirPath = projectPath + "src";
@@ -44,8 +44,8 @@ public class PreprocessTextMaven {
     
     public PreprocessTextMaven() {
     	//2017.11.27 change temporary 
-    	//getRTM = new GenerateRTM(rtmDBFilePath,dbProperty,sqlFile);
-    	getRTM = new GenerateRTMThroughCluster(rtmDBFilePath,dbProperty,sqlFile);
+    	getRTM = new GenerateRTM(rtmDBFilePath,dbProperty,sqlFile);
+    	//getRTM = new GenerateRTMThroughCluster(rtmDBFilePath,dbProperty,sqlFile);
     }
     
     private void cleanData() {
