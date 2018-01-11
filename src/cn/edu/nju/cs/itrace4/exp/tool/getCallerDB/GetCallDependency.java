@@ -20,7 +20,7 @@ import java.util.Set;
  */
 public class GetCallDependency {
 	private String sqlDriver = "org.sqlite.JDBC";
-	private String dbPath = "./data/exp/Pig/relation/CallGraph.db";
+	private String dbPath = "./data/exp/Maven_TestCase/relation/CallGraph.db";
 	private String tableName = "callGraph";
 
 	public void getCallDependency() {

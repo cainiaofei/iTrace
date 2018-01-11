@@ -59,8 +59,8 @@ public class GenerateRTM {
 		mergeStringSet.add("Superset");
 		mergeStringSet.add("Cloners (old)");
 		//Pig太大了增加几个新类型
-		mergeStringSet.add("Required");
-		mergeStringSet.add("Regression");
+//		mergeStringSet.add("Required");
+//		mergeStringSet.add("Regression");
 	}
 	
 	private void clean() {

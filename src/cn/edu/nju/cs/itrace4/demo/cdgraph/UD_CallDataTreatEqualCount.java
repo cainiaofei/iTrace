@@ -36,7 +36,7 @@ public class UD_CallDataTreatEqualCount implements CSTI{
 	private Map<String,Set<String>> valid;
 	private int verifyCount;
 	private Set<Integer> allVertexIdList = new HashSet<Integer>();
-	private boolean hidden = true;
+	private boolean hidden = false;//
 	
 	private double callThreshold;
 	private double dataThreshold;
