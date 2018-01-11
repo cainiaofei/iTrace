@@ -90,7 +90,13 @@ public class GetSrc {
             	 */
             	String[] nameList = getClassNameList(classNameCombine);
             	for(String name:nameList) {
-            		set.add(name);
+            		//exclude test class
+            		if(name.endsWith("Test")) {
+            			continue;
+            		}
+            		else {
+            			set.add(name);
+            		}
             	}
             }
             stmt.close();
