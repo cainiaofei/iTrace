@@ -86,7 +86,7 @@ public class CallRelationIO implements CallRelationIOInterface{
     }
 
     private static String sqlFormatToIdFormatInCallDB(String sqlFormat) {
-    	System.out.println(sqlFormat);
+    	//System.out.println(sqlFormat);
         String[] tokens = sqlFormat.split("\\.");
 
         // find Java method

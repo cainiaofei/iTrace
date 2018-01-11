@@ -20,7 +20,6 @@ import java.util.Set;
 public class GetSrc {
 	private Set<String> nameInGraph;
 	
-	
 	public void getSrcFromMasterBasedOnGraphDB(String masterPath,String targetPath, String dbPath) throws IOException {
 		nameInGraph = getGraphRelevantCode(dbPath);
 		getSrcFromProject(masterPath, targetPath);
@@ -28,7 +27,8 @@ public class GetSrc {
 	
 	public void getSrcFromMasterBasedOnGraphDBNewFormatDB(String masterPath,String targetPath, String dbPath,
 			String tableName,String caller,String callee) throws IOException {
-		nameInGraph = getGraphRelevantCodeFromNewFormatDB(dbPath,tableName,caller,callee);
+		//nameInGraph = getGraphRelevantCodeFromNewFormatDB(dbPath,tableName,caller,callee);
+		nameInGraph = getGraphRelevantCodeFromNewFormatDB("data/exp/Maven_TestCase/rtm/Maven-req.db","rtm","file_path");
 		getSrcFromProject(masterPath, targetPath);
 	}
 	
@@ -66,6 +66,41 @@ public class GetSrc {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+		return set;
+	}
+	
+	private Set<String> getGraphRelevantCodeFromNewFormatDB(String dbPath,String tableName,String colName){
+		Set<String> set = new HashSet<String>();
+		Connection con;
+        Statement stmt;
+
+        try {
+            Class.forName("org.sqlite.JDBC");
+            con = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
+            con.setAutoCommit(false);
+            stmt = con.createStatement();
+            
+            String sql = "select * from "+tableName;
+            ResultSet rs = stmt.executeQuery(sql);
+            while(rs.next()) {
+            	String classNameCombine = rs.getString(colName);//source
+            	/**
+            	 * @author zzf
+            	 * @date 2018.1.11
+            	 */
+            	String[] nameList = getClassNameList(classNameCombine);
+            	for(String name:nameList) {
+            		set.add(name);
+            	}
+            }
+            stmt.close();
+            con.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
 		return set;
 	}
 	
@@ -121,6 +156,31 @@ public class GetSrc {
         
 		return set;
 	}
+	
+	/**
+	 * @author zzf
+	 * @date 2018.1.11
+	 * @description parse the file_path in rtm into several class 
+	 */
+	private static String[] getClassNameList(String strs) {
+		Set<String> set = new HashSet<String>();
+		String[] strArr = strs.split("和");
+		for(int i = 0; i < strArr.length;i++) {
+			//System.out.println(strArr[i]);
+			strArr[i] = strArr[i].replace("/", ".");
+			strArr[i] = strArr[i].substring(0, strArr[i].lastIndexOf("."));
+			strArr[i] = strArr[i].substring(strArr[i].lastIndexOf(".")+1);
+			set.add(strArr[i]);
+		}
+		strArr = new String[set.size()];
+		int index = 0;
+		for(String str:set) {
+			strArr[index] = str;
+			index++;
+		}
+		return strArr;
+	}
+	
 	
 	private Set<String> getAllGraphRelevantCodeFromNewFormatDB(String basePath,
 			String tableName,String caller,String callee){

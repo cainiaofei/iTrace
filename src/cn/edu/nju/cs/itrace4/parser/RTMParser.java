@@ -94,7 +94,7 @@ public class RTMParser {
         for (String sourceId : sorted_ids) {
             Map<String, Double> links = sims.getLinksForSourceId(sourceId);
             ArrayList<SingleLink> linksList = new ArrayList<>();
-            System.out.println(sourceId+"==>"+links);
+          //  System.out.println(sourceId+"==>"+links);
             for (String targetId : links.keySet()) {
                 double score = sims.getScoreForLink(sourceId, targetId);
                 linksList.add(new SingleLink(sourceId, targetId, score));

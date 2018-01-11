@@ -44,7 +44,7 @@ public class SqliteIOForGit implements SqliteIOInterface{
             con = DriverManager.getConnection("jdbc:sqlite:" + path);
             con.setAutoCommit(false);
 
-            System.out.printf("Opened %s successfully\n", dbFile.getName());
+           // System.out.printf("Opened %s successfully\n", dbFile.getName());
             stmt = con.createStatement();
 
             // Store columns from table reqs
@@ -110,7 +110,7 @@ public class SqliteIOForGit implements SqliteIOInterface{
 //    			boolean hasRelevantFuncClass = false;
     			String ucName = "req"+number;
     			String classNameStrs = rs.getString("className");
-    			System.out.println(ucName+"=>"+classNameStrs);
+ //   			System.out.println(ucName+"=>"+classNameStrs);
     			String[] classList = getClassNameList(classNameStrs);
     			for(String className:classList) {//for
     				className = className.replace(" ", "");
