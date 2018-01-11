@@ -30,6 +30,7 @@ import cn.edu.nju.cs.itrace4.demo.exp.project.Maven;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Maven_Cluster;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Maven_Cluster_40;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Pig;
+import cn.edu.nju.cs.itrace4.demo.exp.project.Pig_Cluster;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
 import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
 import cn.edu.nju.cs.itrace4.demo.visual.MyVisualCurve;
@@ -76,6 +77,7 @@ public class CallDataTreatEqualCountTest {
 			projectMap.put("pig", new Pig());
 			projectMap.put("maven_cluster", new Maven_Cluster());
 			projectMap.put("maven_cluster_40", new Maven_Cluster_40());
+			projectMap.put("pig_cluster", new Pig_Cluster());
 		}
 
 

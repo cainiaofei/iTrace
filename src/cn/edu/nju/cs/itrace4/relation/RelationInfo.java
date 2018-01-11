@@ -118,7 +118,7 @@ public class RelationInfo implements Serializable {
          *@date 2017.12.26
          *@description using only call dependency and ignore data dependency. 
          */
-        //relationPairParser(CallRelationIO.parser(callDBPath),new DataRelationList());
+//       relationPairParser(CallRelationIO.parser(callDBPath),new DataRelationList());
 //        String type = System.getProperty("projectType");
 //        if(type!=null && type.equals("git")) {
 //        	 relationPairParser(CallRelationIOForGit.parser(callDBPath), DataRelationIOForGit.parser(dataDBPath));

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
-	<projectName>iTrust</projectName>
+	<projectName>Maven</projectName>
 	<modelName>vsm</modelName>
 	<callEdgeScoreThreshold>0.8</callEdgeScoreThreshold>
 	<dataEdgeScoreThreshold>0.8</dataEdgeScoreThreshold>
