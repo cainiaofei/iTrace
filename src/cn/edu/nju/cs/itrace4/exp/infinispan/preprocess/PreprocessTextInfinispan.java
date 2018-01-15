@@ -9,6 +9,7 @@ import cn.edu.nju.cs.itrace4.exp.tool.TransferTXT;
 import cn.edu.nju.cs.itrace4.parser.SourceTargetUnionForGit;
 import cn.edu.nju.cs.itrace4.preprocess.BatchingPreprocess;
 import cn.edu.nju.cs.itrace4.preprocess.rawdata.db.GenerateRTM;
+import cn.edu.nju.cs.itrace4.preprocess.rawdata.db.GenerateRTMExt;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 
 /**
@@ -19,7 +20,7 @@ import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 public class PreprocessTextInfinispan {
 	private GenerateRTM getRTM;
 	private GetUC getUC = new GetUC();
-	private GetSrc getOriginSrc = new GetSrc();
+	private GetSrc getOriginSrc = new GetSrc(rtmDBFilePath);
 	private TransferTXT getSrc = new TransferTXT();
 	//private TableFormatNormalize generateCallGraph = new TableFormatNormalize();
 	
@@ -43,6 +44,7 @@ public class PreprocessTextInfinispan {
     
     
     public PreprocessTextInfinispan() {
+    	//getRTM = new GenerateRTMExt(rtmDBFilePath, dbProperty, sqlFile);
     	getRTM = new GenerateRTM(rtmDBFilePath, dbProperty, sqlFile);
     }
     
@@ -67,7 +69,10 @@ public class PreprocessTextInfinispan {
 			getUC.getUCFromDB(ucDirPath,rtmDBFilePath);
 			String originPath = srcDirPath;
 	    	String targetPath = classDirPath;
-	    	getOriginSrc.getSrcFromMasterBasedOnGraphDB(masterPath, srcDirPath, graphDBPath);
+	    	
+	    	getOriginSrc.getSrcFromMasterBasedOnGraphDBNewFormatDB(masterPath,originPath,graphDBPath,
+	    			"callGraph","caller","callee");
+	    	//getOriginSrc.getSrcFromMasterBasedOnGraphDB(masterPath, srcDirPath, graphDBPath);
 	    	getSrc.transferTXT(originPath, targetPath);
 		} catch (Exception e) {
 			e.printStackTrace();

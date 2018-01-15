@@ -15,6 +15,8 @@ import java.util.Map;
 import java.util.Set;
 
 import cn.edu.nju.cs.itrace4.exp.infinispan.tool.RTMProcess;
+import cn.edu.nju.cs.itrace4.exp.tool.GetUC;
+import cn.edu.nju.cs.itrace4.preprocess.TextPreprocessor;
 import cn.edu.nju.cs.itrace4.preprocess.rawdata.db.SqliteOperation;
 
 /**
@@ -22,18 +24,19 @@ import cn.edu.nju.cs.itrace4.preprocess.rawdata.db.SqliteOperation;
  * @date 2017.11.3
  * @description build rtm through db. 
  */
-public class GenerateRTM {
+public class GenerateRTMExt extends GenerateRTM {
 	private SqliteOperation sqlOperate;
 	private String dbPath;
 	private String dbProperty;
 	private String driver;
 	private String sqlFile;
+	private GetUC getUC = new GetUC();
 	
 	private Map<String,Integer> nameMapId = new HashMap<String,Integer>();
 	protected Map<Integer,String> idMapName = new HashMap<Integer,String>();
 	private Set<String> mergeStringSet = new HashSet<String>();
 	
-	public GenerateRTM(String dbPath, String dbProperty,String sqlFile) {
+	public GenerateRTMExt(String dbPath, String dbProperty,String sqlFile) {
 		this.dbPath = dbPath;
 		driver = "org.sqlite.JDBC";
 		this.dbProperty = dbProperty;
@@ -44,7 +47,7 @@ public class GenerateRTM {
 		fillMergeSet();
 	}
 	
-	public GenerateRTM() {}
+	public GenerateRTMExt() {}
 	
 	private void fillMergeSet() {
 		mergeStringSet.add("Duplicate");
@@ -133,7 +136,8 @@ public class GenerateRTM {
 	
 	protected void buildFinalRtm(String dbPath,List<List<Integer>> subGraphList) throws SQLException {
 		int count_log = 0;
-		String sql = "select * from init_rtm where issue_id=";
+		String sql = "select * from all_rtm where issue_id=";
+		String initRtmSql = "select * from init_rtm where issue_id=";
 		Set<String> visited = new HashSet<String>();
 		
 		for(List<Integer> subGraph:subGraphList) {
@@ -143,6 +147,9 @@ public class GenerateRTM {
 			StringBuilder code = new StringBuilder();
 			int actualCount = 0;
 			
+			if(allNotNewFeature(subGraph,initRtmSql)){
+				continue;
+			}
 			for(int id:subGraph) {
 				String issueId = idMapName.get(id);
 				ResultSet rs = sqlOperate.executeQuery(sql+"'"+issueId+"'");
@@ -159,6 +166,16 @@ public class GenerateRTM {
 			if(actualCount<2 && description.length()<8) {
 				continue;
 			}
+			
+			/**
+			 * @date 2018.1.11
+			 * @author zzf
+			 * @description remove short text. 
+			 */
+			if(!wordMoreThanThreshold(summary+" "+description,0)) {
+				continue;
+			}
+			
 			if(code.length()>0) {
 				System.out.println(actualCount);
 				request.append(summary+" "+description);
@@ -170,7 +187,6 @@ public class GenerateRTM {
 		        count_log++;
 			}
 		}
-		
 		// remain isolated record.
 		sql = "select * from init_rtm";
 		ResultSet rs = sqlOperate.executeQuery(sql);
@@ -188,6 +204,17 @@ public class GenerateRTM {
 				}
 				String request = summary + " " + description;
 				request = filter(request.toCharArray()).toString();
+				
+				/**
+				 * @date 2018.1.11
+				 * @author zzf
+				 * @description try to remove short text. 
+				 */
+				if(!wordMoreThanThreshold(summary+" "+description,0)) {
+					continue;
+				}
+				
+				
 				String code = rs.getString("file_path");
 				String insertSql = "insert into rtm (request,file_path) values (" + "'" + 
 	            		request + "',"+"'"+code + "')";
@@ -199,7 +226,31 @@ public class GenerateRTM {
 		System.out.println("the insert count is:" + count_log);
 	}
 	
-	
+	private boolean wordMoreThanThreshold(String text, int threshold) {
+		text = getUC.filter(text);
+		TextPreprocessor textPreprocessor = new TextPreprocessor(text);
+		text = textPreprocessor.doUCFileProcess();
+		System.out.println(text.split(" ").length);
+		return text.split(" ").length>threshold;
+	}
+
+	/**
+	 * @author zzf
+	 * @throws SQLException 
+	 * @date 2018.1.11
+	 * @description judge whether there exist a class happen in init_rtm. 
+	 */
+	private boolean allNotNewFeature(List<Integer> subGraph,String sql) throws SQLException {
+		for(int id:subGraph) {
+			String issueId = idMapName.get(id);
+			ResultSet rs = sqlOperate.executeQuery(sql+"'"+issueId+"'");
+			if(rs.next()) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	private void initMap(String dbPath) throws SQLException {
 		String sql = "select * from issue_link";
 		ResultSet rs = sqlOperate.executeQuery(sql);

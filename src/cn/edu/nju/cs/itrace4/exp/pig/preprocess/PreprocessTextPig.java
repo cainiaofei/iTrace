@@ -20,7 +20,7 @@ import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 public class PreprocessTextPig {
 	private GenerateRTM getRTM;
 	private GetUC getUC = new GetUC();
-	private GetSrc getOriginSrc = new GetSrc();
+	private GetSrc getOriginSrc = new GetSrc(rtmDBFilePath);
 	private TransferTXT getSrc = new TransferTXT();
 	//private TableFormatNormalize generateCallGraph = new TableFormatNormalize();
 	

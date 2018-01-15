@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.demo.cdgraph.algoTest;
+package cn.edu.nju.cs.itrace4.demo.cdgraph.temp;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -21,8 +21,7 @@ import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
 import cn.edu.nju.cs.itrace4.demo.FileParse.XmlParse;
 import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataTreatEqual;
-import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataTreatEqualCount;
-import cn.edu.nju.cs.itrace4.demo.cdgraph.temp.UD_CallDataTreatEqualCountTemp;
+import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataTreatEqualOuterLessThanInner;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Gantt;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Infinispan;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
@@ -36,9 +35,7 @@ import cn.edu.nju.cs.itrace4.demo.exp.project.Pig_Cluster;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
 import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
 import cn.edu.nju.cs.itrace4.demo.visual.MyVisualCurve;
-import cn.edu.nju.cs.itrace4.demo.visual.SimplifyVisualCurve;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
-import cn.edu.nju.cs.itrace4.visual.VisualCurve;
 import cn.edu.nju.cs.tool.NegativeLinkAnalyze;
 import cn.edu.nju.cs.tool.ResultAnalyze;
 
@@ -108,7 +105,7 @@ public class CallDataTreatEqualCountTest {
 	        ri.setPruning(callEdgeScoreThreshold, dataEdgeScoreThreshold);
 	        valid = new HashMap<String,Set<String>>();
 	        Result result_UD_CallDataTreatEqual = IR.compute(textDataset,model,
-	        		new UD_CallDataTreatEqualCount(ri,callEdgeScoreThreshold,
+	        		new UD_CallDataTreatEqualOuterLessThanInner(ri,callEdgeScoreThreshold,
 	        			dataEdgeScoreThreshold,600,valid));//0.7
 	        
 	        /**
@@ -116,7 +113,7 @@ public class CallDataTreatEqualCountTest {
 	         * @description adjust algorithm 
 	         */
 //	        Result result_UD_CallDataTreatEqualTemp = IR.compute(textDataset,model,
-//	        		new UD_CallDataTreatEqualCountTemp(ri,callEdgeScoreThreshold,
+//	        		new UD_CallDataTreatEqualOuterLessThanInnerTemp(ri,callEdgeScoreThreshold,
 //	        			dataEdgeScoreThreshold,3,valid));//0.7
 //	        
 	        /**
@@ -126,8 +123,7 @@ public class CallDataTreatEqualCountTest {
 //	        resultAnalyze.findNegativeLink(result_UD_CallDataTreatEqual);
 	        
 	        
-	       // VisualCurve curve = new MyVisualCurve();
-	        VisualCurve curve = new SimplifyVisualCurve();
+	        MyVisualCurve curve = new MyVisualCurve();
 	        curve.addLine(result_ir);
 	        curve.addLine(result_UD_CSTI);
 	        curve.addLine(result_UD_CallDataTreatEqual);
@@ -139,7 +135,6 @@ public class CallDataTreatEqualCountTest {
 	        double ud_pValue = printPValue(result_UD_CallDataTreatEqual,result_UD_CSTI);
 	        double ir_pValue = printPValue(result_UD_CallDataTreatEqual,result_ir);
 	        curve.showChart(project.getProjectName()+"rate:"+rateStr+"ud_pValue:"+ud_pValue);
-	        
 	        System.out.println("----------------IR AP/MAP-------------");
 	        System.out.println("AP:"+result_ir.getAveragePrecisionByRanklist());
 	        System.out.println("MAP:"+result_ir.getMeanAveragePrecisionByQuery());

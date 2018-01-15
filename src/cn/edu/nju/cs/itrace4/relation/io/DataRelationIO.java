@@ -227,9 +227,7 @@ public class DataRelationIO implements DataRelationIOInterface{
             }
         }
 
-
         System.out.println(" methodAccessSameFieldMap = " + methodAccessSameFieldMap.size());
-
 //        DataRelationList dataRelationList = new DataRelationList();
         DataRelationList dataRelationList = new DataRelationList();
         for (String accessFieldIdentify : methodAccessSameFieldMap.keySet()) {

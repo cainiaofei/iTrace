@@ -14,6 +14,7 @@ import org.jfree.data.xy.XYDataset;
 import cn.edu.nju.cs.itrace4.visual.VisualCurve;
 
 public class MyVisualCurve extends VisualCurve{
+	
 	  public void showChart(String projectName) {
 	        JPanel chartPanel = createChartPanel(projectName);
 	        add(chartPanel, BorderLayout.CENTER);

@@ -19,6 +19,12 @@ import java.util.Set;
 
 public class GetSrc {
 	private Set<String> nameInGraph;
+	private String rtmPath;
+	
+	public GetSrc(String rtmPath) {
+		this.rtmPath = rtmPath;
+	}
+	
 	
 	public void getSrcFromMasterBasedOnGraphDB(String masterPath,String targetPath, String dbPath) throws IOException {
 		nameInGraph = getGraphRelevantCode(dbPath);
@@ -28,7 +34,7 @@ public class GetSrc {
 	public void getSrcFromMasterBasedOnGraphDBNewFormatDB(String masterPath,String targetPath, String dbPath,
 			String tableName,String caller,String callee) throws IOException {
 		//nameInGraph = getGraphRelevantCodeFromNewFormatDB(dbPath,tableName,caller,callee);
-		nameInGraph = getGraphRelevantCodeFromNewFormatDB("data/exp/Maven_TestCase/rtm/Maven-req.db","rtm","file_path");
+		nameInGraph = getGraphRelevantCodeFromNewFormatDB(rtmPath,"rtm","file_path");
 		getSrcFromProject(masterPath, targetPath);
 	}
 	
@@ -294,10 +300,10 @@ public class GetSrc {
 	}
 
 	public static void main(String[] args) throws IOException {
-		GetSrc tool = new GetSrc();
-		String originPath = "data\\exp\\Infinispan\\infinispan-master";
-		String targetPath = "data\\exp\\Infinispan\\src";
-		tool.getSrcFromProject(originPath, targetPath);
+//		GetSrc tool = new GetSrc();
+//		String originPath = "data\\exp\\Infinispan\\infinispan-master";
+//		String targetPath = "data\\exp\\Infinispan\\src";
+//		tool.getSrcFromProject(originPath, targetPath);
 //		String dbPath = "data\\exp\\Infinispan\\relation\\call.db";
 //		Set<String> set = tool.getGraphRelevantCode(dbPath);
 //		System.out.println(set.size());

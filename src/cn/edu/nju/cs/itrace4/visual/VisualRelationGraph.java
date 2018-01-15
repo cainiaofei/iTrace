@@ -381,23 +381,24 @@ public class VisualRelationGraph {
     }
 
     public static void main(String[] args) throws IOException {
-        String class_relationInfo = "data/exp/Pig_cluster/relation/CLASS_relationInfo_whole.ser";
+    	String projectPath = "data/exp/Pig_cluster/";
+        String class_relationInfo = projectPath + "relation/CLASS_relationInfo_whole.ser";
 
         try {
             FileInputStream fis = new FileInputStream(class_relationInfo);
             ObjectInputStream ois = new ObjectInputStream(fis);
             RelationInfo ri = (RelationInfo) ois.readObject();
-            ri.setPruning(0.95, 0.95);
+            ri.setPruning(0.9, 0.9);
 
             //System.out.println(ri.getRelationGraphFile());
 
-            String rtmClassPath = "data/exp/Pig_cluster/rtm/RTM_CLASS.txt";
-            String ucPath = "data/exp/Pig_cluster/uc";
-            String classDirPath = "data/exp/Pig_cluster/class/code";
+            String rtmClassPath = projectPath + "rtm/RTM_CLASS.txt";
+            String ucPath = projectPath + "uc";
+            String classDirPath = projectPath + "class/code";
             TextDataset textDataset = new TextDataset(ucPath, classDirPath, rtmClassPath);
 
             CallDataRelationGraph cdGraph = new CallDataRelationGraph(ri);
-            String layoutPath = "data/exp/Pig_cluster/relation/PersistentLayoutDemo.out";
+            String layoutPath = projectPath + "relation/PersistentLayoutDemo.out";
             VisualRelationGraph visualRelationGraph = new VisualRelationGraph(textDataset, cdGraph, layoutPath);
             visualRelationGraph.show();
 

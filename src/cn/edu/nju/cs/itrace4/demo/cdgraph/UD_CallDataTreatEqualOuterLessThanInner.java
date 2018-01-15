@@ -23,7 +23,8 @@ import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 import cn.edu.nju.cs.itrace4.relation.graph.CodeEdge;
 import javafx.util.Pair;
 
-public class UD_CallDataTreatEqualCount implements CSTI{
+
+public class UD_CallDataTreatEqualOuterLessThanInner implements CSTI{
 	private int callRouterLen = 4;
 	private int dataRouterLen = 2;
 	private double[][] callGraphs;
@@ -45,7 +46,7 @@ public class UD_CallDataTreatEqualCount implements CSTI{
 	private int countThreshold = 2;
 	
 	
-	public UD_CallDataTreatEqualCount(RelationInfo ri,double callThreshold,double dataThreshold,
+	public UD_CallDataTreatEqualOuterLessThanInner(RelationInfo ri,double callThreshold,double dataThreshold,
 			int verifyCount,Map<String,Set<String>> valid){
 		allVertexIdList = ri.getVertexIdNameMap().keySet();
 		this.callThreshold = callThreshold;
@@ -111,10 +112,19 @@ public class UD_CallDataTreatEqualCount implements CSTI{
 						//double preValue = curValue;
 						if(!vertexName.equals(represent)){
 							int graphSize = subGraph.getVertexList().size();
-							//
+							//2018.1.13
+							double originValue = curValue;
 							//curValue = Math.min(maxScore*0.9999, curValue+maxScore/(graphSize-1));
 							//curValue = Math.min(maxScore*0.9999, curValue+maxScore/(Math.sqrt(graphSize)));
-							curValue = Math.min(maxScore*0.9999, curValue+maxScore/(graphSize));
+							double bonus = maxScore/(graphSize);
+							bonus = Math.sqrt(bonus);
+							curValue = Math.min(maxScore*0.9999, curValue+bonus);
+							/**
+							 * @date 2018.1.13
+							 * @description store the max bonus. 
+							 */
+							
+							subGraph.setMaxBonus(Math.max(subGraph.getMaxBonus(), bonus));
 						}
 						matrix.setScoreForLink(req, vertexName, curValue);
 					}
@@ -234,7 +244,10 @@ public class UD_CallDataTreatEqualCount implements CSTI{
 			//double validValueSum = (localMaxScore) * bonus;
 			double originValue = matrix.getScoreForLink(req, loneVertexName);
 			double nowValue = originValue + validValueSum;
-			nowValue = Math.min(nowValue, maxScore);
+			//2018.1.13
+			//nowValue = Math.min(nowValue, maxScore);
+			nowValue = Math.min(nowValue, originValue+subGraph.getMaxBonus());
+			
 			matrix.setScoreForLink(req, loneVertexName, nowValue);
 		}
 	}
@@ -312,7 +325,11 @@ public class UD_CallDataTreatEqualCount implements CSTI{
 			
 			double originValue = matrix.getScoreForLink(req, loneVertexName);
 			double nowValue = originValue + validValueSum;
-			nowValue = Math.min(nowValue, maxScore);
+			
+			//2018.1.13
+			//nowValue = Math.min(nowValue, maxScore);
+			nowValue = Math.min(nowValue, originValue+subGraph.getMaxBonus());
+			
 			matrix.setScoreForLink(req, loneVertexName, nowValue);
 		}
 		
@@ -407,7 +424,7 @@ public class UD_CallDataTreatEqualCount implements CSTI{
 
 	@Override
 	public String getAlgorithmName() {
-		return "UD_CallDataTreatEqualCount"+callThreshold+"_"+dataThreshold;
+		return "UD_CallDataTreatEqualOuterLessThanInner"+callThreshold+"_"+dataThreshold;
 	}
 
 	@Override
