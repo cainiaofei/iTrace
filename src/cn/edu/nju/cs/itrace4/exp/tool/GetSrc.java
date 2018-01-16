@@ -12,9 +12,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class GetSrc {
@@ -25,6 +23,8 @@ public class GetSrc {
 		this.rtmPath = rtmPath;
 	}
 	
+	public GetSrc() {
+	}
 	
 	public void getSrcFromMasterBasedOnGraphDB(String masterPath,String targetPath, String dbPath) throws IOException {
 		nameInGraph = getGraphRelevantCode(dbPath);
@@ -49,7 +49,7 @@ public class GetSrc {
             con.setAutoCommit(false);
             stmt = con.createStatement();
             
-            String sql = "select * from callGraph";
+            String sql = "select * from graph";
             ResultSet rs = stmt.executeQuery(sql);
             while(rs.next()) {
             	String former = rs.getString("source");//source

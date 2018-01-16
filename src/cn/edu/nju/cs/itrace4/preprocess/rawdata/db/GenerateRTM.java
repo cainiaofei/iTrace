@@ -145,6 +145,12 @@ public class GenerateRTM {
 			
 			for(int id:subGraph) {
 				String issueId = idMapName.get(id);
+				
+				//2018.1.16
+				if(issueId.equals("ISPN-1198")) {
+					System.out.println("why");;
+				}
+				
 				ResultSet rs = sqlOperate.executeQuery(sql+"'"+issueId+"'");
 				if(!rs.next()) {//there no exist this issue in init_rtm, may be filter by some case contraint.
 					continue;
@@ -160,7 +166,7 @@ public class GenerateRTM {
 				continue;
 			}
 			if(code.length()>0) {
-				System.out.println(actualCount);
+				System.out.println("numbers in group:"+actualCount);
 				request.append(summary+" "+description);
 				request = filter(request.toString().toCharArray());
 				String insertSql = "insert into rtm (request,file_path) values (" + "'" + 

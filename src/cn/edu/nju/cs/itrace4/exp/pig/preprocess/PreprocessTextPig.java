@@ -24,7 +24,7 @@ public class PreprocessTextPig {
 	private TransferTXT getSrc = new TransferTXT();
 	//private TableFormatNormalize generateCallGraph = new TableFormatNormalize();
 	
-	
+	private String clusterFilePath = "data/exp/Maven_Cluster/clusterFile/s_d_t_70d.txt";
 	private static String projectPath = "data/exp/Pig_cluster/";
 
     private static String rtmDBFilePath = projectPath + "rtm/Pig-req.db";
@@ -44,7 +44,7 @@ public class PreprocessTextPig {
     
     public PreprocessTextPig() {
     	//getRTM = new GenerateRTM(rtmDBFilePath,dbProperty,sqlFile);
-    	getRTM = new GenerateRTMThroughCluster(rtmDBFilePath,dbProperty,sqlFile);
+    	getRTM = new GenerateRTMThroughCluster(rtmDBFilePath,dbProperty,sqlFile,clusterFilePath);
     }
     
     private void cleanData() {

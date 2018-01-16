@@ -10,6 +10,7 @@ import cn.edu.nju.cs.itrace4.parser.SourceTargetUnionForGit;
 import cn.edu.nju.cs.itrace4.preprocess.BatchingPreprocess;
 import cn.edu.nju.cs.itrace4.preprocess.rawdata.db.GenerateRTM;
 import cn.edu.nju.cs.itrace4.preprocess.rawdata.db.GenerateRTMExt;
+import cn.edu.nju.cs.itrace4.preprocess.rawdata.db.GenerateRTMThroughCluster;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 
 /**
@@ -20,11 +21,11 @@ import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 public class PreprocessTextInfinispan {
 	private GenerateRTM getRTM;
 	private GetUC getUC = new GetUC();
-	private GetSrc getOriginSrc = new GetSrc(rtmDBFilePath);
+	private GetSrc getOriginSrc = new GetSrc();
 	private TransferTXT getSrc = new TransferTXT();
 	//private TableFormatNormalize generateCallGraph = new TableFormatNormalize();
 	
-	
+	private String clusterFilePath = "data/exp/Infinispan/clusterFile/s_d_t_70d.txt";
 	private static String projectPath = "data/exp/Infinispan/";
 
     private static String rtmDBFilePath = projectPath + "rtm/Infinispan-req.db";
@@ -45,7 +46,8 @@ public class PreprocessTextInfinispan {
     
     public PreprocessTextInfinispan() {
     	//getRTM = new GenerateRTMExt(rtmDBFilePath, dbProperty, sqlFile);
-    	getRTM = new GenerateRTM(rtmDBFilePath, dbProperty, sqlFile);
+    	//getRTM = new GenerateRTM(rtmDBFilePath, dbProperty, sqlFile);
+    	getRTM = new GenerateRTMThroughCluster(rtmDBFilePath,dbProperty,sqlFile,clusterFilePath);
     }
     
     private void cleanData() {
@@ -70,9 +72,9 @@ public class PreprocessTextInfinispan {
 			String originPath = srcDirPath;
 	    	String targetPath = classDirPath;
 	    	
-	    	getOriginSrc.getSrcFromMasterBasedOnGraphDBNewFormatDB(masterPath,originPath,graphDBPath,
-	    			"callGraph","caller","callee");
-	    	//getOriginSrc.getSrcFromMasterBasedOnGraphDB(masterPath, srcDirPath, graphDBPath);
+//	    	getOriginSrc.getSrcFromMasterBasedOnGraphDBNewFormatDB(masterPath,originPath,graphDBPath,
+//	    			"callGraph","caller","callee");
+	    	getOriginSrc.getSrcFromMasterBasedOnGraphDB(masterPath, srcDirPath, graphDBPath);
 	    	getSrc.transferTXT(originPath, targetPath);
 		} catch (Exception e) {
 			e.printStackTrace();

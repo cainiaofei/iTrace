@@ -8,6 +8,12 @@ import java.io.IOException;
 
 import cn.edu.nju.cs.itrace4.preprocess.rawdata.db.SqliteOperation;
 
+/**
+ * @author zzf 
+ * @date 2018.1.15
+ * @description remove some record which fHashcode is 'null'、'static' or 'primitive' through sql. 
+ */
+
 public class FilterDB {
 	private String dbPath = "/home/zzf/geek/Pig_cluster/relation/test2.db";
 	private SqliteOperation sqlOperate;
