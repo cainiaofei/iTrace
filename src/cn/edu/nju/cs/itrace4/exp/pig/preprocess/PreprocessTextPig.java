@@ -4,6 +4,7 @@ import java.io.File;
 
 import cn.edu.nju.cs.itrace4.core.type.Granularity;
 import cn.edu.nju.cs.itrace4.exp.tool.GetSrc;
+import cn.edu.nju.cs.itrace4.exp.tool.GetSrcBaseRI;
 import cn.edu.nju.cs.itrace4.exp.tool.GetUC;
 import cn.edu.nju.cs.itrace4.exp.tool.TransferTXT;
 import cn.edu.nju.cs.itrace4.parser.SourceTargetUnionForGit;
@@ -20,12 +21,15 @@ import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 public class PreprocessTextPig {
 	private GenerateRTM getRTM;
 	private GetUC getUC = new GetUC();
-	private GetSrc getOriginSrc = new GetSrc(rtmDBFilePath);
+	
+	//private GetSrc getOriginSrc = new GetSrc(rtmDBFilePath);
+	private GetSrc getOriginSrc = new GetSrcBaseRI(relationDirPath);
+	
 	private TransferTXT getSrc = new TransferTXT();
 	//private TableFormatNormalize generateCallGraph = new TableFormatNormalize();
 	
-	private String clusterFilePath = "data/exp/Maven_Cluster/clusterFile/s_d_t_70d.txt";
-	private static String projectPath = "data/exp/Pig_cluster/";
+	private String clusterFilePath = "data/exp/pig/clusterFile/s_d_t_70d.txt";
+	private static String projectPath = "data/exp/Pig/";
 
     private static String rtmDBFilePath = projectPath + "rtm/Pig-req.db";
     private static String srcDirPath = projectPath + "src";
@@ -43,8 +47,8 @@ public class PreprocessTextPig {
     private String sqlFile = "resource/sql/buildRTMForPig.sql";
     
     public PreprocessTextPig() {
-    	//getRTM = new GenerateRTM(rtmDBFilePath,dbProperty,sqlFile);
-    	getRTM = new GenerateRTMThroughCluster(rtmDBFilePath,dbProperty,sqlFile,clusterFilePath);
+    	getRTM = new GenerateRTM(rtmDBFilePath,dbProperty,sqlFile);
+    	//getRTM = new GenerateRTMThroughCluster(rtmDBFilePath,dbProperty,sqlFile,clusterFilePath);
     }
     
     private void cleanData() {
@@ -74,8 +78,10 @@ public class PreprocessTextPig {
 			String originPath = srcDirPath;
 	    	String targetPath = classDirPath;
 	    	//getOriginSrc.getSrcFromMasterBasedOnGraphDB(masterPath, srcDirPath, graphDBPath);
-	    	getOriginSrc.getSrcFromMasterBasedOnGraphDBNewFormatDB(masterPath,originPath,graphDBPath,"callGraph",
-	    			"caller","callee");
+//	    	getOriginSrc.getSrcFromMasterBasedOnGraphDBNewFormatDB(masterPath,originPath,graphDBPath,"callGraph",
+//	    			"caller","callee");
+	    	getOriginSrc.getSrcBaseRI(masterPath, originPath);
+	    	
 	    	getSrc.transferTXT(originPath, targetPath);
 		} catch (Exception e) {
 			e.printStackTrace();

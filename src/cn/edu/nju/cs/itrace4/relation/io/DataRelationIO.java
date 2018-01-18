@@ -300,6 +300,9 @@ public class DataRelationIO implements DataRelationIOInterface{
             String sql = "SELECT * FROM " + dbFileName + ";";
             ResultSet rs = stmt.executeQuery(sql);
 
+            /**
+             * 2018.1.18
+             * */
             while (rs.next()) {
                 if (dataRelationType.equals(DataRelationType.FieldAccess)) {
                     FieldAccess fa = new FieldAccess();

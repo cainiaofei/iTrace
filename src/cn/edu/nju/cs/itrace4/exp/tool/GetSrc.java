@@ -308,4 +308,7 @@ public class GetSrc {
 //		Set<String> set = tool.getGraphRelevantCode(dbPath);
 //		System.out.println(set.size());
 	}
+
+	public void getSrcBaseRI(String masterPath, String targetPath) throws IOException {
+	}
 }

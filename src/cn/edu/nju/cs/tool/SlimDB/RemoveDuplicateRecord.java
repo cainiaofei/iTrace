@@ -21,37 +21,43 @@ import cn.edu.nju.cs.itrace4.preprocess.rawdata.db.SqliteOperation;
  *             2. insert record with no duplicate.
  */
 public class RemoveDuplicateRecord {
-	private String dbPath = "/home/zzf/geek/Pig_cluster/relation/test1.db";
-	private String fieldsPath = "resource/sql/fa.property";
-	private String originTable = "fa";
-	private String targetTable = "fieldAccess";
+	private String dbPath = "/home/zzf/geek/Pig_cluster/newDB/test3.db";
+	private String fieldsPath = "resource/sql/pp.property";
+	private String originTable = "pp";
+	private String targetTable = "parameterPass";
 	private SqliteOperation sqlOperate;
 	private String driver = "org.sqlite.JDBC";
 	
 	public RemoveDuplicateRecord() {
 		sqlOperate = new SqliteOperation();
 		sqlOperate.buildConnection(driver, dbPath);
+		sqlOperate.setCommit(false);
 	}
 	
 	public void buildTableWithNoDuplicate() throws SQLException, IOException {
 		int count = 0;
 		String querySql = "select * from " + originTable;
-		String emptyDBSql = "delete from " + targetTable;
+		//String emptyDBSql = "delete from " + targetTable;
 		String base = "insert into " + targetTable;
 		Set<String> set = new HashSet<String>();
 		String[] fields = readFields(fieldsPath);
-		sqlOperate.executeSql(emptyDBSql);
+		//sqlOperate.executeSql(emptyDBSql);
 		ResultSet rs = sqlOperate.executeQuery(querySql);
 		while(rs.next()) {
 			String mcSignature = rs.getString("McSignature");
 			String fHashcode = rs.getString("fHashcode");
 			if(!set.contains(mcSignature+fHashcode)) {
+				count++;
+				System.out.println("count:"+count);
 				set.add(mcSignature+fHashcode);
 				String insertSql = buildInsertSql(base,rs,fields);
 				sqlOperate.executeSql(insertSql);
-				count++;
+				if(count%200000==0) {
+					sqlOperate.commit();
+				}
 			}
 		}
+		sqlOperate.closeConnection();
 		System.out.println("insert count:"+count);
 	}
 	

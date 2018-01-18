@@ -108,6 +108,10 @@ public class CallDataTreatEqualCountTest {
 	        		new UD_CallDataTreatEqualOuterLessThanInner(ri,callEdgeScoreThreshold,
 	        			dataEdgeScoreThreshold,600,valid));//0.7
 	        
+	        Result result_No_Outter = IR.compute(textDataset,model,
+	        		new NoOutter(ri,callEdgeScoreThreshold,
+	        			dataEdgeScoreThreshold,600,valid));//0.7
+	        
 	        /**
 	         * @date 2018.1.12
 	         * @description adjust algorithm 
@@ -128,6 +132,7 @@ public class CallDataTreatEqualCountTest {
 	        curve.addLine(result_UD_CSTI);
 	        curve.addLine(result_UD_CallDataTreatEqual);
 	        
+	        curve.addLine(result_No_Outter);
 	        //curve.addLine(result_UD_CallDataTreatEqualTemp);
 	        
 	        double rate = Double.valueOf(System.getProperty("rate"));

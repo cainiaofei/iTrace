@@ -177,7 +177,7 @@ public class GenerateRTMExt extends GenerateRTM {
 			}
 			
 			if(code.length()>0) {
-				System.out.println(actualCount);
+				System.out.println("actualCount in subGraph:"+actualCount);
 				request.append(summary+" "+description);
 				request = filter(request.toString().toCharArray());
 				String insertSql = "insert into rtm (request,file_path) values (" + "'" + 

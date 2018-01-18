@@ -1,4 +1,5 @@
-package cn.edu.nju.cs.itrace4.demo.cdgraph;
+package cn.edu.nju.cs.itrace4.demo.cdgraph.temp;
+
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,7 +25,7 @@ import cn.edu.nju.cs.itrace4.relation.graph.CodeEdge;
 import javafx.util.Pair;
 
 
-public class UD_CallDataTreatEqualOuterLessThanInner implements CSTI{
+public class NoOutter implements CSTI{
 	private int callRouterLen = 4;
 	private int dataRouterLen = 2;
 	private double[][] callGraphs;
@@ -46,7 +47,7 @@ public class UD_CallDataTreatEqualOuterLessThanInner implements CSTI{
 	private int countThreshold = 2;
 	
 	
-	public UD_CallDataTreatEqualOuterLessThanInner(RelationInfo ri,double callThreshold,double dataThreshold,
+	public NoOutter(RelationInfo ri,double callThreshold,double dataThreshold,
 			int verifyCount,Map<String,Set<String>> valid){
 		allVertexIdList = ri.getVertexIdNameMap().keySet();
 		this.callThreshold = callThreshold;
@@ -146,7 +147,7 @@ public class UD_CallDataTreatEqualOuterLessThanInner implements CSTI{
 					temp.add(localMaxId);
 					subGraph = new SubGraph(temp);
 					
-					giveBonusForLoneNotInThisRegion(matrix, subGraph,curLoneVertexList,req);
+					//giveBonusForLoneNotInThisRegion(matrix, subGraph,curLoneVertexList,req);
 					hasVisitedRegion.addAll(subGraph.getVertexList());
 				}//if end
 				index++;
@@ -464,7 +465,7 @@ public class UD_CallDataTreatEqualOuterLessThanInner implements CSTI{
 
 	@Override
 	public String getAlgorithmName() {
-		return "UD_CallDataTreatEqualOuterLessThanInner"+callThreshold+"_"+dataThreshold;
+		return "NoOutter"+callThreshold+"_"+dataThreshold;
 	}
 
 	@Override
