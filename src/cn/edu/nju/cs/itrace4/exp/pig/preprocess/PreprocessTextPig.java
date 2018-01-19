@@ -40,7 +40,7 @@ public class PreprocessTextPig {
     
     private static String relationDirPath = projectPath + "relation";
     
-    private static String masterPath = projectPath+"pig-master";
+    private static String masterPath = projectPath+"pig-master/src";
     private static String graphDBPath = relationDirPath + File.separator + "call.db";
     
     private String dbProperty = "resource/PigDB.property";
