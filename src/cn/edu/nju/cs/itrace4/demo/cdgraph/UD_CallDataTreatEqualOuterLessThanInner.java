@@ -276,7 +276,7 @@ public class UD_CallDataTreatEqualOuterLessThanInner implements CSTI{
 
 		//	double localMaxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(subGraph.getMaxId()));
 
-			System.out.println("outBonus:"+bonus);
+			//System.out.println("outBonus:"+bonus);
 			
 			double validValueSum = maxScore * bonus;
 			//double validValueSum = (localMaxScore) * bonus;
@@ -359,7 +359,7 @@ public class UD_CallDataTreatEqualOuterLessThanInner implements CSTI{
 			double bonus = giveBonusForLonePointBasedDataGraph(dataGraphs, subGraph, loneVertex, 1);
 			//double localMaxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(subGraph.getMaxId()));
 			//double validValueSum = (localMaxScore) * bonus;
-			System.out.println("outer bonus:"+bonus);
+			//System.out.println("outer bonus:"+bonus);
 			
 			double validValueSum = maxScore * bonus;
 			

@@ -26,7 +26,7 @@ public class Setting {
 //    public static double dataThreshold = 0.2;
 
 //    public static final int LSI_K = 125;
-    public static final int LSI_K = 85;///100
+    public static final int LSI_K = 90;///100
 
 //    public static final int LSI_K = 105;
 

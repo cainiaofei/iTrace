@@ -147,7 +147,7 @@ public class NoOutter implements CSTI{
 //					temp.add(localMaxId);
 //					subGraph = new SubGraph(temp);
 					
-					giveBonusForLoneNotInThisRegion(matrix, subGraph,curLoneVertexList,req);
+				    giveBonusForLoneNotInThisRegion(matrix, subGraph,curLoneVertexList,req);
 					hasVisitedRegion.addAll(subGraph.getVertexList());
 				}//if end
 				index++;
@@ -277,7 +277,6 @@ public class NoOutter implements CSTI{
 
 		//	double localMaxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(subGraph.getMaxId()));
 
-			System.out.println("outBonus:"+bonus);
 			
 			double validValueSum = maxScore * bonus;
 			//double validValueSum = (localMaxScore) * bonus;
@@ -360,7 +359,7 @@ public class NoOutter implements CSTI{
 			double bonus = giveBonusForLonePointBasedDataGraph(dataGraphs, subGraph, loneVertex, 1);
 			//double localMaxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(subGraph.getMaxId()));
 			//double validValueSum = (localMaxScore) * bonus;
-			System.out.println("outer bonus:"+bonus);
+			//System.out.println("outer bonus:"+bonus);
 			
 			double validValueSum = maxScore * bonus;
 			

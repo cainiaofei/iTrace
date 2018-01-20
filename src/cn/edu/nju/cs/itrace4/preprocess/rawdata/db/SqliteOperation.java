@@ -40,7 +40,9 @@ public class SqliteOperation implements DBOperationInterface{
 	@Override
 	public boolean closeConnection() {
 		try {
-			con.commit();
+			if(con.getAutoCommit()==false) {
+				con.commit();
+			}
 			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();

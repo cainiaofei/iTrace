@@ -30,7 +30,7 @@ public class PreprocessTextMaven {
 	private TransferTXT getSrc = new TransferTXT();
 	//private TableFormatNormalize generateCallGraph = new TableFormatNormalize();
 	
-	private static String projectPath = "data/exp/Maven_Cluster/";
+	private static String projectPath = "data/exp/Maven/";
 
     private static String rtmDBFilePath = projectPath + "rtm/Maven-req.db";
     private static String srcDirPath = projectPath + "src";
@@ -49,8 +49,8 @@ public class PreprocessTextMaven {
     
     public PreprocessTextMaven() {
     	//2017.11.27 change temporary 
-    	getRTM = new GenerateRTM(rtmDBFilePath,dbProperty,sqlFile);
-    	//getRTM = new GenerateRTMExt(rtmDBFilePath,dbProperty,sqlFile);
+    	//getRTM = new GenerateRTM(rtmDBFilePath,dbProperty,sqlFile);
+    	getRTM = new GenerateRTMExt(rtmDBFilePath,dbProperty,sqlFile);
     	//getRTM = new GenerateRTMExtMsg(rtmDBFilePath,dbProperty,sqlFile);
     	//getRTM = new GenerateRTMThroughCluster(rtmDBFilePath,dbProperty,sqlFile);
     }

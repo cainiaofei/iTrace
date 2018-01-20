@@ -112,7 +112,7 @@ public class CallDataTreatEqualCountTest {
 	        valid = new HashMap<String,Set<String>>();
 	        Result result_UD_CallDataTreatEqual = IR.compute(textDataset,model,
 	        		new UD_CallDataTreatEqualCount(ri,callEdgeScoreThreshold,
-	        			dataEdgeScoreThreshold,600,valid));//0.7
+	        			dataEdgeScoreThreshold,6,valid));//0.7
 	        
 	        /**
 	         * @date 2018.1.12
