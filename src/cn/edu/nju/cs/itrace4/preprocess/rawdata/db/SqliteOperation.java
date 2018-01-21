@@ -10,6 +10,22 @@ public class SqliteOperation implements DBOperationInterface{
 	
 	private Connection con;
 	
+	public void setCommit(boolean flag) {
+		try {
+			con.setAutoCommit(flag);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void commit() {
+		try {
+			con.commit();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	@Override
 	public void buildConnection(String driver, String dbPath) {
 		 try {
@@ -23,6 +39,7 @@ public class SqliteOperation implements DBOperationInterface{
 	@Override
 	public boolean closeConnection() {
 		try {
+			con.commit();
 			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();

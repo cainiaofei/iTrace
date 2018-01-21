@@ -2,52 +2,52 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/annotations.jar"/>
-	<classpathentry kind="lib" path="lib/charts4j-1.3.jar"/>
-	<classpathentry kind="lib" path="lib/collections-generic-4.01-src.jar"/>
-	<classpathentry kind="lib" path="lib/collections-generic-4.01.jar" sourcepath="lib/collections-generic-4.01-src.jar"/>
-	<classpathentry kind="lib" path="lib/colt-1.2.0.jar"/>
-	<classpathentry kind="lib" path="lib/commons-csv-1.2.jar"/>
-	<classpathentry kind="lib" path="lib/commons-math3-3.6.jar" sourcepath="/home/zzf/geek/iTrace4/lib/"/>
-	<classpathentry kind="lib" path="lib/concurrent-1.3.4.jar"/>
-	<classpathentry kind="lib" path="lib/dom4j-1.6.1.jar"/>
-	<classpathentry kind="lib" path="lib/j3d-core-1.3.1.jar"/>
-	<classpathentry kind="lib" path="lib/Jama-1.0.2.jar"/>
-	<classpathentry kind="lib" path="lib/Jama-1.0.3.jar"/>
-	<classpathentry kind="lib" path="lib/jcommon-1.0.23.jar"/>
-	<classpathentry kind="lib" path="lib/jfreechart-1.0.19.jar"/>
-	<classpathentry kind="lib" path="lib/jmwn-1.2.jar"/>
-	<classpathentry kind="lib" path="lib/jung-3d-2.0.1.jar"/>
-	<classpathentry kind="lib" path="lib/jung-3d-demos-2.0.1.jar"/>
-	<classpathentry kind="lib" path="lib/jung-algorithms-2.0.1-sources.jar"/>
-	<classpathentry kind="lib" path="lib/jung-algorithms-2.0.1.jar"/>
-	<classpathentry kind="lib" path="lib/jung-api-2.0-sources.jar"/>
-	<classpathentry kind="lib" path="lib/jung-api-2.0.1.jar" sourcepath="lib/jung-api-2.0-sources.jar"/>
-	<classpathentry kind="lib" path="lib/jung-graph-impl-2.0.1-sources.jar"/>
-	<classpathentry kind="lib" path="lib/jung-graph-impl-2.0.1.jar" sourcepath="lib/jung-graph-impl-2.0.1-sources.jar"/>
-	<classpathentry kind="lib" path="lib/jung-io-2.0.1.jar"/>
-	<classpathentry kind="lib" path="lib/jung-jai-2.0.1.jar"/>
-	<classpathentry kind="lib" path="lib/jung-jai-samples-2.0.1.jar"/>
-	<classpathentry kind="lib" path="lib/jung-visualization-2.0.1.jar" sourcepath="lib/jung-visualization-2.0.1-sources.jar"/>
-	<classpathentry kind="lib" path="lib/junit-4.10.jar"/>
-	<classpathentry kind="lib" path="lib/mongo-2.9.3.jar"/>
-	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.7-bin.jar"/>
-	<classpathentry kind="lib" path="lib/org.eclipse.core.contenttype_3.4.100.v20110423-0524.jar"/>
-	<classpathentry kind="lib" path="lib/org.eclipse.core.jobs_3.5.100.v20110404.jar"/>
-	<classpathentry kind="lib" path="lib/org.eclipse.core.resources_3.7.100.v20110510-0712.jar"/>
-	<classpathentry kind="lib" path="lib/org.eclipse.core.runtime_3.7.0.v20110110.jar"/>
-	<classpathentry kind="lib" path="lib/org.eclipse.equinox.common_3.6.0.v20110523.jar"/>
-	<classpathentry kind="lib" path="lib/org.eclipse.equinox.preferences_3.4.0.v20110502.jar"/>
-	<classpathentry kind="lib" path="lib/org.eclipse.jdt.core_3.7.0.v_B61.jar"/>
-	<classpathentry kind="lib" path="lib/org.eclipse.osgi_3.7.0.v20110613.jar"/>
-	<classpathentry kind="lib" path="lib/org.eclipse.text_3.5.100.v20110505-0800.jar"/>
-	<classpathentry kind="lib" path="lib/org.eclipse.ui_3.7.0.I20110602-0100.jar"/>
-	<classpathentry kind="lib" path="lib/servlet.jar"/>
-	<classpathentry kind="lib" path="lib/sqlite-jdbc-3.8.5-pre1.jar"/>
-	<classpathentry kind="lib" path="lib/stax-api-1.0.1.jar"/>
-	<classpathentry kind="lib" path="lib/stdlib-package.jar"/>
-	<classpathentry kind="lib" path="lib/tools.jar"/>
-	<classpathentry kind="lib" path="lib/vecmath-1.3.1.jar"/>
-	<classpathentry kind="lib" path="lib/wstx-asl-3.2.6.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/annotations.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/charts4j-1.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/collections-generic-4.01-src.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/collections-generic-4.01.jar" sourcepath="lib/collections-generic-4.01-src.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/colt-1.2.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/commons-csv-1.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/commons-math3-3.6.jar" sourcepath="/home/zzf/geek/iTrace4/lib/"/>
+	<classpathentry exported="true" kind="lib" path="lib/concurrent-1.3.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/dom4j-1.6.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/j3d-core-1.3.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/Jama-1.0.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/Jama-1.0.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jcommon-1.0.23.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jfreechart-1.0.19.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jmwn-1.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jung-3d-2.0.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jung-3d-demos-2.0.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jung-algorithms-2.0.1-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jung-algorithms-2.0.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jung-api-2.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jung-api-2.0.1.jar" sourcepath="lib/jung-api-2.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jung-graph-impl-2.0.1-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jung-graph-impl-2.0.1.jar" sourcepath="lib/jung-graph-impl-2.0.1-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jung-io-2.0.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jung-jai-2.0.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jung-jai-samples-2.0.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jung-visualization-2.0.1.jar" sourcepath="lib/jung-visualization-2.0.1-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/junit-4.10.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/mongo-2.9.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/mysql-connector-java-5.1.7-bin.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/org.eclipse.core.contenttype_3.4.100.v20110423-0524.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/org.eclipse.core.jobs_3.5.100.v20110404.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/org.eclipse.core.resources_3.7.100.v20110510-0712.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/org.eclipse.core.runtime_3.7.0.v20110110.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/org.eclipse.equinox.common_3.6.0.v20110523.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/org.eclipse.equinox.preferences_3.4.0.v20110502.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/org.eclipse.jdt.core_3.7.0.v_B61.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/org.eclipse.osgi_3.7.0.v20110613.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/org.eclipse.text_3.5.100.v20110505-0800.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/org.eclipse.ui_3.7.0.I20110602-0100.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/servlet.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/sqlite-jdbc-3.8.5-pre1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/stax-api-1.0.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/stdlib-package.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/tools.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/vecmath-1.3.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/wstx-asl-3.2.6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
