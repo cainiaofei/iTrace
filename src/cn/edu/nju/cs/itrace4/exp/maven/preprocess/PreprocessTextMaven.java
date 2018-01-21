@@ -4,11 +4,14 @@ import java.io.File;
 
 import cn.edu.nju.cs.itrace4.core.type.Granularity;
 import cn.edu.nju.cs.itrace4.exp.tool.GetSrc;
+import cn.edu.nju.cs.itrace4.exp.tool.GetSrcBaseRI;
 import cn.edu.nju.cs.itrace4.exp.tool.GetUC;
 import cn.edu.nju.cs.itrace4.exp.tool.TransferTXT;
 import cn.edu.nju.cs.itrace4.parser.SourceTargetUnionForGit;
 import cn.edu.nju.cs.itrace4.preprocess.BatchingPreprocess;
 import cn.edu.nju.cs.itrace4.preprocess.rawdata.db.GenerateRTM;
+import cn.edu.nju.cs.itrace4.preprocess.rawdata.db.GenerateRTMExt;
+import cn.edu.nju.cs.itrace4.preprocess.rawdata.db.GenerateRTMExtMsg;
 import cn.edu.nju.cs.itrace4.preprocess.rawdata.db.GenerateRTMThroughCluster;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 
@@ -21,11 +24,13 @@ public class PreprocessTextMaven {
 	private GenerateRTM getRTM;
 	//private GenerateRTMThroughCluster getRTM;
 	private GetUC getUC = new GetUC();
-	private GetSrc getOriginSrc = new GetSrc();
+	//private GetSrc getOriginSrc = new GetSrc(rtmDBFilePath);
+	private GetSrc getOriginSrc = new GetSrcBaseRI(relationDirPath);
+	
 	private TransferTXT getSrc = new TransferTXT();
 	//private TableFormatNormalize generateCallGraph = new TableFormatNormalize();
 	
-	private static String projectPath = "data/exp/Maven_TestCase/";
+	private static String projectPath = "data/exp/Maven/";
 
     private static String rtmDBFilePath = projectPath + "rtm/Maven-req.db";
     private static String srcDirPath = projectPath + "src";
@@ -44,7 +49,9 @@ public class PreprocessTextMaven {
     
     public PreprocessTextMaven() {
     	//2017.11.27 change temporary 
-    	getRTM = new GenerateRTM(rtmDBFilePath,dbProperty,sqlFile);
+    	//getRTM = new GenerateRTM(rtmDBFilePath,dbProperty,sqlFile);
+    	getRTM = new GenerateRTMExt(rtmDBFilePath,dbProperty,sqlFile);
+    	//getRTM = new GenerateRTMExtMsg(rtmDBFilePath,dbProperty,sqlFile);
     	//getRTM = new GenerateRTMThroughCluster(rtmDBFilePath,dbProperty,sqlFile);
     }
     
@@ -70,8 +77,10 @@ public class PreprocessTextMaven {
 			String originPath = srcDirPath;
 	    	String targetPath = classDirPath;
 	    	//getOriginSrc.getSrcFromMasterBasedOnGraphDB(masterPath, srcDirPath, graphDBPath);
-	    	getOriginSrc.getSrcFromMasterBasedOnGraphDBNewFormatDB(masterPath,originPath,graphDBPath,"callGraph",
-	    			"caller","callee");
+//	    	getOriginSrc.getSrcFromMasterBasedOnGraphDBNewFormatDB(masterPath,originPath,graphDBPath,"callGraph",
+//	    			"caller","callee");
+	    	
+	    	getOriginSrc.getSrcBaseRI(masterPath, originPath);
 	    	getSrc.transferTXT(originPath, targetPath);
 		} catch (Exception e) {
 			e.printStackTrace();

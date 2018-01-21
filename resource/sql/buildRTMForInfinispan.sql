@@ -1,3 +1,4 @@
+ 
   create table init_rtm
    as select * from
    (
@@ -8,7 +9,7 @@
         select code_change.commit_hash as commit_hash, file_path,message
         from code_change, change_set
         where code_change.commit_hash=change_set.commit_hash
-        and (sum_added_lines - sum_removed_lines) >= 5 and file_path like '%java'
+        and (sum_added_lines - sum_removed_lines) >= 0 and file_path like '%java' and file_path not like '%Test.java'
       ) as commit_file,
       (
         select issue.issue_id, commit_hash,summary, description 

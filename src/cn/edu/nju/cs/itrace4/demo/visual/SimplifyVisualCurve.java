@@ -1,5 +1,8 @@
-package cn.edu.nju.cs.itrace4.visual;
+package cn.edu.nju.cs.itrace4.demo.visual;
 
+import cn.edu.nju.cs.itrace4.core.document.LinksList;
+import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
+import cn.edu.nju.cs.itrace4.core.document.SingleLink;
 import cn.edu.nju.cs.itrace4.core.metrics.PrecisionRecallCurve;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
 import org.jfree.chart.ChartFactory;
@@ -24,7 +27,7 @@ import java.util.List;
 /**
  * Created by niejia on 15/2/24.
  */
-public class VisualCurve extends JFrame {
+public class SimplifyVisualCurve extends MyVisualCurve {
 
     public static int count = 0;
 
@@ -33,10 +36,10 @@ public class VisualCurve extends JFrame {
     protected Map<PrecisionRecallCurve, String> labelMap = new HashMap<>();
     protected List<Result> resultsInCurve = new ArrayList<>();
 
-    public VisualCurve() {
+    public SimplifyVisualCurve() {
     }
 
-    public VisualCurve(PrecisionRecallCurve precisionRecallCurve) {
+    public SimplifyVisualCurve(PrecisionRecallCurve precisionRecallCurve) {
         curveList.add(precisionRecallCurve);
     }
 
@@ -110,20 +113,86 @@ public class VisualCurve extends JFrame {
         return dataSet;
     }
 
+    /**
+     * @author zzf
+     * @date 2018.1.14
+     * @description it will eat too much time in former method. Here we only connect 
+     * 	vertex which when valid. 
+     */
     public void addLine(Result result) {
         resultsInCurve.add(result);
-        curveList.add(result.getPrecisionRecallCurve());
+        curveList.add(getPrecisionRecallCurve(result));
         //找bug开始
 //        if(labelMap.containsKey(result.getPrecisionRecallCurve())){
 //        	System.out.println("");
 //        }
         //找bug结束
         
-        labelMap.put(result.getPrecisionRecallCurve(), result.getModel() + " " + result.getAlgorithmName());
+        String temp = result.getModel() + " " + result.getAlgorithmName();
+        
+        labelMap.put(getPrecisionRecallCurve(result), result.getModel() + " " + result.getAlgorithmName());
         nameQueue.add(result.getAlgorithmName());
     }
 
-    public static BufferedImage getScreenShot(
+    /**
+     * @author zzf
+     * @date 2018.1.14
+     * @description  
+     */
+    private PrecisionRecallCurve getPrecisionRecallCurve(Result result) {
+    	SimilarityMatrix oracle = result.getOracle();
+    	SimilarityMatrix matrix = result.matrix;
+    	
+    	PrecisionRecallCurve precisionRecallCurve = new PrecisionRecallCurve();
+        precisionRecallCurve.setName(result.getAlgorithmName());
+        precisionRecallCurve.setCutParameter(result.getCutParameter());
+        
+        oracle.setThreshold(0.0);
+        int correct = 0;
+
+        int TP = 0;
+        int TN = 0;
+        int FP = 0;
+        int FN = 0;
+
+        LinksList allLinks = matrix.allLinks();
+        Collections.sort(allLinks, Collections.reverseOrder());
+
+//        System.out.println(" allLinks = " + allLinks );
+        /**
+         * it seemed this links doesnt use
+         * */
+        LinksList links = matrix.getLinksAboveThreshold();
+        Collections.sort(links, Collections.reverseOrder());
+
+        int linkNumber = 0;
+        for (SingleLink link : allLinks) {
+//            System.out.println(" link = " + link );
+            String source = link.getSourceArtifactId();
+            String target = link.getTargetArtifactId();
+            if (matrix.isLinkAboveThreshold(source, target)) {
+            	linkNumber++;
+                if (oracle.isLinkAboveThreshold(source, target)) {
+                    correct++;
+                    TP++;
+                    double precision = correct / (double) linkNumber;
+                    precisionRecallCurve.put(String.format("%03d_Precision", linkNumber), precision);
+                    double recall = correct / (double) oracle.count();
+                    precisionRecallCurve.put(String.format("%03d_Recall", linkNumber), recall);
+                } else {
+                    FP++;
+                }
+            } else {
+                if (oracle.isLinkAboveThreshold(link.getSourceArtifactId(), link.getTargetArtifactId())) {
+                    FN++;
+                }
+                TN++;
+            }
+        }
+        return precisionRecallCurve;
+	}
+
+	public static BufferedImage getScreenShot(
             Component component) {
 
         BufferedImage image = new BufferedImage(
@@ -173,13 +242,4 @@ public class VisualCurve extends JFrame {
             i++;
         }
     }
-
-    /**
-     * @author zzf
-     * @date 2018.1.14
-     * @description implement by child
-     */
-	public void showChart(String string) {
-		
-	}
 }

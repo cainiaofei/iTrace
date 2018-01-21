@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.demo.cdgraph;
+package cn.edu.nju.cs.itrace4.demo.cdgraph.temp;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,8 +23,8 @@ import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 import cn.edu.nju.cs.itrace4.relation.graph.CodeEdge;
 import javafx.util.Pair;
 
-public class UD_CallDataTreatEqualCount implements CSTI{
-	private int callRouterLen = 4;
+public class UD_CallDataTreatEqualCountTemp implements CSTI{
+	private int callRouterLen = 6;
 	private int dataRouterLen = 2;
 	private double[][] callGraphs;
 	private double[][] dataGraphs;
@@ -45,7 +45,7 @@ public class UD_CallDataTreatEqualCount implements CSTI{
 	private int countThreshold = 2;
 	
 	
-	public UD_CallDataTreatEqualCount(RelationInfo ri,double callThreshold,double dataThreshold,
+	public UD_CallDataTreatEqualCountTemp(RelationInfo ri,double callThreshold,double dataThreshold,
 			int verifyCount,Map<String,Set<String>> valid){
 		allVertexIdList = ri.getVertexIdNameMap().keySet();
 		this.callThreshold = callThreshold;
@@ -124,7 +124,7 @@ public class UD_CallDataTreatEqualCount implements CSTI{
 					 * @date 2018.1.12
 					 * @description dont give bonus for outer vertex temperary. 
 					 */
-					giveBonusForLoneNotInThisRegion(matrix, subGraph,curLoneVertexList,req);
+					//giveBonusForLoneNotInThisRegion(matrix, subGraph,curLoneVertexList,req);
 					hasVisitedRegion.addAll(subGraph.getVertexList());
 				}//if end
 				index++;
@@ -230,8 +230,11 @@ public class UD_CallDataTreatEqualCount implements CSTI{
 
 			double localMaxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(subGraph.getMaxId()));
 
-			double validValueSum = maxScore * bonus;
-			//double validValueSum = (localMaxScore) * bonus;
+			/**
+			 * @date  
+			 */
+			//double validValueSum = maxScore * bonus;
+			double validValueSum = (localMaxScore) * bonus;
 			double originValue = matrix.getScoreForLink(req, loneVertexName);
 			double nowValue = originValue + validValueSum;
 			nowValue = Math.min(nowValue, maxScore);
@@ -407,7 +410,7 @@ public class UD_CallDataTreatEqualCount implements CSTI{
 
 	@Override
 	public String getAlgorithmName() {
-		return "UD_CallDataTreatEqualCount"+callThreshold+"_"+dataThreshold;
+		return "UD_CallDataTreatEqualCountTemp"+callThreshold+"_"+dataThreshold;
 	}
 
 	@Override

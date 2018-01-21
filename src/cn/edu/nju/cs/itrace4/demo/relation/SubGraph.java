@@ -18,6 +18,20 @@ public class SubGraph {
 	//2017/8/12 增加一个属性  为了使用新方法 这里的距离和传统意义的距离还不一样 越大越紧密
 	private double closenessDistanceFromMaxSubGraph;
 	
+	/*
+	 * @date 2018/1/13
+	 * @description add a property used to store the max bonus.
+	 */
+	private double maxBonus;
+	
+	public void setMaxBonus(double maxBonus) {
+		this.maxBonus = maxBonus;
+	}
+	
+	public double getMaxBonus() {
+		return maxBonus;
+	}
+	
 	public void SetType(String type) {
 		this.type = type;
 	}
