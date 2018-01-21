@@ -26,7 +26,6 @@ public class SqliteOperation implements DBOperationInterface{
 		}
 	}
 	
-	
 	@Override
 	public void buildConnection(String driver, String dbPath) {
 		 try {
