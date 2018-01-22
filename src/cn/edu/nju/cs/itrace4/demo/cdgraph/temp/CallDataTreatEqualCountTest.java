@@ -106,7 +106,7 @@ public class CallDataTreatEqualCountTest {
 	        valid = new HashMap<String,Set<String>>();
 	        Result result_UD_CallDataTreatEqual = IR.compute(textDataset,model,
 	        		new UD_CallDataTreatEqualOuterLessThanInner(ri,callEdgeScoreThreshold,
-	        			dataEdgeScoreThreshold,4,valid));//0.7
+	        			dataEdgeScoreThreshold,3,valid));//0.7
 	        
 //	        Result result_No_Outter = IR.compute(textDataset,model,
 //	        		new NoOutter(ri,callEdgeScoreThreshold,
