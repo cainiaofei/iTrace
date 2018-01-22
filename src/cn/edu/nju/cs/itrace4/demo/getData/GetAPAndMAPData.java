@@ -40,7 +40,7 @@ public class GetAPAndMAPData{
 	
 	public void initProjectMap(){
 		projectMap.put(0, "iTrust");
-		projectMap.put(1, "Gantt");
+		projectMap.put(1, "Maven_TestCase");
 		projectMap.put(2, "jHotDraw");
 	}
 	
