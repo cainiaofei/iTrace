@@ -13,7 +13,7 @@ import cn.edu.nju.cs.refactor.exception.FileException;
  * @date 2018.1.19 
  * @description encapsulate some operation used to operate file.
  */
-public class FileProcessTool implements Tool{
+public class FileProcessTool implements FileProcess{
 
 	/**
 	 * @throws FileException 
@@ -53,10 +53,35 @@ public class FileProcessTool implements Tool{
 		}
 	}
 	
+	/**
+	 * @date 2018.1.21
+	 * @author zzf
+	 * @throws FileException 
+	 * @throws IOException 
+	 * @description get text file content 
+	 */
+	@Override
+	public String getFileConent(String filePath) throws FileException, IOException {
+		if(filePath==null) {
+			throw new FileException("it is not a java file");
+		}
+		else {
+			StringBuilder sb = new StringBuilder();
+			BufferedReader br = new BufferedReader(new FileReader(new File(filePath)));
+			String line = null;
+			while((line=br.readLine())!=null) {
+				sb.append(line);
+				sb.append('\n');
+			}
+			br.close();
+			return sb.toString();
+		}
+	}
+	
 	@Override
 	public String description() {
 		StringBuilder description = new StringBuilder();
-		description.append("1.");
+		description.append("1. get package name of a java File");
 		return description.toString();
 	}
 	
