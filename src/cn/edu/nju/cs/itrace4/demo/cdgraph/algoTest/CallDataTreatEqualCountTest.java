@@ -99,9 +99,6 @@ public class CallDataTreatEqualCountTest {
 	        
 	        ri.showMessage();
 	        
-	        //demo
-	        Map<Integer,String> map = ri.getVertexIdNameMap();
-	        
 	        ois.close();
 	        
 	        Result result_ir = IR.compute(textDataset, model, new None_CSTI());

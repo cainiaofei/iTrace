@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
-	<projectName>maven</projectName>
+	<projectName>Maven_TestCase</projectName>
 	<modelName>vsm</modelName>
 	<callEdgeScoreThreshold>0.6</callEdgeScoreThreshold>
-	<dataEdgeScoreThreshold>0.6</dataEdgeScoreThreshold>
+	<dataEdgeScoreThreshold>0.8</dataEdgeScoreThreshold>
 	<percent>0.4</percent>
 	<router>6</router>
 </config>

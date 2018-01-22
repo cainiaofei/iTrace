@@ -15,7 +15,7 @@ import cn.edu.nju.cs.itrace4.preprocess.rawdata.db.SqliteOperation;
  */
 
 public class FilterDB {
-	private String dbPath = "/home/zzf/geek/Pig_cluster/relation/test2.db";
+	private String dbPath = "/home/zzf/sqliteOutput/test3.db";
 	private SqliteOperation sqlOperate;
 	private String driver = "org.sqlite.JDBC";
 	
@@ -53,7 +53,7 @@ public class FilterDB {
 	
 	public static void main(String[] args) {
 		FilterDB tool = new FilterDB();
-		String filterSqlPath = "resource/sql/buildFM.sql";
+		String filterSqlPath = "resource/sql/buildPP.sql";
 		tool.filter(filterSqlPath);
 	}
 	

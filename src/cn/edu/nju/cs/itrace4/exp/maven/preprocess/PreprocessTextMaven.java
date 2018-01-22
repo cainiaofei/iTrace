@@ -41,7 +41,7 @@ public class PreprocessTextMaven {
     
     private static String relationDirPath = projectPath + "relation";
     
-    private static String masterPath = projectPath+"maven-master";
+    private static String masterPath = projectPath + "maven-master";
     private static String graphDBPath = relationDirPath + File.separator + "call.db";
     
     private String dbProperty = "resource/mavenDB.property";

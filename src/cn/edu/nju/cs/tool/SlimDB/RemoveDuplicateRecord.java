@@ -61,7 +61,7 @@ public class RemoveDuplicateRecord {
 		System.out.println("insert count:"+count);
 	}
 	
-	private String[] readFields(String fieldsPath) throws IOException {
+	public String[] readFields(String fieldsPath) throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(new File(fieldsPath)));
 		StringBuilder sb = new StringBuilder();
 		String line = null;
@@ -91,6 +91,7 @@ public class RemoveDuplicateRecord {
 		sb.append("values");
 		sb.append("(");
 		for(String field:fields) {
+			System.out.println("string:"+sb.toString()+"--field:"+rs.getString(field));
 			sb.append("'"+rs.getString(field)+"'"+",");
 		}
 		sb.deleteCharAt(sb.length()-1);

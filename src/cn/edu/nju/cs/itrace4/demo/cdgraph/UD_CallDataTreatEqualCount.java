@@ -124,6 +124,14 @@ public class UD_CallDataTreatEqualCount implements CSTI{
 					 * @date 2018.1.12
 					 * @description dont give bonus for outer vertex temperary. 
 					 */
+					/**
+					 * @date 2018.1.12
+					 * @description dont give bonus for outer vertex temperary. 
+					 */
+					List<Integer> temp = new ArrayList<Integer>();
+					temp.add(localMaxId);
+					subGraph = new SubGraph(temp);
+					
 					giveBonusForLoneNotInThisRegion(matrix, subGraph,curLoneVertexList,req);
 					hasVisitedRegion.addAll(subGraph.getVertexList());
 				}//if end
