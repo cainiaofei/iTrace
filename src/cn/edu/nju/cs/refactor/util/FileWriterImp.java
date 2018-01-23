@@ -60,4 +60,13 @@ public class FileWriterImp implements FileWrite{
 		}
 	}
 
+	@Override
+	public void writeContent(String content) {
+		try {
+			bw.write(content);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 }
