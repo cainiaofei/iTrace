@@ -1,7 +1,7 @@
 lib/
 data/
 bin/
-out/
+/out
 output/
 *.zip
 *.rar
