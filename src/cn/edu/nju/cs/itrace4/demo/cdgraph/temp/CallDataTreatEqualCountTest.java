@@ -49,7 +49,7 @@ public class CallDataTreatEqualCountTest {
 		private double callEdgeScoreThreshold;
 	    private double dataEdgeScoreThreshold;
 		private double percent;
-	    
+	    private int userVerifyNumber = 3;
 		
 		public CallDataTreatEqualCountTest() throws ParserConfigurationException,
 			SAXException, IOException{
@@ -106,7 +106,7 @@ public class CallDataTreatEqualCountTest {
 	        valid = new HashMap<String,Set<String>>();
 	        Result result_UD_CallDataTreatEqual = IR.compute(textDataset,model,
 	        		new UD_CallDataTreatEqualOuterLessThanInner(ri,callEdgeScoreThreshold,
-	        			dataEdgeScoreThreshold,3,valid));//0.7
+	        			dataEdgeScoreThreshold,userVerifyNumber,valid));//0.7
 	        
 //	        Result result_No_Outter = IR.compute(textDataset,model,
 //	        		new NoOutter(ri,callEdgeScoreThreshold,

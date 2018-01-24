@@ -15,8 +15,8 @@ import edu.uci.ics.jung.graph.Graph;
 public class StoreSubGraphInfoByThreshold {
 	
 	private CallDataRelationGraph cdGraph;
-	private double callThreshold = 0.4;
-	private double dataThreshold = 0.7;
+	private double callThreshold ;
+	private double dataThreshold ;
 	
 	public StoreSubGraphInfoByThreshold() {}
 	

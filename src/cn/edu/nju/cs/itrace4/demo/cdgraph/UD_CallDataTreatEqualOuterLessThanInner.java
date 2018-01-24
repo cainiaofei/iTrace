@@ -37,7 +37,7 @@ public class UD_CallDataTreatEqualOuterLessThanInner implements CSTI{
 	private Map<String,Set<String>> valid;
 	private int verifyCount;
 	private Set<Integer> allVertexIdList = new HashSet<Integer>();
-	private boolean hidden = true;//
+	private boolean hidden = false;//
 	
 	private double callThreshold;
 	private double dataThreshold;
@@ -54,8 +54,8 @@ public class UD_CallDataTreatEqualOuterLessThanInner implements CSTI{
 		
 		regionList = new StoreDataSubGraphRemoveEdge().getSubGraphs(ri);
 		
-		callGraphs = describeCallGraphWithMatrix(new CallDataRelationGraph(ri).callEdgeScoreMap,ri.getVertexes().size());
-		dataGraphs = describeDataGraphWithMatrix(new CallDataRelationGraph(ri).dataEdgeScoreMap,ri.getVertexes().size());
+		callGraphs = describeCallGraphWithMatrix(new CallDataRelationGraph(ri,false).callEdgeScoreMap,ri.getVertexes().size());
+		dataGraphs = describeDataGraphWithMatrix(new CallDataRelationGraph(ri,false).dataEdgeScoreMap,ri.getVertexes().size());
 		
 		vertexIdNameMap = ri.getVertexIdNameMap();
 		this.valid = valid;
@@ -125,7 +125,7 @@ public class UD_CallDataTreatEqualOuterLessThanInner implements CSTI{
 							
 							//2018.1.18
 							//double bonus = maxScore * meanCloseness;
-							System.out.println("added bonus:"+bonus/originValue*100+"%");
+							//System.out.println("added bonus:"+bonus/originValue*100+"%");
 							
 							curValue = Math.min(maxScore*0.9999, curValue+bonus);
 							/**

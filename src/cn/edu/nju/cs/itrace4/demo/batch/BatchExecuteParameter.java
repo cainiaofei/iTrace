@@ -47,8 +47,8 @@ public class BatchExecuteParameter {
 	private Map<String, String> modelMap;
 	private Map<Integer, String> idMapProject;
 	private Map<Integer, String> idMapModel;
-
-	private String targetPath = "batch-2-all";
+	private int userVerifyNumber = 3;
+	private String targetPath = "newData/batch-3-all";
 
 	public BatchExecuteParameter(String projectPath, String modelPath) {
 		this.projectPath = projectPath;
@@ -144,7 +144,7 @@ public class BatchExecuteParameter {
 		valid = new HashMap<String, Set<String>>();
 		Result result_UD_CallDataTreatEqual = IR.compute(textDataset, fullModelName,
 				new UD_CallDataTreatEqualOuterLessThanInner(ri, callThreshold, dataThreshold, 
-						2,valid));// 0.7
+						userVerifyNumber,valid));// 0.7
 		String irRecord = getRecord(result_ir, result_UD_CallDataTreatEqual);
 		result[projectIndex][modelIndex][0] = irRecord;
 		String udRecord = getRecord(result_UD_CSTI, result_UD_CallDataTreatEqual);
