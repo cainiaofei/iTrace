@@ -124,16 +124,17 @@ public class BatchStorePng {
         if(!baseFile.exists()) {
         	baseFile.mkdir();
         }
-        curve.showChart();
+        
+        curve.showChart(project.getProjectName());
         curve.curveStore(baseFile.getAbsolutePath(),model);
 	}
 
 	public static void main(String[] args) throws Exception {
-		double callThreshold = 0.6;
+		double callThreshold = 0.4;
 		double dataThreshold = 0.8;
 		String projectPath = "resource/config/project.txt";
 		String modelPath = "resource/config/model.txt";
-		String pngPath = "batch/0.6-0.8";
+		String pngPath = "batch-3-all/0.4-0.8";
 		BatchStorePng bsp = new BatchStorePng(callThreshold,dataThreshold,projectPath,modelPath,pngPath);
 		bsp.batchStorePng();
 	}

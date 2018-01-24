@@ -143,7 +143,7 @@ public class BatchExecuteParameter {
 		ri.setPruning(callThreshold, dataThreshold);
 		valid = new HashMap<String, Set<String>>();
 		Result result_UD_CallDataTreatEqual = IR.compute(textDataset, fullModelName,
-				new UD_CallDataTreatEqualOuterLessThanInner(ri, dataThreshold, dataThreshold, 
+				new UD_CallDataTreatEqualOuterLessThanInner(ri, callThreshold, dataThreshold, 
 						2,valid));// 0.7
 		String irRecord = getRecord(result_ir, result_UD_CallDataTreatEqual);
 		result[projectIndex][modelIndex][0] = irRecord;

@@ -125,6 +125,7 @@ public class UD_CallDataTreatEqualOuterLessThanInner implements CSTI{
 							
 							//2018.1.18
 							//double bonus = maxScore * meanCloseness;
+							System.out.println("added bonus:"+bonus/originValue*100+"%");
 							
 							curValue = Math.min(maxScore*0.9999, curValue+bonus);
 							/**
@@ -135,6 +136,7 @@ public class UD_CallDataTreatEqualOuterLessThanInner implements CSTI{
 							subGraph.setMaxBonus(Math.max(subGraph.getMaxBonus(), bonus));
 						}
 						matrix.setScoreForLink(req, vertexName, curValue);
+						
 					}
 					Set<Integer> curLoneVertexList = fillLoneVertex(subGraph,
 							hasVisitedRegion,hidden);
@@ -144,9 +146,10 @@ public class UD_CallDataTreatEqualOuterLessThanInner implements CSTI{
 					 */
 					List<Integer> temp = new ArrayList<Integer>();
 					temp.add(localMaxId);
-					subGraph = new SubGraph(temp);
+					SubGraph newSubGraph =  new SubGraph(temp);
+					//subGraph = new SubGraph(temp);
 					
-					giveBonusForLoneNotInThisRegion(matrix, subGraph,curLoneVertexList,req);
+					giveBonusForLoneNotInThisRegion(matrix, newSubGraph,curLoneVertexList,req);
 					hasVisitedRegion.addAll(subGraph.getVertexList());
 				}//if end
 				index++;
