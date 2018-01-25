@@ -22,6 +22,7 @@ import cn.edu.nju.cs.itrace4.core.metrics.Result;
 import cn.edu.nju.cs.itrace4.demo.FileParse.XmlParse;
 import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataTreatEqual;
 import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataTreatEqualOuterLessThanInner;
+import cn.edu.nju.cs.itrace4.demo.cdgraph.inneroutter.UD_InnerAndOuterMax;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Gantt;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Infinispan;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
@@ -49,7 +50,7 @@ public class CallDataTreatEqualCountTest {
 		private double callEdgeScoreThreshold;
 	    private double dataEdgeScoreThreshold;
 		private double percent;
-	    private int userVerifyNumber = 15;
+	    private int userVerifyNumber = 3;
 		
 		public CallDataTreatEqualCountTest() throws ParserConfigurationException,
 			SAXException, IOException{
@@ -108,9 +109,9 @@ public class CallDataTreatEqualCountTest {
 	        		new UD_CallDataTreatEqualOuterLessThanInner(ri,callEdgeScoreThreshold,
 	        			dataEdgeScoreThreshold,userVerifyNumber,valid));//0.7
 	        
-//	        Result result_No_Outter = IR.compute(textDataset,model,
-//	        		new NoOutter(ri,callEdgeScoreThreshold,
-//	        			dataEdgeScoreThreshold,10,valid));//0.7
+	        Result result_No_Outter = IR.compute(textDataset,model,
+	        		new UD_InnerAndOuterMax(ri,callEdgeScoreThreshold,
+	        			dataEdgeScoreThreshold,userVerifyNumber,valid));//0.7
 	        
 	        /**
 	         * @date 2018.1.12
@@ -132,7 +133,7 @@ public class CallDataTreatEqualCountTest {
 	        curve.addLine(result_UD_CSTI);
 	        curve.addLine(result_UD_CallDataTreatEqual);
 	        
-	        //curve.addLine(result_No_Outter);
+	        curve.addLine(result_No_Outter);
 	        //curve.addLine(result_UD_CallDataTreatEqualTemp);
 	        
 	        double rate = Double.valueOf(System.getProperty("rate"));
@@ -140,6 +141,9 @@ public class CallDataTreatEqualCountTest {
 	        double ud_pValue = printPValue(result_UD_CallDataTreatEqual,result_UD_CSTI);
 	        double ir_pValue = printPValue(result_UD_CallDataTreatEqual,result_ir);
 	        curve.showChart(project.getProjectName()+"rate:"+rateStr+"ud_pValue:"+ud_pValue);
+	        String modelName = getName(model);
+	       // curve.curveStore("/home/zzf/png/outerInner",project.getProjectName()+"_"+modelName);
+	        curve.curveStore("/home/zzf/png/outerAddInner",project.getProjectName()+"_"+modelName);
 	        System.out.println("----------------IR AP/MAP-------------");
 	        System.out.println("AP:"+result_ir.getAveragePrecisionByRanklist());
 	        System.out.println("MAP:"+result_ir.getMeanAveragePrecisionByQuery());
@@ -150,6 +154,12 @@ public class CallDataTreatEqualCountTest {
 	        System.out.println("AP:"+result_UD_CallDataTreatEqual.getAveragePrecisionByRanklist());
 	        System.out.println("MAP:"+result_UD_CallDataTreatEqual.getMeanAveragePrecisionByQuery());
 	    }
+
+		//cn.nju...vsm ===> vsm
+		private String getName(String model) {
+			int index = model.lastIndexOf('.');
+			return model.substring(index+1);
+		}
 
 		private double printPValue(Result ours, Result compareTo) {
 		      MannWhitneyUTest mannWhitneyUTest = new MannWhitneyUTest();
