@@ -49,7 +49,7 @@ public class CallDataTreatEqualCountTest {
 		private double callEdgeScoreThreshold;
 	    private double dataEdgeScoreThreshold;
 		private double percent;
-	    private int userVerifyNumber = 3;
+	    private int userVerifyNumber = 15;
 		
 		public CallDataTreatEqualCountTest() throws ParserConfigurationException,
 			SAXException, IOException{

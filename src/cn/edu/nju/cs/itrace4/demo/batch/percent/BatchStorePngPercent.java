@@ -1,4 +1,5 @@
-package cn.edu.nju.cs.itrace4.demo.batch;
+package cn.edu.nju.cs.itrace4.demo.batch.percent;
+
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,7 +14,6 @@ import cn.edu.nju.cs.itrace4.core.algo.UD_CSTI;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
-import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataTreatEqualCount;
 import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataTreatEqualOuterLessThanInner;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Infinispan;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
@@ -27,7 +27,7 @@ import cn.edu.nju.cs.refactor.exception.FileException;
 import cn.edu.nju.cs.refactor.util.FileProcess;
 import cn.edu.nju.cs.refactor.util.FileProcessTool;
 
-public class BatchStorePng {
+public class BatchStorePngPercent {
 	private double callThreshold;
 	private double dataThreshold;
 	private String projectPath;
@@ -39,13 +39,17 @@ public class BatchStorePng {
 	private Map<String,Project> projectMap; 
 	private Map<String,String> modelMap;
 	
-	public BatchStorePng(double callThreshold,double dataThreshold,String projectPath,
-			String modelPath,String pngPath) {
+	private int userVerifyCount;
+	private double percent;
+	
+	public BatchStorePngPercent(double callThreshold,double dataThreshold,String projectPath,
+			String modelPath,String pngPath,double percent) {
 		this.callThreshold = callThreshold;
 		this.dataThreshold = dataThreshold;
 		this.projectPath = projectPath;
 		this.modelPath = modelPath;
 		this.pngPath = pngPath;
+		this.percent = percent;
 		this.fileProcess = new FileProcessTool();
 		init();
 	}
@@ -83,7 +87,7 @@ public class BatchStorePng {
 		return res;
 	}
 	
-	public void batchStorePng() throws Exception {
+	public void batchStorePngPercent() throws Exception {
 		String[] projects = getArrFromFile(projectPath);
 		String[] models = getArrFromFile(modelPath);
 		for(String projectName:projects) {
@@ -105,6 +109,8 @@ public class BatchStorePng {
         RelationInfo ri = (RelationInfo) ois.readObject();
         ois.close();
         
+        userVerifyCount = (int)(ri.getVertexIdNameMap().size() * percent);
+        
         Result result_ir = IR.compute(textDataset, model, new None_CSTI());
         Result result_UD_CSTI = IR.compute(textDataset, model, new UD_CSTI(ri));
         
@@ -113,7 +119,7 @@ public class BatchStorePng {
         valid = new HashMap<String,Set<String>>();
         Result result_UD_CallDataTreatEqual = IR.compute(textDataset,model,
         		new UD_CallDataTreatEqualOuterLessThanInner(ri,callThreshold,
-        			dataThreshold,6,valid));//0.7
+        			dataThreshold,userVerifyCount,valid));//0.7
         VisualCurve curve = new MyVisualCurve();
         curve.addLine(result_ir);
         curve.addLine(result_UD_CSTI);
@@ -132,11 +138,13 @@ public class BatchStorePng {
 	public static void main(String[] args) throws Exception {
 		double callThreshold = 0.4;
 		double dataThreshold = 0.8;
+		double percent = 0.04;
 		String projectPath = "resource/config/project.txt";
 		String modelPath = "resource/config/model.txt";
-		String pngPath = "batch-3-all/0.4-0.8";
-		BatchStorePng bsp = new BatchStorePng(callThreshold,dataThreshold,projectPath,modelPath,pngPath);
-		bsp.batchStorePng();
+		String pngPath = "percent/"+percent+File.separator+callThreshold+"-"+dataThreshold;
+		BatchStorePngPercent bsp = new BatchStorePngPercent(callThreshold,dataThreshold,
+				projectPath,modelPath,pngPath,percent);
+		bsp.batchStorePngPercent();
 	}
 	
 }

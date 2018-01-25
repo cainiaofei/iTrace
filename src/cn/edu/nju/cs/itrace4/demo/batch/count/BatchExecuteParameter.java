@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.demo.batch;
+package cn.edu.nju.cs.itrace4.demo.batch.count;
 
 import java.io.BufferedWriter;
 import java.io.File;

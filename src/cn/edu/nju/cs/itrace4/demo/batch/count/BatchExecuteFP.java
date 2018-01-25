@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.demo.batch;
+package cn.edu.nju.cs.itrace4.demo.batch.count;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -39,8 +39,8 @@ public class BatchExecuteFP {
 	
 	private String targetPath;
 	
-	private double callThreshold = 0.4;
-	private double dataThreshold = 0.8;
+	private double callThreshold;
+	private double dataThreshold;
 	
 	private FPReduce fpReduce = new FPReduceThinkVisit();
 	private ProjectFactory projectFactory = new ProjectFactoryImp();
@@ -48,8 +48,10 @@ public class BatchExecuteFP {
 	private FileProcess fileProcess = new FileProcessTool();
 	private FileWrite fileWrite = new FileWriterImp();
 	
-	public BatchExecuteFP() {
-		targetPath = "batch-3-all" + File.separator + callThreshold + "-" + dataThreshold;
+	public BatchExecuteFP(String targetPath,double callThreshold,double dataThreshold) {
+		this.targetPath = targetPath;
+		this.callThreshold = callThreshold;
+		this.dataThreshold = dataThreshold;
 	}
 	
 	public void getFPData() throws ClassNotFoundException, IOException, FileException {
@@ -120,7 +122,11 @@ public class BatchExecuteFP {
 	}
 	
 	public static void main(String[] args) throws FileException {
-		BatchExecuteFP batchExecuteFP = new BatchExecuteFP();
+		double callThreshold = 0.4;
+		double dataThreshold = 0.8;
+		String targetPath = "newData/batch-3-all" + File.separator + 
+				callThreshold + "-" + dataThreshold;
+		BatchExecuteFP batchExecuteFP = new BatchExecuteFP(targetPath,callThreshold,dataThreshold);
 		try {
 			batchExecuteFP.getFPData();
 		} catch (ClassNotFoundException | IOException e) {
