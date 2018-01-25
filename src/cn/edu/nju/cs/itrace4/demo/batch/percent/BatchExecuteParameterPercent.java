@@ -18,6 +18,7 @@ import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
 import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataTreatEqualOuterLessThanInner;
+import cn.edu.nju.cs.itrace4.demo.cdgraph.inneroutter.UD_InnerAndOuterMax;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Gantt;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Infinispan;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
@@ -48,13 +49,10 @@ public class BatchExecuteParameterPercent {
 	private Map<Integer, String> idMapProject;
 	private Map<Integer, String> idMapModel;
 	private int userVerifyNumber;
-	private double percent = 0.03;
-	private String targetPath = "percent/"+percent;
+	private double percent = 0.035;
+	private String targetPath = "percent/OutterInner"+percent;
 
 	public BatchExecuteParameterPercent(String projectPath, String modelPath) {
-		percent = 0.033;
-		
-		
 		this.projectPath = projectPath;
 		this.modelPath = modelPath;
 		this.fileProcess = new FileProcessTool();
@@ -104,7 +102,7 @@ public class BatchExecuteParameterPercent {
 						}
 					}
 				}
-				if(irCount<2) {
+				if(irCount<1) {
 					continue;
 				}
 				// write file
@@ -156,9 +154,14 @@ public class BatchExecuteParameterPercent {
 		Map<String, Set<String>> valid = new HashMap<String, Set<String>>();
 		ri.setPruning(callThreshold, dataThreshold);
 		valid = new HashMap<String, Set<String>>();
+//		Result result_UD_CallDataTreatEqual = IR.compute(textDataset, fullModelName,
+//				new UD_CallDataTreatEqualOuterLessThanInner(ri, callThreshold, dataThreshold, 
+//						userVerifyNumber,valid));// 0.7
+		
 		Result result_UD_CallDataTreatEqual = IR.compute(textDataset, fullModelName,
-				new UD_CallDataTreatEqualOuterLessThanInner(ri, callThreshold, dataThreshold, 
+				new UD_InnerAndOuterMax(ri, callThreshold, dataThreshold, 
 						userVerifyNumber,valid));// 0.7
+		
 		String irRecord = getRecord(result_ir, result_UD_CallDataTreatEqual);
 		result[projectIndex][modelIndex][0] = irRecord;
 		String udRecord = getRecord(result_UD_CSTI, result_UD_CallDataTreatEqual);
