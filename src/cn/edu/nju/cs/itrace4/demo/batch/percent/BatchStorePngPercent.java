@@ -138,10 +138,10 @@ public class BatchStorePngPercent {
 	public static void main(String[] args) throws Exception {
 		double callThreshold = 0.4;
 		double dataThreshold = 0.8;
-		double percent = 0.04;
+		double percent = 0.035;
 		String projectPath = "resource/config/project.txt";
 		String modelPath = "resource/config/model.txt";
-		String pngPath = "percent/"+percent+File.separator+callThreshold+"-"+dataThreshold;
+		String pngPath = "percent/OutterInner/"+percent+File.separator+callThreshold+"-"+dataThreshold;
 		BatchStorePngPercent bsp = new BatchStorePngPercent(callThreshold,dataThreshold,
 				projectPath,modelPath,pngPath,percent);
 		bsp.batchStorePngPercent();

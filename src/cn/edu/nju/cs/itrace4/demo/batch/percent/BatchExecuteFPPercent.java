@@ -132,8 +132,8 @@ public class BatchExecuteFPPercent {
 	public static void main(String[] args) throws FileException {
 		double callThreshold = 0.4;
 		double dataThreshold = 0.8;
-		double percent = 0.03;
-		String targetPath = "percent/"+percent + File.separator + 
+		double percent = 0.035;
+		String targetPath = "percent/OutterInner/"+percent + File.separator + 
 				callThreshold + "-" + dataThreshold;
 		BatchExecuteFPPercent batchExecuteFPPercent = new BatchExecuteFPPercent(targetPath,callThreshold,
 				dataThreshold,percent);
