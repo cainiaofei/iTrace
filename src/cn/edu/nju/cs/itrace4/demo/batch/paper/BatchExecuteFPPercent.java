@@ -70,6 +70,11 @@ public class BatchExecuteFPPercent {
 			StringBuilder sb = new StringBuilder();
 			sb.append(fileProcess.getFileConent(template)+"\n");
 			Project project = projectFactory.generate(projects[projectIndex].trim());
+			/**
+			 * @date 2018.1.26 
+			 */
+			System.setProperty("projectName", project.getProjectName());
+			
 			TextDataset textDataset = getTextDataset(project);
 			RelationInfo ri = getRelationInfo(project);
 			userVerifyCount = (int)(ri.getVertexIdNameMap().size()*percent);

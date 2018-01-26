@@ -51,7 +51,7 @@ public class CallDataTreatEqualCountTest {
 		private double callEdgeScoreThreshold;
 	    private double dataEdgeScoreThreshold;
 		private double percent;
-	    private int userVerifyNumber = 3;
+	    private int userVerifyNumber = 15;
 		
 		public CallDataTreatEqualCountTest() throws ParserConfigurationException,
 			SAXException, IOException{
@@ -99,6 +99,8 @@ public class CallDataTreatEqualCountTest {
 	        ri.showMessage();
 	        
 	        ois.close();
+	        
+	        System.setProperty("projectName", project.getProjectName());
 	        
 	        Result result_ir = IR.compute(textDataset, model, new None_CSTI());
 	        Result result_UD_CSTI = IR.compute(textDataset, model, new UD_CSTI(ri));

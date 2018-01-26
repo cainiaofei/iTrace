@@ -138,6 +138,8 @@ public class BatchExecuteParameterPercent {
 			double callThreshold, double dataThreshold,
 			RelationInfo class_relation,RelationInfo class_relationForO,
 			RelationInfo class_relationForAllDependencies) {
+		System.setProperty("projectName", projects[projectIndex]);
+		
 		String fullModelName = modelMap.get(models[modelIndex].trim().toLowerCase());
 		Result result_ir = IR.compute(textDataset, fullModelName, new None_CSTI());
 		ri.setPruning(0, 0);
