@@ -23,6 +23,7 @@ import cn.edu.nju.cs.itrace4.demo.FileParse.XmlParse;
 import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataTreatEqual;
 import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataTreatEqualOuterLessThanInner;
 import cn.edu.nju.cs.itrace4.demo.cdgraph.inneroutter.UD_InnerAndOuterMax;
+import cn.edu.nju.cs.itrace4.demo.cdgraph.inneroutter.UD_InnerAndOuterSeq;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Gantt;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Infinispan;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
@@ -110,7 +111,7 @@ public class CallDataTreatEqualCountTest {
 	        			dataEdgeScoreThreshold,userVerifyNumber,valid));//0.7
 	        
 	        Result result_No_Outter = IR.compute(textDataset,model,
-	        		new UD_InnerAndOuterMax(ri,callEdgeScoreThreshold,
+	        		new UD_InnerAndOuterSeq(ri,callEdgeScoreThreshold,
 	        			dataEdgeScoreThreshold,userVerifyNumber,valid));//0.7
 	        
 	        /**

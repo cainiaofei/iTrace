@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.demo.batch.percent;
+package cn.edu.nju.cs.itrace4.demo.batch.paper;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -14,11 +14,12 @@ import org.apache.commons.math3.stat.inference.MannWhitneyUTest;
 
 import cn.edu.nju.cs.itrace4.core.algo.None_CSTI;
 import cn.edu.nju.cs.itrace4.core.algo.UD_CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.UseEdge;
+import cn.edu.nju.cs.itrace4.core.algo.icse.PruningCall_Data_Connection_Closenss;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.ir.IR;
+import cn.edu.nju.cs.itrace4.core.ir.IRModelConst;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
-import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataTreatEqualOuterLessThanInner;
-import cn.edu.nju.cs.itrace4.demo.cdgraph.inneroutter.UD_InnerAndOuterMax;
 import cn.edu.nju.cs.itrace4.demo.cdgraph.inneroutter.UD_InnerAndOuterSeq;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Gantt;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Infinispan;
@@ -32,6 +33,7 @@ import cn.edu.nju.cs.itrace4.demo.exp.project.Pig;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Pig_Cluster;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
+import cn.edu.nju.cs.itrace4.util.Setting;
 import cn.edu.nju.cs.refactor.exception.FileException;
 import cn.edu.nju.cs.refactor.util.FileProcess;
 import cn.edu.nju.cs.refactor.util.FileProcessTool;
@@ -51,7 +53,7 @@ public class BatchExecuteParameterPercent {
 	private Map<Integer, String> idMapModel;
 	private int userVerifyNumber;
 	private double percent = 0.035;
-	private String targetPath = "percent/OuterInnerSeq/"+percent;
+	private String targetPath = "paper/OuterInnerSeq/"+percent;
 
 	public BatchExecuteParameterPercent(String projectPath, String modelPath) {
 		this.projectPath = projectPath;
@@ -70,41 +72,25 @@ public class BatchExecuteParameterPercent {
 		// the first two is Itrust and gannt
 		for (double callThreshold = 0.4; callThreshold < 0.41; callThreshold += 0.1) {
 			for (double dataThreshold = 0.8; dataThreshold < 0.81; dataThreshold += 0.1) {
-				int count = 0;
-				// project:4 model:3 method:3 StringBuilder:ap,map,p-value,rate
-				String[][][] result = new String[4][3][3];
+				//2018.1.25
+				// project:4 model:3 method:4 StringBuilder:ap,map,p-value,rate
+				String[][][] result = new String[4][3][4];
 				// the first two is iTrust and Gantt
-				for (int projectIndex = 0; projectIndex < 2; projectIndex++) {
+				for (int projectIndex = 0; projectIndex < projects.length; projectIndex++) {
 					TextDataset textDataset = getTextDataset(projects[projectIndex].toLowerCase());
 					RelationInfo ri = getRelationInfo(projects[projectIndex].toLowerCase());
+					
+					RelationInfo class_relation = getRelationInfo(projects[projectIndex].toLowerCase());
+					RelationInfo class_relationForO = getRelationInfo(projects[projectIndex].toLowerCase());
+					RelationInfo class_relationForAllDependencies = getRelationInfo(projects[projectIndex].toLowerCase());
+					
 					userVerifyNumber = (int)(ri.getVertexIdNameMap().size()*percent);
 					for (int modelIndex = 0; modelIndex < models.length; modelIndex++) {
-						boolean isMeetPvalue = calculateResult(result, projects, projectIndex, models, modelIndex,
-								textDataset, ri, callThreshold, dataThreshold);
-						if (isMeetPvalue) {
-							count++;
-						}
+						calculateResult(result, projects,
+								projectIndex, models, modelIndex, textDataset, ri,
+								callThreshold, dataThreshold,class_relation,
+								class_relationForO,class_relationForAllDependencies);
 					}
-				}
-				if (count < 5) {
-					continue;
-				}
-				
-				int irCount = 0;
-				for (int projectIndex = 2; projectIndex < projects.length; projectIndex++) {
-					TextDataset textDataset = getTextDataset(projects[projectIndex]);
-					RelationInfo ri = getRelationInfo(projects[projectIndex]);
-					userVerifyNumber = (int)(ri.getVertexIdNameMap().size()*percent);
-					for (int modelIndex = 0; modelIndex < models.length; modelIndex++) {
-						boolean isMeetPvalue = calculateResultCompareWithIR(result, projects, projectIndex, models, modelIndex, textDataset, ri,
-								callThreshold, dataThreshold);
-						if(isMeetPvalue) {
-							irCount++;
-						}
-					}
-				}
-				if(irCount<1) {
-					continue;
 				}
 				// write file
 				writeFile(callThreshold, dataThreshold, result);
@@ -127,7 +113,7 @@ public class BatchExecuteParameterPercent {
 				StringBuilder sb = new StringBuilder();
 				String modelName = idMapModel.get(modelIndex);
 				String header = getHeader(modelName);
-				String[] methods = { "ir", "ud", "cluster" };
+				String[] methods = { "ir", "ud","closeness", "cluster" };
 				sb.append(header+"\n");
 				for (int methodIndex = 0; methodIndex < result[projectIndex][modelIndex].length; methodIndex++) {
 					String methodName = methods[methodIndex];
@@ -146,40 +132,12 @@ public class BatchExecuteParameterPercent {
 		return sb.toString();
 	}
 
-	private boolean calculateResult(String[][][] result, String[] projects, int projectIndex, String[] models,
-			int modelIndex, TextDataset textDataset, RelationInfo ri, double callThreshold, double dataThreshold) {
-		String fullModelName = modelMap.get(models[modelIndex].trim().toLowerCase());
-		Result result_ir = IR.compute(textDataset, fullModelName, new None_CSTI());
-		ri.setPruning(0, 0);
-		Result result_UD_CSTI = IR.compute(textDataset, fullModelName, new UD_CSTI(ri));
-		Map<String, Set<String>> valid = new HashMap<String, Set<String>>();
-		ri.setPruning(callThreshold, dataThreshold);
-		valid = new HashMap<String, Set<String>>();
-//		Result result_UD_CallDataTreatEqual = IR.compute(textDataset, fullModelName,
-//				new UD_CallDataTreatEqualOuterLessThanInner(ri, callThreshold, dataThreshold, 
-//						userVerifyNumber,valid));// 0.7
-		
-		Result result_UD_CallDataTreatEqual = IR.compute(textDataset, fullModelName,
-				new UD_InnerAndOuterMax(ri, callThreshold, dataThreshold, 
-						userVerifyNumber,valid));// 0.7
-		
-		String irRecord = getRecord(result_ir, result_UD_CallDataTreatEqual);
-		result[projectIndex][modelIndex][0] = irRecord;
-		String udRecord = getRecord(result_UD_CSTI, result_UD_CallDataTreatEqual);
-		result[projectIndex][modelIndex][1] = udRecord;
-		String clusterRecord = getRecord(result_UD_CallDataTreatEqual);
-		result[projectIndex][modelIndex][2] = clusterRecord;
-
-		if (this.printPValue(result_UD_CallDataTreatEqual, result_UD_CSTI) <= 0.05) {
-			return true;
-		} else {
-			return false;
-		}
-	}
 	
-	
-	private boolean calculateResultCompareWithIR(String[][][] result, String[] projects, int projectIndex, String[] models,
-			int modelIndex, TextDataset textDataset, RelationInfo ri, double callThreshold, double dataThreshold) {
+	private void calculateResult(String[][][] result, String[] projects, int projectIndex, String[] models,
+			int modelIndex, TextDataset textDataset, RelationInfo ri,
+			double callThreshold, double dataThreshold,
+			RelationInfo class_relation,RelationInfo class_relationForO,
+			RelationInfo class_relationForAllDependencies) {
 		String fullModelName = modelMap.get(models[modelIndex].trim().toLowerCase());
 		Result result_ir = IR.compute(textDataset, fullModelName, new None_CSTI());
 		ri.setPruning(0, 0);
@@ -189,19 +147,28 @@ public class BatchExecuteParameterPercent {
 		valid = new HashMap<String, Set<String>>();
 		Result result_UD_CallDataTreatEqual = IR.compute(textDataset, fullModelName,
 				new UD_InnerAndOuterSeq(ri, callThreshold, dataThreshold, 
-						userVerifyNumber,valid));// 0.7
+						userVerifyNumber,valid));// 
+		
+		
+		class_relation.setPruning(Setting.callThreshold, Setting.dataThreshold);
+        class_relationForO.setPruning(-1, -1);
+        class_relationForAllDependencies.setPruning(-1, -1);
+
+        Result result_pruningeCall_Data_Dir = IR.compute(textDataset, fullModelName, 
+        		new PruningCall_Data_Connection_Closenss(class_relation, class_relationForO, 
+        				class_relationForAllDependencies,
+        				UseEdge.Call, 1.0, 1.0));
+		
 		String irRecord = getRecord(result_ir, result_UD_CallDataTreatEqual);
 		result[projectIndex][modelIndex][0] = irRecord;
 		String udRecord = getRecord(result_UD_CSTI, result_UD_CallDataTreatEqual);
 		result[projectIndex][modelIndex][1] = udRecord;
+		
+		String closenessRecord = getRecord(result_pruningeCall_Data_Dir,result_UD_CallDataTreatEqual);
+		result[projectIndex][modelIndex][2] = closenessRecord;
+		
 		String clusterRecord = getRecord(result_UD_CallDataTreatEqual);
-		result[projectIndex][modelIndex][2] = clusterRecord;
-
-		if (this.printPValue(result_UD_CallDataTreatEqual, result_ir) <= 0.05) {
-			return true;
-		} else {
-			return false;
-		}
+		result[projectIndex][modelIndex][3] = clusterRecord;
 	}
 
 	private String getRecord(Result result) {
@@ -229,6 +196,7 @@ public class BatchExecuteParameterPercent {
 		ObjectInputStream ois = new ObjectInputStream(fis);
 		RelationInfo ri = (RelationInfo) ois.readObject();
 		ois.close();
+		fis.close();
 		return ri;
 	}
 

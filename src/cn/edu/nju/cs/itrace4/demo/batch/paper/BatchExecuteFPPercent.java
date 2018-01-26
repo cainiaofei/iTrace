@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.demo.batch.percent;
+package cn.edu.nju.cs.itrace4.demo.batch.paper;
 
 
 import java.io.File;
@@ -134,7 +134,7 @@ public class BatchExecuteFPPercent {
 		double callThreshold = 0.4;
 		double dataThreshold = 0.8;
 		double percent = 0.035;
-		String targetPath = "percent/OuterInnerSeq/"+percent + File.separator + 
+		String targetPath = "paper/OuterInnerSeq/"+percent + File.separator + 
 				callThreshold + "-" + dataThreshold;
 		BatchExecuteFPPercent batchExecuteFPPercent = new BatchExecuteFPPercent(targetPath,callThreshold,
 				dataThreshold,percent);
