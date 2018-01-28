@@ -21,7 +21,7 @@ import cn.edu.nju.cs.refactor.exp.input.ModelFactoryImp;
 import cn.edu.nju.cs.refactor.exp.input.ProjectFactory;
 import cn.edu.nju.cs.refactor.exp.input.ProjectFactoryImp;
 import cn.edu.nju.cs.refactor.exp.out.FPReduce;
-import cn.edu.nju.cs.refactor.exp.out.FPReduceThinkVisit;
+import cn.edu.nju.cs.refactor.exp.out.FPReduceThinkVisitBasedOnCount;
 import cn.edu.nju.cs.refactor.util.FileProcess;
 import cn.edu.nju.cs.refactor.util.FileProcessTool;
 import cn.edu.nju.cs.refactor.util.FileWrite;
@@ -42,7 +42,7 @@ public class BatchExecuteFP {
 	private double callThreshold;
 	private double dataThreshold;
 	
-	private FPReduce fpReduce = new FPReduceThinkVisit();
+	private FPReduce fpReduce = new FPReduceThinkVisitBasedOnCount();
 	private ProjectFactory projectFactory = new ProjectFactoryImp();
 	private ModelFactory modelFactory = new ModelFactoryImp();
 	private FileProcess fileProcess = new FileProcessTool();

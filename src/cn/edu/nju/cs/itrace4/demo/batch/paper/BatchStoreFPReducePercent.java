@@ -13,7 +13,6 @@ import cn.edu.nju.cs.itrace4.core.algo.None_CSTI;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
-import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataTreatEqualOuterLessThanInner;
 import cn.edu.nju.cs.itrace4.demo.cdgraph.inneroutter.UD_InnerAndOuterSeq;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
@@ -24,6 +23,7 @@ import cn.edu.nju.cs.refactor.exp.input.ProjectFactory;
 import cn.edu.nju.cs.refactor.exp.input.ProjectFactoryImp;
 import cn.edu.nju.cs.refactor.exp.out.FPReduce;
 import cn.edu.nju.cs.refactor.exp.out.FPReduceThinkVisitBasedOnCount;
+import cn.edu.nju.cs.refactor.exp.out.FPReduceThinkVisitBasedOnPrecision;
 import cn.edu.nju.cs.refactor.util.FileProcess;
 import cn.edu.nju.cs.refactor.util.FileProcessTool;
 import cn.edu.nju.cs.refactor.util.FileWrite;
@@ -34,17 +34,21 @@ import cn.edu.nju.cs.refactor.util.FileWriterImp;
  * @date 2018.1.23
  * @description  
  */
-public class BatchExecuteFPPercent {
+public class BatchStoreFPReducePercent {
 	private String projectPath = "resource/config/project.txt";
 	private String modelPath = "resource/config/model.txt";
-	private String template = "resource/template/fpData.format";
+	private String template = "resource/template/fpReduceDataOnlyEven.format";
+	
+	private boolean onlyEven = true;//whether print even only. 
 	
 	private String targetPath;
 	
 	private double callThreshold;
 	private double dataThreshold;
 	
-	private FPReduce fpReduce = new FPReduceThinkVisitBasedOnCount();
+	private FPReduce fpReduceCount = new FPReduceThinkVisitBasedOnCount();
+	private FPReduce fpReducePrecision = new FPReduceThinkVisitBasedOnPrecision();
+	
 	private ProjectFactory projectFactory = new ProjectFactoryImp();
 	private ModelFactory modelFactory = new ModelFactoryImp();
 	private FileProcess fileProcess = new FileProcessTool();
@@ -54,7 +58,7 @@ public class BatchExecuteFPPercent {
 	private int userVerifyCount;
 	
 	
-	public BatchExecuteFPPercent(String targetPath,double callThreshold,
+	public BatchStoreFPReducePercent(String targetPath,double callThreshold,
 			double dataThreshold,double percent) {
 		this.targetPath = targetPath;
 		this.callThreshold = callThreshold;
@@ -88,10 +92,23 @@ public class BatchExecuteFPPercent {
 				Result result_UD_CallDataTreatEqual = IR.compute(textDataset, model,
 						new UD_InnerAndOuterSeq(ri, callThreshold, dataThreshold, 
 								userVerifyCount,valid));// 0.7
-				String[] fpDataList = fpReduce.getFPReduceData(result_UD_CallDataTreatEqual, result_ir, valid);
+				String[] fpCountList = fpReduceCount.getFPReduceData(result_UD_CallDataTreatEqual, 
+						result_ir, valid);
+				String[] fpPrecisionList = fpReducePrecision.getFPReduceData(result_UD_CallDataTreatEqual, 
+						result_ir, valid);
+				
 				sb.append(models[modelIndex]+";");
-				for(String fpData:fpDataList) {
-					sb.append(fpData+";");
+				for(int i = 0; i < fpCountList.length;i++) {
+					String fpCountData = fpCountList[i];
+					String fpPrecisionData = fpPrecisionList[i];
+					if(onlyEven) {
+						if(i%2==1) {
+							sb.append(fpPrecisionData+";"+fpCountData+";");
+						}
+					}
+					else {
+						sb.append(fpPrecisionData+";"+fpCountData+";");
+					}
 				}
 				sb.append("\n");
 			}
@@ -101,7 +118,7 @@ public class BatchExecuteFPPercent {
 	}
 	
 	private void createFPFile(String targetPath, String projectName) {
-		File dir = new File(targetPath+File.separator+"fp");
+		File dir = new File(targetPath);
 		if(!dir.exists()) {
 			dir.mkdir();
 		}
@@ -139,12 +156,12 @@ public class BatchExecuteFPPercent {
 		double callThreshold = 0.4;
 		double dataThreshold = 0.8;
 		double percent = 0.035;
-		String targetPath = "paper/OuterInnerSeq/"+percent + File.separator + 
-				callThreshold + "-" + dataThreshold;
-		BatchExecuteFPPercent batchExecuteFPPercent = new BatchExecuteFPPercent(targetPath,callThreshold,
+		String targetPath = "paper/OuterInnerSeq/"+ percent +File.separator + 
+				callThreshold + "-" + dataThreshold + "/fpReduceOnlyEven";
+		BatchStoreFPReducePercent batchStoreFPReducePercent = new BatchStoreFPReducePercent(targetPath,callThreshold,
 				dataThreshold,percent);
 		try {
-			batchExecuteFPPercent.getFPData();
+			batchStoreFPReducePercent.getFPData();
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		}
