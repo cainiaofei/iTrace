@@ -92,9 +92,10 @@ public class BatchStoreFPReducePercent {
 				Result result_UD_CallDataTreatEqual = IR.compute(textDataset, model,
 						new UD_InnerAndOuterSeq(ri, callThreshold, dataThreshold, 
 								userVerifyCount,valid));// 0.7
-				String[] fpCountList = fpReduceCount.getFPReduceData(result_UD_CallDataTreatEqual, 
-						result_ir, valid);
+				
 				String[] fpPrecisionList = fpReducePrecision.getFPReduceData(result_UD_CallDataTreatEqual, 
+						result_ir, valid);
+				String[] fpCountList = fpReduceCount.getFPReduceData(result_UD_CallDataTreatEqual, 
 						result_ir, valid);
 				
 				sb.append(models[modelIndex]+";");

@@ -392,6 +392,11 @@ public abstract class Result implements Serializable {
                 precisionRecallCurve.put(String.format("%03d_Precision", linkNumber), precision);
                 double recall = correct / (double) oracle.count();
                 precisionRecallCurve.put(String.format("%03d_Recall", linkNumber), recall);
+                
+                if(recall>=0.4) {
+                	System.out.println("IR:"+correct);
+                }
+                
                 LinksDistributed linksDistributed = new LinksDistributed(TP, FP, TN, FN);
                 linksDistributedAtRecall.put(recall, linksDistributed);
                
@@ -880,7 +885,7 @@ public abstract class Result implements Serializable {
                 correctSoFar++;
                 double recall = (double)correctSoFar / (double) oracle.count();
                 double precision = (double) correctSoFar / (double) currentLink;
-                if (recall > gap) {
+                if (recall >= gap) {
                     System.out.println("False Positive: " + fp + " @Recall: " + recall);
 //                    System.out.println(fp);
                     fpList.add(fp);
@@ -970,7 +975,7 @@ public abstract class Result implements Serializable {
 		for (String id : pointId) {
 			double p = curve.get(id + "_Precision");
 			double r = curve.get(id + "_Recall");
-			if (r > gap) {
+			if (r >= gap) {
 				// System.out.println("Precision: " + p + " @Recall: " + r);
 				System.out.println(p);
 				precisionList.add(p);
@@ -1018,6 +1023,7 @@ public abstract class Result implements Serializable {
                 double precision = correct / (double) linkNumber;
                 precisionRecallCurve.put(String.format("%03d_Precision", linkNumber), precision);
                 double recall = correct / (double) oracle.count();
+                
                 precisionRecallCurve.put(String.format("%03d_Recall", linkNumber), recall);
                 LinksDistributed linksDistributed = new LinksDistributed(TP, FP, TN, FN);
                 linksDistributedAtRecall.put(recall, linksDistributed);
@@ -1074,7 +1080,7 @@ public abstract class Result implements Serializable {
 				correctSoFar++;
 				double recall = (double) correctSoFar / (double) oracle.count();
 				double precision = (double) correctSoFar / (double) currentLink;
-				if (recall > gap) {
+				if (recall >= gap) {
 					System.out.println("False Positive: " + fp + " @Recall: " + recall);
 					// System.out.println(fp);
 					fpList.add(fp);
