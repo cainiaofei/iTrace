@@ -50,7 +50,7 @@ public class BatchExecuteParameterPercent {
 	private Map<Integer, String> idMapModel;
 	private int userVerifyNumber;
 	private double percent = 0.035;
-	private String targetPath = "percent/OutterInner"+percent;
+	private String targetPath = "percent/outAddInner/"+percent;
 
 	public BatchExecuteParameterPercent(String projectPath, String modelPath) {
 		this.projectPath = projectPath;

@@ -151,8 +151,8 @@ public class UD_InnerAndOuterMax implements CSTI{
 							//double bonus = maxScore * meanCloseness;
 							//System.out.println("added bonus:"+bonus/originValue*100+"%");
 							
-							double bonus = Math.max(innerBonus, outerBonusMap.get(vertexId));
-							//double bonus = innerBonus + outerBonusMap.get(vertexId);
+							//double bonus = Math.max(innerBonus, outerBonusMap.get(vertexId));
+							double bonus = innerBonus + outerBonusMap.get(vertexId);
 							
 							curValue = Math.min(maxScore*0.9999, curValue+bonus);
 							/**
