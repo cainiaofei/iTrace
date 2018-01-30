@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class GetCodeLineAndClassCount {
+	public static int classCount = 0;
 	
 	public int process(String basePath) throws IOException {
 		File dir = new File(basePath);
@@ -17,9 +18,9 @@ public class GetCodeLineAndClassCount {
 			}
 		}
 		else {
-			
 			if(dir.isFile() && dir.getName().endsWith(".java")) {
 				res += codeLines(dir);
+				classCount++;
 			}
 		}
 		return res;
@@ -30,18 +31,17 @@ public class GetCodeLineAndClassCount {
 		int count = 0;
 		String line = null;
 		while((line=br.readLine())!=null) {
-			if(line.length()!=0) {
-				count++;
-			}
+			count++;
 		}
 		br.close();
 		return count;
 	}
 	
 	public static void main(String[] args) throws IOException {
-		String path = "./src/cn/edu/nju/cs/tool";
+		String path = "./data/exp/Maven/maven-master";
 		GetCodeLineAndClassCount tool = new GetCodeLineAndClassCount();
 		int res = tool.process(path);
-		System.out.println(res);
+		System.out.println("code lines:"+res);
+		System.out.println("class count:"+classCount);
 	}
 }

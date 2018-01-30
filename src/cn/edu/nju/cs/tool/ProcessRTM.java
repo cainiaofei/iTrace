@@ -81,7 +81,7 @@ public class ProcessRTM {
 	public static void main(String[] args) throws IOException {
 		String rtmPath = "./data/exp/iTrust/rtm/RTM_CLASS.txt"; 
 		ProcessRTM tool = new ProcessRTM();
-		tool.analyzeRTM(rtmPath);
-		//tool.process(rtmPath);
+		//tool.analyzeRTM(rtmPath);
+		tool.process(rtmPath);
 	}
 }
