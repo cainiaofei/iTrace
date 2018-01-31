@@ -3,7 +3,6 @@ package cn.edu.nju.cs.tool;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -79,7 +78,7 @@ public class ProcessRTM {
 	}
 
 	public static void main(String[] args) throws IOException {
-		String rtmPath = "./data/exp/iTrust/rtm/RTM_CLASS.txt"; 
+		String rtmPath = "./data/exp/Infinispan/rtm/RTM_CLASS.txt"; 
 		ProcessRTM tool = new ProcessRTM();
 		//tool.analyzeRTM(rtmPath);
 		tool.process(rtmPath);

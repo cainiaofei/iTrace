@@ -31,14 +31,17 @@ public class GetCodeLineAndClassCount {
 		int count = 0;
 		String line = null;
 		while((line=br.readLine())!=null) {
-			count++;
+			if(line.length()!=0) {
+				count++;
+			}
+			
 		}
 		br.close();
 		return count;
 	}
 	
 	public static void main(String[] args) throws IOException {
-		String path = "./data/exp/Maven/maven-master";
+		String path = "data/exp/Infinispan/infinispan-master/";
 		GetCodeLineAndClassCount tool = new GetCodeLineAndClassCount();
 		int res = tool.process(path);
 		System.out.println("code lines:"+res);
