@@ -16,3 +16,4 @@ data_old/
 *.ser
 fp/
 fp_verifyCountThree/
+*.log
