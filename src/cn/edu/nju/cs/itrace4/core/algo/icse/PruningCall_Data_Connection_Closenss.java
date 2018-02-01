@@ -54,7 +54,8 @@ public class PruningCall_Data_Connection_Closenss implements CSTI {
     private double bonusForData;
     private Double bonus_thresholdForData;
 
-    public PruningCall_Data_Connection_Closenss(RelationInfo prunedRelationInfo, RelationInfo fullRelationInfo, UseEdge useEdge, Double bonus_thresholdForCall, Double bonus_thresholdForData) {
+    public PruningCall_Data_Connection_Closenss(RelationInfo prunedRelationInfo, RelationInfo fullRelationInfo,
+    		UseEdge useEdge, Double bonus_thresholdForCall, Double bonus_thresholdForData) {
         this.prunedRelationInfo = prunedRelationInfo;
         this.prunedRelationGraph = new CallDataRelationGraph(prunedRelationInfo, true);
 

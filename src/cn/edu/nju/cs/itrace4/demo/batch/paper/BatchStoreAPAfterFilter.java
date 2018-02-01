@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.demo.batch.percent;
+package cn.edu.nju.cs.itrace4.demo.batch.paper;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -14,11 +15,15 @@ import org.apache.commons.math3.stat.inference.MannWhitneyUTest;
 
 import cn.edu.nju.cs.itrace4.core.algo.None_CSTI;
 import cn.edu.nju.cs.itrace4.core.algo.UD_CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.UseEdge;
+import cn.edu.nju.cs.itrace4.core.algo.icse.PruningCall_Data_Connection_Closenss;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
+import cn.edu.nju.cs.itrace4.core.document.LinksList;
+import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
+import cn.edu.nju.cs.itrace4.core.document.SingleLink;
 import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
-import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataTreatEqualOuterLessThanInner;
-import cn.edu.nju.cs.itrace4.demo.cdgraph.inneroutter.UD_InnerAndOuterMax;
+import cn.edu.nju.cs.itrace4.core.metrics.cut.ConstantThresholdResult;
 import cn.edu.nju.cs.itrace4.demo.cdgraph.inneroutter.UD_InnerAndOuterSeq;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Gantt;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Infinispan;
@@ -32,7 +37,10 @@ import cn.edu.nju.cs.itrace4.demo.exp.project.Pig;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Pig_Cluster;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
+import cn.edu.nju.cs.itrace4.util.Setting;
 import cn.edu.nju.cs.refactor.exception.FileException;
+import cn.edu.nju.cs.refactor.plug.FindBadReq;
+import cn.edu.nju.cs.refactor.plug.Plug;
 import cn.edu.nju.cs.refactor.util.FileProcess;
 import cn.edu.nju.cs.refactor.util.FileProcessTool;
 
@@ -41,7 +49,7 @@ import cn.edu.nju.cs.refactor.util.FileProcessTool;
  * @date 2018.1.21
  * @description try to use some parameter and find the best one.
  */
-public class BatchExecuteParameterPercent {
+public class BatchStoreAPAfterFilter {
 	private String projectPath;
 	private String modelPath;
 	private FileProcess fileProcess;
@@ -51,9 +59,14 @@ public class BatchExecuteParameterPercent {
 	private Map<Integer, String> idMapModel;
 	private int userVerifyNumber;
 	private double percent = 0.035;
-	private String targetPath = "percent/OuterInnerSeq/"+percent;
+	private String targetPath = "paper1/OuterInnerSeq/"+percent;
+	
+	private int countThreshold = 2;
+	private String rtmPath;
+	
+	private Plug findBadReq;
 
-	public BatchExecuteParameterPercent(String projectPath, String modelPath) {
+	public BatchStoreAPAfterFilter(String projectPath, String modelPath) {
 		this.projectPath = projectPath;
 		this.modelPath = modelPath;
 		this.fileProcess = new FileProcessTool();
@@ -61,50 +74,38 @@ public class BatchExecuteParameterPercent {
 		this.modelMap = new HashMap<String, String>();
 		this.idMapProject = new HashMap<Integer, String>();
 		this.idMapModel = new HashMap<Integer, String>();
+		
+		this.findBadReq = new FindBadReq();
+		
 		init();
 	}
 
-	public void batch() throws ClassNotFoundException, IOException {
+	public void batch() throws ClassNotFoundException, IOException, FileException {
 		String[] projects = getArrFromFile(projectPath);
 		String[] models = getArrFromFile(modelPath);
 		// the first two is Itrust and gannt
 		for (double callThreshold = 0.4; callThreshold < 0.41; callThreshold += 0.1) {
 			for (double dataThreshold = 0.8; dataThreshold < 0.81; dataThreshold += 0.1) {
-				int count = 0;
-				// project:4 model:3 method:3 StringBuilder:ap,map,p-value,rate
-				String[][][] result = new String[4][3][3];
+				//2018.1.25
+				// project:4 model:3 method:4 StringBuilder:ap,map,p-value,rate
+				String[][][] result = new String[4][3][4];
 				// the first two is iTrust and Gantt
-				for (int projectIndex = 0; projectIndex < 2; projectIndex++) {
+				for (int projectIndex = 0; projectIndex < projects.length; projectIndex++) {
 					TextDataset textDataset = getTextDataset(projects[projectIndex].toLowerCase());
 					RelationInfo ri = getRelationInfo(projects[projectIndex].toLowerCase());
+					
+					RelationInfo class_relation = getRelationInfo(projects[projectIndex].toLowerCase());
+					RelationInfo class_relationForO = getRelationInfo(projects[projectIndex].toLowerCase());
+					RelationInfo class_relationForAllDependencies = getRelationInfo(projects[projectIndex].toLowerCase());
+					
 					userVerifyNumber = (int)(ri.getVertexIdNameMap().size()*percent);
 					for (int modelIndex = 0; modelIndex < models.length; modelIndex++) {
-						boolean isMeetPvalue = calculateResult(result, projects, projectIndex, models, modelIndex,
-								textDataset, ri, callThreshold, dataThreshold);
-						if (isMeetPvalue) {
-							count++;
-						}
+						rtmPath = projectMap.get(projects[projectIndex].toLowerCase()).getRtmClassPath();
+						calculateResult(result, projects,
+								projectIndex, models, modelIndex, textDataset, ri,
+								callThreshold, dataThreshold,class_relation,
+								class_relationForO,class_relationForAllDependencies);
 					}
-				}
-				if (count < 5) {
-					continue;
-				}
-				
-				int irCount = 0;
-				for (int projectIndex = 2; projectIndex < projects.length; projectIndex++) {
-					TextDataset textDataset = getTextDataset(projects[projectIndex]);
-					RelationInfo ri = getRelationInfo(projects[projectIndex]);
-					userVerifyNumber = (int)(ri.getVertexIdNameMap().size()*percent);
-					for (int modelIndex = 0; modelIndex < models.length; modelIndex++) {
-						boolean isMeetPvalue = calculateResultCompareWithIR(result, projects, projectIndex, models, modelIndex, textDataset, ri,
-								callThreshold, dataThreshold);
-						if(isMeetPvalue) {
-							irCount++;
-						}
-					}
-				}
-				if(irCount<1) {
-					continue;
 				}
 				// write file
 				writeFile(callThreshold, dataThreshold, result);
@@ -113,7 +114,8 @@ public class BatchExecuteParameterPercent {
 	}
 
 	private void writeFile(double callThreshold, double dataThreshold, String[][][] result) throws IOException {
-		File file = new File(targetPath + File.separator + callThreshold + "-" + dataThreshold);
+		File file = new File(targetPath + File.separator + callThreshold + "-" + dataThreshold+
+				File.separator + "ap_map_after_filter_"+countThreshold);
 		if (!file.exists()) {
 			file.mkdirs();
 		}
@@ -127,7 +129,7 @@ public class BatchExecuteParameterPercent {
 				StringBuilder sb = new StringBuilder();
 				String modelName = idMapModel.get(modelIndex);
 				String header = getHeader(modelName);
-				String[] methods = { "ir", "ud", "cluster" };
+				String[] methods = { "ir", "ud","closeness", "cluster" };
 				sb.append(header+"\n");
 				for (int methodIndex = 0; methodIndex < result[projectIndex][modelIndex].length; methodIndex++) {
 					String methodName = methods[methodIndex];
@@ -146,40 +148,14 @@ public class BatchExecuteParameterPercent {
 		return sb.toString();
 	}
 
-	private boolean calculateResult(String[][][] result, String[] projects, int projectIndex, String[] models,
-			int modelIndex, TextDataset textDataset, RelationInfo ri, double callThreshold, double dataThreshold) {
-		String fullModelName = modelMap.get(models[modelIndex].trim().toLowerCase());
-		Result result_ir = IR.compute(textDataset, fullModelName, new None_CSTI());
-		ri.setPruning(0, 0);
-		Result result_UD_CSTI = IR.compute(textDataset, fullModelName, new UD_CSTI(ri));
-		Map<String, Set<String>> valid = new HashMap<String, Set<String>>();
-		ri.setPruning(callThreshold, dataThreshold);
-		valid = new HashMap<String, Set<String>>();
-//		Result result_UD_CallDataTreatEqual = IR.compute(textDataset, fullModelName,
-//				new UD_CallDataTreatEqualOuterLessThanInner(ri, callThreshold, dataThreshold, 
-//						userVerifyNumber,valid));// 0.7
-		
-		Result result_UD_CallDataTreatEqual = IR.compute(textDataset, fullModelName,
-				new UD_InnerAndOuterMax(ri, callThreshold, dataThreshold, 
-						userVerifyNumber,valid));// 0.7
-		
-		String irRecord = getRecord(result_ir, result_UD_CallDataTreatEqual);
-		result[projectIndex][modelIndex][0] = irRecord;
-		String udRecord = getRecord(result_UD_CSTI, result_UD_CallDataTreatEqual);
-		result[projectIndex][modelIndex][1] = udRecord;
-		String clusterRecord = getRecord(result_UD_CallDataTreatEqual);
-		result[projectIndex][modelIndex][2] = clusterRecord;
-
-		if (this.printPValue(result_UD_CallDataTreatEqual, result_UD_CSTI) <= 0.05) {
-			return true;
-		} else {
-			return false;
-		}
-	}
 	
-	
-	private boolean calculateResultCompareWithIR(String[][][] result, String[] projects, int projectIndex, String[] models,
-			int modelIndex, TextDataset textDataset, RelationInfo ri, double callThreshold, double dataThreshold) {
+	private void calculateResult(String[][][] result, String[] projects, int projectIndex, String[] models,
+			int modelIndex, TextDataset textDataset, RelationInfo ri,
+			double callThreshold, double dataThreshold,
+			RelationInfo class_relation,RelationInfo class_relationForO,
+			RelationInfo class_relationForAllDependencies) throws FileException, IOException {
+		System.setProperty("projectName", projects[projectIndex]);
+		
 		String fullModelName = modelMap.get(models[modelIndex].trim().toLowerCase());
 		Result result_ir = IR.compute(textDataset, fullModelName, new None_CSTI());
 		ri.setPruning(0, 0);
@@ -189,19 +165,90 @@ public class BatchExecuteParameterPercent {
 		valid = new HashMap<String, Set<String>>();
 		Result result_UD_CallDataTreatEqual = IR.compute(textDataset, fullModelName,
 				new UD_InnerAndOuterSeq(ri, callThreshold, dataThreshold, 
-						userVerifyNumber,valid));// 0.7
+						userVerifyNumber,valid));// 
+		
+		
+		class_relation.setPruning(Setting.callThreshold, Setting.dataThreshold);
+        class_relationForO.setPruning(-1, -1);
+        class_relationForAllDependencies.setPruning(-1, -1);
+
+        Result result_pruningeCall_Data_Dir = IR.compute(textDataset, fullModelName, 
+        		new PruningCall_Data_Connection_Closenss(class_relation, class_relationForO, 
+        				class_relationForAllDependencies,
+        				UseEdge.Call, 1.0, 1.0));
+        /**
+         * @date 2018.1.27
+         * @author zzf
+         * @description remove requirements which achieved by specified classes. 
+         */
+        findBadReq.detect(result_UD_CallDataTreatEqual, result_UD_CSTI);
+        
+        
+        Map<String,Map<String,Double>> rtmMap = read(rtmPath);
+        result_ir = filter(result_ir,rtmMap);
+        result_UD_CSTI = filter(result_UD_CSTI,rtmMap);
+        result_pruningeCall_Data_Dir = filter(result_pruningeCall_Data_Dir,rtmMap);
+        result_UD_CallDataTreatEqual = filter(result_UD_CallDataTreatEqual,rtmMap);
+        
+        
+        
 		String irRecord = getRecord(result_ir, result_UD_CallDataTreatEqual);
 		result[projectIndex][modelIndex][0] = irRecord;
 		String udRecord = getRecord(result_UD_CSTI, result_UD_CallDataTreatEqual);
 		result[projectIndex][modelIndex][1] = udRecord;
+		
+		String closenessRecord = getRecord(result_pruningeCall_Data_Dir,result_UD_CallDataTreatEqual);
+		result[projectIndex][modelIndex][2] = closenessRecord;
+		
 		String clusterRecord = getRecord(result_UD_CallDataTreatEqual);
-		result[projectIndex][modelIndex][2] = clusterRecord;
+		result[projectIndex][modelIndex][3] = clusterRecord;
+	}
 
-		if (this.printPValue(result_UD_CallDataTreatEqual, result_ir) <= 0.05) {
-			return true;
-		} else {
-			return false;
+	private Map<String, Map<String, Double>> read(String rtmPath) throws FileException, IOException {
+		Map<String,Map<String,Double>> rtmMap = new HashMap<String,Map<String,Double>>();
+		String content = fileProcess.getFileConent(rtmPath);
+	    String[] lines = content.split("\n");
+	    for(int i = 0; i < lines.length;i++) {
+	    	String[] strs = lines[i].split("\\s+");
+	    	String req = strs[0];
+	    	String source = strs[1];
+	    	Double score = Double.valueOf(strs[2]);
+	    	if(!rtmMap.containsKey(req)) {
+	    		rtmMap.put(req, new HashMap<String,Double>());
+	    	}
+	    	rtmMap.get(req).put(source, score);
+	    }
+	    
+	    Iterator<String> ite = rtmMap.keySet().iterator();
+	    while(ite.hasNext()) {
+	    	String req = ite.next();
+	    	if(rtmMap.get(req).size()<=countThreshold) {
+	    		ite.remove();
+	    	}
+	    }
+		return rtmMap;
+	}
+
+	private Result filter(Result origin, Map<String,Map<String,Double>> rtmMap) {
+		SimilarityMatrix matrixAfterFilter = new SimilarityMatrix();
+		LinksList allLinks = origin.matrix.allLinks();
+		for(SingleLink link:allLinks) {
+			String req = link.getSourceArtifactId();
+			if(rtmMap.containsKey(req)) {
+				matrixAfterFilter.addLink(link.getSourceArtifactId(), link.getTargetArtifactId(),
+						link.getScore());
+			}
 		}
+		
+		SimilarityMatrix rtmMatrix = new SimilarityMatrix();
+		for(String req:rtmMap.keySet()) {
+			Map<String,Double> sourceScoreMap = rtmMap.get(req);
+			for(String source:sourceScoreMap.keySet()) {
+				rtmMatrix.addLink(req,source,sourceScoreMap.get(source));
+			}
+		}
+		
+		return new ConstantThresholdResult(matrixAfterFilter,rtmMatrix);
 	}
 
 	private String getRecord(Result result) {
@@ -229,6 +276,7 @@ public class BatchExecuteParameterPercent {
 		ObjectInputStream ois = new ObjectInputStream(fis);
 		RelationInfo ri = (RelationInfo) ois.readObject();
 		ois.close();
+		fis.close();
 		return ri;
 	}
 
@@ -298,10 +346,12 @@ public class BatchExecuteParameterPercent {
 		return pValue_fmeasure;
 	}
 
-	public static void main(String[] args) {
-		String projectPath = "resource/config/project.txt";
+	public static void main(String[] args) throws FileException {
+		//String projectPath = "resource/config/project.txt";
+		String projectPath = "resource/config/test.txt";
+		
 		String modelPath = "resource/config/model.txt";
-		BatchExecuteParameterPercent bp = new BatchExecuteParameterPercent(projectPath, modelPath);
+		BatchStoreAPAfterFilter bp = new BatchStoreAPAfterFilter(projectPath, modelPath);
 		try {
 			bp.batch();
 		} catch (ClassNotFoundException e) {

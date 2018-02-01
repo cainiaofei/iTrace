@@ -23,6 +23,7 @@ import cn.edu.nju.cs.itrace4.demo.FileParse.XmlParse;
 import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataTreatEqual;
 import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataTreatEqualOuterLessThanInner;
 import cn.edu.nju.cs.itrace4.demo.cdgraph.inneroutter.UD_InnerAndOuterMax;
+import cn.edu.nju.cs.itrace4.demo.cdgraph.inneroutter.UD_InnerAndOuterSeq;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Gantt;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Infinispan;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
@@ -50,7 +51,7 @@ public class CallDataTreatEqualCountTest {
 		private double callEdgeScoreThreshold;
 	    private double dataEdgeScoreThreshold;
 		private double percent;
-	    private int userVerifyNumber = 3;
+	    private int userVerifyNumber = 15;
 		
 		public CallDataTreatEqualCountTest() throws ParserConfigurationException,
 			SAXException, IOException{
@@ -99,6 +100,8 @@ public class CallDataTreatEqualCountTest {
 	        
 	        ois.close();
 	        
+	        System.setProperty("projectName", project.getProjectName());
+	        
 	        Result result_ir = IR.compute(textDataset, model, new None_CSTI());
 	        Result result_UD_CSTI = IR.compute(textDataset, model, new UD_CSTI(ri));
 	        
@@ -110,7 +113,7 @@ public class CallDataTreatEqualCountTest {
 	        			dataEdgeScoreThreshold,userVerifyNumber,valid));//0.7
 	        
 	        Result result_No_Outter = IR.compute(textDataset,model,
-	        		new UD_InnerAndOuterMax(ri,callEdgeScoreThreshold,
+	        		new UD_InnerAndOuterSeq(ri,callEdgeScoreThreshold,
 	        			dataEdgeScoreThreshold,userVerifyNumber,valid));//0.7
 	        
 	        /**

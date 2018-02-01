@@ -1,4 +1,5 @@
-package cn.edu.nju.cs.itrace4.demo.batch.count;
+package cn.edu.nju.cs.itrace4.demo.batch.paper;
+
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,6 +14,7 @@ import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
 import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataTreatEqualOuterLessThanInner;
+import cn.edu.nju.cs.itrace4.demo.cdgraph.inneroutter.UD_InnerAndOuterSeq;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 import cn.edu.nju.cs.refactor.exception.FileException;
@@ -32,7 +34,7 @@ import cn.edu.nju.cs.refactor.util.FileWriterImp;
  * @date 2018.1.23
  * @description  
  */
-public class BatchExecuteFP {
+public class BatchExecuteFPPercent {
 	private String projectPath = "resource/config/project.txt";
 	private String modelPath = "resource/config/model.txt";
 	private String template = "resource/template/fpData.format";
@@ -48,10 +50,16 @@ public class BatchExecuteFP {
 	private FileProcess fileProcess = new FileProcessTool();
 	private FileWrite fileWrite = new FileWriterImp();
 	
-	public BatchExecuteFP(String targetPath,double callThreshold,double dataThreshold) {
+	private double percent;
+	private int userVerifyCount;
+	
+	
+	public BatchExecuteFPPercent(String targetPath,double callThreshold,
+			double dataThreshold,double percent) {
 		this.targetPath = targetPath;
 		this.callThreshold = callThreshold;
 		this.dataThreshold = dataThreshold;
+		this.percent = percent;
 	}
 	
 	public void getFPData() throws ClassNotFoundException, IOException, FileException {
@@ -62,8 +70,14 @@ public class BatchExecuteFP {
 			StringBuilder sb = new StringBuilder();
 			sb.append(fileProcess.getFileConent(template)+"\n");
 			Project project = projectFactory.generate(projects[projectIndex].trim());
+			/**
+			 * @date 2018.1.26 
+			 */
+			System.setProperty("projectName", project.getProjectName());
+			
 			TextDataset textDataset = getTextDataset(project);
 			RelationInfo ri = getRelationInfo(project);
+			userVerifyCount = (int)(ri.getVertexIdNameMap().size()*percent);
 			for(int modelIndex = 0; modelIndex<models.length;modelIndex++) {
 				String model = modelFactory.generate(models[modelIndex]);
 				ri.setPruning(0, 0);
@@ -72,8 +86,8 @@ public class BatchExecuteFP {
 				ri.setPruning(callThreshold, dataThreshold);
 				valid = new HashMap<String, Set<String>>();
 				Result result_UD_CallDataTreatEqual = IR.compute(textDataset, model,
-						new UD_CallDataTreatEqualOuterLessThanInner(ri, callThreshold, dataThreshold, 
-								3,valid));// 0.7
+						new UD_InnerAndOuterSeq(ri, callThreshold, dataThreshold, 
+								userVerifyCount,valid));// 0.7
 				String[] fpDataList = fpReduce.getFPReduceData(result_UD_CallDataTreatEqual, result_ir, valid);
 				sb.append(models[modelIndex]+";");
 				for(String fpData:fpDataList) {
@@ -124,11 +138,13 @@ public class BatchExecuteFP {
 	public static void main(String[] args) throws FileException {
 		double callThreshold = 0.4;
 		double dataThreshold = 0.8;
-		String targetPath = "newData/batch-3-all" + File.separator + 
+		double percent = 0.035;
+		String targetPath = "paper/OuterInnerSeq/"+percent + File.separator + 
 				callThreshold + "-" + dataThreshold;
-		BatchExecuteFP batchExecuteFP = new BatchExecuteFP(targetPath,callThreshold,dataThreshold);
+		BatchExecuteFPPercent batchExecuteFPPercent = new BatchExecuteFPPercent(targetPath,callThreshold,
+				dataThreshold,percent);
 		try {
-			batchExecuteFP.getFPData();
+			batchExecuteFPPercent.getFPData();
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		}

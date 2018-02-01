@@ -52,6 +52,7 @@ public class FileWriterImp implements FileWrite{
 		}
 	}
 	
+	@Override
 	public void newLine() {
 		try {
 			bw.newLine();

@@ -18,6 +18,18 @@ public class LSI implements IRModel {
     private int k = Setting.LSI_K;
 
     public SimilarityMatrix Compute(ArtifactsCollection source, ArtifactsCollection target) {
+    	/**
+    	 * @date 2018.1.26
+    	 * @author zzf
+    	 * @description change k value based on projectName
+    	 */
+    	String projectName = System.getProperty("projectName");
+    	if(projectName!=null && (projectName.equalsIgnoreCase("infinispan")||
+    			projectName.equalsIgnoreCase("pig"))) {
+    		k = 200;
+    		System.out.println("lsi_k-------------------"+k);
+    	}
+    	
         ArtifactsCollection bothSourceAndTarget = new ArtifactsCollection();
         bothSourceAndTarget.putAll(source);
         bothSourceAndTarget.putAll(target);

@@ -14,6 +14,7 @@ import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
 import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataTreatEqualOuterLessThanInner;
+import cn.edu.nju.cs.itrace4.demo.cdgraph.inneroutter.UD_InnerAndOuterSeq;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 import cn.edu.nju.cs.refactor.exception.FileException;
@@ -22,7 +23,7 @@ import cn.edu.nju.cs.refactor.exp.input.ModelFactoryImp;
 import cn.edu.nju.cs.refactor.exp.input.ProjectFactory;
 import cn.edu.nju.cs.refactor.exp.input.ProjectFactoryImp;
 import cn.edu.nju.cs.refactor.exp.out.FPReduce;
-import cn.edu.nju.cs.refactor.exp.out.FPReduceThinkVisit;
+import cn.edu.nju.cs.refactor.exp.out.FPReduceThinkVisitBasedOnCount;
 import cn.edu.nju.cs.refactor.util.FileProcess;
 import cn.edu.nju.cs.refactor.util.FileProcessTool;
 import cn.edu.nju.cs.refactor.util.FileWrite;
@@ -43,7 +44,7 @@ public class BatchExecuteFPPercent {
 	private double callThreshold;
 	private double dataThreshold;
 	
-	private FPReduce fpReduce = new FPReduceThinkVisit();
+	private FPReduce fpReduce = new FPReduceThinkVisitBasedOnCount();
 	private ProjectFactory projectFactory = new ProjectFactoryImp();
 	private ModelFactory modelFactory = new ModelFactoryImp();
 	private FileProcess fileProcess = new FileProcessTool();
@@ -80,7 +81,7 @@ public class BatchExecuteFPPercent {
 				ri.setPruning(callThreshold, dataThreshold);
 				valid = new HashMap<String, Set<String>>();
 				Result result_UD_CallDataTreatEqual = IR.compute(textDataset, model,
-						new UD_CallDataTreatEqualOuterLessThanInner(ri, callThreshold, dataThreshold, 
+						new UD_InnerAndOuterSeq(ri, callThreshold, dataThreshold, 
 								userVerifyCount,valid));// 0.7
 				String[] fpDataList = fpReduce.getFPReduceData(result_UD_CallDataTreatEqual, result_ir, valid);
 				sb.append(models[modelIndex]+";");
@@ -133,7 +134,7 @@ public class BatchExecuteFPPercent {
 		double callThreshold = 0.4;
 		double dataThreshold = 0.8;
 		double percent = 0.035;
-		String targetPath = "percent/outAddInner/"+percent + File.separator + 
+		String targetPath = "percent/OuterInnerSeq/"+percent + File.separator + 
 				callThreshold + "-" + dataThreshold;
 		BatchExecuteFPPercent batchExecuteFPPercent = new BatchExecuteFPPercent(targetPath,callThreshold,
 				dataThreshold,percent);

@@ -10,7 +10,7 @@ import cn.edu.nju.cs.itrace4.core.metrics.Result;
  * @author zzf
  * @description ~~ 
  */
-public class FPReduceThinkVisit implements FPReduce{
+public class FPReduceThinkVisitBasedOnCount implements FPReduce{
 
 	@Override
 	public String[] getFPReduceData(Result ours, Result target,
@@ -20,7 +20,12 @@ public class FPReduceThinkVisit implements FPReduce{
 	    String[] res = new String[oursFP.size()];
 	    for(int i = 0; i < oursFP.size();i++) {
 	    	int diff = oursFP.get(i) - compareFP.get(i);
-	    	res[i] = "" + diff;
+	    	if(diff>0) {
+	    		res[i] = "+" + diff;
+	    	}
+	    	else {
+	    		res[i] = "" + diff;
+	    	}
 	    }
 		return res;
 	}

@@ -28,11 +28,11 @@ public class iTrust_VSM_ICSME {
     public static void run() throws IOException, ClassNotFoundException {
         TextDataset textDataset = new TextDataset(ITRUST_CONSTANTS.ucPath, ITRUST_CONSTANTS.classDirPath, ITRUST_CONSTANTS.rtmClassPath);
 
-        FileInputStream fis = new FileInputStream(ITRUST_CONSTANTS.class_relationInfoPath);
+        FileInputStream fis = new FileInputStream(ITRUST_CONSTANTS.class_relationInfoPathWhole);
         ObjectInputStream ois = new ObjectInputStream(fis);
         RelationInfo class_relation = (RelationInfo) ois.readObject();
 
-        FileInputStream fisForO = new FileInputStream(ITRUST_CONSTANTS.class_relationInfoPath);
+        FileInputStream fisForO = new FileInputStream(ITRUST_CONSTANTS.class_relationInfoPathWhole);
         ObjectInputStream oisForO = new ObjectInputStream(fisForO);
         RelationInfo class_relationForO = (RelationInfo) oisForO.readObject();
 
