@@ -121,7 +121,7 @@ public class BatchStoreFPReducePercent {
 	private void createFPFile(String targetPath, String projectName) {
 		File dir = new File(targetPath);
 		if(!dir.exists()) {
-			dir.mkdir();
+			dir.mkdirs();
 		}
 		fileWrite.createFile(dir.getAbsolutePath() + File.separator + projectName + ".csv");
 	}
