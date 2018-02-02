@@ -393,9 +393,9 @@ public abstract class Result implements Serializable {
                 double recall = correct / (double) oracle.count();
                 precisionRecallCurve.put(String.format("%03d_Recall", linkNumber), recall);
                 
-                if(recall>=0.4) {
-                	System.out.println("IR:"+correct);
-                }
+//                if(recall>=0.4) {
+//                	System.out.println("IR:"+correct);
+//                }
                 
                 LinksDistributed linksDistributed = new LinksDistributed(TP, FP, TN, FN);
                 linksDistributedAtRecall.put(recall, linksDistributed);

@@ -26,6 +26,7 @@ import cn.edu.nju.cs.itrace4.demo.cdgraph.inneroutter.UD_InnerAndOuterMax;
 import cn.edu.nju.cs.itrace4.demo.cdgraph.inneroutter.UD_InnerAndOuterSeq;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Gantt;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Infinispan;
+import cn.edu.nju.cs.itrace4.demo.exp.project.Infinispan_TestCase;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
 import cn.edu.nju.cs.itrace4.demo.exp.project.JhotDraw;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Maven;
@@ -51,7 +52,7 @@ public class CallDataTreatEqualCountTest {
 		private double callEdgeScoreThreshold;
 	    private double dataEdgeScoreThreshold;
 		private double percent;
-	    private int userVerifyNumber = 15;
+	    private int userVerifyNumber = 8;
 		
 		public CallDataTreatEqualCountTest() throws ParserConfigurationException,
 			SAXException, IOException{
@@ -85,6 +86,7 @@ public class CallDataTreatEqualCountTest {
 			projectMap.put("maven_cluster_40", new Maven_Cluster_40());
 			projectMap.put("pig_cluster", new Pig_Cluster());
 			projectMap.put("maven_testcase", new Maven_TestCase());
+			projectMap.put("infinispan_testcase", new Infinispan_TestCase());
 		}
 
 

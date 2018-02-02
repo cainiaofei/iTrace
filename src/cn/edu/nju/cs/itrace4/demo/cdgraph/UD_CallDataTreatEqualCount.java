@@ -236,7 +236,7 @@ public class UD_CallDataTreatEqualCount implements CSTI{
 			
 			double bonus = giveBonusForLonePointBasedCallGraph(callGraphs, subGraph, loneVertex, 1);
 
-			double localMaxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(subGraph.getMaxId()));
+			//double localMaxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(subGraph.getMaxId()));
 
 			double validValueSum = maxScore * bonus;
 			//double validValueSum = (localMaxScore) * bonus;
@@ -314,7 +314,7 @@ public class UD_CallDataTreatEqualCount implements CSTI{
 		for (int loneVertex : loneVertexList) {
 			String loneVertexName = vertexIdNameMap.get(loneVertex);
 			double bonus = giveBonusForLonePointBasedDataGraph(dataGraphs, subGraph, loneVertex, 1);
-			double localMaxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(subGraph.getMaxId()));
+		//	double localMaxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(subGraph.getMaxId()));
 			//double validValueSum = (localMaxScore) * bonus;
 			double validValueSum = maxScore * bonus;
 			
