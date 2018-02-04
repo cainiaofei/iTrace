@@ -28,8 +28,9 @@ public class PreprocessTextPig {
 	private TransferTXT getSrc = new TransferTXT();
 	//private TableFormatNormalize generateCallGraph = new TableFormatNormalize();
 	
-	private String clusterFilePath = "data/exp/pig/clusterFile/s_d_t_70d.txt";
-	private static String projectPath = "data/exp/Pig/";
+	private
+	String clusterFilePath = "data/exp/PigNew/clusterFile/s_d_t_70d.txt";
+	private static String projectPath = "data/exp/PigNew/";
 
     private static String rtmDBFilePath = projectPath + "rtm/Pig-req.db";
     private static String srcDirPath = projectPath + "src";

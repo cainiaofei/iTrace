@@ -30,7 +30,7 @@ public class PreprocessTextMaven {
 	private TransferTXT getSrc = new TransferTXT();
 	//private TableFormatNormalize generateCallGraph = new TableFormatNormalize();
 	
-	private static String projectPath = "data/exp/Maven/";
+	private static String projectPath = "data/exp/MavenNew/";
 
     private static String rtmDBFilePath = projectPath + "rtm/Maven-req.db";
     private static String srcDirPath = projectPath + "src";
@@ -40,7 +40,7 @@ public class PreprocessTextMaven {
     private static String methodDirPath = projectPath + "method/code";
     
     private static String relationDirPath = projectPath + "relation";
-    
+   
     private static String masterPath = projectPath + "maven-master";
     private static String graphDBPath = relationDirPath + File.separator + "call.db";
     

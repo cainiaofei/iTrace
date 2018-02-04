@@ -17,7 +17,7 @@ import cn.edu.nju.cs.itrace4.exp.tool.getCallerDB.GetCallDependencyThisThread;
 
 public class GetCallDependency {
 	private String sqlDriver = "org.sqlite.JDBC";
-	private String dbPath = "data/exp/Pig/relation/CallGraph.db";
+	private String dbPath = "data/exp/Pig_Run/relation/CallGraph.db";
 	private String tableName = "callGraph";
 
 	public void getCallDependency() {
