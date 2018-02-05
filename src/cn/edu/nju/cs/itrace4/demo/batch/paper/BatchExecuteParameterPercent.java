@@ -52,7 +52,8 @@ public class BatchExecuteParameterPercent {
 	private Map<Integer, String> idMapProject;
 	private Map<Integer, String> idMapModel;
 	private int userVerifyNumber;
-	private double percent = 0.035;
+	//private double percent = 0.035; // former
+	private double percent = 1.0;
 	private String targetPath = "paper/OuterInnerSeq/"+percent;
 
 	public BatchExecuteParameterPercent(String projectPath, String modelPath) {

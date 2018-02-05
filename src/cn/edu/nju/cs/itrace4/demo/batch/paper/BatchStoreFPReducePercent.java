@@ -156,7 +156,9 @@ public class BatchStoreFPReducePercent {
 	public static void main(String[] args) throws FileException {
 		double callThreshold = 0.4;
 		double dataThreshold = 0.8;
-		double percent = 0.035;
+		//double percent = 0.035; //origin
+		double percent = 1.0;
+		
 		String targetPath = "paper/OuterInnerSeq/"+ percent +File.separator + 
 				callThreshold + "-" + dataThreshold + "/fpReduceOnlyEven";
 		BatchStoreFPReducePercent batchStoreFPReducePercent = new BatchStoreFPReducePercent(targetPath,callThreshold,

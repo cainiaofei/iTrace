@@ -29,6 +29,9 @@ public class LSI implements IRModel {
     		k = 200;
     		System.out.println("lsi_k-------------------"+k);
     	}
+    	else {
+    		System.out.println("lsi_k-------------------"+k);
+    	}
     	
         ArtifactsCollection bothSourceAndTarget = new ArtifactsCollection();
         bothSourceAndTarget.putAll(source);

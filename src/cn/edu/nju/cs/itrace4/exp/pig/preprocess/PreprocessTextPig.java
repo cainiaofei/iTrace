@@ -10,6 +10,7 @@ import cn.edu.nju.cs.itrace4.exp.tool.TransferTXT;
 import cn.edu.nju.cs.itrace4.parser.SourceTargetUnionForGit;
 import cn.edu.nju.cs.itrace4.preprocess.BatchingPreprocess;
 import cn.edu.nju.cs.itrace4.preprocess.rawdata.db.GenerateRTM;
+import cn.edu.nju.cs.itrace4.preprocess.rawdata.db.GenerateRTMExt;
 import cn.edu.nju.cs.itrace4.preprocess.rawdata.db.GenerateRTMThroughCluster;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 
@@ -29,8 +30,8 @@ public class PreprocessTextPig {
 	//private TableFormatNormalize generateCallGraph = new TableFormatNormalize();
 	
 	private
-	String clusterFilePath = "data/exp/PigNew/clusterFile/s_d_t_70d.txt";
-	private static String projectPath = "data/exp/PigNew/";
+	String clusterFilePath = "data/exp/Pig_Run/clusterFile/s_d_t_70d.txt";
+	private static String projectPath = "data/exp/Pig_Run/";
 
     private static String rtmDBFilePath = projectPath + "rtm/Pig-req.db";
     private static String srcDirPath = projectPath + "src";
@@ -48,7 +49,8 @@ public class PreprocessTextPig {
     private String sqlFile = "resource/sql/buildRTMForPig.sql";
     
     public PreprocessTextPig() {
-    	getRTM = new GenerateRTM(rtmDBFilePath,dbProperty,sqlFile);
+    	//getRTM = new GenerateRTM(rtmDBFilePath,dbProperty,sqlFile);
+    	getRTM = new GenerateRTMExt(rtmDBFilePath,dbProperty,sqlFile);
     	//getRTM = new GenerateRTMThroughCluster(rtmDBFilePath,dbProperty,sqlFile,clusterFilePath);
     }
     

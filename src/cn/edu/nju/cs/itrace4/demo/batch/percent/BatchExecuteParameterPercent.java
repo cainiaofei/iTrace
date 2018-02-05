@@ -17,7 +17,6 @@ import cn.edu.nju.cs.itrace4.core.algo.UD_CSTI;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
-import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataTreatEqualOuterLessThanInner;
 import cn.edu.nju.cs.itrace4.demo.cdgraph.inneroutter.UD_InnerAndOuterMax;
 import cn.edu.nju.cs.itrace4.demo.cdgraph.inneroutter.UD_InnerAndOuterSeq;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Gantt;
@@ -50,7 +49,9 @@ public class BatchExecuteParameterPercent {
 	private Map<Integer, String> idMapProject;
 	private Map<Integer, String> idMapModel;
 	private int userVerifyNumber;
-	private double percent = 0.035;
+	//private double percent = 0.035;/////former
+	private double percent = 1.0;
+	
 	private String targetPath = "percent/OuterInnerSeq/"+percent;
 
 	public BatchExecuteParameterPercent(String projectPath, String modelPath) {

@@ -11,6 +11,7 @@ import cn.edu.nju.cs.itrace4.exp.tool.TransferTXT;
 import cn.edu.nju.cs.itrace4.parser.SourceTargetUnionForGit;
 import cn.edu.nju.cs.itrace4.preprocess.BatchingPreprocess;
 import cn.edu.nju.cs.itrace4.preprocess.rawdata.db.GenerateRTM;
+import cn.edu.nju.cs.itrace4.preprocess.rawdata.db.GenerateRTMExt;
 import cn.edu.nju.cs.itrace4.preprocess.rawdata.db.GenerateRTMThroughCluster;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 
@@ -29,8 +30,8 @@ public class PreprocessTextInfinispan {
 	private TransferTXT getSrc = new TransferTXT();
 	//private TableFormatNormalize generateCallGraph = new TableFormatNormalize();
 	
-	private String clusterFilePath = "data/exp/Infinispan/clusterFile/s_d_t_120d.txt";
-	private static String projectPath = "data/exp/Infinispan/";
+	private String clusterFilePath = "data/exp/Infinispan_TestCase/clusterFile/s_d_t_120d.txt";
+	private static String projectPath = "data/exp/Infinispan_TestCase/";
 
     private static String rtmDBFilePath = projectPath + "rtm/Infinispan-req.db";
     private static String srcDirPath = projectPath + "src";
@@ -48,8 +49,9 @@ public class PreprocessTextInfinispan {
     private String sqlFile = "resource/sql/buildRTMForInfinispan.sql";
     
     public PreprocessTextInfinispan() {
+    	getRTM = new GenerateRTMExt(rtmDBFilePath,dbProperty,sqlFile);
     	//getRTM = new GenerateRTM(rtmDBFilePath,dbProperty,sqlFile);
-    	getRTM = new GenerateRTMThroughCluster(rtmDBFilePath,dbProperty,sqlFile,clusterFilePath);
+    	//getRTM = new GenerateRTMThroughCluster(rtmDBFilePath,dbProperty,sqlFile,clusterFilePath);
     }
     
     private void cleanData() {
