@@ -12,7 +12,6 @@ import cn.edu.nju.cs.itrace4.parser.SourceTargetUnionForGit;
 import cn.edu.nju.cs.itrace4.preprocess.BatchingPreprocess;
 import cn.edu.nju.cs.itrace4.preprocess.rawdata.db.GenerateRTM;
 import cn.edu.nju.cs.itrace4.preprocess.rawdata.db.GenerateRTMExt;
-import cn.edu.nju.cs.itrace4.preprocess.rawdata.db.GenerateRTMThroughCluster;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 
 /**
@@ -30,8 +29,8 @@ public class PreprocessTextInfinispan {
 	private TransferTXT getSrc = new TransferTXT();
 	//private TableFormatNormalize generateCallGraph = new TableFormatNormalize();
 	
-	private String clusterFilePath = "data/exp/Infinispan_TestCase/clusterFile/s_d_t_120d.txt";
-	private static String projectPath = "data/exp/Infinispan_TestCase/";
+	private String clusterFilePath = "data/exp/Infinispan/clusterFile/s_d_t_120d.txt";
+	private static String projectPath = "data/exp/Infinispan/";
 
     private static String rtmDBFilePath = projectPath + "rtm/Infinispan-req.db";
     private static String srcDirPath = projectPath + "src";
@@ -43,7 +42,7 @@ public class PreprocessTextInfinispan {
     private static String relationDirPath = projectPath + "relation";
     
     private static String masterPath = projectPath+"infinispan-master";
-    private static String graphDBPath = relationDirPath + File.separator + "call.db";
+   // private static String graphDBPath = relationDirPath + File.separator + "call.db";
     
     private String dbProperty = "resource/InfinispanDB.property";
     private String sqlFile = "resource/sql/buildRTMForInfinispan.sql";
@@ -107,7 +106,8 @@ public class PreprocessTextInfinispan {
     	PreprocessTextInfinispan InfinispanProcess = new PreprocessTextInfinispan();
     	InfinispanProcess.arrangeData();
     	
-    	SourceTargetUnionForGit union = new SourceTargetUnionForGit(ucDirPath, srcDirPath, rtmDBFilePath, Granularity.CLASS,classDirPath,methodDirPath);
+    	SourceTargetUnionForGit union = new SourceTargetUnionForGit(ucDirPath, srcDirPath, rtmDBFilePath, 
+    			Granularity.CLASS,classDirPath,methodDirPath);
 
         BatchingPreprocess preprocess = new BatchingPreprocess(ucDirPath, classDirPath, methodDirPath);
         preprocess.doProcess();

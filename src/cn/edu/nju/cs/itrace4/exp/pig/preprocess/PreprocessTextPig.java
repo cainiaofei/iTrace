@@ -29,9 +29,8 @@ public class PreprocessTextPig {
 	private TransferTXT getSrc = new TransferTXT();
 	//private TableFormatNormalize generateCallGraph = new TableFormatNormalize();
 	
-	private
-	String clusterFilePath = "data/exp/Pig_Run/clusterFile/s_d_t_70d.txt";
-	private static String projectPath = "data/exp/Pig_Run/";
+	private	String clusterFilePath = "data/exp/Pig_Run/clusterFile/s_d_t_70d.txt";
+	private static String projectPath = "data/exp/Pig/";
 
     private static String rtmDBFilePath = projectPath + "rtm/Pig-req.db";
     private static String srcDirPath = projectPath + "src";
@@ -104,13 +103,13 @@ public class PreprocessTextPig {
          *              step5:  get union between class,uc,ri and rtm.
          *              step6:  process txt. 
          */
-    	PreprocessTextPig PigProcess = new PreprocessTextPig();
-    	PigProcess.arrangeData();
-    	
-    	SourceTargetUnionForGit union = new SourceTargetUnionForGit(ucDirPath, srcDirPath, rtmDBFilePath, Granularity.CLASS,classDirPath,methodDirPath);
-
-        BatchingPreprocess preprocess = new BatchingPreprocess(ucDirPath, classDirPath, methodDirPath);
-        preprocess.doProcess();
+//    	PreprocessTextPig PigProcess = new PreprocessTextPig();
+//    	PigProcess.arrangeData();
+//    	
+//    	SourceTargetUnionForGit union = new SourceTargetUnionForGit(ucDirPath, srcDirPath, rtmDBFilePath, Granularity.CLASS,classDirPath,methodDirPath);
+//
+//        BatchingPreprocess preprocess = new BatchingPreprocess(ucDirPath, classDirPath, methodDirPath);
+//        preprocess.doProcess();
         
         RelationInfo rg = new RelationInfo(classDirPath, relationDirPath, Granularity.CLASS);
         rg.showMessage();

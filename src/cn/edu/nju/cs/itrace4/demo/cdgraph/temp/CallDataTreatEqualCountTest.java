@@ -38,7 +38,9 @@ import cn.edu.nju.cs.itrace4.demo.exp.project.Pig_Cluster;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
 import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
 import cn.edu.nju.cs.itrace4.demo.visual.MyVisualCurve;
+import cn.edu.nju.cs.itrace4.demo.visual.SimplifyVisualCurve;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
+import cn.edu.nju.cs.itrace4.visual.VisualCurve;
 import cn.edu.nju.cs.tool.NegativeLinkAnalyze;
 import cn.edu.nju.cs.tool.ResultAnalyze;
 
@@ -133,7 +135,19 @@ public class CallDataTreatEqualCountTest {
 //	        resultAnalyze.findNegativeLink(result_UD_CallDataTreatEqual);
 	        
 	        
-	        MyVisualCurve curve = new MyVisualCurve();
+	        System.out.println("----------------IR AP/MAP-------------");
+	        System.out.println("AP:"+result_ir.getAveragePrecisionByRanklist());
+	        System.out.println("MAP:"+result_ir.getMeanAveragePrecisionByQuery());
+	        System.out.println("----------------UD AP/MAP-------------");
+	        System.out.println("AP:"+result_UD_CSTI.getAveragePrecisionByRanklist());
+	        System.out.println("MAP:"+result_UD_CSTI.getMeanAveragePrecisionByQuery());
+	        System.out.println("----------------Cluster AP/MAP-------------");
+	        System.out.println("AP:"+result_UD_CallDataTreatEqual.getAveragePrecisionByRanklist());
+	        System.out.println("MAP:"+result_UD_CallDataTreatEqual.getMeanAveragePrecisionByQuery());
+	        
+	        
+	        //MyVisualCurve curve = new MyVisualCurve();
+	        VisualCurve curve = new SimplifyVisualCurve();
 	        curve.addLine(result_ir);
 	        curve.addLine(result_UD_CSTI);
 	        curve.addLine(result_UD_CallDataTreatEqual);

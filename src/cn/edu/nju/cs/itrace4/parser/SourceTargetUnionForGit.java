@@ -131,7 +131,7 @@ public class SourceTargetUnionForGit implements SourceTargetUnionInterface{
             }
         }
 
-        //System.out.printf("Delete %d of %d trace links in %s RTM.\n", deleteLinksNum, allLinksNum, granularity);
+        System.out.printf("Delete %d of %d trace links in %s RTM.\n", deleteLinksNum, allLinksNum, granularity);
         _.writeFile(sb.toString(), rtmClassPath);
     }
 

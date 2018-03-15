@@ -162,7 +162,7 @@ public class GenerateRTM {
 				continue;
 			}
 			if(code.length()>0) {
-				System.out.println("numbers in group:"+actualCount);
+				//System.out.println("numbers in group:"+actualCount);
 				request.append(summary+" "+description);
 				request = filter(request.toString().toCharArray());
 				String insertSql = "insert into rtm (request,file_path) values (" + "'" + 
@@ -198,7 +198,7 @@ public class GenerateRTM {
 		        count_log++;
 			}
 		}
-		System.out.println("the insert count is:" + count_log);
+		//System.out.println("the insert count is:" + count_log);
 	}
 	
 	

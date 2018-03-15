@@ -3,10 +3,8 @@ package cn.edu.nju.cs.itrace4.preprocess.rawdata.db;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -14,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import cn.edu.nju.cs.itrace4.exp.infinispan.tool.RTMProcess;
 import cn.edu.nju.cs.itrace4.exp.tool.GetUC;
 import cn.edu.nju.cs.itrace4.preprocess.TextPreprocessor;
 import cn.edu.nju.cs.itrace4.preprocess.rawdata.db.SqliteOperation;
@@ -177,7 +174,7 @@ public class GenerateRTMExt extends GenerateRTM {
 			}
 			
 			if(code.length()>0) {
-				System.out.println("actualCount in subGraph:"+actualCount);
+				//System.out.println("actualCount in subGraph:"+actualCount);
 				request.append(summary+" "+description);
 				request = filter(request.toString().toCharArray());
 				String insertSql = "insert into rtm (request,file_path) values (" + "'" + 
@@ -223,14 +220,14 @@ public class GenerateRTMExt extends GenerateRTM {
 		        count_log++;
 			}
 		}
-		System.out.println("the insert count is:" + count_log);
+		//System.out.println("the insert count is:" + count_log);
 	}
 	
 	private boolean wordMoreThanThreshold(String text, int threshold) {
 		text = getUC.filter(text);
 		TextPreprocessor textPreprocessor = new TextPreprocessor(text);
 		text = textPreprocessor.doUCFileProcess();
-		System.out.println(text.split(" ").length);
+		//System.out.println(text.split(" ").length);
 		return text.split(" ").length>threshold;
 	}
 

@@ -54,6 +54,16 @@ public class UD_InnerAndOuterSeq implements CSTI{
 		
 		regionList = new StoreDataSubGraphRemoveEdge().getSubGraphs(ri);
 		
+		//2018.2.6  get the number of regions.
+		int tmpCount = 0;
+		for(SubGraph subGraph:regionList) {
+			if(subGraph.getVertexList().size()>1) {
+				tmpCount++;
+			}
+		}
+		System.out.println("tmpCount:"+tmpCount);
+		
+		
 		callGraphs = describeCallGraphWithMatrix(new CallDataRelationGraph(ri,false).callEdgeScoreMap,ri.getVertexes().size());
 		dataGraphs = describeDataGraphWithMatrix(new CallDataRelationGraph(ri,false).dataEdgeScoreMap,ri.getVertexes().size());
 		

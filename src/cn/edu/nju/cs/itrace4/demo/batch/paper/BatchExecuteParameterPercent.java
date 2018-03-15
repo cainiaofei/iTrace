@@ -52,9 +52,9 @@ public class BatchExecuteParameterPercent {
 	private Map<Integer, String> idMapProject;
 	private Map<Integer, String> idMapModel;
 	private int userVerifyNumber;
-	//private double percent = 0.035; // former
-	private double percent = 1.0;
-	private String targetPath = "paper/OuterInnerSeq/"+percent;
+	private double percent = 0.035; // former
+	//private double percent = 1.0;
+	private String targetPath = "paperxxx/OuterInnerSeq/"+percent;
 
 	public BatchExecuteParameterPercent(String projectPath, String modelPath) {
 		this.projectPath = projectPath;
@@ -139,6 +139,7 @@ public class BatchExecuteParameterPercent {
 			double callThreshold, double dataThreshold,
 			RelationInfo class_relation,RelationInfo class_relationForO,
 			RelationInfo class_relationForAllDependencies) {
+		
 		System.setProperty("projectName", projects[projectIndex]);
 		
 		String fullModelName = modelMap.get(models[modelIndex].trim().toLowerCase());
@@ -270,7 +271,7 @@ public class BatchExecuteParameterPercent {
 	}
 
 	public static void main(String[] args) {
-		String projectPath = "resource/config/project.txt";
+		String projectPath = "resource/config/project1.txt";
 		String modelPath = "resource/config/model.txt";
 		BatchExecuteParameterPercent bp = new BatchExecuteParameterPercent(projectPath, modelPath);
 		try {

@@ -8,7 +8,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.HashSet;
 import java.util.Set;
 
 public class GetUC {
@@ -36,6 +35,15 @@ public class GetUC {
 		BufferedWriter bw = new BufferedWriter(new FileWriter(targetPath+File.separator+"req"+index+".txt"));
 		bw.write(text);
 		bw.close();
+		
+		String ucOriginPath = new File(targetPath).getParent()+File.separator+"uc_origin";
+		File ucDir = new File(ucOriginPath);
+		if(!ucDir.exists()) {
+			ucDir.mkdirs();
+		}
+		BufferedWriter bwOrigin = new BufferedWriter(new FileWriter(ucOriginPath+File.separator+"req"+index+".txt"));
+		bwOrigin.write(text);
+		bwOrigin.close();
 	}
 	
 	/**
@@ -115,7 +123,7 @@ public class GetUC {
 		return false;
 	}
 
-	private void fillSet(Set<String> specialStrSet, String[] specialStr) {
+	public void fillSet(Set<String> specialStrSet, String[] specialStr) {
 		for(String str:specialStr) {
 			specialStrSet.add(str);
 		}
