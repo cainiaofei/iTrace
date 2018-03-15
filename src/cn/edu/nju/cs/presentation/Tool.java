@@ -8,6 +8,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -133,21 +134,20 @@ public class Tool implements ActionListener{
 
     
     private void showIrResultDialog(Frame owner, Component parentComponent,LinksList allLinks) {
+    	Collections.sort(allLinks,Collections.reverseOrder());
+    	
     	JDialog dialog = new JDialog(owner,"信息检索方法结果展示",true);
     	JPanel panel = new JPanel();
     	String[] cols = {"requirement","class","score"};
     	dialog.setResizable(false);
 		dialog.setLocationRelativeTo(parentComponent);
 		String[][] data = getDataFromLinks(allLinks);
-//		String[][] data = {
-//				{"a","b","c"},
-//				{"a1","b1","c1"}
-//		};
 		JTable jt = new JTable(data,cols);
 		jt.setBounds(100, 0, 600, 1000);
 		JScrollPane js = new JScrollPane(jt); 
+		js.setBounds(100, 0, 600, 1000);
 		panel.add(js);
-		panel.add(jt);
+		//panel.add(jt);
 		panel.setLayout(null);
 		dialog.setContentPane(panel);
 		dialog.setSize(800, 1200);
