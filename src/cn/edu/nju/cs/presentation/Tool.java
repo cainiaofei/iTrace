@@ -20,6 +20,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
@@ -126,18 +128,48 @@ public class Tool implements ActionListener{
     	for(SingleLink link:allLinks) {
     		System.out.println(link.getSourceArtifactId());
     	}
-    	showIrResultDialog(jf,jf);
+    	showIrResultDialog(jf,jf,allLinks);
 	}
 
     
-    private void showIrResultDialog(Frame owner, Component parentComponent) {
+    private void showIrResultDialog(Frame owner, Component parentComponent,LinksList allLinks) {
     	JDialog dialog = new JDialog(owner,"信息检索方法结果展示",true);
     	JPanel panel = new JPanel();
+    	String[] cols = {"requirement","class","score"};
     	dialog.setResizable(false);
 		dialog.setLocationRelativeTo(parentComponent);
+		String[][] data = getDataFromLinks(allLinks);
+//		String[][] data = {
+//				{"a","b","c"},
+//				{"a1","b1","c1"}
+//		};
+		JTable jt = new JTable(data,cols);
+		jt.setBounds(100, 0, 600, 1000);
+		JScrollPane js = new JScrollPane(jt); 
+		panel.add(js);
+		panel.add(jt);
+		panel.setLayout(null);
+		dialog.setContentPane(panel);
+		dialog.setSize(800, 1200);
+		dialog.setLayout(null);
+		dialog.setVisible(true);
+		System.out.println();
     }
     
     
+	private String[][] getDataFromLinks(LinksList allLinks) {
+		String[][] data = new String[allLinks.size()][3];
+		int index = 0;
+		for(SingleLink link:allLinks) {
+			String[] record = new String[3];
+			record[0] = link.getSourceArtifactId();
+			record[1] = link.getTargetArtifactId();
+			record[2] = link.getScore()+"";
+			data[index++] = record;
+		}
+		return data;
+	}
+
 	/**
      * @date 2018.3.15
      * @description used to ir parameter config. 
