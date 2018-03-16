@@ -1,15 +1,20 @@
 package cn.edu.nju.cs.presentation;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
  
-public class DemoFrame extends JFrame {
+public class DemoFrame{
+	JFrame jf = new JFrame("用户判断");
     JPanel jp1, jp2;
     public DemoFrame() {
         jp1 = new JPanel();
@@ -49,20 +54,24 @@ public class DemoFrame extends JFrame {
         
         jp1.setLayout(null);
         
-        jp2 = new JPanel();
+        jp2 = new JPanel(new BorderLayout());
         JLabel label = new JLabel("需求文本");
         
-        JTextPane ta = new JTextPane();
-        ta.setBounds(160,100,200,200);
-        jp2.add(label);
-        jp2.add(ta);
+        JTextArea ta = new JTextArea();
+        //JTextPane ta = new JTextPane();
+        //ta.setBounds(160,100,200,200);
+        jp2.add(label, BorderLayout.NORTH);
+        jp2.add(new JLabel());
+        jp2.add(new JScrollPane(ta));
+//        jp2.add(label);
+//        jp2.setLayout(new BorderLayout());
+ //       jp2.add(ta);
         JSplitPane jsp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, jp1, jp2);
-        this.getContentPane().add(jsp);;
-        setBounds(300, 200, 500, 500);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setVisible(true);
+        jf.getContentPane().add(jsp);;
+        jf.setBounds(300, 200, 500, 500);
+        jf.setVisible(true);
         jsp.setDividerLocation(0.6);// 在1/2处进行拆分
-        this.setLayout(null);
+        jf.setLayout(null);
     }
  
     public static void main(String[] args) {
