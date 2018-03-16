@@ -20,6 +20,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -48,6 +49,10 @@ public class Tool implements ActionListener{
 	private String reqPath, codePath; // IR
 	private PDFGenerate pdfGenerate = new PDFGenerate();
 	
+	private CodeDependencyDisplay codeDependencyDisplay;
+	
+	private JProgressBar codeDepencyProgress = new JProgressBar(0,20000);
+	
 	public Tool() {
 		jf = new JFrame("requirement_code_traceability_tool");
 		fileChooser = new JFileChooser();
@@ -60,13 +65,9 @@ public class Tool implements ActionListener{
 				model = String.valueOf(models.getSelectedItem());
 			}
 		});
-
 		menuBar.setBounds(0, 0, 100, 20);
-		file = new JMenu("File");
-		tool = new JMenu("Tool");
-		view = new JMenu("view");
-		help = new JMenu("help");
-
+		file = new JMenu("File");tool = new JMenu("Tool");
+		view = new JMenu("view");help = new JMenu("help");
 		importReq = new JMenuItem("import requirement");
 		importReq.addActionListener(this);;
 		importCode = new JMenuItem("import code");
@@ -74,6 +75,8 @@ public class Tool implements ActionListener{
 
 		codeDepdencyCapture = new JMenuItem("codeDependencyCapture");
 		irMethod = new JMenuItem("ir method");
+		
+		codeDepdencyCapture.addActionListener(this);
 		irMethod.addActionListener(this);
 		tool.add(codeDepdencyCapture);
 		tool.add(irMethod);
@@ -83,6 +86,12 @@ public class Tool implements ActionListener{
 		menuBar.add(file);menuBar.add(tool);
 		menuBar.add(view);menuBar.add(help);
 		menuBar.add(toolBar);
+		
+		codeDepencyProgress.setBounds(100, 200, 400, 60);
+		codeDepencyProgress.setValue(0);
+		codeDepencyProgress.setStringPainted(true);
+		
+		//jf.add(codeDepencyProgress);
 		//jf.add(menuBar);
 		jf.setJMenuBar(menuBar);
 		jf.setSize(600, 600);
@@ -118,6 +127,16 @@ public class Tool implements ActionListener{
 				e1.printStackTrace();
 			}
 			display(irResult);
+		}
+		else if(e.getSource()==codeDepdencyCapture) {
+			//display progress of capture code dependency.
+			System.out.println("the progress of code dependency");
+			getCodeDepProgress();
+			try {
+				CodeDependencyDisplay.showCodeDependencyGraph(jf);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
 	}
 
@@ -241,6 +260,24 @@ public class Tool implements ActionListener{
 		return res;
 	}
 
+	/**
+	 * @date 2018.3.16
+	 * @description the progress of capture code dependency.
+	 */
+	public void getCodeDepProgress() {
+		int i = 0;
+		while(i<=20000) {
+			codeDepencyProgress.setValue(i);
+			i += 1;
+			//System.out.println(i);
+		}
+		try {
+			Thread.sleep(1500);//150000
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static void main(String[] args) {
 		Tool tool = new Tool();
 		

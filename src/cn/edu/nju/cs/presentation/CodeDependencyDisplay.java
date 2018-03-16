@@ -38,10 +38,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.*;
@@ -84,9 +82,12 @@ public class CodeDependencyDisplay {
     private Map<Integer, Pair<Integer, Integer>> dataEdges;
     private Map<Integer, Pair<Integer, Integer>> call_data_Edges;
     private Result result;
+    
+    private JFrame jf;
 
     public CodeDependencyDisplay(TextDataset textDataset, RelationGraph relationGraph,
-    		String layoutPath) {
+    		String layoutPath,JFrame jf) {
+    	this.jf = jf;
         this.relationGraph = relationGraph;
         this.textDataset = textDataset;
         this.result = IRForVisual.compute(textDataset, IRModelConst.VSM, new None_CSTI());
@@ -99,38 +100,6 @@ public class CodeDependencyDisplay {
         vertexNameMap = new HashMap<>();
         vertexIndexMap = new HashMap<>();
         edgeRelationWeightsMap = new HashMap<Integer,Number>();
-
-        ucRelatedCodes = new ArrayList<>();
-        ucHighScoresCodes = new ArrayList<>();
-        ucList = new ArrayList<>();
-
-        callEdges = new LinkedHashMap<>();
-        dataEdges = new LinkedHashMap<>();
-        call_data_Edges = new LinkedHashMap<>();
-
-        this.LAYOUT_FILE = layoutPath;
-
-        edgeFactory = new Factory<Integer>() {
-            int i = 1;
-
-            @Override
-            public Integer create() {
-                return i++;
-            }
-        };
-    }
-
-    public CodeDependencyDisplay(TextDataset textDataset, RelationGraph relationGraph, String layoutPath, String model) {
-        this.relationGraph = relationGraph;
-        this.textDataset = textDataset;
-        this.result = IRForVisual.compute(textDataset, model, new None_CSTI());
-        this.qualityScoreLinksList = result.getMatrix().getQualityLinks();
-        this.highestScoreLinksList = result.getMatrix().getHighestLinks();
-        this.pruningInfo = new PruningInfo(textDataset, relationGraph.getRelationInfo());
-        this.subGraphInfo = new SubGraphInfo(textDataset, this.relationGraph, result.getMatrix());
-        vertexNameMap = new HashMap<>();
-        vertexIndexMap = new HashMap<>();
-        edgeRelationWeightsMap = new HashMap<>();
 
         ucRelatedCodes = new ArrayList<>();
         ucHighScoresCodes = new ArrayList<>();
@@ -195,9 +164,8 @@ public class CodeDependencyDisplay {
             public String transform(Integer v) {
             	String name = vertexNameMap.get(v);
             	if(!rank.isEmpty()) {
-            		double curScore = matrix.getScoreForLink(currentUC, name);
-            		String scoreStr = String.format("%.4f", curScore);
-            		return scoreStr+"_"+rank.get(name);
+            		return name;
+            		//return scoreStr+"_"+rank.get(name);
             	}
             	else {
             		return "";
@@ -229,47 +197,29 @@ public class CodeDependencyDisplay {
 
                     public void paintIcon(Component c, Graphics g,
                                           int x, int y) {
+                    	String code = vertexNameMap.get(cv);
+                    	//g.setColor(Color.blue);
+                    	g.setColor(Color.white);
+                    	g.fillRect(x, y, code.length()*7+10, 20);
+                    	g.setColor(Color.black);
+                    	//暂时更改成矩形
+                    	g.drawRect(x, y, code.length()*7+10, 20);//150
+//                    	g.setColor(Color.white);
+//                    	g.fillRect(x, y, code.length()*7+10, 20);
+                        //g.fillOval(x, y, 30, 30);
                         if (vv.getPickedVertexState().isPicked(cv)) {
-                            g.setColor(Color.yellow);
-                        } else if (ucRelatedCodes.size() != 0) {
-//                            System.out.println("ucRelatedCodes");
-//                            System.out.println(" vertexIndexMap.get(cv) = " + vertexIndexMap.get(cv));
-                            String v = vertexNameMap.get(cv);
-
-                            // Gap show format
-//                            if (ucRelatedCodes.contains(v) && ucHighScoresCodes.contains(v)) {
-                            if (ucRelatedCodes.contains(v) && firstValidHighestScoreTarget.equals(v)) {
-                                g.setColor(Color.RED);
-                            } else if (firstValidHighestScoreTarget.equals(v)) {
-                                g.setColor(Color.GRAY);
-                            } else if (ucRelatedCodes.contains(v) && secondHighestScoreTarget.contains(v)) {
-                                g.setColor(Color.ORANGE);
-                            } else if (secondHighestScoreTarget.contains(v)) {
-                                g.setColor(Color.GRAY);
-                            } else if (ucRelatedCodes.contains(v)) {
-                                // Gap show format
-//                            } else if (ucHighScoresCodes.contains(v)) {
-                                g.setColor(Color.BLUE);
-//                                                                g.setColor(Color.BLACK);
-                            } else {
-                                g.setColor(Color.BLACK);
-                            }
-
+                            g.setColor(Color.red);
                         } else {
-                            g.setColor(Color.BLACK);
-                        }
-                        g.fillOval(x, y, 30, 30);
-                        if (vv.getPickedVertexState().isPicked(cv)) {
                             g.setColor(Color.black);
-                        } else {
-                            g.setColor(Color.white);
                         }
                         String similarity = "";
-                        String code = vertexNameMap.get(cv);
+                       
                         if (!currentUC.equals("") && ucRelatedCodes.contains(code)) {
                             similarity = String.valueOf(matrix.getScoreForLink(currentUC, code));
                         }
-                        g.drawString("" + cv, x + 6, y + 15);
+                        g.setColor(Color.black);
+                        g.drawString("" + code, x + 6, y + 15);
+                        //g.drawString("" + code, x , y );
                     }
                 };
             }
@@ -364,18 +314,6 @@ public class CodeDependencyDisplay {
                 vv.repaint();
             }
 
-			private void print(LinksList startLinks) {
-				try {
-					BufferedWriter bw = new BufferedWriter(new FileWriter("output.txt"));
-					for(SingleLink link:startLinks){
-						bw.write(link.toString());
-						bw.newLine();
-					}
-					bw.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
         });
 
         final JButton persist = new JButton("Save Layout");
@@ -403,22 +341,23 @@ public class CodeDependencyDisplay {
         JPanel controls = new JPanel();
         controls.add(persist);
         controls.add(restore);
-        controls.add(ucBox);
+       // controls.add(ucBox);
         controls.add(((DefaultModalGraphMouse<Integer, Integer>) gm).getModeComboBox());
         content.add(controls, BorderLayout.SOUTH);
         frame.pack();
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void showCodeDependencyGraph(JFrame jf) throws IOException {
         String class_relationInfo = "data/exp/iTrust/relation/CLASS_relationInfo_whole.ser";
         
         try {
             FileInputStream fis = new FileInputStream(class_relationInfo);
             ObjectInputStream ois = new ObjectInputStream(fis);
             RelationInfo ri = (RelationInfo) ois.readObject();
-            ri.setPruning(0.8, 0.9);
-
+            ri.setPruning(0.8, 0.8);
+            ois.close();
+            
             String rtmClassPath = "data/exp/iTrust/rtm/RTM_CLASS.txt";
             String ucPath = "data/exp/iTrust/uc";
             String classDirPath = "data/exp/iTrust/class/graph/code";
@@ -426,7 +365,8 @@ public class CodeDependencyDisplay {
             
             CallDataRelationGraph cdGraph = new CallDataRelationGraph(ri);
             String layoutPath = "data/exp/iTrust/relation/PersistentLayoutDemo.out";
-            CodeDependencyDisplay codeDependencyDisplay = new CodeDependencyDisplay(textDataset, cdGraph, layoutPath);
+            CodeDependencyDisplay codeDependencyDisplay = new CodeDependencyDisplay(textDataset, cdGraph,
+            		layoutPath,jf);
             codeDependencyDisplay.show();
 
         } catch (FileNotFoundException e) {
