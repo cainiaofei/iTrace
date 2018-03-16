@@ -1,4 +1,5 @@
-package cn.edu.nju.cs.itrace4.visual;
+package cn.edu.nju.cs.presentation;
+
 
 import cn.edu.nju.cs.itrace4.core.algo.None_CSTI;
 import cn.edu.nju.cs.itrace4.core.algo.UseEdge;
@@ -6,7 +7,6 @@ import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.document.LinksList;
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
 import cn.edu.nju.cs.itrace4.core.document.SingleLink;
-import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.ir.IRModelConst;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
 import cn.edu.nju.cs.itrace4.relation.*;
@@ -14,9 +14,11 @@ import cn.edu.nju.cs.itrace4.relation.graph.CallEdge;
 import cn.edu.nju.cs.itrace4.relation.graph.CodeEdge;
 import cn.edu.nju.cs.itrace4.relation.graph.CodeVertex;
 import cn.edu.nju.cs.itrace4.relation.graph.DataEdge;
+import cn.edu.nju.cs.itrace4.visual.IRForVisual;
 import edu.uci.ics.jung.algorithms.layout.FRLayout;
-import edu.uci.ics.jung.graph.DirectedSparseGraph;
 import edu.uci.ics.jung.graph.Graph;
+import edu.uci.ics.jung.graph.SparseGraph;
+import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.visualization.GraphZoomScrollPane;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.DefaultModalGraphMouse;
@@ -36,18 +38,23 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.*;
 import java.util.List;
 
 /**
- * Created by niejia on 15/3/1.
+ * @author zzf
+ * @date 2018.3.16
+ * @description display the graph of code dependency. 
  */
-public class VisualRelationGraph {
-
+public class CodeDependencyDisplay {
+	Map<String,Integer> rank = new HashMap<String,Integer>();
+	
     private RelationGraph relationGraph;
 
     private Graph<Integer, Integer> g;
@@ -64,39 +71,34 @@ public class VisualRelationGraph {
     private LinksList highestScoreLinksList;
     private String highestScoreTarget;
     private String secondHighestScoreTarget;
-
     private String firstValidHighestScoreTarget;
-
-    //    private LinksList highestScoreLinksList;
     private PersistentLayout<Integer, Integer> persistentLayout;
     private VisualizationViewer<Integer, Integer> vv;
-
     private String currentUC = "";
     private List<String> ucRelatedCodes;
     private List<String> ucHighScoresCodes;
     private List<String> ucList;
-
     private PruningInfo pruningInfo;
     private SubGraphInfo subGraphInfo;
-
     private Map<Integer, Pair<Integer, Integer>> callEdges;
     private Map<Integer, Pair<Integer, Integer>> dataEdges;
     private Map<Integer, Pair<Integer, Integer>> call_data_Edges;
     private Result result;
 
-    public VisualRelationGraph(TextDataset textDataset, RelationGraph relationGraph, String layoutPath) {
+    public CodeDependencyDisplay(TextDataset textDataset, RelationGraph relationGraph,
+    		String layoutPath) {
         this.relationGraph = relationGraph;
         this.textDataset = textDataset;
-        this.result = IR.compute(textDataset, IRModelConst.VSM, new None_CSTI());
+        this.result = IRForVisual.compute(textDataset, IRModelConst.VSM, new None_CSTI());
+        
         this.qualityScoreLinksList = result.getMatrix().getQualityLinks();
         this.highestScoreLinksList = result.getMatrix().getHighestLinks();
         this.pruningInfo = new PruningInfo(textDataset, relationGraph.getRelationInfo());
-//        this.subGraphInfo = new SubGraphInfo(textDataset, relationGraph.getRelationInfo());
         this.subGraphInfo = new SubGraphInfo(textDataset, this.relationGraph, result.getMatrix());
 
         vertexNameMap = new HashMap<>();
         vertexIndexMap = new HashMap<>();
-        edgeRelationWeightsMap = new HashMap<>();
+        edgeRelationWeightsMap = new HashMap<Integer,Number>();
 
         ucRelatedCodes = new ArrayList<>();
         ucHighScoresCodes = new ArrayList<>();
@@ -106,7 +108,6 @@ public class VisualRelationGraph {
         dataEdges = new LinkedHashMap<>();
         call_data_Edges = new LinkedHashMap<>();
 
-//        this.LAYOUT_FILE = "data/exp/Maven/relation/PersistentLayoutDemo.out";
         this.LAYOUT_FILE = layoutPath;
 
         edgeFactory = new Factory<Integer>() {
@@ -119,14 +120,13 @@ public class VisualRelationGraph {
         };
     }
 
-    public VisualRelationGraph(TextDataset textDataset, RelationGraph relationGraph, String layoutPath, String model) {
+    public CodeDependencyDisplay(TextDataset textDataset, RelationGraph relationGraph, String layoutPath, String model) {
         this.relationGraph = relationGraph;
         this.textDataset = textDataset;
-        this.result = IR.compute(textDataset, model, new None_CSTI());
+        this.result = IRForVisual.compute(textDataset, model, new None_CSTI());
         this.qualityScoreLinksList = result.getMatrix().getQualityLinks();
         this.highestScoreLinksList = result.getMatrix().getHighestLinks();
         this.pruningInfo = new PruningInfo(textDataset, relationGraph.getRelationInfo());
-//        this.subGraphInfo = new SubGraphInfo(textDataset, relationGraph.getRelationInfo());
         this.subGraphInfo = new SubGraphInfo(textDataset, this.relationGraph, result.getMatrix());
         vertexNameMap = new HashMap<>();
         vertexIndexMap = new HashMap<>();
@@ -140,7 +140,6 @@ public class VisualRelationGraph {
         dataEdges = new LinkedHashMap<>();
         call_data_Edges = new LinkedHashMap<>();
 
-//        this.LAYOUT_FILE = "data/exp/Maven/relation/PersistentLayoutDemo.out";
         this.LAYOUT_FILE = layoutPath;
 
         edgeFactory = new Factory<Integer>() {
@@ -154,10 +153,8 @@ public class VisualRelationGraph {
     }
 
     private void graphConvert() {
-        g = new DirectedSparseGraph();
-
+    	g = new SparseGraph<Integer,Integer>();
         Map<Integer, CodeVertex> vertexMap = relationGraph.getVertexes();
-
         for (Integer id : vertexMap.keySet()) {
             g.addVertex(id);
             vertexNameMap.put(id, vertexMap.get(id).getName());
@@ -167,11 +164,9 @@ public class VisualRelationGraph {
         for (CodeEdge codeEdge : relationGraph.getCallEdges()) {
             Integer v1 = relationGraph.getVertexIdByName(codeEdge.getSource().getName());
             Integer v2 = relationGraph.getVertexIdByName(codeEdge.getTarget().getName());
-
             Number weight = ((CallEdge) codeEdge).getCallRelationSize();
-
             Integer edgeId = edgeFactory.create();
-            g.addEdge(edgeId, v1, v2);
+            g.addEdge(edgeId, v1, v2,EdgeType.DIRECTED);
             callEdges.put(edgeId, new Pair<Integer, Integer>(v1, v2));
             if (weight == null) weight = 0.0;
             edgeRelationWeightsMap.put(edgeId, weight);
@@ -182,7 +177,7 @@ public class VisualRelationGraph {
             Integer v2 = relationGraph.getVertexIdByName(codeEdge.getTarget().getName());
             Number weight = ((DataEdge) codeEdge).getDataRelationSizeByUniqueType();
             Integer edgeId = edgeFactory.create();
-            g.addEdge(edgeId, v1, v2);
+            g.addEdge(edgeId, v1,v2,EdgeType.UNDIRECTED);
             if (weight == null) weight = 0.0;
             edgeRelationWeightsMap.put(edgeId, weight);
         }
@@ -198,13 +193,15 @@ public class VisualRelationGraph {
 
         vv.getRenderContext().setVertexLabelTransformer(new Transformer<Integer, String>() {
             public String transform(Integer v) {
-                String similarity = "";
-                String code = vertexNameMap.get(v);
-
-                if (!currentUC.equals("")) {
-                    similarity = String.valueOf(matrix.getScoreForLink(currentUC, code));
-                }
-                return (vertexNameMap.get(v)) + "\n" + similarity;
+            	String name = vertexNameMap.get(v);
+            	if(!rank.isEmpty()) {
+            		double curScore = matrix.getScoreForLink(currentUC, name);
+            		String scoreStr = String.format("%.4f", curScore);
+            		return scoreStr+"_"+rank.get(name);
+            	}
+            	else {
+            		return "";
+            	}
             }
         });
 
@@ -235,17 +232,25 @@ public class VisualRelationGraph {
                         if (vv.getPickedVertexState().isPicked(cv)) {
                             g.setColor(Color.yellow);
                         } else if (ucRelatedCodes.size() != 0) {
+//                            System.out.println("ucRelatedCodes");
+//                            System.out.println(" vertexIndexMap.get(cv) = " + vertexIndexMap.get(cv));
                             String v = vertexNameMap.get(cv);
+
+                            // Gap show format
+//                            if (ucRelatedCodes.contains(v) && ucHighScoresCodes.contains(v)) {
                             if (ucRelatedCodes.contains(v) && firstValidHighestScoreTarget.equals(v)) {
                                 g.setColor(Color.RED);
                             } else if (firstValidHighestScoreTarget.equals(v)) {
                                 g.setColor(Color.GRAY);
-                            } else if (ucRelatedCodes.contains(v) && secondHighestScoreTarget.equals(v)) {
+                            } else if (ucRelatedCodes.contains(v) && secondHighestScoreTarget.contains(v)) {
                                 g.setColor(Color.ORANGE);
-                            } else if (secondHighestScoreTarget.equals(v)) {//之前是contains
+                            } else if (secondHighestScoreTarget.contains(v)) {
                                 g.setColor(Color.GRAY);
                             } else if (ucRelatedCodes.contains(v)) {
+                                // Gap show format
+//                            } else if (ucHighScoresCodes.contains(v)) {
                                 g.setColor(Color.BLUE);
+//                                                                g.setColor(Color.BLACK);
                             } else {
                                 g.setColor(Color.BLACK);
                             }
@@ -310,21 +315,22 @@ public class VisualRelationGraph {
 
                 LinksList startLinks = new LinksList();
                 for (CodeVertex cv : ((CallDataRelationGraph) relationGraph).getStartVertexes()) {
-                    SingleLink singleLink = new SingleLink(currentUC, cv.getName(), result.getMatrix().getScoreForLink(currentUC, cv.getName()));
+                	Object score = result.getMatrix().getScoreForLink(currentUC, cv.getName());
+                	SingleLink singleLink = new SingleLink(currentUC, cv.getName(), (Double)score);
+                    //SingleLink singleLink = new SingleLink(currentUC, cv.getName(), 1.0);
                     startLinks.add(singleLink);
                 }
-                
                 Collections.sort(startLinks, Collections.reverseOrder());
 
                 LinksList endLinks = new LinksList();
-                System.out.println();
-                System.out.println("Ends");
                 for (CodeVertex cv : ((CallDataRelationGraph) relationGraph).getEndVertexes()) {
-                    SingleLink singleLink = new SingleLink(currentUC, cv.getName(), result.getMatrix().getScoreForLink(currentUC, cv.getName()));
+                    SingleLink singleLink = new SingleLink(currentUC, cv.getName(), 1.0);//result.getMatrix().getScoreForLink(currentUC, cv.getName()));
                     endLinks.add(singleLink);
                 }
                 Collections.sort(endLinks, Collections.reverseOrder());
-                secondHighestScoreTarget = result.getMatrix().getSecondMaxValueTarget(currentUC, pruningInfo.getFirstPieceCodeForSource(currentUC));
+               
+                secondHighestScoreTarget = result.getMatrix().getSecondMaxValueTarget(currentUC, 
+                		pruningInfo.getFirstPieceCodeForSource(currentUC));
 
                 List<String> tmp = new ArrayList<String>();
                 firstValidHighestScoreTarget = subGraphInfo.getFirstValidPieceCodeForSource(currentUC, tmp, UseEdge.Call);
@@ -343,8 +349,33 @@ public class VisualRelationGraph {
                     ucRelatedCodes.add(link.getTargetArtifactId());
                 }
 
+                LinksList linksForCurReq = new LinksList();
+                Map<String,Double> targetMapScore = matrix.getLinksForSourceId(uc);
+                linksForCurReq.clear();
+                for(String target:targetMapScore.keySet()) {
+                	linksForCurReq.add(new SingleLink(uc,target,matrix.getScoreForLink(uc, target)));
+                }
+                Collections.sort(linksForCurReq,Collections.reverseOrder());
+                int index = 1;
+                for(SingleLink link:linksForCurReq) {
+                	rank.put(link.getTargetArtifactId(), index++);
+                }
+                
                 vv.repaint();
             }
+
+			private void print(LinksList startLinks) {
+				try {
+					BufferedWriter bw = new BufferedWriter(new FileWriter("output.txt"));
+					for(SingleLink link:startLinks){
+						bw.write(link.toString());
+						bw.newLine();
+					}
+					bw.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
         });
 
         final JButton persist = new JButton("Save Layout");
@@ -377,30 +408,26 @@ public class VisualRelationGraph {
         content.add(controls, BorderLayout.SOUTH);
         frame.pack();
         frame.setVisible(true);
-
     }
 
     public static void main(String[] args) throws IOException {
-    	String projectPath = "data/exp/iTrust/";
-        String class_relationInfo = projectPath + "relation/CLASS_relationInfo_whole.ser";
-
+        String class_relationInfo = "data/exp/iTrust/relation/CLASS_relationInfo_whole.ser";
+        
         try {
             FileInputStream fis = new FileInputStream(class_relationInfo);
             ObjectInputStream ois = new ObjectInputStream(fis);
             RelationInfo ri = (RelationInfo) ois.readObject();
-            ri.setPruning(0.8, 0.8);
+            ri.setPruning(0.8, 0.9);
 
-            //System.out.println(ri.getRelationGraphFile());
-
-            String rtmClassPath = projectPath + "rtm/RTM_CLASS.txt";
-            String ucPath = projectPath + "uc";
-            String classDirPath = projectPath + "class/code";
+            String rtmClassPath = "data/exp/iTrust/rtm/RTM_CLASS.txt";
+            String ucPath = "data/exp/iTrust/uc";
+            String classDirPath = "data/exp/iTrust/class/graph/code";
             TextDataset textDataset = new TextDataset(ucPath, classDirPath, rtmClassPath);
-
+            
             CallDataRelationGraph cdGraph = new CallDataRelationGraph(ri);
-            String layoutPath = projectPath + "relation/PersistentLayoutDemo.out";
-            VisualRelationGraph visualRelationGraph = new VisualRelationGraph(textDataset, cdGraph, layoutPath);
-            visualRelationGraph.show();
+            String layoutPath = "data/exp/iTrust/relation/PersistentLayoutDemo.out";
+            CodeDependencyDisplay codeDependencyDisplay = new CodeDependencyDisplay(textDataset, cdGraph, layoutPath);
+            codeDependencyDisplay.show();
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

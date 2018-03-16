@@ -19,7 +19,6 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -47,6 +46,8 @@ public class Tool implements ActionListener{
 	private JMenuItem importReq,importCode,codeDepdencyCapture,irMethod;
 	private JFileChooser fileChooser;
 	private String reqPath, codePath; // IR
+	private PDFGenerate pdfGenerate = new PDFGenerate();
+	
 	public Tool() {
 		jf = new JFrame("requirement_code_traceability_tool");
 		fileChooser = new JFileChooser();
@@ -126,34 +127,47 @@ public class Tool implements ActionListener{
 	 */
     private void display(Result irResult) {
     	LinksList allLinks = irResult.matrix.allLinks();
-    	for(SingleLink link:allLinks) {
-    		System.out.println(link.getSourceArtifactId());
-    	}
     	showIrResultDialog(jf,jf,allLinks);
 	}
 
     
     private void showIrResultDialog(Frame owner, Component parentComponent,LinksList allLinks) {
     	Collections.sort(allLinks,Collections.reverseOrder());
+    	String[][] data = getDataFromLinks(allLinks);
+    	JMenuBar mb = new JMenuBar();
+    	JMenu menu = new JMenu("export");
+    	JMenuItem save = new JMenuItem("save as pdf");
+    	save.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(e.getSource()==save) {
+					int retval = fileChooser.showSaveDialog(save);
+				    if (retval == JFileChooser.APPROVE_OPTION) {
+				      File file = fileChooser.getSelectedFile();
+				      pdfGenerate.saveAsPDF(file.getAbsolutePath(), data);
+				    }
+				}
+			}
+    	});
+    	menu.add(save);
+    	mb.add(menu);
     	
     	JDialog dialog = new JDialog(owner,"信息检索方法结果展示",true);
     	JPanel panel = new JPanel();
     	String[] cols = {"requirement","class","score"};
     	dialog.setResizable(false);
 		dialog.setLocationRelativeTo(parentComponent);
-		String[][] data = getDataFromLinks(allLinks);
 		JTable jt = new JTable(data,cols);
 		jt.setBounds(100, 0, 600, 1000);
 		JScrollPane js = new JScrollPane(jt); 
 		js.setBounds(100, 0, 600, 1000);
 		panel.add(js);
-		//panel.add(jt);
 		panel.setLayout(null);
+		dialog.setJMenuBar(mb);
 		dialog.setContentPane(panel);
 		dialog.setSize(800, 1200);
 		dialog.setLayout(null);
 		dialog.setVisible(true);
-		System.out.println();
     }
     
     
@@ -229,7 +243,7 @@ public class Tool implements ActionListener{
 
 	public static void main(String[] args) {
 		Tool tool = new Tool();
-
+		
 	}
 
 }
