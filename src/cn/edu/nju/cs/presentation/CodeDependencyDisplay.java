@@ -236,7 +236,6 @@ public class CodeDependencyDisplay {
         Container content = frame.getContentPane();
         final GraphZoomScrollPane panel = new GraphZoomScrollPane(vv);
         
-        
         //content.add(panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -263,6 +262,21 @@ public class CodeDependencyDisplay {
        // controls.add(ucBox);
         controls.add(((DefaultModalGraphMouse<Integer, Integer>) gm).getModeComboBox());
         
+        JLabel callThresholdLabel = new JLabel("call Threshold:");
+		JTextField callValue = new JTextField();
+		callValue.setText("call threshold");
+		//controls.add(callThresholdLabel);
+		controls.add(callValue);
+		
+		JLabel dataThresholdLabel = new JLabel("data Threshold:");
+		JTextField dataValue = new JTextField();
+		//controls.add(dataThresholdLabel);
+		dataValue.setText("data threshold");
+		controls.add(dataValue);
+		
+		JButton update = new JButton("update");
+        controls.add(update);
+		
         JPanel right = new JPanel(new BorderLayout());
         JLabel label = new JLabel("代码文本展示");
         label.setFont(new Font(null,Font.BOLD,20));
@@ -297,7 +311,7 @@ public class CodeDependencyDisplay {
             FileInputStream fis = new FileInputStream(class_relationInfo);
             ObjectInputStream ois = new ObjectInputStream(fis);
             RelationInfo ri = (RelationInfo) ois.readObject();
-            ri.setPruning(0.8, 0.8);
+            ri.setPruning(0.4, 0.8);
             ois.close();
             
             String rtmClassPath = "data/exp/iTrust/rtm/RTM_CLASS.txt";

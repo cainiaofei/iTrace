@@ -2,6 +2,7 @@ package cn.edu.nju.cs.presentation;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,8 +16,15 @@ import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
+
+import cn.edu.nju.cs.refactor.exception.FileException;
+import cn.edu.nju.cs.refactor.util.FileProcess;
+import cn.edu.nju.cs.refactor.util.FileProcessTool;
  
 public class DemoFrame{
+	private String filePath = "data/exp/iTrust/uc_origin/UC15.txt";
+	private FileProcess fileProcess = new FileProcessTool();
+	
 	JFrame jf = new JFrame("用户判断");
     JPanel jp1, jp2;
     private JMenuBar menuBar;
@@ -58,10 +66,10 @@ public class DemoFrame{
         stop.setBounds(100, 250, 100, 50);
         
         JButton help = new JButton("帮助");
-        help.setBounds(30, 320, 100, 50);
+        help.setBounds(30, 350, 100, 50);
         
         JButton btn  = new JButton("提交");
-        btn.setBounds(150, 320, 100, 50);
+        btn.setBounds(150, 350, 100, 50);
         
         jp1.add(req);jp1.add(code);jp1.add(reqValue);jp1.add(codeValue);
         jp1.add(relevant);jp1.add(unRelevant);
@@ -73,8 +81,15 @@ public class DemoFrame{
         
         jp2 = new JPanel(new BorderLayout());
         JLabel label = new JLabel("需求文本");
+        label.setFont(new Font(null,Font.BOLD,18));
         
         JTextArea ta = new JTextArea();
+        ta.setEditable(false);
+        try {
+			ta.setText(fileProcess.getFileConent(filePath));
+		} catch (FileException | IOException e) {
+			e.printStackTrace();
+		}
         //JTextPane ta = new JTextPane();
         //ta.setBounds(160,100,200,200);
         jp2.add(label, BorderLayout.NORTH);
@@ -85,12 +100,14 @@ public class DemoFrame{
  //       jp2.add(ta);
         JSplitPane jsp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, jp1, jp2);
         jf.getContentPane().add(jsp);;
-        jf.setBounds(300, 200, 600, 500);
+        jf.setBounds(300, 200, 700, 500);
         jf.setVisible(true);
         jsp.setDividerLocation(0.6);// 在1/2处进行拆分
         jf.setLayout(null);
     }
  
+    
+    
     public static void main(String[] args) {
         new DemoFrame();
     }
