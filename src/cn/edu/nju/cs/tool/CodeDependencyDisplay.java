@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.presentation;
+package cn.edu.nju.cs.tool;
 
 
 import cn.edu.nju.cs.itrace4.core.algo.None_CSTI;
@@ -235,15 +235,97 @@ public class CodeDependencyDisplay {
         final JFrame frame = new JFrame();
         Container content = frame.getContentPane();
         final GraphZoomScrollPane panel = new GraphZoomScrollPane(vv);
-        
-        
-        //content.add(panel);
+        content.add(panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         final ModalGraphMouse gm = new DefaultModalGraphMouse<Integer, Integer>();
         vv.setGraphMouse(gm);
 
+        final JComboBox ucBox = new JComboBox();
+        for (String uc : textDataset.getSourceCollection().keySet()) {
+            ucBox.addItem(uc);
+            ucList.add(uc);
+        }
+
+        ucBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JComboBox type = (JComboBox) e.getSource();
+                String uc = (String) type.getSelectedItem();
+                currentUC = uc;
+                ucRelatedCodes = new ArrayList<String>();
+                ucHighScoresCodes = new ArrayList<String>();
+
+                for (SingleLink link : highestScoreLinksList) {
+                    if (link.getSourceArtifactId().equals(currentUC)) {
+                        highestScoreTarget = link.getTargetArtifactId();
+                        break;
+                    }
+                }
+
+                LinksList startLinks = new LinksList();
+                for (CodeVertex cv : ((CallDataRelationGraph) relationGraph).getStartVertexes()) {
+                	Object score = result.getMatrix().getScoreForLink(currentUC, cv.getName());
+                	SingleLink singleLink = new SingleLink(currentUC, cv.getName(), (Double)score);
+                    //SingleLink singleLink = new SingleLink(currentUC, cv.getName(), 1.0);
+                    startLinks.add(singleLink);
+                }
+                Collections.sort(startLinks, Collections.reverseOrder());
+
+                LinksList endLinks = new LinksList();
+                for (CodeVertex cv : ((CallDataRelationGraph) relationGraph).getEndVertexes()) {
+                    SingleLink singleLink = new SingleLink(currentUC, cv.getName(), 1.0);//result.getMatrix().getScoreForLink(currentUC, cv.getName()));
+                    endLinks.add(singleLink);
+                }
+                Collections.sort(endLinks, Collections.reverseOrder());
+               
+                secondHighestScoreTarget = result.getMatrix().getSecondMaxValueTarget(currentUC, 
+                		pruningInfo.getFirstPieceCodeForSource(currentUC));
+
+                List<String> tmp = new ArrayList<String>();
+                firstValidHighestScoreTarget = subGraphInfo.getFirstValidPieceCodeForSource(currentUC, tmp, UseEdge.Call);
+
+                if (highestScoreTarget == null || highestScoreTarget.equals("")) {
+                    throw new NoSuchElementException("Can't find highest Target for Source " + currentUC + ".");
+                }
+
+                for (SingleLink link : qualityScoreLinksList) {
+                    if (link.getSourceArtifactId().equals(currentUC)) {
+                        ucHighScoresCodes.add(link.getTargetArtifactId());
+                    }
+                }
+
+                for (SingleLink link : textDataset.getRtm().getLinksAboveThresholdForSourceArtifact(uc)) {
+                    ucRelatedCodes.add(link.getTargetArtifactId());
+                }
+
+                LinksList linksForCurReq = new LinksList();
+                Map<String,Double> targetMapScore = matrix.getLinksForSourceId(uc);
+                linksForCurReq.clear();
+                for(String target:targetMapScore.keySet()) {
+                	linksForCurReq.add(new SingleLink(uc,target,matrix.getScoreForLink(uc, target)));
+                }
+                Collections.sort(linksForCurReq,Collections.reverseOrder());
+                int index = 1;
+                for(SingleLink link:linksForCurReq) {
+                	rank.put(link.getTargetArtifactId(), index++);
+                }
+                
+                vv.repaint();
+            }
+
+        });
+
         final JButton persist = new JButton("Save Layout");
+        persist.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    persistentLayout.persist(LAYOUT_FILE);
+                } catch (IOException e1) {
+                    System.err.println("got " + e1);
+                }
+            }
+        });
 
         JButton restore = new JButton("Restore Layout");
         restore.addActionListener(new ActionListener() {
@@ -256,36 +338,12 @@ public class CodeDependencyDisplay {
             }
         });
 
-        
         JPanel controls = new JPanel();
         controls.add(persist);
         controls.add(restore);
        // controls.add(ucBox);
         controls.add(((DefaultModalGraphMouse<Integer, Integer>) gm).getModeComboBox());
-        
-        JPanel right = new JPanel(new BorderLayout());
-        JLabel label = new JLabel("代码文本展示");
-        label.setFont(new Font(null,Font.BOLD,20));
-        
-        JTextArea ta = new JTextArea();
-        ta.setEditable(false);
-        //JTextPane ta = new JTextPane();
-        //ta.setBounds(160,100,200,200);
-        right.add(label, BorderLayout.NORTH);
-        right.add(new JLabel());
-        right.add(new JScrollPane(ta));
-        
-        
-        //JSplitPane jsp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, controls, new JPanel());
-        JSplitPane jsp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, panel, right);
-        jsp.setDividerLocation(0.6);// 在1/2处进行拆分
-        
-        //JSplitPane jsPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, jsp, controls);
-        
-        
-        content.add(jsp,BorderLayout.NORTH);
         content.add(controls, BorderLayout.SOUTH);
-        
         frame.pack();
         frame.setVisible(true);
     }

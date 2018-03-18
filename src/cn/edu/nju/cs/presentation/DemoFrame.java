@@ -1,10 +1,13 @@
 package cn.edu.nju.cs.presentation;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -16,10 +19,24 @@ import javax.swing.JTextPane;
 public class DemoFrame{
 	JFrame jf = new JFrame("用户判断");
     JPanel jp1, jp2;
+    private JMenuBar menuBar;
+   	private JMenu file,tool,view,help;
     public DemoFrame() {
         jp1 = new JPanel();
         
+        menuBar = new JMenuBar();
+    	menuBar.setBounds(0, 0, 100, 20);
+    	
+		file = new JMenu("文件");tool = new JMenu("工具");
+		view = new JMenu("视图");help = new JMenu("帮助");
+		
+		menuBar.add(file);menuBar.add(tool);
+		menuBar.add(view);menuBar.add(help);
+		jf.setJMenuBar(menuBar);
+        
         JLabel req = new JLabel("需求");
+        //req.setFont(new Font(null,Font.BOLD,12));
+        
         req.setBounds(30, 50, 40, 20);
         JTextField reqValue = new JTextField();
         reqValue.setText("uc15");
@@ -68,7 +85,7 @@ public class DemoFrame{
  //       jp2.add(ta);
         JSplitPane jsp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, jp1, jp2);
         jf.getContentPane().add(jsp);;
-        jf.setBounds(300, 200, 500, 500);
+        jf.setBounds(300, 200, 600, 500);
         jf.setVisible(true);
         jsp.setDividerLocation(0.6);// 在1/2处进行拆分
         jf.setLayout(null);
