@@ -84,6 +84,9 @@ public class BatchExecuteFPPercent {
 				Result result_ir = IR.compute(textDataset, model, new None_CSTI());
 				Map<String, Set<String>> valid = new HashMap<String, Set<String>>();
 				ri.setPruning(callThreshold, dataThreshold);
+				
+				ri.showMessage();
+				
 				valid = new HashMap<String, Set<String>>();
 				Result result_UD_CallDataTreatEqual = IR.compute(textDataset, model,
 						new UD_InnerAndOuterSeq(ri, callThreshold, dataThreshold, 

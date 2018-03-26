@@ -1,4 +1,4 @@
+infinispan
 iTrust
 maven_testcase
 pig
-infinispan
