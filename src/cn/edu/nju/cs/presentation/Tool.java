@@ -9,6 +9,7 @@ import java.awt.event.ItemListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -145,12 +146,27 @@ public class Tool implements ActionListener{
 	 * @description display the result of IR.
 	 */
     private void display(Result irResult) {
-    	LinksList allLinks = irResult.matrix.allLinks();
+    	String target = "UC15";
+//    	LinksList allLinks = irResult.matrix.allLinks();
+    	Map<String,Double> map = irResult.matrix.getLinksForSourceId(target);
+    	LinksList allLinks = new LinksList();
+    	for(String req:map.keySet()) {
+    		allLinks.add(new SingleLink(target,req,map.get(req)));
+    	}
     	showIrResultDialog(jf,jf,allLinks);
 	}
 
     
     private void showIrResultDialog(Frame owner, Component parentComponent,LinksList allLinks) {
+    	String[] reqs = new String[20];
+    	for(int i = 1;i<reqs.length;i++) {
+    		reqs[i-1] = "UC"+i;
+    	}
+    	
+    	JComboBox choose = new JComboBox(reqs);
+    	JToolBar bar = new JToolBar();
+    	bar.add(choose);
+    	
     	Collections.sort(allLinks,Collections.reverseOrder());
     	String[][] data = getDataFromLinks(allLinks);
     	JMenuBar mb = new JMenuBar();
@@ -170,34 +186,35 @@ public class Tool implements ActionListener{
     	});
     	menu.add(save);
     	mb.add(menu);
+    	mb.add(bar);
     	
     	JDialog dialog = new JDialog(owner,"信息检索方法结果展示",true);
     	JPanel panel = new JPanel();
-    	String[] cols = {"requirement","class","score"};
+    	String[] cols = {"class","score"};
     	dialog.setResizable(false);
 		dialog.setLocationRelativeTo(parentComponent);
 		JTable jt = new JTable(data,cols);
-		jt.setBounds(100, 0, 600, 1000);
+		jt.setBounds(50, 0, 500, 500);
 		JScrollPane js = new JScrollPane(jt); 
-		js.setBounds(100, 0, 600, 1000);
+		js.setBounds(50, 0, 500, 500);
 		panel.add(js);
 		panel.setLayout(null);
 		dialog.setJMenuBar(mb);
 		dialog.setContentPane(panel);
-		dialog.setSize(800, 1200);
+		dialog.setSize(600, 600);
 		dialog.setLayout(null);
 		dialog.setVisible(true);
     }
     
     
 	private String[][] getDataFromLinks(LinksList allLinks) {
-		String[][] data = new String[allLinks.size()][3];
+		String[][] data = new String[allLinks.size()][2];
 		int index = 0;
 		for(SingleLink link:allLinks) {
 			String[] record = new String[3];
-			record[0] = link.getSourceArtifactId();
-			record[1] = link.getTargetArtifactId();
-			record[2] = link.getScore()+"";
+			//record[0] = link.getSourceArtifactId();
+			record[0] = link.getTargetArtifactId();
+			record[1] = link.getScore()+"";
 			data[index++] = record;
 		}
 		return data;
