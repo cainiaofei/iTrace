@@ -61,7 +61,7 @@ public class FindWhoInvokeMe {
 		String basePath = "src";
 		//String basePath = "Z:\\研二\\iTrace4_icsme\\iTrace4\\src";
 		FindWhoInvokeMe tool = new FindWhoInvokeMe();
-		tool.doTask(basePath, "FindBadReq");
+		tool.doTask(basePath, "split");
 	}
 	
 }
