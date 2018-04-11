@@ -193,7 +193,7 @@ public class TopologyStructure {
             public String transform(Integer v) {
             	String name = vertexNameMap.get(v);
             	if(!rank.isEmpty()) {
-            		return name;
+            		return name+matrix.getScoreForLink(name,"UC18");
             		//return scoreStr+"_"+rank.get(name);
             	}
             	else {
@@ -257,9 +257,11 @@ public class TopologyStructure {
                         }
                         String similarity = "";
                        
+                        currentUC = "UC18";
                         if (!currentUC.equals("") && ucRelatedCodes.contains(code)) {
                             similarity = String.valueOf(matrix.getScoreForLink(currentUC, code));
                         }
+                        similarity = String.valueOf(matrix.getScoreForLink(currentUC, code));
                         g.setColor(Color.black);
                         g.drawString("" + code, x + 6, y + 15);
                         //g.drawString("" + code, x , y );
