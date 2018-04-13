@@ -1,6 +1,5 @@
 package cn.edu.nju.cs.itrace4.cluster;
 
-import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -31,7 +30,8 @@ public class GetReqInIssueDB {
 		ResultSet rs = sqlOperate.executeQuery(query);
 		while(rs.next()) {
 			StringBuilder sb = new StringBuilder();
-			for(String col:cols) {
+			for(int i = 1; i < cols.length;i++) {
+				String col = cols[i];
 				String line = rs.getString(col);
 				line = line.replaceAll("\n", " ");
 				sb.append(line+" ");
@@ -40,7 +40,7 @@ public class GetReqInIssueDB {
 			content = getUC.filter(content);
 			TextPreprocessor tp = new TextPreprocessor(content);
 			content = tp.doJavaFileProcess();
-			res.append(content+"\n");
+			res.append(rs.getString(cols[0])+":"+content+"\n");
 			//System.out.println("content:"+content);
 		}
 		fileWrite.createFile(target);
@@ -50,10 +50,10 @@ public class GetReqInIssueDB {
 	
 	public static void main(String[] args) {
 		GetReqInIssueDB tool = new GetReqInIssueDB();
-		String targetName = "cluster/infinispan.txt";
-		String dbPath = "data/exp/Infinispan/rtm/Infinispan-req.db";
+		String targetName = "cluster/maven.txt";
+		String dbPath = "data/exp/Maven/rtm/Maven-req.db";
 		String tableName = "issue";
-		String[] cols = {"summary","description"};
+		String[] cols = {"issue_id","summary","description"};
 		try {
 			tool.getUCText(dbPath, tableName, cols, targetName);
 		} catch (SQLException e) {
