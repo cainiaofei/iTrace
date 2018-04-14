@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.presentation;
+package cn.edu.nju.cs.presentation.tmp;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -27,7 +27,7 @@ public class DemoFrame{
 	private String filePath = "data/exp/iTrust/uc_origin/UC15.txt";
 	private FileProcess fileProcess = new FileProcessTool();
 	
-	JFrame jf = new JFrame("用户判断");
+	JFrame jf = new JFrame("user feedback");
     JPanel jp1, jp2;
     private JMenuBar menuBar;
    	private JMenu file,tool,view,help;
@@ -37,14 +37,14 @@ public class DemoFrame{
         menuBar = new JMenuBar();
     	menuBar.setBounds(0, 0, 100, 20);
     	
-		file = new JMenu("文件");tool = new JMenu("工具");
-		view = new JMenu("视图");help = new JMenu("帮助");
+		file = new JMenu("file");tool = new JMenu("tool");
+		view = new JMenu("view");help = new JMenu("help");
 		
 		menuBar.add(file);menuBar.add(tool);
 		menuBar.add(view);menuBar.add(help);
 		jf.setJMenuBar(menuBar);
         
-        JLabel req = new JLabel("需求");
+        JLabel req = new JLabel("req");
         //req.setFont(new Font(null,Font.BOLD,12));
         int offset = 50;
         req.setBounds(30+offset, 50, 40, 20);
@@ -52,30 +52,30 @@ public class DemoFrame{
         reqValue.setText("UC15");
         reqValue.setBounds(60+offset, 50, 40, 20);
         
-        JLabel code = new JLabel("类");
+        JLabel code = new JLabel("class");
         code.setBounds(110+offset,50,20,20);
         JTextField codeValue = new JTextField();
         codeValue.setText("AuthDaoValidator");
         codeValue.setBounds(130+offset, 50, 100, 20);
         
         ButtonGroup radioGroup = new ButtonGroup();
-        JRadioButton relevant = new JRadioButton("相关");
-        relevant.setBackground(Color.GREEN);
+        JRadioButton relevant = new JRadioButton("relevant");
+       // relevant.setBackground(Color.GREEN);
         relevant.setBounds(100+offset, 100, 100, 50);
-        JRadioButton unRelevant = new JRadioButton("不相关");
-        unRelevant.setBackground(Color.RED);
+        JRadioButton unRelevant = new JRadioButton("no relevant");
+       // unRelevant.setBackground(Color.RED);
         unRelevant.setBounds(100+offset, 150, 100, 50);
-        JRadioButton skip = new JRadioButton("跳过");
-        skip.setBackground(Color.BLUE);
+        JRadioButton skip = new JRadioButton("skip");
+       // skip.setBackground(Color.BLUE);
         skip.setBounds(100+offset, 200, 100, 50);
-        JRadioButton stop = new JRadioButton("停止判断");
-        stop.setBackground(Color.YELLOW);
+        JRadioButton stop = new JRadioButton("stop judge");
+       // stop.setBackground(Color.YELLOW);
         stop.setBounds(100+offset, 250, 100, 50);
         
-        JButton help = new JButton("帮助");
+        JButton help = new JButton("help");
         help.setBounds(30+offset, 350, 100, 50);
         
-        JButton btn  = new JButton("提交");
+        JButton btn  = new JButton("submit");
         btn.setBounds(150+offset, 350, 100, 50);
         
         jp1.add(req);jp1.add(code);jp1.add(reqValue);jp1.add(codeValue);

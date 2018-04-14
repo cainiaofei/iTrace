@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.presentation;
+package cn.edu.nju.cs.presentation.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -23,7 +23,7 @@ import cn.edu.nju.cs.refactor.exception.FileException;
 import cn.edu.nju.cs.refactor.util.FileProcess;
 import cn.edu.nju.cs.refactor.util.FileProcessTool;
  
-public class DemoFrame{
+public class UserVerify{
 	private String filePath = "data/exp/iTrust/uc_origin/UC15.txt";
 	private FileProcess fileProcess = new FileProcessTool();
 	
@@ -31,7 +31,7 @@ public class DemoFrame{
     JPanel jp1, jp2;
     private JMenuBar menuBar;
    	private JMenu file,tool,view,help;
-    public DemoFrame() {
+    public UserVerify() {
         jp1 = new JPanel();
         
         menuBar = new JMenuBar();
@@ -60,16 +60,16 @@ public class DemoFrame{
         
         ButtonGroup radioGroup = new ButtonGroup();
         JRadioButton relevant = new JRadioButton("相关");
-        relevant.setBackground(Color.GREEN);
+        relevant.setForeground(Color.GREEN);
         relevant.setBounds(100+offset, 100, 100, 50);
         JRadioButton unRelevant = new JRadioButton("不相关");
-        unRelevant.setBackground(Color.RED);
+        unRelevant.setForeground(Color.RED);
         unRelevant.setBounds(100+offset, 150, 100, 50);
         JRadioButton skip = new JRadioButton("跳过");
-        skip.setBackground(Color.BLUE);
+        skip.setForeground(Color.BLUE);
         skip.setBounds(100+offset, 200, 100, 50);
         JRadioButton stop = new JRadioButton("停止判断");
-        stop.setBackground(Color.YELLOW);
+        stop.setForeground(Color.ORANGE);
         stop.setBounds(100+offset, 250, 100, 50);
         
         JButton help = new JButton("帮助");
@@ -117,6 +117,6 @@ public class DemoFrame{
     
     
     public static void main(String[] args) {
-        new DemoFrame();
+        new UserVerify();
     }
 }
