@@ -172,20 +172,6 @@ public class QueryResult{
 		JTable jt = new JTable(data,cols);
 		jt.setDefaultRenderer(Object.class, new MyCellRenderer());
 		
-//		for(int i = 0; i < 100;i++) {
-//			setOneRowBackgroundColor(jt, i, Color.RED);
-//		}
-		
-//		for(int ele:validPostionSet) {
-//			setOneRowBackgroundColor(jt, ele, Color.GREEN);
-//		}
-//		for(int ele:noValidPostionSet) {
-//			setOneRowBackgroundColor(jt, ele, Color.RED);
-//		}
-//		for(int ele:skipPostionSet) {
-//			setOneRowBackgroundColor(jt, ele, Color.ORANGE);
-//		}
-		
 		JScrollPane js = new JScrollPane(jt); 
 		js.setBounds(300, 0, 360, 500);
 		panel.add(js);

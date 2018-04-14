@@ -1,5 +1,4 @@
-package cn.edu.nju.cs.presentation.gui;
-
+package cn.edu.nju.cs.presentation.ok;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -38,7 +37,7 @@ import cn.edu.nju.cs.refactor.util.FileProcessTool;
 
 public class TestTable {
 	
-	private int index = 0;
+	private int index = 1;
 	private String filePath = "tempUC/UC18.txt";
 	
 	private UDCompute udCompute = new UDCompute();
@@ -63,9 +62,6 @@ public class TestTable {
     }
 
     public TestTable() {
-    	file = new JMenu("文件");tool = new JMenu("工具");
-		view = new JMenu("视图");help = new JMenu("帮助");
-    	jf = new JFrame("需求可追踪查询工具");
     	String[][] data = init();
     	final DefaultTableModel model = new DefaultTableModel(
                 new Object[]{"class","score"}, 
@@ -75,59 +71,24 @@ public class TestTable {
     	for(String[] arr:data) {
     		model.addRow(new Object[]{arr[0],arr[1]});
     	}
+//        model.addRow(new Object[]{arr[0]});
+//        model.addRow(new Object[]{"C"});
+//        model.addRow(new Object[]{"E"});
+//        model.addRow(new Object[]{"G"});
 
-    	JMenuBar mb = new JMenuBar();
-    	mb.add(this.file);mb.add(this.tool);
-    	mb.add(this.view);mb.add(this.help);
-    	
-    	JPanel leftPanel = new JPanel(new BorderLayout());
-    	String[] irModels = new String[20];
-    	for(int i = 0; i<irModels.length;i++) {
-    		irModels[i] = "UC"+(i+1);
-    	}
-    	JComboBox models = new JComboBox(irModels);
-    	models.setSelectedIndex(17);
-    	models.setBounds(80, 5, 100, 20);
-    	JButton btn  = new JButton("搜索");
-        btn.setBounds(200, 5, 80, 20);
-        leftPanel.add(btn);
-    	JTextArea bugTXT = new JTextArea();
-    	String uc = null;
-    	try {
-			uc = fp.getFileConent(filePath);
-		} catch (FileException | IOException e) {
-			e.printStackTrace();
-		}
-    	bugTXT.setText(uc);
-        bugTXT.setEditable(false);
-        bugTXT.setFont(new Font(null,0,16));
-        int widthX = 1,heightY = 30;
-        int width = 299,height = 470;
-        bugTXT.setLineWrap(true); 
-        bugTXT.setBounds(widthX,heightY,width,height);
-        leftPanel.setLayout(null);
-        leftPanel.add(models);
-        JScrollPane bb = new JScrollPane(bugTXT);
-        bb.setBounds(widthX,heightY,width,height);
-        leftPanel.add(bb);
-        leftPanel.setSize(300, 500);
-        leftPanel.add(btn);
-        
-    	
+        //JTable table = new JTable(data,cols);
         JTable table = new JTable(model);
         table.setDefaultRenderer(Object.class, new MyCellRenderer());
+
         JScrollPane js = new JScrollPane(table); 
-    	js.setBounds(300, 0, 360, 500);
-    	JPanel panel = new JPanel();
-		panel.add(js);
-		
-		JSplitPane jsp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, leftPanel, js);
-		jf.setJMenuBar(mb);
-		jf.setContentPane(jsp);
-		jf.setSize(680, 580);
-		jf.setLayout(null);
-		jf.setVisible(true);
-		
+        //JTable table = new JTable(model);
+        
+
+        JFrame frame = new JFrame("Testing");
+        frame.add(js);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }
 
     private String[][] display(Result irResult) {
@@ -145,17 +106,14 @@ public class TestTable {
     	int index = 0;
     	for(SingleLink link:allLinks) {
     		String className = link.getTargetArtifactId();
-    		if(validSet.contains(className)) {//1
-    			validPostionSet.add(2*index);
-    			validPostionSet.add(2*index+1);
+    		if(validSet.contains(className)) {
+    			validPostionSet.add(index);
     		}
-    		else if(noValidSet.contains(className)) {//5
-    			noValidPostionSet.add(2*index);
-    			noValidPostionSet.add(2*index+1);
+    		else if(noValidSet.contains(className)) {
+    			noValidPostionSet.add(index);
     		}
-    		else if(skipSet.contains(className)) {//4
-    			skipPostionSet.add(2*index);
-    			skipPostionSet.add(2*index+1);
+    		else if(skipSet.contains(className)) {
+    			skipPostionSet.add(index);
     		}
     		index++;
     	}
@@ -187,8 +145,6 @@ public class TestTable {
 			udResult = udCompute.udExecute(modelFactory.generate(result[2]),validSet,noValidSet);
 			noValidSet.remove("auth.surveyResults_jsp");
 			skipSet.add("auth.surveyResults_jsp");
-			validSet.clear();
-			validSet.add("HospitalsDAO");
 		} catch (ClassNotFoundException e1) {
 			e1.printStackTrace();
 		} catch (IOException e1) {
@@ -203,18 +159,24 @@ public class TestTable {
         public java.awt.Component getTableCellRendererComponent(javax.swing.JTable table, java.lang.Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             final java.awt.Component cellComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 
-            if (noValidPostionSet.contains(index)) {
+            if (index == 1) {
                 cellComponent.setForeground(Color.black);
                 cellComponent.setBackground(Color.red);
+
             } 
-            else if(validPostionSet.contains(index)) {
+            else if(index==2) {
             	cellComponent.setForeground(Color.black);
                 cellComponent.setBackground(Color.GREEN);
 
             }
-            else if(skipPostionSet.contains(index)) {
+            else if(index==3) {
             	cellComponent.setForeground(Color.black);
-                cellComponent.setBackground(Color.ORANGE);
+                cellComponent.setBackground(Color.BLUE);
+
+            }
+            else if(index==4) {
+            	cellComponent.setForeground(Color.black);
+                cellComponent.setBackground(Color.YELLOW);
 
             }
             else {
