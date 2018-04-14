@@ -29,18 +29,19 @@ public class UDCompute {
 	private double percent = 0.035;
 	
 	
-	public Result udExecute(String model) throws ClassNotFoundException, IOException {
+	public Result udExecute(String model,Set<String> valid,Set<String> noValid) throws
+		ClassNotFoundException, IOException {
 		TextDataset textDataset = getTextDataset(project);
 		RelationInfo ri = getRelationInfo(project);
 		userVerifyCount = (int)(ri.getVertexIdNameMap().size() * percent);
 		
-		 Map<String,Set<String>> valid = new HashMap<String,Set<String>>();
+		 Map<String,Set<String>> validMap = new HashMap<String,Set<String>>();
 	        ri.setPruning(callThreshold, dataThreshold);
-	    valid = new HashMap<String,Set<String>>();
 		
 		Result result_UD_CallDataTreatEqual = IR.compute(textDataset,model,
         		new UD_InnerAndOuterSeq(ri,callThreshold,
-        			dataThreshold,userVerifyCount,valid));//0.7
+        			dataThreshold,userVerifyCount,validMap,
+        			valid,noValid));//0.7
 		return result_UD_CallDataTreatEqual;
 	}
 	

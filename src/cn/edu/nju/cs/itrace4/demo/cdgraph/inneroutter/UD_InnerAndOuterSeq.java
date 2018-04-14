@@ -45,6 +45,16 @@ public class UD_InnerAndOuterSeq implements CSTI{
 	private Map<Integer,Map<Integer,Double>> callRouterCache = new HashMap<Integer,Map<Integer,Double>>();
 	private int countThreshold = 2;
 	
+	private Set<String> validSet, noValidSet;
+	
+	public UD_InnerAndOuterSeq(RelationInfo ri,double callThreshold,double dataThreshold,
+			int verifyCount,Map<String,Set<String>> valid,
+			Set<String> validSet,Set<String> noValidSet){
+		this(ri,callThreshold,dataThreshold,verifyCount,valid);
+		this.validSet = validSet;
+		this.noValidSet = noValidSet;
+	}
+	
 	
 	public UD_InnerAndOuterSeq(RelationInfo ri,double callThreshold,double dataThreshold,
 			int verifyCount,Map<String,Set<String>> valid){
@@ -114,6 +124,17 @@ public class UD_InnerAndOuterSeq implements CSTI{
 					}
 					subGraph.setVisited(req);
 				}
+				
+				if(req.equals("UC18") && index<=verifyCount) {
+					if(oracle.isLinkAboveThreshold(req,represent)) {
+						validSet.add(represent);
+					} 
+					else {
+						noValidSet.add(represent);
+					}
+				}
+				
+				
 				if(oracle.isLinkAboveThreshold(req,represent) && index<=verifyCount){//if start
 					subGraph.addReq(req);
 					/**

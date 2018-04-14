@@ -5,29 +5,23 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Frame;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.table.DefaultTableCellRenderer;
 
@@ -54,6 +48,14 @@ public class QueryResult{
 	private FileProcess fp = new FileProcessTool();
 	private JProgressBar codeDepencyProgress = new JProgressBar(0,20000);
 	
+	private Set<String> validSet = new HashSet<String>();
+	private Set<String> noValidSet = new HashSet<String>(); 
+	private Set<String> skipSet = new HashSet<String>();
+	
+	private Set<Integer> validPostionSet = new HashSet<Integer>();
+	private Set<Integer> noValidPostionSet = new HashSet<Integer>();
+	private Set<Integer> skipPostionSet = new HashSet<Integer>();
+	
 	public QueryResult() {
 		jf = new JFrame("需求可追踪查询工具");
 		menuBar = new JMenuBar();
@@ -66,18 +68,20 @@ public class QueryResult{
 		menuBar.add(view);menuBar.add(help);
 		menuBar.add(toolBar);
 		
-		Result irResult = null;
+		Result udResult = null;
 		//call data model
 		String[] result = {"0","0","vsm"};
 		//showIRConfigDialog(jf,jf);
 		try {
-			irResult = udCompute.udExecute(modelFactory.generate(result[2]));
+			udResult = udCompute.udExecute(modelFactory.generate(result[2]),validSet,noValidSet);
+			noValidSet.remove("auth.surveyResults_jsp");
+			skipSet.add("auth.surveyResults_jsp");
 		} catch (ClassNotFoundException e1) {
 			e1.printStackTrace();
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		display(irResult);
+		display(udResult);
 	}
 
 
@@ -87,7 +91,6 @@ public class QueryResult{
 	 */
     private void display(Result irResult) {
     	String target = "UC18";
-//    	LinksList allLinks = irResult.matrix.allLinks();
     	Map<String,Double> map = irResult.matrix.getLinksForSourceId(target);
     	LinksList allLinks = new LinksList();
     	for(String req:map.keySet()) {
@@ -98,6 +101,21 @@ public class QueryResult{
     
     private void showIrResultDialog(Frame owner, Component parentComponent,LinksList allLinks) {
     	Collections.sort(allLinks,Collections.reverseOrder());
+    	int index = 0;
+    	for(SingleLink link:allLinks) {
+    		String className = link.getTargetArtifactId();
+    		if(validSet.contains(className)) {
+    			validPostionSet.add(index);
+    		}
+    		else if(noValidSet.contains(className)) {
+    			noValidPostionSet.add(index);
+    		}
+    		else if(skipSet.contains(className)) {
+    			skipPostionSet.add(index);
+    		}
+    		index++;
+    	}
+    	
     	String[][] data = getDataFromLinks(allLinks);
     	JMenuBar mb = new JMenuBar();
     	mb.add(this.file);mb.add(this.tool);
@@ -105,9 +123,6 @@ public class QueryResult{
     	
     	JPanel leftPanel = new JPanel(new BorderLayout());
     	
-//    	JLabel description = new JLabel("需求：");
-//    	description.setFont(new Font(null,Font.BOLD,18));
-//    	description.setBounds(20, 0, 80, 20);
     	String[] irModels = new String[20];
     	for(int i = 0; i<irModels.length;i++) {
     		irModels[i] = "UC"+(i+1);
@@ -147,8 +162,6 @@ public class QueryResult{
         bb.setBounds(widthX,heightY,width,height);
         leftPanel.add(bb);
         leftPanel.setSize(300, 500);
-        //leftPanel.add(btn,BorderLayout.SOUTH);
-        //leftPanel.setLayout(null);
         
         leftPanel.add(btn);
         
@@ -157,19 +170,28 @@ public class QueryResult{
     	jf.setResizable(false);
 		jf.setLocationRelativeTo(parentComponent);
 		JTable jt = new JTable(data,cols);
-		this.setOneRowBackgroundColor(jt, 2, Color.RED);
-		//jt.setBounds(50, 0, 500, 500);
+		jt.setDefaultRenderer(Object.class, new MyCellRenderer());
+		
+//		for(int i = 0; i < 100;i++) {
+//			setOneRowBackgroundColor(jt, i, Color.RED);
+//		}
+		
+//		for(int ele:validPostionSet) {
+//			setOneRowBackgroundColor(jt, ele, Color.GREEN);
+//		}
+//		for(int ele:noValidPostionSet) {
+//			setOneRowBackgroundColor(jt, ele, Color.RED);
+//		}
+//		for(int ele:skipPostionSet) {
+//			setOneRowBackgroundColor(jt, ele, Color.ORANGE);
+//		}
+		
 		JScrollPane js = new JScrollPane(jt); 
 		js.setBounds(300, 0, 360, 500);
 		panel.add(js);
-		//js.setLayout(null);
-		//panel.setLayout(null);
 		jf.setJMenuBar(mb);
 		
 		JSplitPane jsp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, leftPanel, js);
-		
-		//jsp.setLayout(null);
-		
 		jf.setContentPane(jsp);
 		
 		jf.setSize(680, 600);
@@ -191,62 +213,6 @@ public class QueryResult{
 		return data;
 	}
 
-	/**
-     * @date 2018.3.15
-     * @description used to ir parameter config. 
-     */
-	private String[] showIRConfigDialog(Frame owner, Component parentComponent) {
-		String[] res = new String[3];
-		JPanel panel = new JPanel();
-		JDialog dialog = new JDialog(owner, "参数配置", true);
-		dialog.setResizable(false);
-		dialog.setLocationRelativeTo(parentComponent);
-
-		JLabel callThresholdLabel = new JLabel("callThreshold");
-		callThresholdLabel.setBounds(100, 100, 100, 20);
-		JTextField callValue = new JTextField();
-		callValue.setBounds(200, 100, 60, 20);
-		JLabel dataThresholdLabel = new JLabel("dataThreshold");
-		dataThresholdLabel.setBounds(100, 150, 100, 20);
-		JTextField dataValue = new JTextField();
-		dataValue.setBounds(200, 150, 60, 20);
-
-		JLabel modelName = new JLabel("model");
-		modelName.setBounds(150,200,100,20);
-
-		String[] modelList = {"VSM","LSI","JS"};
-		JComboBox<String> modelKinds = new JComboBox<String>(modelList);
-		modelKinds.setBounds(200, 200, 60, 20);
-
-		JButton btn = new JButton("确定");
-		btn.setBounds(150, 250, 80, 20);
-		btn.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				double callThreshold = Double.valueOf(callValue.getText());
-				double dataThreshold = Double.valueOf(dataValue.getText());
-				String model = modelKinds.getSelectedItem().toString();
-				res[0] = callThreshold +"";
-				res[1] = dataThreshold+"";
-				res[2] = model;
-				dialog.dispose();
-			}
-		});
-
-		panel.add(callThresholdLabel);
-		panel.add(dataThresholdLabel);
-		panel.add(callValue);
-		panel.add(dataValue);
-		panel.add(modelName);
-		panel.add(modelKinds);
-		panel.add(btn);
-		panel.setLayout(null);
-
-		dialog.setSize(400, 400);
-		dialog.setContentPane(panel);
-		dialog.setVisible(true);
-		return res;
-	}
 
 	public void setOneRowBackgroundColor(JTable table, int rowIndex,  
             Color color) {  
@@ -255,22 +221,29 @@ public class QueryResult{
   
                 public Component getTableCellRendererComponent(JTable table,  
                         Object value, boolean isSelected, boolean hasFocus,  
-                        int row, int column) {  
-                    if (row == rowIndex) {  
-                        setBackground(color);  
-                       // setForeground(Color.WHITE);  
-                    }
-                    else {
-                    	setBackground(Color.WHITE);  
-                    }
-                    /*else if(row > rowIndex){  
-                        setBackground(Color.BLACK);  
-                        setForeground(Color.WHITE);  
-                    }else{  
-                        setBackground(Color.BLACK);  
-                        setForeground(Color.WHITE);  
-                    }  */
-  
+                        int row, int column) { 
+                	
+                	if(validPostionSet.contains(rowIndex)) {
+                		setBackground(Color.GREEN);  
+                	}
+                	else if(noValidPostionSet.contains(rowIndex)) {
+                		setBackground(Color.RED);
+                	}
+                	else if(skipPostionSet.contains(rowIndex)) {
+                		setBackground(Color.ORANGE);
+                	}
+                	else {
+                		setBackground(Color.WHITE);  
+                	}
+                	
+                	
+//                    if (row == rowIndex) {  
+//                        setBackground(color);  
+//                       // setForeground(Color.WHITE);  
+//                    }
+//                    else {
+//                    	setBackground(Color.WHITE);  
+//                    }
                     return super.getTableCellRendererComponent(table, value,  
                             isSelected, hasFocus, row, column);  
                 }  
@@ -303,8 +276,7 @@ public class QueryResult{
 	}
 	
 	public static void main(String[] args) {
-		QueryResult tool = new QueryResult();
-		
+		new QueryResult();
 	}
 
 }
