@@ -17,6 +17,7 @@ import cn.edu.nju.cs.itrace4.core.algo.UD_CSTI;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
+import cn.edu.nju.cs.itrace4.demo.algo.coderegion.UD_CodeTextAsWholeInRegion;
 import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataTreatEqualOuterLessThanInner;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Gantt;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Infinispan;
@@ -47,7 +48,8 @@ public class BatchExecuteParameter {
 	private Map<String, String> modelMap;
 	private Map<Integer, String> idMapProject;
 	private Map<Integer, String> idMapModel;
-	private int userVerifyNumber = 3;
+	private double percent = 0.035;
+	private int userVerifyNumber;
 	private String targetPath = "newData/batch-3-all";
 
 	public BatchExecuteParameter(String projectPath, String modelPath) {
@@ -74,8 +76,9 @@ public class BatchExecuteParameter {
 				for (int projectIndex = 0; projectIndex < 2; projectIndex++) {
 					TextDataset textDataset = getTextDataset(projects[projectIndex].toLowerCase());
 					RelationInfo ri = getRelationInfo(projects[projectIndex].toLowerCase());
+					userVerifyNumber = (int)(ri.getVertexIdNameMap().size()*percent);
 					for (int modelIndex = 0; modelIndex < models.length; modelIndex++) {
-						boolean isMeetPvalue = calculateResult(result, projects, projectIndex, models, modelIndex,
+						boolean isMeetPvalue = calculateResult(projects[projectIndex],result, projects, projectIndex, models, modelIndex,
 								textDataset, ri, callThreshold, dataThreshold);
 						if (isMeetPvalue) {
 							count++;
@@ -88,8 +91,9 @@ public class BatchExecuteParameter {
 				for (int projectIndex = 2; projectIndex < projects.length; projectIndex++) {
 					TextDataset textDataset = getTextDataset(projects[projectIndex]);
 					RelationInfo ri = getRelationInfo(projects[projectIndex]);
+					userVerifyNumber = (int)(ri.getVertexIdNameMap().size()*percent);
 					for (int modelIndex = 0; modelIndex < models.length; modelIndex++) {
-						calculateResult(result, projects, projectIndex, models, modelIndex, textDataset, ri,
+						calculateResult(projects[projectIndex],result, projects, projectIndex, models, modelIndex, textDataset, ri,
 								callThreshold, dataThreshold);
 					}
 				}
@@ -133,8 +137,10 @@ public class BatchExecuteParameter {
 		return sb.toString();
 	}
 
-	private boolean calculateResult(String[][][] result, String[] projects, int projectIndex, String[] models,
+	private boolean calculateResult(String projectName, String[][][] result, String[] projects, int projectIndex, String[] models,
 			int modelIndex, TextDataset textDataset, RelationInfo ri, double callThreshold, double dataThreshold) {
+		
+		
 		String fullModelName = modelMap.get(models[modelIndex].trim().toLowerCase());
 		Result result_ir = IR.compute(textDataset, fullModelName, new None_CSTI());
 		ri.setPruning(0, 0);
@@ -143,8 +149,8 @@ public class BatchExecuteParameter {
 		ri.setPruning(callThreshold, dataThreshold);
 		valid = new HashMap<String, Set<String>>();
 		Result result_UD_CallDataTreatEqual = IR.compute(textDataset, fullModelName,
-				new UD_CallDataTreatEqualOuterLessThanInner(ri, callThreshold, dataThreshold, 
-						userVerifyNumber,valid));// 0.7
+				new UD_CodeTextAsWholeInRegion(getProject(projectName),ri, callThreshold, dataThreshold, 
+						userVerifyNumber,valid,fullModelName));// 0.7
 		String irRecord = getRecord(result_ir, result_UD_CallDataTreatEqual);
 		result[projectIndex][modelIndex][0] = irRecord;
 		String udRecord = getRecord(result_UD_CSTI, result_UD_CallDataTreatEqual);
@@ -159,6 +165,24 @@ public class BatchExecuteParameter {
 		}
 	}
 
+	private Project getProject(String projectName) {
+		if(projectName.equalsIgnoreCase("iTrust")) {
+			return new Itrust();
+		}
+		else if(projectName.equalsIgnoreCase("Maven_TestCase")) {
+			return new Maven_TestCase();
+		}
+		else if(projectName.equalsIgnoreCase("infinispan")) {
+			return new Infinispan();
+		}
+		else if(projectName.equalsIgnoreCase("pig")) {
+			return new Pig();
+		}
+		else {
+			return null;
+		}
+	}
+	
 	private String getRecord(Result result) {
 		StringBuilder record = new StringBuilder();
 		double irAp = result.getAveragePrecisionByRanklist();

@@ -17,6 +17,8 @@ public class SubGraph {
 	private Set<String> visited;
 	//2017/8/12 增加一个属性  为了使用新方法 这里的距离和传统意义的距离还不一样 越大越紧密
 	private double closenessDistanceFromMaxSubGraph;
+	//2018.4.18 增加一个属性，记录这个域的名字
+	private String regionName;
 	
 	/*
 	 * @date 2018/1/13
@@ -90,5 +92,13 @@ public class SubGraph {
 
 	public void setClosenessDistanceFromMaxSubGraph(double closenessDistanceFromMaxSubGraph) {
 		this.closenessDistanceFromMaxSubGraph = closenessDistanceFromMaxSubGraph;
+	}
+	
+	public void setRegionName(String regionName) {
+		this.regionName = regionName;
+	}
+	 
+	public String getRegionName() {
+		return regionName;
 	}
 }
