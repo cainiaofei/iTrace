@@ -7,4 +7,5 @@ import cn.edu.nju.cs.refactor.exception.FileException;
 public interface FileProcess extends Tool{
 	public String getFileConent(String filePath) throws FileException, IOException;
 	public String getClassPackageName(String fileName) throws FileException, IOException;
+	public void writeFile(String filePath,String text);
 }

@@ -20,6 +20,7 @@ import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.ir.IRModelConst;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
+import cn.edu.nju.cs.itrace4.demo.algo.coderegion.UD_CodeTextAsWholeInRegion;
 import cn.edu.nju.cs.itrace4.demo.cdgraph.inneroutter.UD_InnerAndOuterSeq;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Gantt;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Infinispan;
@@ -32,6 +33,7 @@ import cn.edu.nju.cs.itrace4.demo.exp.project.Maven_TestCase;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Pig;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Pig_Cluster;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
+import cn.edu.nju.cs.itrace4.demo.explore.ITrust;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 import cn.edu.nju.cs.itrace4.util.Setting;
 import cn.edu.nju.cs.refactor.exception.FileException;
@@ -71,8 +73,8 @@ public class BatchExecuteParameterPercent {
 		String[] projects = getArrFromFile(projectPath);
 		String[] models = getArrFromFile(modelPath);
 		// the first two is Itrust and gannt
-		for (double callThreshold = 0.4; callThreshold < 0.41; callThreshold += 0.1) {
-			for (double dataThreshold = 0.8; dataThreshold < 0.81; dataThreshold += 0.1) {
+		for (double callThreshold = 0.2; callThreshold < 1.0; callThreshold += 0.1) {
+			for (double dataThreshold = 0.2; dataThreshold < 1.0; dataThreshold += 0.1) {
 				//2018.1.25
 				// project:4 model:3 method:4 StringBuilder:ap,map,p-value,rate
 				String[][][] result = new String[4][3][4];
@@ -149,9 +151,17 @@ public class BatchExecuteParameterPercent {
 		Map<String, Set<String>> valid = new HashMap<String, Set<String>>();
 		ri.setPruning(callThreshold, dataThreshold);
 		valid = new HashMap<String, Set<String>>();
+		
+		Project project = getProject(projects[projectIndex]);
+		
+		
 		Result result_UD_CallDataTreatEqual = IR.compute(textDataset, fullModelName,
-				new UD_InnerAndOuterSeq(ri, callThreshold, dataThreshold, 
-						userVerifyNumber,valid));// 
+				new UD_CodeTextAsWholeInRegion(project,ri, callThreshold, dataThreshold, 
+						userVerifyNumber,valid,fullModelName));// 
+		
+//		Result result_UD_CallDataTreatEqual = IR.compute(textDataset, fullModelName,
+//				new UD_InnerAndOuterSeq(ri, callThreshold, dataThreshold, 
+//						userVerifyNumber,valid));// 
 		
 		
 		class_relation.setPruning(Setting.callThreshold, Setting.dataThreshold);
@@ -173,6 +183,24 @@ public class BatchExecuteParameterPercent {
 		
 		String clusterRecord = getRecord(result_UD_CallDataTreatEqual);
 		result[projectIndex][modelIndex][3] = clusterRecord;
+	}
+
+	private Project getProject(String projectName) {
+		if(projectName.equalsIgnoreCase("iTrust")) {
+			return new Itrust();
+		}
+		else if(projectName.equalsIgnoreCase("Maven_TestCase")) {
+			return new Maven_TestCase();
+		}
+		else if(projectName.equalsIgnoreCase("infinispan")) {
+			return new Infinispan();
+		}
+		else if(projectName.equalsIgnoreCase("pig")) {
+			return new Pig();
+		}
+		else {
+			return null;
+		}
 	}
 
 	private String getRecord(Result result) {
@@ -271,7 +299,7 @@ public class BatchExecuteParameterPercent {
 	}
 
 	public static void main(String[] args) {
-		String projectPath = "resource/config/project1.txt";
+		String projectPath = "resource/config/project.txt";
 		String modelPath = "resource/config/model.txt";
 		BatchExecuteParameterPercent bp = new BatchExecuteParameterPercent(projectPath, modelPath);
 		try {

@@ -1,9 +1,11 @@
 package cn.edu.nju.cs.refactor.util;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import cn.edu.nju.cs.refactor.exception.FileException;
@@ -77,6 +79,20 @@ public class FileProcessTool implements FileProcess{
 			return sb.toString();
 		}
 	}
+	
+	
+	@Override
+	public void writeFile(String filePath, String text) {
+		BufferedWriter bw = null;
+		try {
+			bw = new BufferedWriter(new FileWriter(new File(filePath)));
+			bw.write(text);
+			bw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 	@Override
 	public String description() {
