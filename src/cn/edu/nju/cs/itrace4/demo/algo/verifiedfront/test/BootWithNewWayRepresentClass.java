@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.demo.algo.coderegion.test;
+package cn.edu.nju.cs.itrace4.demo.algo.verifiedfront.test;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -26,6 +26,7 @@ import cn.edu.nju.cs.itrace4.core.metrics.Result;
 import cn.edu.nju.cs.itrace4.demo.FileParse.XmlParse;
 import cn.edu.nju.cs.itrace4.demo.algo.coderegion.UD_CodeTextAsWholeInRegion;
 import cn.edu.nju.cs.itrace4.demo.algo.coderegion.UD_MergeCodeTXTAndNewRepresentElement;
+import cn.edu.nju.cs.itrace4.demo.algo.verifiedfront.resultprocess.ResultChange;
 import cn.edu.nju.cs.itrace4.demo.cdgraph.inneroutter.UD_InnerAndOuterSeq;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
 import cn.edu.nju.cs.itrace4.demo.exp.project.JhotDraw;
@@ -106,6 +107,7 @@ public class BootWithNewWayRepresentClass{
         Result result_UD_sortByMergeCodeInRegion = IR.compute(textDataset, model,
 				new UD_CodeTextAsWholeInRegion(project,ri, callEdgeScoreThreshold, dataEdgeScoreThreshold, 
 						userVerifyCount,valid,model));// 0.7
+        ResultChange.modifyResult(result_UD_sortByMergeCodeInRegion, valid);
         
         valid = new HashMap<String,Set<String>>();
         Result result_UD_mergeCodeReprentClassNewWay = IR.compute(textDataset, model,
