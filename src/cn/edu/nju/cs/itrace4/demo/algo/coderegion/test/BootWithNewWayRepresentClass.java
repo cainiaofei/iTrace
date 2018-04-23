@@ -42,7 +42,7 @@ import cn.edu.nju.cs.itrace4.demo.visual.MyVisualCurve;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 import cn.edu.nju.cs.itrace4.util.Setting;
  
-public class BooWithNewWayRepresentClass{
+public class BootWithNewWayRepresentClass{
 	
 	//private StoreSubGraphInfoByThreshold storeSubGraphInfoByThreshold;
 	private AnalyzeResult analyzeResult;
@@ -55,7 +55,7 @@ public class BooWithNewWayRepresentClass{
     private double dataEdgeScoreThreshold;
 	private double percent;
     
-	public BooWithNewWayRepresentClass() throws ParserConfigurationException, SAXException, IOException{
+	public BootWithNewWayRepresentClass() throws ParserConfigurationException, SAXException, IOException{
 		initProjectMap();
 		initModelMap();
 		analyzeResult = new AnalyzeResult();
@@ -327,7 +327,7 @@ public class BooWithNewWayRepresentClass{
 	public static void main(String[] args) throws IOException, ClassNotFoundException,
 			ParserConfigurationException, SAXException {
 		long startTime = System.currentTimeMillis();
-    	BooWithNewWayRepresentClass bonusForLoneBoot = new BooWithNewWayRepresentClass();
+    	BootWithNewWayRepresentClass bonusForLoneBoot = new BootWithNewWayRepresentClass();
     	bonusForLoneBoot.run();
     	long endTime = System.currentTimeMillis();
     	System.out.println("time cost:"+(endTime-startTime)*1.0/1000/60);

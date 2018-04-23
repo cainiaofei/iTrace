@@ -168,7 +168,6 @@ public class UD_MergeCodeTXTAndNewRepresentElement implements CSTI{
 				findBiggestValue(matrix,req);
 				SubGraph subGraph = regionsList.get(0);
 				List<Integer> vertexList = subGraph.getVertexList();
-				int localMaxId = subGraph.getMaxId();
 				GraphNode representNode = getRepresentativeElement(subGraph);
 				String representName = representNode.getClassName();
 				int representId = representNode.getId();
@@ -251,21 +250,47 @@ public class UD_MergeCodeTXTAndNewRepresentElement implements CSTI{
 		GraphNode representNode = new GraphNode(localMaxId,representClassName);
 		
 		List<Integer> vertexList = subGraph.getVertexList();
-		List<GraphNode> nodeList = new ArrayList<GraphNode>();
+		List<GraphNode> entranceNodeList = new ArrayList<GraphNode>();
 		for(int id:vertexList) {
 			GraphNode graphNode = new GraphNode(id,vertexIdNameMap.get(id));
 			neighborWithGraphNode(graphNode,vertexList);
-			nodeList.add(graphNode);
+			if(graphNode.getCallerList().size()==0) {
+				entranceNodeList.add(graphNode);
+			}
 		}
 		
-		for(GraphNode curNode:nodeList) {
-			if(curNode.getCallerList().size()==0) {
+		System.out.println("---------------------------------------");
+		int maxLen = 1;
+		for(GraphNode curNode:entranceNodeList) {
+			int maxLenStartFromCurNode = getMaxCallRouterLength(subGraph,curNode.getId(),
+					new HashSet<Integer>());
+			if(maxLenStartFromCurNode>maxLen) {
 				representNode = curNode;
+				maxLen = Math.max(maxLen, maxLenStartFromCurNode);
 			}
 		}
 		return representNode;
 	}
 
+	/**
+	 * @author zzf
+	 * @date 2018.4.23 14:21
+	 * @description get the max length of call router which start from curId in region 
+	 */
+	private int getMaxCallRouterLength(SubGraph region,int curId,Set<Integer> visited) {
+		List<Integer> neighborList = region.getVertexList();
+		int maxLen = 1;
+		for(int neighbor:neighborList) {
+			if(callGraphs[curId][neighbor]>0 && !visited.contains(neighbor)) {
+				visited.add(neighbor);
+				int curLen = 1 + getMaxCallRouterLength(region,neighbor,visited);
+				visited.remove(neighbor);
+				maxLen = Math.max(maxLen, curLen);
+			}
+		}
+		return maxLen;
+	}
+	
 	/**
 	 * @author zzf
 	 * @date 2018.4.23
