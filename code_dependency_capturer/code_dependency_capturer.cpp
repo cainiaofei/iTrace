@@ -36,10 +36,10 @@ sqlite3 *dbPP = NULL;
 sqlite3 *dbCG = NULL;
 
 //String Buffer
-#define BUFFERROW 400000
-#define FDBSIZE 1000
-#define PDBSIZE 1000
-#define CDBSIZE 1000//改大了
+#define BUFFERROW 100000
+#define FDBSIZE 3000
+#define PDBSIZE 3000
+#define CDBSIZE 3000//改大了
 
 static char FaDBBuffer[BUFFERROW][FDBSIZE];
 static int FaBufferCount = 0;
@@ -471,7 +471,7 @@ tdClassPrepare(jvmtiEnv *jvmti_env,
 	check_jvmti_error(jvmti_env, error, "Cannot getClassFields");
 
 	
-	if (strstr(signature, "pig") != NULL) {//::FOR iTrust
+	if (strstr(signature, "derby") != NULL) {//::FOR iTrust
 		for (int i = 0; i < fieldCount; i++)
 		{
 			jfieldID field = *(fields + i);
@@ -530,7 +530,7 @@ tdMethodEntry(jvmtiEnv *jvmti_env,
 		check_jvmti_error(jvmti_env, error, "Cannot getClassSignature");
 
 		
-		if (strstr(klass_signature, "pig") != NULL) {//::FOR iTrust
+		if (strstr(klass_signature, "derby") != NULL) {//::FOR iTrust
 																	//if(strstr(klass_signature, "Lsample") !=NULL){
 
 			error = (*jvmti_env).GetMethodName(method, &method_name, &method_signature, NULL);
@@ -609,7 +609,7 @@ tdMethodExit(jvmtiEnv *jvmti_env,
 		check_jvmti_error(jvmti_env, error, "Cannot getClassSignature");
 
 		
-		if (strstr(klass_signature, "pig") != NULL) {//::FOR iTrust
+		if (strstr(klass_signature, "derby") != NULL) {//::FOR iTrust
 
 			error = (*jvmti_env).GetObjectHashCode(thread, &threadHashcode);
 			check_jvmti_error(jvmti_env, error, "Cannot get MethodName");
@@ -702,8 +702,15 @@ tdMethodExit(jvmtiEnv *jvmti_env,
 			//record return value,ignore the non-object value and the exception situation
 			jint return_hashcode;
 			char  * returnType;
-			char tempSignature[450];
+			char tempSignature[1000];
+			
 			strcpy(tempSignature, method_signature);
+			int tempLen = strlen(tempSignature);
+			if (tempLen > 1000) {
+				cout << "tempLen"<< " : " << tempLen << endl;
+				exit(0);
+			}	
+			
 			//get return Type
 			returnType = strtok(tempSignature, ")");
 			returnType = strtok(NULL, ")");
