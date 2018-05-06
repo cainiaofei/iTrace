@@ -30,6 +30,7 @@ public class LSI implements IRModel {
     		System.out.println("lsi_k-------------------"+k);
     	}
     	else {
+    		k = Math.min(target.size(), k);
     		System.out.println("lsi_k-------------------"+k);
     	}
     	

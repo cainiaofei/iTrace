@@ -1,5 +1,7 @@
-package cn.edu.nju.cs.itrace4.demo.cdgraph.inneroutter;
+package cn.edu.nju.cs.itrace4.demo.algo.coderegion;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -10,21 +12,28 @@ import java.util.Map;
 import java.util.Set;
 
 import cn.edu.nju.cs.itrace4.core.algo.CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.SortByMergedClass;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.document.LinksList;
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
 import cn.edu.nju.cs.itrace4.core.document.SingleLink;
+import cn.edu.nju.cs.itrace4.core.ir.IRModel;
 import cn.edu.nju.cs.itrace4.demo.algo.SortBySubGraph;
 import cn.edu.nju.cs.itrace4.demo.algo.SortVertexByScore;
+import cn.edu.nju.cs.itrace4.demo.datastruct.GraphNode;
+import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
 import cn.edu.nju.cs.itrace4.demo.relation.StoreDataSubGraphRemoveEdge;
 import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
 import cn.edu.nju.cs.itrace4.relation.CallDataRelationGraph;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 import cn.edu.nju.cs.itrace4.relation.graph.CodeEdge;
+import cn.edu.nju.cs.refactor.exception.FileException;
+import cn.edu.nju.cs.refactor.util.FileProcess;
+import cn.edu.nju.cs.refactor.util.FileProcessTool;
 import javafx.util.Pair;
 
 
-public class UD_InnerAndOuterSeq implements CSTI{
+public class UD_MergeCodeTXTAndNewRepresentElement implements CSTI{
 	private int callRouterLen = 4;
 	private int dataRouterLen = 2;
 	private double[][] callGraphs;
@@ -45,109 +54,145 @@ public class UD_InnerAndOuterSeq implements CSTI{
 	private Map<Integer,Map<Integer,Double>> callRouterCache = new HashMap<Integer,Map<Integer,Double>>();
 	private int countThreshold = 2;
 	
-	private Set<String> validSet, noValidSet;
-	
-	public UD_InnerAndOuterSeq(RelationInfo ri,double callThreshold,double dataThreshold,
-			int verifyCount,Map<String,Set<String>> valid,
-			Set<String> validSet,Set<String> noValidSet){
-		this(ri,callThreshold,dataThreshold,verifyCount,valid);
-		this.validSet = validSet;
-		this.noValidSet = noValidSet;
-	}
+	//2018.4.19 regard file text in same region as a whole.
+	private FileProcess fileProcess = new FileProcessTool();
+	private Project project;
+	private String codeMergePath;
+	private String model;
+	//used to merge text which in a same region.
+	List<SubGraph> regions;
 	
 	
-	public UD_InnerAndOuterSeq(RelationInfo ri,double callThreshold,double dataThreshold,
-			int verifyCount,Map<String,Set<String>> valid){
+	public UD_MergeCodeTXTAndNewRepresentElement(Project project,RelationInfo ri,double callThreshold,
+			double dataThreshold, int verifyCount,Map<String,Set<String>> valid,
+			String model){
 		allVertexIdList = ri.getVertexIdNameMap().keySet();
 		this.callThreshold = callThreshold;
 		this.dataThreshold = dataThreshold;
+		this.project = project;
+		this.valid = valid;
+		this.verifyCount = verifyCount;
+		this.model = model;
+		
+		vertexIdNameMap = ri.getVertexIdNameMap();
 		
 		regionList = new StoreDataSubGraphRemoveEdge().getSubGraphs(ri);
 		
-		//2018.2.6  get the number of regions.
-		int tmpCount = 0;
-		for(SubGraph subGraph:regionList) {
-			if(subGraph.getVertexList().size()>1) {
-				tmpCount++;
+		//2018.4.19 the region list
+		try {
+			mergeTXTInSameRegion(regionList);
+		} catch (FileException | IOException e) {
+			e.printStackTrace();
+		}
+		
+		callGraphs = describeCallGraphWithMatrix(new CallDataRelationGraph(ri,false).callEdgeScoreMap,
+				ri.getVertexes().size());
+		dataGraphs = describeDataGraphWithMatrix(new CallDataRelationGraph(ri,false).dataEdgeScoreMap,
+				ri.getVertexes().size());
+		
+	}
+	
+	
+	private String mergeTXTInSameRegion(List<SubGraph> subGraphList) throws FileException, IOException {
+		regions = new ArrayList<SubGraph>(); 
+		for(SubGraph subGraph:subGraphList) {
+			List<Integer> classIdList = subGraph.getVertexList();
+			if(classIdList.size()>1) {
+				regions.add(subGraph);
 			}
 		}
-		System.out.println("tmpCount:"+tmpCount);
+		String ucPath = project.getUcPath();
+		codeMergePath = (new File(ucPath)).getParent()+File.separator+"mergeClass";
 		
+		File dir = new File(codeMergePath);
+		if(!dir.exists()) {
+			dir.mkdirs();
+		}
 		
-		callGraphs = describeCallGraphWithMatrix(new CallDataRelationGraph(ri,false).callEdgeScoreMap,ri.getVertexes().size());
-		dataGraphs = describeDataGraphWithMatrix(new CallDataRelationGraph(ri,false).dataEdgeScoreMap,ri.getVertexes().size());
-		
-		vertexIdNameMap = ri.getVertexIdNameMap();
-		this.valid = valid;
-		this.verifyCount = verifyCount;
+		String classBase = project.getClassDirPath();
+		for(SubGraph region:regions) {
+			StringBuilder content = new StringBuilder();
+			String className = null;
+			for(int id:region.getVertexList()) {
+				className = vertexIdNameMap.get(id);
+				content.append(" "+fileProcess.getFileConent(classBase+File.separator+className+".txt"));
+			}
+			String mergeFileName = className+"_"+region.getVertexList().size();
+			region.setRegionName(mergeFileName);
+			fileProcess.writeFile(codeMergePath+File.separator+mergeFileName+".txt", content.toString());
+//			File f = new File(classBase+File.separator+mergeFileName+".txt");
+//			f.delete();
+		}
+		return codeMergePath;
+	}
+	
+	
+	/**
+	 * @author zzf
+	 * @date 2018.4.19
+	 * @description compute the similarity between merged code text and requirements. 
+	 */
+	private SimilarityMatrix compute(TextDataset textDataset, String modelType) {
+
+		Class modelTypeClass = null;
+		IRModel irModel = null;
+		try {
+			modelTypeClass = Class.forName(modelType);
+			irModel = (IRModel) modelTypeClass.newInstance();
+		} catch (ClassNotFoundException |InstantiationException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
+
+		SimilarityMatrix similarityMatrix = irModel.Compute(textDataset.getSourceCollection(),
+				textDataset.getTargetCollection());
+		return similarityMatrix;
 	}
 	
 	
 	public SimilarityMatrix optimizeIRMatrix(SimilarityMatrix matrix, TextDataset textDataset) {
 		 
 		 SimilarityMatrix oracle = textDataset.getRtm();
-		 
+		 TextDataset dataset = new TextDataset(project.getUcPath(), codeMergePath, 
+	        		project.getRtmClassPath());
+		 SimilarityMatrix mergedCodeAndReq = compute(dataset, model);
 		 
 		 for(String req:matrix.sourceArtifactsIds()){
-			List<SubGraph> curRegionList = new ArrayList<SubGraph>(regionList);
-			//it will get maxId for every subGraph after sort.
-			Collections.sort(curRegionList,new SortBySubGraph(vertexIdNameMap,matrix,req));
-			int maxId = curRegionList.get(0).getMaxId();
-			double maxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(maxId));
-			
+			List<SubGraph> regionsList = new ArrayList<SubGraph>(regions); 
+			Collections.sort(regionsList,new SortByMergedClass(mergedCodeAndReq,req));
+			double maxScore = findBiggestValue(matrix,req);
 			int index = 1;
 			//the count of region which has more than one vertex.
 			Set<Integer> hasVisitedRegion = new HashSet<Integer>();
-			//for(SubGraph subGraph:callDataSubGraphList){//subGraph
-			while(curRegionList.size() != 0) {
-				Collections.sort(curRegionList,new SortBySubGraph(vertexIdNameMap,matrix,req));
-				SubGraph subGraph = curRegionList.get(0);
-				
+			while(regionsList.size() != 0) {
+				//update the local class, the similarity of which and requirement is max in region.
+				findBiggestValue(matrix,req);
+				SubGraph subGraph = regionsList.get(0);
 				List<Integer> vertexList = subGraph.getVertexList();
-				Collections.sort(vertexList, new SortVertexByScore(vertexIdNameMap,matrix,req));
-				if(vertexList.size()<countThreshold){
-					curRegionList.remove(0);
-					continue;
-				}
-				//regard the max score in this subGraph as represent
-				int localMaxId = subGraph.getMaxId();
-				String represent = vertexIdNameMap.get(localMaxId);
+				GraphNode representNode = getRepresentativeElement(subGraph);
+				String representName = representNode.getClassName();
+				int representId = representNode.getId();
+				
 				if(index<=verifyCount){
 					if(valid.containsKey(req)){
-						valid.get(req).add(represent);
+						valid.get(req).add(representName);
 					}
 					else{
 						valid.put(req, new HashSet<String>());
-						valid.get(req).add(represent);
+						valid.get(req).add(representName);
 					}
 					subGraph.setVisited(req);
 				}
 				
-//				if(req.equals("UC18") && index<=verifyCount) {
-//					if(oracle.isLinkAboveThreshold(req,represent)) {
-//						validSet.add(represent);
-//					} 
-//					else {
-//						noValidSet.add(represent);
-//					}
-//				}
-				
-				
-				if(oracle.isLinkAboveThreshold(req,represent) && index<=verifyCount){//if start
+				if(oracle.isLinkAboveThreshold(req,representName) && index<=verifyCount){//if start
 					subGraph.addReq(req);
-					/**
-					 * @author zzf
-					 * @date 2018.1.25
-					 * @description classify two kinds of bonus:inner bonus and outer bonus. 
-					 */
 					List<Integer> temp = new ArrayList<Integer>();
-					temp.add(localMaxId);
+					//temp.add(localMaxId);
+					temp.add(representId);
 					SubGraph newSubGraph =  new SubGraph(temp);
 					
 					Map<Integer,Double> outerBonusMap = new HashMap<Integer,Double>();
-//					double localMaxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(localMaxId));
 					for(int vertexId:vertexList) {
-						if(vertexId==localMaxId) {
+						if(vertexId==representId) {
 							continue;
 						}
 						else {
@@ -156,59 +201,27 @@ public class UD_InnerAndOuterSeq implements CSTI{
 						}
 					}
 					
-					/**
-					 * @date 2018.1.25
-					 * @author zzf
-					 * @description inner bonus
-					 * */
-					
 					for(int vertexId:vertexList) {
 						String vertexName = vertexIdNameMap.get(vertexId);
 						double curValue = matrix.getScoreForLink(req, vertexName);
-						//double preValue = curValue;
-						if(!vertexName.equals(represent)){
+						if(!vertexName.equals(representName)){
 							int graphSize = subGraph.getVertexList().size();
-							//2018.1.13
-							double originValue = curValue;
-							//curValue = Math.min(maxScore*0.9999, curValue+maxScore/(graphSize-1));
-							//curValue = Math.min(maxScore*0.9999, curValue+maxScore/(Math.sqrt(graphSize)));
-							
 							double innerBonus = maxScore/(graphSize);
-							//bonus = Math.sqrt(bonus);
-							
-							//2018.1.18
-							//double bonus = maxScore * meanCloseness;
-							//System.out.println("added bonus:"+bonus/originValue*100+"%");
-							
-							//double bonus = Math.max(innerBonus, outerBonusMap.get(vertexId));
-							//double bonus = innerBonus + outerBonusMap.get(vertexId);
-							//double newBonus = (curValue + innerBonus)*(1+outerBonusMap.get(vertexId));
 							double newValue = (curValue + innerBonus)*(1+outerBonusMap.get(vertexId));
-							//curValue = Math.min(maxScore*0.9999, curValue+bonus);
 							curValue = Math.min(maxScore*0.9999, newValue);
-							/**
-							 * @date 2018.1.13
-							 * @description store the max bonus. 
-							 */
 							subGraph.setMaxBonus(Math.max(subGraph.getMaxBonus(), newValue));
-							//subGraph.setMaxBonus(Math.max(subGraph.getMaxBonus(), bonus));
 						}
 						matrix.setScoreForLink(req, vertexName, curValue);
 						
 					}
 					Set<Integer> curLoneVertexList = fillLoneVertex(subGraph,
 							hasVisitedRegion,hidden);
-					/**
-					 * @date 2018.1.12
-					 * @description dont give bonus for outer vertex temperary. 
-					 */
-					//subGraph = new SubGraph(temp);
 					
 					giveBonusForLoneNotInThisRegion(matrix, newSubGraph,curLoneVertexList,req);
 					hasVisitedRegion.addAll(subGraph.getVertexList());
 				}//if end
 				index++;
-				curRegionList.remove(0);
+				regionsList.remove(0);
 			}///
 		}//req
 		
@@ -225,6 +238,97 @@ public class UD_InnerAndOuterSeq implements CSTI{
 		return res;
 	}
 	
+	/**
+	 * @date 2018.4.22
+	 * @author zzf
+	 * @description choose the code element which has not been called anyone in region
+	 * as the representative element. 
+	 */
+	private GraphNode getRepresentativeElement(SubGraph subGraph) {
+		int localMaxId = subGraph.getMaxId();
+		String representClassName = vertexIdNameMap.get(localMaxId);
+		GraphNode representNode = new GraphNode(localMaxId,representClassName);
+		
+		List<Integer> vertexList = subGraph.getVertexList();
+		List<GraphNode> entranceNodeList = new ArrayList<GraphNode>();
+		for(int id:vertexList) {
+			GraphNode graphNode = new GraphNode(id,vertexIdNameMap.get(id));
+			neighborWithGraphNode(graphNode,vertexList);
+			if(graphNode.getCallerList().size()==0) {
+				entranceNodeList.add(graphNode);
+			}
+		}
+		
+		System.out.println("---------------------------------------");
+		int maxLen = 1;
+		for(GraphNode curNode:entranceNodeList) {
+			int maxLenStartFromCurNode = getMaxCallRouterLength(subGraph,curNode.getId(),
+					new HashSet<Integer>());
+			if(maxLenStartFromCurNode>maxLen) {
+				representNode = curNode;
+				maxLen = Math.max(maxLen, maxLenStartFromCurNode);
+			}
+		}
+		return representNode;
+	}
+
+	/**
+	 * @author zzf
+	 * @date 2018.4.23 14:21
+	 * @description get the max length of call router which start from curId in region 
+	 */
+	private int getMaxCallRouterLength(SubGraph region,int curId,Set<Integer> visited) {
+		List<Integer> neighborList = region.getVertexList();
+		int maxLen = 1;
+		for(int neighbor:neighborList) {
+			if(callGraphs[curId][neighbor]>0 && !visited.contains(neighbor)) {
+				visited.add(neighbor);
+				int curLen = 1 + getMaxCallRouterLength(region,neighbor,visited);
+				visited.remove(neighbor);
+				maxLen = Math.max(maxLen, curLen);
+			}
+		}
+		return maxLen;
+	}
+	
+	/**
+	 * @author zzf
+	 * @date 2018.4.23
+	 * @description calculate the caller class and callee class which are in same region with graphNode
+	 */
+	private void neighborWithGraphNode(GraphNode graphNode, List<Integer> vertexList) {
+		int curId = graphNode.getId();
+		for(int neighborId:vertexList) {
+			if(callGraphs[neighborId][curId]>0) {
+				graphNode.addCallerGraphNode(new GraphNode(neighborId,vertexIdNameMap.get(neighborId)));
+			}
+			if(callGraphs[curId][neighborId]>0) {
+				graphNode.addCalleeGraphNode(new GraphNode(neighborId,vertexIdNameMap.get(neighborId)));
+			}
+		}
+	}
+
+
+	private double findBiggestValue(SimilarityMatrix matrix,String requirement) {
+		double maxScore = 0;
+		for(SubGraph subGraph:regions) {
+			int maxId = subGraph.getVertexList().get(0);
+			List<Integer> vertexList = subGraph.getVertexList();
+			for(int i = 0; i<vertexList.size(); i++){
+//				System.out.println(vertexList.get(i));
+//				System.out.println(vertexIdNameMap.get(vertexList.get(i)));
+				double curScore = matrix.getScoreForLink(requirement,vertexIdNameMap.get(vertexList.get(i)));
+				maxScore = Math.max(maxScore, curScore);
+				if(Math.abs(curScore-maxScore)<=0.000000000001){
+					maxId = vertexList.get(i);
+				}
+			}
+			subGraph.setMaxId(maxId);
+		}
+		return maxScore;
+	}
+	
+	
 	private double getOuterBonus(SubGraph subGraph, int vertexId, String req) {
 		double callBonus = giveBonusForLonePointBasedCallGraph(callGraphs, subGraph, vertexId, 1);
 		double dataBonus = giveBonusForLonePointBasedDataGraph(dataGraphs, subGraph, vertexId, 1);
@@ -232,7 +336,7 @@ public class UD_InnerAndOuterSeq implements CSTI{
 	}
 
 
-	private double showClosenessInGraph(SubGraph subGraph) {
+	public double showClosenessInGraph(SubGraph subGraph) {
 		List<Double> list = new LinkedList<Double>();
 		int[] nums = new int[subGraph.getVertexList().size()];
 		for(int i = 0; i < nums.length;i++) {
@@ -363,7 +467,7 @@ public class UD_InnerAndOuterSeq implements CSTI{
 		return amount;
 	}
 	
-	private int getRegionCountWhichHasOnlyOneVertex(List<SubGraph> regionList) {
+	public int getRegionCountWhichHasOnlyOneVertex(List<SubGraph> regionList) {
 		int bachelorCount = 0;
 		for(SubGraph region:regionList) {
 			if(region.getVertexList().size()==1) {
@@ -529,7 +633,7 @@ public class UD_InnerAndOuterSeq implements CSTI{
 
 	@Override
 	public String getAlgorithmName() {
-		return "UD_InnerAndOuterSeq"+callThreshold+"_"+dataThreshold;
+		return "UD_MergeCodeTXTAndNewRepresentElement"+callThreshold+"_"+dataThreshold;
 	}
 
 	@Override
