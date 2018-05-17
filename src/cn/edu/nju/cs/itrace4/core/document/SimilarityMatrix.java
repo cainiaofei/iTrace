@@ -626,7 +626,14 @@ public class SimilarityMatrix implements Serializable {
         }
         return highestLinks;
     }
-
+    /**
+     * @date 2018.5.17
+     * @author zzf
+     * @description get matrix 
+     */
+    public Map<String,Map<String,Double>> getMatrix(){
+    	return matrix;
+    }
 
 }
 

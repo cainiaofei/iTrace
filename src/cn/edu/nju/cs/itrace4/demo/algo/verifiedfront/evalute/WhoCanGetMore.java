@@ -90,19 +90,13 @@ public class WhoCanGetMore{
         RelationInfo ri = (RelationInfo) ois.readObject();
         ois.close();
         
-        int userVerifyCount = (int)(ri.getVertexIdNameMap().size()*percent);
-        
         Result result_ir = IR.compute(textDataset, model, new None_CSTI());
         Result result_UD_CSTI = IR.compute(textDataset,model, new UD_CSTI(ri));
         ri.setPruning(callEdgeScoreThreshold, dataEdgeScoreThreshold);
         
-        Map<String,Set<String>> valid = new LinkedHashMap<String,Set<String>>();
         Result result_UD_sortByMergeCodeInRegion = IR.compute(textDataset, model,
-				new UD_CodeTextAsWholeInRegion(project,ri, callEdgeScoreThreshold, dataEdgeScoreThreshold, 
-						userVerifyCount,valid,model));// 0.7
-        ResultChange.modifyResult(result_UD_sortByMergeCodeInRegion, valid);
-        //note: we should reorder this list.
-        
+				new UDAndCluster(project,ri, callEdgeScoreThreshold, dataEdgeScoreThreshold, 
+						model));// 0.7
         compareWhichGetMore(result_UD_sortByMergeCodeInRegion,result_UD_CSTI);
         validate(result_UD_sortByMergeCodeInRegion,result_UD_CSTI);
         

@@ -6,14 +6,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import cn.edu.nju.cs.itrace4.core.algo.CSTI;
-import cn.edu.nju.cs.itrace4.core.algo.SortByMergedClass;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.document.LinksList;
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
@@ -34,30 +32,23 @@ import cn.edu.nju.cs.refactor.util.FileProcess;
 import cn.edu.nju.cs.refactor.util.FileProcessTool;
 import javafx.util.Pair;
 
-
-
 public class UDAndCluster implements CSTI{
 	private int callRouterLen = 4;
 	private int dataRouterLen = 2;
 	private double[][] callGraphs;
 	private double[][] dataGraphs;
 	
-	
 	private List<SubGraph> regionList;
 	
 	protected Map<Integer, String> vertexIdNameMap;
-	protected Map<String, Integer> vertexNameIdMap;
+	protected Map<String, Integer> vertexNameIdMap = new HashMap<String,Integer>();
 	
-	private Map<String,Set<String>> valid;
-	private int verifyCount;
 	private Set<Integer> allVertexIdList = new HashSet<Integer>();
-	private boolean hidden = false;//
 	
 	private double callThreshold;
 	private double dataThreshold;
 	
 	private Map<Integer,Map<Integer,Double>> callRouterCache = new HashMap<Integer,Map<Integer,Double>>();
-	private int countThreshold = 2;
 	
 	//2018.4.19 regard file text in same region as a whole.
 	private FileProcess fileProcess = new FileProcessTool();
@@ -69,27 +60,17 @@ public class UDAndCluster implements CSTI{
 	private RelationGraph relationGraph;
 	
 	public UDAndCluster(Project project,RelationInfo ri,double callThreshold,
-			double dataThreshold, int verifyCount,Map<String,Set<String>> valid,
+			double dataThreshold, 
 			String model){
 		allVertexIdList = ri.getVertexIdNameMap().keySet();
 		this.callThreshold = callThreshold;
 		this.dataThreshold = dataThreshold;
 		this.project = project;
-		this.valid = valid;
-		this.verifyCount = verifyCount;
 		this.model = model;
 		relationGraph = new CallDataRelationGraph(ri);
 		vertexIdNameMap = ri.getVertexIdNameMap();
 	    reverse(vertexIdNameMap,vertexNameIdMap);
 		regionList = new StoreDataSubGraphRemoveEdge().getSubGraphs(ri);
-		
-		//2018.4.19 the region list
-		try {
-			mergeTXTInSameRegion(regionList);
-		} catch (FileException | IOException e) {
-			e.printStackTrace();
-		}
-		
 		callGraphs = describeCallGraphWithMatrix(new CallDataRelationGraph(ri,false).callEdgeScoreMap,
 				ri.getVertexes().size());
 		dataGraphs = describeDataGraphWithMatrix(new CallDataRelationGraph(ri,false).dataEdgeScoreMap,
@@ -103,153 +84,66 @@ public class UDAndCluster implements CSTI{
 		}
 	}
 
-
-	private String mergeTXTInSameRegion(List<SubGraph> subGraphList) throws FileException, IOException {
-		regions = new ArrayList<SubGraph>(); 
-		for(SubGraph subGraph:subGraphList) {
-			List<Integer> classIdList = subGraph.getVertexList();
-			if(classIdList.size()>1) {
-				regions.add(subGraph);
-			}
-		}
-		String ucPath = project.getUcPath();
-		codeMergePath = (new File(ucPath)).getParent()+File.separator+"mergeClass";
-		
-		File dir = new File(codeMergePath);
-		if(!dir.exists()) {
-			dir.mkdirs();
-		}
-		
-		String classBase = project.getClassDirPath();
-		for(SubGraph region:regions) {
-			StringBuilder content = new StringBuilder();
-			String className = null;
-			for(int id:region.getVertexList()) {
-				className = vertexIdNameMap.get(id);
-				content.append(" "+fileProcess.getFileConent(classBase+File.separator+className+".txt"));
-			}
-			String mergeFileName = className+"_"+region.getVertexList().size();
-			region.setRegionName(mergeFileName);
-			fileProcess.writeFile(codeMergePath+File.separator+mergeFileName+".txt", content.toString());
-//			File f = new File(classBase+File.separator+mergeFileName+".txt");
-//			f.delete();
-		}
-		return codeMergePath;
-	}
-	
-	
-	/**
-	 * @author zzf
-	 * @date 2018.4.19
-	 * @description compute the similarity between merged code text and requirements. 
-	 */
-	private SimilarityMatrix compute(TextDataset textDataset, String modelType) {
-
-		Class modelTypeClass = null;
-		IRModel irModel = null;
-		try {
-			modelTypeClass = Class.forName(modelType);
-			irModel = (IRModel) modelTypeClass.newInstance();
-		} catch (ClassNotFoundException |InstantiationException | IllegalAccessException e) {
-			e.printStackTrace();
-		}
-
-		SimilarityMatrix similarityMatrix = irModel.Compute(textDataset.getSourceCollection(),
-				textDataset.getTargetCollection());
-		return similarityMatrix;
-	}
-	
-	
 	public SimilarityMatrix optimizeIRMatrix(SimilarityMatrix matrix, TextDataset textDataset) {
 		 double bonus = getAdaptiveBonus(matrix);
 		 SimilarityMatrix oracle = textDataset.getRtm();
-		 TextDataset dataset = new TextDataset(project.getUcPath(), codeMergePath, 
-	        		project.getRtmClassPath());
-		 SimilarityMatrix mergedCodeAndReq = compute(dataset, model);
 		 LinksList resultLinks = new LinksList();
 		 LinksList originLinks = matrix.allLinks();
 		 int i = originLinks.size();
 		 //store max score for every requirement.
 		 Map<String,Double> maxScoreForReq = new HashMap<String,Double>();
-	     while (originLinks.size() != 0) {////////////////////////
-	            SingleLink link = originLinks.get(0);
-	            originLinks.remove(0);
-	            String source = link.getSourceArtifactId();
-	            String target = link.getTargetArtifactId();
-	            double score = link.getScore();
-	            if(!maxScoreForReq.containsKey(source)) {
-	            	maxScoreForReq.put(source, 0.0);
-	            }
-	            maxScoreForReq.put(source, Math.max(maxScoreForRq.get(source), score));
-	            
-	            if (oracle.isLinkAboveThreshold(source, target)) {
-	            	SubGraph subGraph = isRepresentInRegion(source,target,regionList);
-	            	if(subGraph!=null) {
-	            		clusterProcess(source,target,subGraph,originLinks,maxScoreForReq.get(source));
-	            	}
-	            	else {
-	            		udProcess(source,target,originLinks);
-	            	}
-	            }
-	            resultLinks.add(new SingleLink(source, target, score+i));
-	            Collections.sort(originLinks, Collections.reverseOrder());
-	            i--;
-	        }///////////////////外层while loop
+		 //2018.5.17 represent link by map
+		 Map<String,Map<String,Double>> linkMap = matrix.getMatrix();
+		 while (originLinks.size() != 0) {////////////////////////
+			 SingleLink link = originLinks.get(0);
+			 originLinks.remove(0);
+			 String source = link.getSourceArtifactId();
+			 String target = link.getTargetArtifactId();
+			 double score = link.getScore();
+			 linkMap.get(source).remove(target);
+
+			 if(!maxScoreForReq.containsKey(source)) {
+				 maxScoreForReq.put(source, 0.0);
+			 }
+			 maxScoreForReq.put(source, Math.max(maxScoreForReq.get(source), score));
+
+			 if (oracle.isLinkAboveThreshold(source, target)) {
+				 SubGraph subGraph = getRegionRepresent(source,target,regionList);
+				 if(subGraph!=null) {
+					 clusterProcess(source,target,subGraph,matrix,maxScoreForReq.get(source),originLinks);
+				 }
+				 else {
+					 udProcess(source,target,originLinks,bonus);
+				 }
+			 }
+			 resultLinks.add(new SingleLink(source, target, score+i));
+			 Collections.sort(originLinks, Collections.reverseOrder());
+			 i--;
+		 }///////////////////外层while loop
 		 
-		 for(String req:matrix.sourceArtifactsIds()){
-			List<SubGraph> regionsList = new ArrayList<SubGraph>(regions); 
-			Collections.sort(regionsList,new SortByMergedClass(mergedCodeAndReq,req));
-			double maxScore = findBiggestValue(matrix,req);
-			int index = 1;
-			//the count of region which has more than one vertex.
-			Set<Integer> hasVisitedRegion = new HashSet<Integer>();
-			while(regionsList.size() != 0) {
-				//update the local class, the similarity of which and requirement is max in region.
-				findBiggestValue(matrix,req);
-				SubGraph subGraph = regionsList.get(0);
-				List<Integer> vertexList = subGraph.getVertexList();
-				int localMaxId = subGraph.getMaxId();
-				String represent = vertexIdNameMap.get(localMaxId);
-				
-				if(oracle.isLinkAboveThreshold(req,represent) && index<=verifyCount){//if start
-					
-				index++;
-				regionsList.remove(0);
-			}///
-		}//req
-		
 		LinksList allLinks = matrix.allLinks();
 		Collections.sort(allLinks, Collections.reverseOrder());
 		SimilarityMatrix res = new SimilarityMatrix();
 		for(SingleLink link:allLinks){
 			res.addLink(link.getSourceArtifactId(), link.getTargetArtifactId(),link.getScore());
 		}
-		
-		double rate = allSize(valid)*1.0/res.allLinks().size(); 
-		System.out.println("ud_CallDataTreatEqual:"+rate);
-		System.setProperty("rate", rate+"");
 		return res;
 	}
 	
 	private void clusterProcess(String source,String target,SubGraph subGraph,SimilarityMatrix originMatrix
-			,double maxScore) {
-		List<Integer> vertexList = subGraph.getVertexList();
-		int localMaxId = vertexNameIdMap.get(target);
+			,double maxScore,LinksList allLinks) {
+		int representId = vertexNameIdMap.get(target);
 		List<Integer> temp = new ArrayList<Integer>();
-		temp.add(localMaxId);
+		temp.add(representId);
 		SubGraph newSubGraph =  new SubGraph(temp);
 		
 		Map<Integer,Double> outerBonusMap = new HashMap<Integer,Double>();
 		for(int vertexId:subGraph.getVertexList()) {
-			if(vertexId==localMaxId) {
-				continue;
-			}
-			else {
-				double outerBonusWeight = getOuterBonus(newSubGraph,vertexId,source);
-				outerBonusMap.put(vertexId, outerBonusWeight);
-			}
+			double outerBonusWeight = getOuterBonus(newSubGraph,vertexId,source);
+			outerBonusMap.put(vertexId, outerBonusWeight);
 		}
 		
+		List<Integer> vertexList = subGraph.getVertexList();
 		for(int vertexId:vertexList) {
 			String vertexName = vertexIdNameMap.get(vertexId);
 			if(originMatrix.getScoreForLink(source, vertexName)==null) {
@@ -263,10 +157,9 @@ public class UDAndCluster implements CSTI{
 			subGraph.setMaxBonus(Math.max(subGraph.getMaxBonus(), newValue));
 			originMatrix.setScoreForLink(source, vertexName, curValue);
 		}
-		Set<Integer> curLoneVertexList = generateLoneVertexList(subGraph,originMatrix);
+		Set<Integer> curLoneVertexList = generateLoneVertexList(subGraph,originMatrix,source);
 		giveBonusForLoneNotInThisRegion(originMatrix, newSubGraph,curLoneVertexList,source);
 	}
-
 
 	private Set<Integer> generateLoneVertexList(SubGraph subGraph,SimilarityMatrix originMatrix,String req) {
 		Set<Integer> set = new HashSet<Integer>();
@@ -280,22 +173,24 @@ public class UDAndCluster implements CSTI{
 		return set;
 	}
 
-
-	private SubGraph isRepresentInRegion(String source, String target, List<SubGraph> regionList) {
+	/**
+	 * @date 2018.5.17
+	 * @author zzf
+	 * @description whether this element(target) is a represent class of region? If yes, return this region; else return null.
+	 */
+	private SubGraph getRegionRepresent(String source, String target, List<SubGraph> regionList) {
 		int id = this.vertexNameIdMap.get(source);
 		for(SubGraph region:regionList) {
-			if(region.getVertexList().contains(id)) {
-				if(!region.isVisited(source)) {
-					region.addReq(source);
-					return region;
-				}
+			if(region.getVertexList().contains(id) && !region.isVisited(source)) {
+				region.addReq(source);
+				return region;
 			}
 		}
 		return null;
 	}
 
 
-	private void udProcess(String source,String target, LinksList originLinks) {
+	private void udProcess(String source,String target, LinksList originLinks,double bonus) {
 		 List<CodeVertex> neighbours = ((CallDataRelationGraph) relationGraph).getNeighboursByCall(target);
          for (CodeVertex nb : neighbours) {
              double originScore = originLinks.getScore(source, nb.getName());
@@ -305,27 +200,6 @@ public class UDAndCluster implements CSTI{
          }
 	}
 
-
-	private double findBiggestValue(SimilarityMatrix matrix,String requirement) {
-		double maxScore = 0;
-		for(SubGraph subGraph:regions) {
-			int maxId = subGraph.getVertexList().get(0);
-			List<Integer> vertexList = subGraph.getVertexList();
-			for(int i = 0; i<vertexList.size(); i++){
-//				System.out.println(vertexList.get(i));
-//				System.out.println(vertexIdNameMap.get(vertexList.get(i)));
-				double curScore = matrix.getScoreForLink(requirement,vertexIdNameMap.get(vertexList.get(i)));
-				maxScore = Math.max(maxScore, curScore);
-				if(Math.abs(curScore-maxScore)<=0.000000000001){
-					maxId = vertexList.get(i);
-				}
-			}
-			subGraph.setMaxId(maxId);
-		}
-		return maxScore;
-	}
-	
-	
 	private double getOuterBonus(SubGraph subGraph, int vertexId, String req) {
 		double callBonus = giveBonusForLonePointBasedCallGraph(callGraphs, subGraph, vertexId, 1);
 		double dataBonus = giveBonusForLonePointBasedDataGraph(dataGraphs, subGraph, vertexId, 1);
@@ -412,17 +286,17 @@ public class UDAndCluster implements CSTI{
 	            return ;
 	     }
 	     else{
-	        	//from outer to inner
-	            for(int i = 1; i < graphs.length;i++){
-	            	if(graphs[curVertex][i]==0||visited.contains(i)){
-	            		continue;
-	            	}
-	                visited.add(i);
-	                curRoute.add(i);
-	                getAllRoutesFromOuterToInnerByDfs(graphs,i,curRoute,allRoutes,vertexInGraph,visited,target,routerLen);
-	                curRoute.remove(curRoute.size()-1);
-	                visited.remove(i);
-	            }
+	    	 //from outer to inner
+	    	 for(int i = 1; i < graphs.length;i++){
+	    		 if(graphs[curVertex][i]==0||visited.contains(i)){
+	    			 continue;
+	    		 }
+	    		 visited.add(i);
+	    		 curRoute.add(i);
+	    		 getAllRoutesFromOuterToInnerByDfs(graphs,i,curRoute,allRoutes,vertexInGraph,visited,target,routerLen);
+	    		 curRoute.remove(curRoute.size()-1);
+	    		 visited.remove(i);
+	    	 }
 	     }
 	}
 	
@@ -439,10 +313,6 @@ public class UDAndCluster implements CSTI{
 			String loneVertexName = vertexIdNameMap.get(loneVertex);
 			
 			double bonus = giveBonusForLonePointBasedCallGraph(callGraphs, subGraph, loneVertex, 1);
-
-		//	double localMaxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(subGraph.getMaxId()));
-
-			//System.out.println("outBonus:"+bonus);
 			
 			double validValueSum = maxScore * bonus;
 			//double validValueSum = (localMaxScore) * bonus;
