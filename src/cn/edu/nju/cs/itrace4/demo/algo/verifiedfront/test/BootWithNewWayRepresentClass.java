@@ -107,7 +107,7 @@ public class BootWithNewWayRepresentClass{
         Result result_UD_sortByMergeCodeInRegion = IR.compute(textDataset, model,
 				new UD_CodeTextAsWholeInRegion(project,ri, callEdgeScoreThreshold, dataEdgeScoreThreshold, 
 						userVerifyCount,valid,model));// 0.7
-        //ResultChange.modifyResult(result_UD_sortByMergeCodeInRegion, valid);
+        ResultChange.modifyResult(result_UD_sortByMergeCodeInRegion, valid);
         
         valid = new HashMap<String,Set<String>>();
         Result result_UD_mergeCodeReprentClassNewWay = IR.compute(textDataset, model,

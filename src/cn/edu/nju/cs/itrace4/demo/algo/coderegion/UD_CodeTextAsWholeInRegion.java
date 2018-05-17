@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -174,7 +175,7 @@ public class UD_CodeTextAsWholeInRegion implements CSTI{
 						valid.get(req).add(represent);
 					}
 					else{
-						valid.put(req, new HashSet<String>());
+						valid.put(req, new LinkedHashSet<String>());
 						valid.get(req).add(represent);
 					}
 					subGraph.setVisited(req);
