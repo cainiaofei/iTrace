@@ -26,7 +26,7 @@ import cn.edu.nju.cs.refactor.util.FileProcess;
 import cn.edu.nju.cs.refactor.util.FileProcessTool;
 import javafx.util.Pair;
 
-public class UDAndCluster implements CSTI{
+public class UDCodeRegion implements CSTI{
 	private int callRouterLen = 4;
 	private int dataRouterLen = 2;
 	private double[][] callGraphs;
@@ -48,7 +48,7 @@ public class UDAndCluster implements CSTI{
 	List<SubGraph> regions;
 	private RelationGraph relationGraph;
 	
-	public UDAndCluster(RelationInfo ri,double callThreshold,
+	public UDCodeRegion(RelationInfo ri,double callThreshold,
 			double dataThreshold){
 		allVertexIdList = ri.getVertexIdNameMap().keySet();
 		this.callThreshold = callThreshold;
@@ -99,7 +99,11 @@ public class UDAndCluster implements CSTI{
 					 clusterProcess(source,target,subGraph,matrix,maxScoreForReq.get(source));
 				 }
 				 else {
-					 udProcess(source,target,matrix,bonus);
+					 List<Integer> cur = new LinkedList<Integer>();
+					 cur.add(this.vertexNameIdMap.get(target));
+					 subGraph = new SubGraph(cur);
+					 //udProcess(source,target,matrix,bonus);
+					 clusterProcess(source,target,subGraph,matrix,maxScoreForReq.get(source));
 				 }
 			 }
 			 resultLinks.add(new SingleLink(source, target, score+i));

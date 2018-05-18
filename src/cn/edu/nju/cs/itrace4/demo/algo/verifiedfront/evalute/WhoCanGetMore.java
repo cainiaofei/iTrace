@@ -23,8 +23,6 @@ import cn.edu.nju.cs.itrace4.core.document.SingleLink;
 import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
 import cn.edu.nju.cs.itrace4.demo.FileParse.XmlParse;
-import cn.edu.nju.cs.itrace4.demo.algo.coderegion.UD_CodeTextAsWholeInRegion;
-import cn.edu.nju.cs.itrace4.demo.algo.verifiedfront.resultprocess.ResultChange;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
 import cn.edu.nju.cs.itrace4.demo.exp.project.JhotDraw;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Maven;
@@ -38,7 +36,7 @@ import cn.edu.nju.cs.itrace4.relation.RelationInfo;
  
 public class WhoCanGetMore{
 	// user will stop verifying When the user continuously encounters a certain number of incorrect connections.
-	private int wrongLinkThreshold = 67; 
+	private int wrongLinkThreshold = 16; 
 	//private StoreSubGraphInfoByThreshold storeSubGraphInfoByThreshold;
 	private AnalyzeResult analyzeResult;
 	private Project project;
@@ -94,9 +92,13 @@ public class WhoCanGetMore{
         Result result_UD_CSTI = IR.compute(textDataset,model, new UD_CSTI(ri));
         ri.setPruning(callEdgeScoreThreshold, dataEdgeScoreThreshold);
         
+//        Result result_UD_sortByMergeCodeInRegion = IR.compute(textDataset, model,
+//				new UDAndCluster(ri, callEdgeScoreThreshold, dataEdgeScoreThreshold));// 0.7
+        
+        //UDCodeRegion
         Result result_UD_sortByMergeCodeInRegion = IR.compute(textDataset, model,
-				new UDAndCluster(project,ri, callEdgeScoreThreshold, dataEdgeScoreThreshold, 
-						model));// 0.7
+				new UDCodeRegion(ri, callEdgeScoreThreshold, dataEdgeScoreThreshold));// 0.7
+        
         compareWhichGetMore(result_UD_sortByMergeCodeInRegion,result_UD_CSTI);
         validate(result_UD_sortByMergeCodeInRegion,result_UD_CSTI);
         
@@ -107,14 +109,11 @@ public class WhoCanGetMore{
         curve.addLine(result_UD_CSTI);
         //curve.addLine(result_pruningeCall_Data_Dir);
         curve.addLine(result_UD_sortByMergeCodeInRegion);//累加 内部 直接平均
-        
+        curve.showChart(project.getProjectName());;
         double irPvalue = printPValue(result_ir, result_UD_sortByMergeCodeInRegion);
         double udPvalue = printPValue(result_UD_CSTI, result_UD_sortByMergeCodeInRegion);
         String irPvalueStr = (irPvalue+"").substring(0, 5);
         String udPvalueStr = (udPvalue+"").substring(0, 5);
-        double rate = Double.valueOf(System.getProperty("rate"));
-        String rateStr = (rate+"").substring(0, 5);
-        curve.showChart(project.getProjectName()+"-"+irPvalueStr+"-"+udPvalueStr+"-"+rateStr);
         curve.curveStore(".",project.getProjectName()+"-"+percent+"-"+callEdgeScoreThreshold+"-"+
         		dataEdgeScoreThreshold+"-"+model+irPvalueStr+"-"+udPvalueStr);
     }
@@ -147,7 +146,7 @@ public class WhoCanGetMore{
 				correctLinksCount++;
 			}
 			number++;
-			if(number>1000) {
+			if(number>600) {
 				return correctLinksCount;
 			}
 		}
