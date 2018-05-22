@@ -14,7 +14,6 @@ import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.document.LinksList;
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
 import cn.edu.nju.cs.itrace4.core.document.SingleLink;
-import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
 import cn.edu.nju.cs.itrace4.demo.relation.StoreDataSubGraphRemoveEdge;
 import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
 import cn.edu.nju.cs.itrace4.relation.CallDataRelationGraph;
@@ -22,8 +21,6 @@ import cn.edu.nju.cs.itrace4.relation.RelationGraph;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 import cn.edu.nju.cs.itrace4.relation.graph.CodeEdge;
 import cn.edu.nju.cs.itrace4.relation.graph.CodeVertex;
-import cn.edu.nju.cs.refactor.util.FileProcess;
-import cn.edu.nju.cs.refactor.util.FileProcessTool;
 import javafx.util.Pair;
 
 public class UDCodeRegion implements CSTI{
@@ -71,7 +68,6 @@ public class UDCodeRegion implements CSTI{
 	}
 
 	public SimilarityMatrix optimizeIRMatrix(SimilarityMatrix matrix, TextDataset textDataset) {
-		 double bonus = getAdaptiveBonus(matrix);
 		 SimilarityMatrix oracle = textDataset.getRtm();
 		 LinksList resultLinks = new LinksList();
 		 LinksList originLinks = matrix.allLinks();
@@ -119,8 +115,8 @@ public class UDCodeRegion implements CSTI{
 		return res;
 	}
 	
-	private void clusterProcess(String source,String target,SubGraph subGraph,SimilarityMatrix originMatrix
-			,double maxScore) {
+	private void clusterProcess(String source,String target,SubGraph subGraph,SimilarityMatrix originMatrix,
+			double maxScore) {
 		int representId = vertexNameIdMap.get(target);
 		List<Integer> temp = new ArrayList<Integer>();
 		temp.add(representId);
@@ -128,6 +124,9 @@ public class UDCodeRegion implements CSTI{
 		
 		Map<Integer,Double> outerBonusMap = new HashMap<Integer,Double>();
 		for(int vertexId:subGraph.getVertexList()) {
+			if(vertexId==representId) {
+				continue;
+			}
 			double outerBonusWeight = getOuterBonus(newSubGraph,vertexId,source);
 			outerBonusMap.put(vertexId, outerBonusWeight);
 		}
@@ -135,7 +134,7 @@ public class UDCodeRegion implements CSTI{
 		List<Integer> vertexList = subGraph.getVertexList();
 		for(int vertexId:vertexList) {
 			String vertexName = vertexIdNameMap.get(vertexId);
-			if(originMatrix.getScoreForLink(source, vertexName)==null) {
+			if(originMatrix.getScoreForLink(source, vertexName)<0.0) {
 				continue;
 			}
 			double curValue = originMatrix.getScoreForLink(source, vertexName);
@@ -171,7 +170,7 @@ public class UDCodeRegion implements CSTI{
 		int id = this.vertexNameIdMap.get(target);
 		for(SubGraph region:regionList) {
 			if(region.getVertexList().contains(id) && !region.isVisited(source)) {
-				region.addReq(source);
+				region.setVisited(source);
 				return region;
 			}
 		}
@@ -300,6 +299,9 @@ public class UDCodeRegion implements CSTI{
 			double nowValue = originValue + validValueSum;
 			//2018.1.13
 			nowValue = Math.min(nowValue, maxScore);
+			if(matrix.getScoreForLink(req, loneVertexName)<0.0) {
+				return;
+			}
 			matrix.setScoreForLink(req, loneVertexName, nowValue);
 		}
 	}
@@ -348,6 +350,9 @@ public class UDCodeRegion implements CSTI{
 			double nowValue = originValue + validValueSum;
 			//2018.1.13
 			nowValue = Math.min(nowValue, maxScore);
+			if(matrix.getScoreForLink(req, loneVertexName)<0.0) {
+				return;
+			}
 			matrix.setScoreForLink(req, loneVertexName, nowValue);
 		}
 		

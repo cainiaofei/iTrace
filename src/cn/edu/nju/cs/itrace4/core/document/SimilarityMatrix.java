@@ -116,7 +116,7 @@ public class SimilarityMatrix implements Serializable {
             retVal = links.get(targetArtfactId);
         }
         if(retVal==null){
-        	//System.out.println(retVal);
+        	retVal = -1.0;
         }
         return retVal;
     }

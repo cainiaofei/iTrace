@@ -96,9 +96,11 @@ public class UDAndCluster implements CSTI{
 			 if (oracle.isLinkAboveThreshold(source, target)) {
 				 SubGraph subGraph = getRegionRepresent(source,target,regionList);
 				 if(subGraph!=null) {
+					 System.out.println("clusterProcess:"+source+"----"+target);
 					 clusterProcess(source,target,subGraph,matrix,maxScoreForReq.get(source));
 				 }
 				 else {
+					 System.out.println("udProcess:"+source+"----"+target);
 					 udProcess(source,target,matrix,bonus);
 				 }
 			 }
@@ -166,8 +168,11 @@ public class UDAndCluster implements CSTI{
 	private SubGraph getRegionRepresent(String source, String target, List<SubGraph> regionList) {
 		int id = this.vertexNameIdMap.get(target);
 		for(SubGraph region:regionList) {
+			if(region.getVertexList().size()==1) {
+				return null;
+			}
 			if(region.getVertexList().contains(id) && !region.isVisited(source)) {
-				region.addReq(source);
+				region.setVisited(source);
 				return region;
 			}
 		}
@@ -179,9 +184,10 @@ public class UDAndCluster implements CSTI{
 		 List<CodeVertex> neighbours = ((CallDataRelationGraph) relationGraph).getNeighboursByCall(target);
          for (CodeVertex nb : neighbours) {
         	 double originScore = matrix.getScoreForLink(source, nb.getName());
-             if (originScore != -1) {
-            	 matrix.setScoreForLink(source, target, originScore * (1 + bonus));
-             }
+        	 if(originScore<0.0) {
+        		 continue;
+        	 }
+        	 matrix.setScoreForLink(source, nb.getName(), originScore * (1 + bonus));
          }
 	}
 
