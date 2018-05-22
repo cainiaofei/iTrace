@@ -146,7 +146,7 @@ public class WhoCanGetMore{
 				correctLinksCount++;
 			}
 			number++;
-			if(number>600) {
+			if(number>2000) {
 				return correctLinksCount;
 			}
 		}
