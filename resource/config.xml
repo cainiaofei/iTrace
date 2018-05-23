@@ -2,8 +2,8 @@
 <config>
 	<projectName>iTrust</projectName>
 	<modelName>vsm</modelName>
-	<callEdgeScoreThreshold>0.6</callEdgeScoreThreshold>
-	<dataEdgeScoreThreshold>0.6</dataEdgeScoreThreshold>
-	<percent>1</percent>
+	<callEdgeScoreThreshold>0.4</callEdgeScoreThreshold>
+	<dataEdgeScoreThreshold>0.8</dataEdgeScoreThreshold>
+	<percent>0.035</percent>
 	<router>6</router>
 </config>

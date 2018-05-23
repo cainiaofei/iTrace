@@ -38,9 +38,9 @@ import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 /**
  * 之前老方法 只是看过的放在前面 
  */
-public class WhoCanGetMore{
+public class WhoGetMorePlaceFront{
 	// user will stop verifying When the user continuously encounters a certain number of incorrect connections.
-	private int wrongLinkThreshold = 16; 
+	private int wrongLinkThreshold = 10; 
 	//private StoreSubGraphInfoByThreshold storeSubGraphInfoByThreshold;
 	private AnalyzeResult analyzeResult;
 	private Project project;
@@ -52,7 +52,7 @@ public class WhoCanGetMore{
     private double dataEdgeScoreThreshold;
 	private double percent;
     
-	public WhoCanGetMore() throws ParserConfigurationException, SAXException, IOException{
+	public WhoGetMorePlaceFront() throws ParserConfigurationException, SAXException, IOException{
 		initProjectMap();
 		initModelMap();
 		analyzeResult = new AnalyzeResult();
@@ -103,8 +103,8 @@ public class WhoCanGetMore{
 				new UD_CodeTextAsWholeInRegion(project,ri, callEdgeScoreThreshold, dataEdgeScoreThreshold, 
 						userVerifyCount,valid,model));// 0.7
         ResultChange.modifyResult(result_UD_sortByMergeCodeInRegion, valid);
-        //note: we should reorder this list.
-        
+//        //note: we should reorder this list.
+//        
         compareWhichGetMore(result_UD_sortByMergeCodeInRegion,result_UD_CSTI);
         validate(result_UD_sortByMergeCodeInRegion,result_UD_CSTI);
         
@@ -208,7 +208,7 @@ public class WhoCanGetMore{
 	public static void main(String[] args) throws IOException, ClassNotFoundException,
 			ParserConfigurationException, SAXException {
 		long startTime = System.currentTimeMillis();
-    	WhoCanGetMore bonusForLoneBoot = new WhoCanGetMore();
+    	WhoGetMorePlaceFront bonusForLoneBoot = new WhoGetMorePlaceFront();
     	bonusForLoneBoot.run();
     	long endTime = System.currentTimeMillis();
     	System.out.println("time cost:"+(endTime-startTime)*1.0/1000/60);
