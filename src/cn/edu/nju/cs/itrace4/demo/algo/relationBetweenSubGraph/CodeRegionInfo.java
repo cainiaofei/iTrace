@@ -1,6 +1,7 @@
 package cn.edu.nju.cs.itrace4.demo.algo.relationBetweenSubGraph;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -9,6 +10,7 @@ import java.util.Map;
 import java.util.Set;
 
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
+import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
 import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.CodeRegionClosenessType;
 import cn.edu.nju.cs.itrace4.demo.datastruct.GraphNode;
 import cn.edu.nju.cs.itrace4.demo.relation.StoreDataSubGraphRemoveEdge;
@@ -24,7 +26,7 @@ import cn.edu.nju.cs.itrace4.relation.graph.CodeEdge;
  * 				2. show the portion of valid valid code element and no-valid code element. 
  */
 public class CodeRegionInfo {
-	private int routerLenThreshold = 17;
+	private int routerLenThreshold = 4;
 	private RelationInfo ri;
 	private CodeRegionClosenessType codeRegionClosenessType;
 	private TextDataset textDataset;
@@ -56,7 +58,7 @@ public class CodeRegionInfo {
 		int countThreshold = 1;
 		selectRegionWithMoreThanOneVertex(codeRegionList,countThreshold);
 		double[][] closenessBetweenCodeRegion = getClosenessBetweenCodeRegion(codeRegionList);
-		displayCodeRegionInfo(closenessBetweenCodeRegion);
+		displayCodeRegionInfo(closenessBetweenCodeRegion,codeRegionList);
 	}
 	 
 	/**
@@ -74,8 +76,35 @@ public class CodeRegionInfo {
 		}
 	}
 
-	private void displayCodeRegionInfo(double[][] closenessBetweenCodeRegion) {
-		
+	/**
+	 * @date  2018.5.30
+	 * @author zzf
+	 * @description display the closeness between code region combining the information of whether.  
+	 */
+	private void displayCodeRegionInfo(double[][] closenessBetweenCodeRegion,
+			List<SubGraph> codeRegionList) {
+		SimilarityMatrix oracle = textDataset.getRtm();
+		List<CodeRegionPair> regionPairList = getRegionPairList(closenessBetweenCodeRegion);
+		for(CodeRegionPair regionPair:regionPairList) {
+			int formerId = regionPair.getFormerId();
+			int latterId = regionPair.getLatterId();
+			double closeness = regionPair.getCloseness();
+			System.out.println(formerId+"----"+latterId+"  :  "+closeness);
+		}
+	}
+	
+	/**
+	 * sort region pair base on the closeness. 
+	 */
+	private List<CodeRegionPair> getRegionPairList(double[][] closenessBetweenCodeRegion){
+		List<CodeRegionPair> regionPairList = new ArrayList<CodeRegionPair>();
+		for(int row=0;row<closenessBetweenCodeRegion.length;row++) {
+			for(int col=row+1;col<closenessBetweenCodeRegion[row].length;col++) {
+				regionPairList.add(new CodeRegionPair(row,col,closenessBetweenCodeRegion[row][col]));
+			}
+		}
+		Collections.sort(regionPairList,new CodeRegionPairCmp());
+		return regionPairList;
 	}
 
 	/**
@@ -88,7 +117,7 @@ public class CodeRegionInfo {
 			for(int j = i+1;j<codeRegionList.size();j++) {
 				double closeness = getClosenessBetweenThem(codeRegionList.get(i),codeRegionList.get(j));
 				closenessBetweenCodeRegion[i][j] = closeness;
-				System.out.println(i+"--->"+j+":"+closeness);
+				//System.out.println(i+"--->"+j+":"+closeness);
 			}
 		}
 		return closenessBetweenCodeRegion;
@@ -242,8 +271,8 @@ public class CodeRegionInfo {
 	
 	/**
 	 * @author zzf
-	 * @description choose the code element which has not been called anyone in region
-	 * as the representative element. 
+	 * @description choose the code element which has not been called anyone in region as the 
+	 * 		representative element. 
 	 */
 	private GraphNode getRepresentativeElement(SubGraph subGraph,double[][] callGraphs) {
 		int localMaxId = subGraph.getVertexList().get(0);

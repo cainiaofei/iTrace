@@ -146,7 +146,6 @@ public class CallDataRelationGraph extends RelationGraph {
         if (relationInfo.isPruning()) {
             pruning(relationInfo.getCallEdgeScoreThreshold(), relationInfo.getDataEdgeScoreThreshold());
         }
-        System.out.println("");
     }
 
     private void pruning(double callEdgeScoreThreshold, double dataEdgeScoreThreshold) {
@@ -193,7 +192,6 @@ public class CallDataRelationGraph extends RelationGraph {
             dataEdgeScoreMapByString.put(source + "#" + target, dataEdgeScoreMap.get(codeEdge));
         }
 
-        System.out.println("");
     }
 
     private void showDataTypeIDTFInConsole(Map<String, Double> sortedDataTypeIDFMap) {
@@ -302,7 +300,6 @@ public class CallDataRelationGraph extends RelationGraph {
 
         }
 
-        System.out.println("");
 
         double upBound = compute3Alpha(dataEdgeScoreMap);
 
@@ -366,7 +363,6 @@ public class CallDataRelationGraph extends RelationGraph {
         }
 
 
-        System.out.println("");
         double upBound = compute3Alpha(callEdgeScoreMap);
 
        // 3.17
