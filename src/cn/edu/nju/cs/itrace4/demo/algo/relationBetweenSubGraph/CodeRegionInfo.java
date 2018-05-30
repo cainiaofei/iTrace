@@ -24,6 +24,7 @@ import cn.edu.nju.cs.itrace4.relation.graph.CodeEdge;
  * 				2. show the portion of valid valid code element and no-valid code element. 
  */
 public class CodeRegionInfo {
+	private int routerLenThreshold = 17;
 	private RelationInfo ri;
 	private CodeRegionClosenessType codeRegionClosenessType;
 	private TextDataset textDataset;
@@ -84,7 +85,7 @@ public class CodeRegionInfo {
 		int regionCount = codeRegionList.size();
 		double[][] closenessBetweenCodeRegion = new double[regionCount][regionCount];
 		for(int i = 0; i < codeRegionList.size();i++) {
-			for(int j = 5+1;j<codeRegionList.size();j++) {
+			for(int j = i+1;j<codeRegionList.size();j++) {
 				double closeness = getClosenessBetweenThem(codeRegionList.get(i),codeRegionList.get(j));
 				closenessBetweenCodeRegion[i][j] = closeness;
 				System.out.println(i+"--->"+j+":"+closeness);
@@ -147,8 +148,11 @@ public class CodeRegionInfo {
 		Set<Integer> visited = new HashSet<Integer>();
 		visited.add(representIdInCodeRegionA);
 		
-		double closeness = getClosenessBetweenTwoVertex(representIdInCodeRegionA,representIdInCodeRegionB,
+//		double closeness = getClosenessBetweenTwoVertex(representIdInCodeRegionA,representIdInCodeRegionB,
+//				graphs,maxUtilNow,curDist,visited);
+		double closeness = getGeometricMeanClosenessBetweenTwoVertex(representIdInCodeRegionA,representIdInCodeRegionB,
 				graphs,maxUtilNow,curDist,visited);
+		
 		closenessBetweenRegionDP[representIdInCodeRegionA][representIdInCodeRegionB] = closeness;
 		return closeness;
 	}
@@ -159,6 +163,9 @@ public class CodeRegionInfo {
 	 */
 	private double getClosenessBetweenTwoVertex(int source,int target,double[][] graphs,
 			double maxUtilNow,double curDist,Set<Integer> visited) {
+		 if(visited.size()>10) {
+			 return 0;
+		 }
 		 if(closenessBetweenRegionDP[source][target]>0) {
 			 return Math.max(maxUtilNow, curDist*closenessBetweenRegionDP[source][target]);
 		 }
@@ -171,17 +178,12 @@ public class CodeRegionInfo {
 			 }
 			 else {
 				 double localMax = 0.0;
-				 for(int i = 1; i < graphs.length;i++) {
+				 for(int i = 0; i < graphs.length;i++) {
 					 if(graphs[source][i]>0 && !visited.contains(i) && i!=source) {
 						 visited.add(i);
 						 curDist = curDist * graphs[source][i];
 						 localMax = Math.max(localMax, getClosenessBetweenTwoVertex(i,target,graphs,
 								 maxUtilNow,curDist,visited));
-//						 for(int ele:visited) {
-//						    System.out.print(ele+" ");
-//						 }
-//						 System.out.println(localMax);
-						 
 						 maxUtilNow = Math.max(maxUtilNow, localMax);
 						 visited.remove(i);
 					 }
@@ -196,13 +198,17 @@ public class CodeRegionInfo {
 	 * @date 2018.5.29
 	 * @description geometric mean 
 	 */
-	private double getClosenessBetweenTwoVertex(int source,int target,double[][] graphs,
-			double maxUtilNow,double curDist,Set<Integer> visited,int times) {
+	private double getGeometricMeanClosenessBetweenTwoVertex(int source,int target,double[][] graphs,
+			double maxUtilNow,double curDist,Set<Integer> visited) {
+		if(visited.size()>routerLenThreshold) {
+			 return 0;
+		 }
 		 if(maxUtilNow>curDist) {
 			 return maxUtilNow;
 		 }
 		 else {
 			 if(source==target) {
+				 curDist = Math.pow(curDist,1.0/(visited.size()-1));
 				 return Math.max(maxUtilNow,curDist);
 			 }
 			 else {
@@ -211,7 +217,7 @@ public class CodeRegionInfo {
 					 if(graphs[source][i]>0 && !visited.contains(i) && i!=source) {
 						 visited.add(i);
 						 curDist = curDist * graphs[source][i];
-						 localMax = Math.max(localMax, getClosenessBetweenTwoVertex(i,target,graphs,
+						 localMax = Math.max(localMax, getGeometricMeanClosenessBetweenTwoVertex(i,target,graphs,
 								 maxUtilNow,curDist,visited));
 						 maxUtilNow = Math.max(maxUtilNow, localMax);
 						 visited.remove(i);
