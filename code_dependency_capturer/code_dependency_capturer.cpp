@@ -479,7 +479,9 @@ tdClassPrepare(jvmtiEnv *jvmti_env,
 	check_jvmti_error(jvmti_env, error, "Cannot getClassFields");
 
 	
-	if (strstr(signature, "seam") != NULL) {//::FOR iTrust
+	if (strstr(signature, "xxx") != NULL) {//::FOR iTrust
+		cout << signature << endl;
+
 		for (int i = 0; i < fieldCount; i++)
 		{
 			jfieldID field = *(fields + i);
@@ -538,7 +540,7 @@ tdMethodEntry(jvmtiEnv *jvmti_env,
 		check_jvmti_error(jvmti_env, error, "Cannot getClassSignature");
 
 		
-		if (strstr(klass_signature, "seam") != NULL) {//::FOR iTrust
+		if (strstr(klass_signature, "xxx") != NULL) {//::FOR iTrust
 																	//if(strstr(klass_signature, "Lsample") !=NULL){
 
 			error = (*jvmti_env).GetMethodName(method, &method_name, &method_signature, NULL);
@@ -617,7 +619,7 @@ tdMethodExit(jvmtiEnv *jvmti_env,
 		check_jvmti_error(jvmti_env, error, "Cannot getClassSignature");
 
 		
-		if (strstr(klass_signature, "seam") != NULL) {//::FOR iTrust
+		if (strstr(klass_signature, "xxx") != NULL) {//::FOR iTrust
 
 			error = (*jvmti_env).GetObjectHashCode(thread, &threadHashcode);
 			check_jvmti_error(jvmti_env, error, "Cannot get MethodName");
@@ -859,7 +861,7 @@ Agent_OnLoad(JavaVM *vm, char *options, void *reserved) {
 		JVMTI_EVENT_DATA_DUMP_REQUEST, NULL);
 
 	//DB for FA
-	int dbflag = sqlite3_open("/home/zzf/workspace/iTrace4/data/exp/Drools/relation/test1.db", &dbFA);
+	int dbflag = sqlite3_open("/home/zzf/workspace/iTrace4/data/exp/Groovy/relation/test1.db", &dbFA);
 
 	if (dbflag) {
 		fprintf(stderr, "Can't open database: %s \n", sqlite3_errmsg(dbFA));
@@ -875,7 +877,7 @@ Agent_OnLoad(JavaVM *vm, char *options, void *reserved) {
 	if (tableflag) printf("%s", errorDB);
 
 	//DB for FM
-	dbflag = sqlite3_open("/home/zzf/workspace/iTrace4/data/exp/Drools/relation/test2.db", &dbFM);
+	dbflag = sqlite3_open("/home/zzf/workspace/iTrace4/data/exp/Groovy/relation/test2.db", &dbFM);
 	if (dbflag) {
 		fprintf(stderr, "Can't open database: %s \n", sqlite3_errmsg(dbFM));
 		sqlite3_close(dbFM);
@@ -890,7 +892,7 @@ Agent_OnLoad(JavaVM *vm, char *options, void *reserved) {
 	if (tableflag) printf("%s", errorDB);
 
 	//DB for PP
-	dbflag = sqlite3_open("/home/zzf/workspace/iTrace4/data/exp/Drools/relation/test3.db", &dbPP);
+	dbflag = sqlite3_open("/home/zzf/workspace/iTrace4/data/exp/Groovy/relation/test3.db", &dbPP);
 	if (dbflag) {
 		fprintf(stderr, "Can't open database: %s \n", sqlite3_errmsg(dbPP));
 		sqlite3_close(dbPP);
@@ -905,7 +907,7 @@ Agent_OnLoad(JavaVM *vm, char *options, void *reserved) {
 	if (tableflag) printf("%s", errorDB);
 
 	//DB for CG
-	dbflag = sqlite3_open("/home/zzf/workspace/iTrace4/data/exp/Drools/relation/CallGraph.db", &dbCG);
+	dbflag = sqlite3_open("/home/zzf/workspace/iTrace4/data/exp/Groovy/relation/CallGraph.db", &dbCG);
 	if (dbflag) {
 		fprintf(stderr, "Can't open database: %s \n", sqlite3_errmsg(dbCG));
 		sqlite3_close(dbCG);

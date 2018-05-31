@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.demo.algo.verifiedfront.evalute;
+package cn.edu.nju.cs.itrace4.demo.algo.verifiedfront.demo;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -23,6 +23,8 @@ import cn.edu.nju.cs.itrace4.core.document.SingleLink;
 import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
 import cn.edu.nju.cs.itrace4.demo.FileParse.XmlParse;
+import cn.edu.nju.cs.itrace4.demo.algo.coderegion.UD_CodeTextAsWholeInRegion;
+import cn.edu.nju.cs.itrace4.demo.algo.verifiedfront.resultprocess.ResultChange;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
 import cn.edu.nju.cs.itrace4.demo.exp.project.JhotDraw;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Maven;
@@ -33,10 +35,12 @@ import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
 import cn.edu.nju.cs.itrace4.demo.tool.AnalyzeResult;
 import cn.edu.nju.cs.itrace4.demo.visual.MyVisualCurve;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
- 
-public class WhoCanGetMore{
+/**
+ * 之前老方法 只是看过的放在前面 
+ */
+public class WhoGetMorePlaceFront{
 	// user will stop verifying When the user continuously encounters a certain number of incorrect connections.
-	private int wrongLinkThreshold = 16; 
+	private int wrongLinkThreshold = 10; 
 	//private StoreSubGraphInfoByThreshold storeSubGraphInfoByThreshold;
 	private AnalyzeResult analyzeResult;
 	private Project project;
@@ -48,7 +52,7 @@ public class WhoCanGetMore{
     private double dataEdgeScoreThreshold;
 	private double percent;
     
-	public WhoCanGetMore() throws ParserConfigurationException, SAXException, IOException{
+	public WhoGetMorePlaceFront() throws ParserConfigurationException, SAXException, IOException{
 		initProjectMap();
 		initModelMap();
 		analyzeResult = new AnalyzeResult();
@@ -88,17 +92,19 @@ public class WhoCanGetMore{
         RelationInfo ri = (RelationInfo) ois.readObject();
         ois.close();
         
+        int userVerifyCount = (int)(ri.getVertexIdNameMap().size()*percent);
+        
         Result result_ir = IR.compute(textDataset, model, new None_CSTI());
         Result result_UD_CSTI = IR.compute(textDataset,model, new UD_CSTI(ri));
         ri.setPruning(callEdgeScoreThreshold, dataEdgeScoreThreshold);
         
-//        Result result_UD_sortByMergeCodeInRegion = IR.compute(textDataset, model,
-//				new UDAndCluster(ri, callEdgeScoreThreshold, dataEdgeScoreThreshold));// 0.7
-        
-        //UDCodeRegion
+        Map<String,Set<String>> valid = new LinkedHashMap<String,Set<String>>();
         Result result_UD_sortByMergeCodeInRegion = IR.compute(textDataset, model,
-				new UDCodeRegion(ri, callEdgeScoreThreshold, dataEdgeScoreThreshold));// 0.7
-        
+				new UD_CodeTextAsWholeInRegion(project,ri, callEdgeScoreThreshold, dataEdgeScoreThreshold, 
+						userVerifyCount,valid,model));// 0.7
+        ResultChange.modifyResult(result_UD_sortByMergeCodeInRegion, valid);
+//        //note: we should reorder this list.
+//        
         compareWhichGetMore(result_UD_sortByMergeCodeInRegion,result_UD_CSTI);
         validate(result_UD_sortByMergeCodeInRegion,result_UD_CSTI);
         
@@ -109,11 +115,14 @@ public class WhoCanGetMore{
         curve.addLine(result_UD_CSTI);
         //curve.addLine(result_pruningeCall_Data_Dir);
         curve.addLine(result_UD_sortByMergeCodeInRegion);//累加 内部 直接平均
-        curve.showChart(project.getProjectName());;
+        
         double irPvalue = printPValue(result_ir, result_UD_sortByMergeCodeInRegion);
         double udPvalue = printPValue(result_UD_CSTI, result_UD_sortByMergeCodeInRegion);
         String irPvalueStr = (irPvalue+"").substring(0, 5);
         String udPvalueStr = (udPvalue+"").substring(0, 5);
+        double rate = Double.valueOf(System.getProperty("rate"));
+        String rateStr = (rate+"").substring(0, 5);
+        curve.showChart(project.getProjectName()+"-"+irPvalueStr+"-"+udPvalueStr+"-"+rateStr);
         curve.curveStore(".",project.getProjectName()+"-"+percent+"-"+callEdgeScoreThreshold+"-"+
         		dataEdgeScoreThreshold+"-"+model+irPvalueStr+"-"+udPvalueStr);
     }
@@ -146,7 +155,7 @@ public class WhoCanGetMore{
 				correctLinksCount++;
 			}
 			number++;
-			if(number>2000) {
+			if(number>1000) {
 				return correctLinksCount;
 			}
 		}
@@ -199,7 +208,7 @@ public class WhoCanGetMore{
 	public static void main(String[] args) throws IOException, ClassNotFoundException,
 			ParserConfigurationException, SAXException {
 		long startTime = System.currentTimeMillis();
-    	WhoCanGetMore bonusForLoneBoot = new WhoCanGetMore();
+    	WhoGetMorePlaceFront bonusForLoneBoot = new WhoGetMorePlaceFront();
     	bonusForLoneBoot.run();
     	long endTime = System.currentTimeMillis();
     	System.out.println("time cost:"+(endTime-startTime)*1.0/1000/60);
