@@ -18,6 +18,8 @@ import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
 import cn.edu.nju.cs.itrace4.relation.CallDataRelationGraph;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 import cn.edu.nju.cs.itrace4.relation.graph.CodeEdge;
+import cn.edu.nju.cs.refactor.util.FileWrite;
+import cn.edu.nju.cs.refactor.util.FileWriterImp;
 
 /**
  * @date 2018.5.28
@@ -32,6 +34,9 @@ public class CodeRegionInfo {
 	private TextDataset textDataset;
 	protected Map<Integer, String> vertexIdNameMap;
 	private double[][] closenessBetweenRegionDP;
+	
+	private FileWrite fw = new FileWriterImp();
+	private String filePath = "codeRegion.csv";
 	
 	public CodeRegionInfo(TextDataset textDataset,RelationInfo ri,
 			CodeRegionClosenessType codeRegionClosenessType) {
@@ -86,13 +91,131 @@ public class CodeRegionInfo {
 		SimilarityMatrix oracle = textDataset.getRtm();
 		List<CodeRegionPair> regionPairList = getRegionPairList(closenessBetweenCodeRegion);
 		for(CodeRegionPair regionPair:regionPairList) {
-			int formerId = regionPair.getFormerId();
-			int latterId = regionPair.getLatterId();
-			double closeness = regionPair.getCloseness();
-			System.out.println(formerId+"----"+latterId+"  :  "+closeness);
+			for(String req:oracle.sourceArtifactsIds()) {
+				SubGraph formerSubGraph = codeRegionList.get(regionPair.getFormerId());
+				double formerValidPortion = getValidPortionWithReq(oracle,formerSubGraph,req);
+				if(formerValidPortion>=0.5) {
+					regionPair.setValidPortionFormerRegion(req, formerValidPortion);
+				}
+				SubGraph latterSubGraph = codeRegionList.get(regionPair.getLatterId());
+				double latterValidPortion = getValidPortionWithReq(oracle,latterSubGraph,req);
+				if(latterValidPortion>=0.5) {
+					regionPair.setValidPortionLatterRegion(req, latterValidPortion);
+				}
+			}
 		}
+		display(regionPairList);
+		storeRegionInfo(regionPairList);
 	}
 	
+	/**
+	 * @description store code region information in excel. 
+	 * regionId,relevantCode_validPortion,regionId,relevantCode_validPortion,overlapRequirement,closeness
+	 *    1       uc15_0.12 uc18_0.24       3            uc15_0.11                uc15           0.1234
+	 */
+	private void storeRegionInfo(List<CodeRegionPair> regionPairList) {
+		fw.createFile(filePath);
+		String header = getHeader();
+		fw.writeLine(header);
+		fw.newLine();
+		for(CodeRegionPair regionPair:regionPairList) {
+			StringBuilder sb = new StringBuilder();
+			sb.append(regionPair.getFormerId()+";");
+			Map<String,Double> formerInfo = regionPair.getValidPortionWithReqFromerRegion();
+			for(String req:formerInfo.keySet()) {
+				sb.append(req+"_"+String.format("%.2f",formerInfo.get(req)));
+			}
+			sb.append(";");
+			
+			sb.append(regionPair.getLatterId()+";");
+			Map<String,Double> latterInfo = regionPair.getValidPortionWithReqLatterRegion();
+			for(String req:latterInfo.keySet()) {
+				sb.append(req+"_"+String.format("%.2f", latterInfo.get(req)));
+			}
+			sb.append(";");
+			
+			//overlap
+			for(String req:formerInfo.keySet()) {
+				if(latterInfo.containsKey(req)) {
+					sb.append(req+" ");
+				}
+			}
+			sb.append(";");
+			sb.append(String.format("%.2f",regionPair.getCloseness()));
+			fw.writeLine(sb.toString());
+			fw.newLine();
+		}
+	}
+
+	private String getHeader() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("regionId;relevantCode_validPortion;regionId;relevantCode_validPortion;"+
+				"overlapRequirement;closeness");
+		return sb.toString();
+	}
+
+	/**
+	 * @date 2018.5.30
+	 * @author zzf
+	 * @description region1- validReq:Portion -region2 validReq:Portion  overlap: 
+	 */
+	private void display(List<CodeRegionPair> regionPairList) {
+		for(CodeRegionPair codeRegionPair:regionPairList) {
+			String formerCodeRegionInfo = getInformationAboutCodeRegion(codeRegionPair.getFormerId(),
+					codeRegionPair.getValidPortionWithReqFromerRegion());
+			String latterCodeRegionInfo = getInformationAboutCodeRegion(codeRegionPair.getLatterId(),
+					codeRegionPair.getValidPortionWithReqLatterRegion());
+			String overlapReq = getOverlapReqBetweenCodeRegion(codeRegionPair.getValidPortionWithReqFromerRegion(),
+					codeRegionPair.getValidPortionWithReqLatterRegion());
+			StringBuilder sb = new StringBuilder();
+			sb.append(formerCodeRegionInfo+latterCodeRegionInfo+"overlap:"+overlapReq);
+			System.out.println(sb.toString());
+		}
+		
+	}
+
+	/**
+	 * @date 2018.5.31
+	 * @description return the requirements which were implemented by both two code region. 
+	 */
+	private String getOverlapReqBetweenCodeRegion(Map<String, Double> validPortionWithReqFromerRegion,
+			Map<String, Double> validPortionWithReqLatterRegion) {
+		StringBuilder sb = new StringBuilder();
+		Set<String> formerSet = validPortionWithReqFromerRegion.keySet();
+		Set<String> latterSet = validPortionWithReqLatterRegion.keySet();
+		Set<String> interSet = new HashSet<String>();
+		for(String str:formerSet) {
+			if(latterSet.contains(str)) {
+				interSet.add(str);
+			}
+		}
+		for(String str:interSet) {
+			sb.append(str+"  ");
+		}
+		return sb.toString();
+	}
+
+	private String getInformationAboutCodeRegion(int formerId, Map<String, Double> validPortionWithReqRegion) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(formerId+"---");
+		for(String str:validPortionWithReqRegion.keySet()) {
+			sb.append(str+":"+validPortionWithReqRegion.get(str));
+		}
+		sb.append("           ");
+		return sb.toString();
+	}
+
+	private double getValidPortionWithReq(SimilarityMatrix oracle, SubGraph subGraph, String req) {
+		int validCount = 0;
+		for(int eleId:subGraph.getVertexList()) {
+			String targetName = vertexIdNameMap.get(eleId);
+			if(oracle.isLinkAboveThreshold(req, targetName)) {
+				validCount++;
+			}
+		}
+		return validCount*1.0/subGraph.getVertexList().size();
+	}
+
 	/**
 	 * sort region pair base on the closeness. 
 	 */
