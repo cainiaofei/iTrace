@@ -471,7 +471,7 @@ tdClassPrepare(jvmtiEnv *jvmti_env,
 	check_jvmti_error(jvmti_env, error, "Cannot getClassFields");
 
 	
-	if (strstr(signature, "derby") != NULL) {//::FOR iTrust
+	if (strstr(signature, "drools") != NULL) {//::FOR iTrust
 		for (int i = 0; i < fieldCount; i++)
 		{
 			jfieldID field = *(fields + i);

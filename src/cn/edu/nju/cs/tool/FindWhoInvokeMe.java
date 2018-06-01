@@ -5,10 +5,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-import cn.edu.nju.cs.itrace4.core.algo.icse.PruningCall_Data_Connection_Closenss;
-import cn.edu.nju.cs.itrace4.exp.jhotdraw.JHotDraw_CONSTANTS;
-import cn.edu.nju.cs.itrace4.relation.RelationInfo;
-
 /*
  * 2017/3/24
  * by zhangsan
@@ -61,7 +57,7 @@ public class FindWhoInvokeMe {
 		String basePath = "src";
 		//String basePath = "Z:\\研二\\iTrace4_icsme\\iTrace4\\src";
 		FindWhoInvokeMe tool = new FindWhoInvokeMe();
-		tool.doTask(basePath, "UD_InnerAndOuterSeq");
+		tool.doTask(basePath, "call");
 	}
 	
 }

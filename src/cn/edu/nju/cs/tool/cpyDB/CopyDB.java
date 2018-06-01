@@ -35,12 +35,12 @@ public class CopyDB {
 		this.targetDBPath = targetDBPath;
 		this.targetTable = targetTable;
 		this.originDBOperate = new SqliteOperation();
-		this.originDBOperate.buildConnection(driver, this.originDBPath);
+		this.originDBOperate.buildConnection(driver, originDBPath);
 		
 		this.propertyPath = propertyPath;
 		
 		this.targetDBOperate = new SqliteOperation();
-		this.targetDBOperate.buildConnection(driver, this.targetDBPath);
+		this.targetDBOperate.buildConnection(driver, targetDBPath);
 		this.targetDBOperate.setCommit(false);//batch insert
 	}
 	
@@ -52,13 +52,9 @@ public class CopyDB {
 		String base = "insert into " + targetTable;
 		while(rs.next()) {
 			count++;
-			if(count<=1920000) {
-				System.out.println("count:"+count);
-				continue;
-			}
 			String insertSql = buildInsertSql(base,rs,cols);
 			targetDBOperate.executeSql(insertSql);
-			if(count%1000000==0) {
+			if(count%10000==0) {
 				targetDBOperate.commit();
 				System.out.println("insert count:"+count);
 			}
@@ -105,11 +101,11 @@ public class CopyDB {
 	}
 
 	public static void main(String[] args) {
-		String originDBPath = "/home/zzf/sqliteOutput/test3.db";
-		String originTable = "pp";
-		String targetDBPath = "/home/zzf/newDB/test3.db";
-		String targetTable = "pp";
-		String propertyPath = "resource/sql/pp.property";
+		String originDBPath = "/home/zzf/drools/test2.db";
+		String originTable = "fm";
+		String targetDBPath = "/home/zzf/iTrace/data/exp/Drools/relation/test2.db";
+		String targetTable = "fieldModification";
+		String propertyPath = "resource/sql/fm.property";
 		CopyDB tool = new CopyDB(originDBPath,originTable,targetDBPath,targetTable,propertyPath);
 		try {
 			tool.transfer();
@@ -119,16 +115,4 @@ public class CopyDB {
 			e.printStackTrace();
 		}
 	}
-	
 }
-
-
-
-
-
-
-
-
-
-
-
