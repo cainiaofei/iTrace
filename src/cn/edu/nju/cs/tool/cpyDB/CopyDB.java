@@ -45,6 +45,7 @@ public class CopyDB {
 	}
 	
 	public void transfer() throws IOException, SQLException {
+		targetDBOperate.setCommit(false);//batch insert
 		int count = 0;
 		String[] cols = parser(propertyPath);
 		String query = "select * from " + originTable;
