@@ -17,8 +17,7 @@ import cn.edu.nju.cs.itrace4.core.algo.UD_CSTI;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
-import cn.edu.nju.cs.itrace4.demo.algo.coderegion.UD_CodeTextAsWholeInRegion;
-import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataTreatEqualOuterLessThanInner;
+import cn.edu.nju.cs.itrace4.demo.algo.coderegion.UD_MergeCodeTXTAndNewRepresentElement;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Gantt;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Infinispan;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
@@ -78,14 +77,14 @@ public class BatchExecuteParameter {
 					RelationInfo ri = getRelationInfo(projects[projectIndex].toLowerCase());
 					userVerifyNumber = (int)(ri.getVertexIdNameMap().size()*percent);
 					for (int modelIndex = 0; modelIndex < models.length; modelIndex++) {
-						boolean isMeetPvalue = calculateResult(projects[projectIndex],result, projects, projectIndex, models, modelIndex,
+						boolean isMeetPvalue = calculateResult(result, projects, projectIndex, models, modelIndex,
 								textDataset, ri, callThreshold, dataThreshold);
 						if (isMeetPvalue) {
 							count++;
 						}
 					}
 				}
-				if (count < 5) {
+				if (count < 4) {
 					continue;
 				}
 				for (int projectIndex = 2; projectIndex < projects.length; projectIndex++) {
@@ -93,7 +92,7 @@ public class BatchExecuteParameter {
 					RelationInfo ri = getRelationInfo(projects[projectIndex]);
 					userVerifyNumber = (int)(ri.getVertexIdNameMap().size()*percent);
 					for (int modelIndex = 0; modelIndex < models.length; modelIndex++) {
-						calculateResult(projects[projectIndex],result, projects, projectIndex, models, modelIndex, textDataset, ri,
+						calculateResult(result, projects, projectIndex, models, modelIndex, textDataset, ri,
 								callThreshold, dataThreshold);
 					}
 				}
@@ -137,7 +136,7 @@ public class BatchExecuteParameter {
 		return sb.toString();
 	}
 
-	private boolean calculateResult(String projectName, String[][][] result, String[] projects, int projectIndex, String[] models,
+	private boolean calculateResult(String[][][] result, String[] projects, int projectIndex, String[] models,
 			int modelIndex, TextDataset textDataset, RelationInfo ri, double callThreshold, double dataThreshold) {
 		
 		
@@ -149,7 +148,7 @@ public class BatchExecuteParameter {
 		ri.setPruning(callThreshold, dataThreshold);
 		valid = new HashMap<String, Set<String>>();
 		Result result_UD_CallDataTreatEqual = IR.compute(textDataset, fullModelName,
-				new UD_CodeTextAsWholeInRegion(getProject(projectName),ri, callThreshold, dataThreshold, 
+				new UD_MergeCodeTXTAndNewRepresentElement(getProject(projects[projectIndex]),ri, callThreshold, dataThreshold, 
 						userVerifyNumber,valid,fullModelName));// 0.7
 		String irRecord = getRecord(result_ir, result_UD_CallDataTreatEqual);
 		result[projectIndex][modelIndex][0] = irRecord;
@@ -177,6 +176,9 @@ public class BatchExecuteParameter {
 		}
 		else if(projectName.equalsIgnoreCase("pig")) {
 			return new Pig();
+		}
+		else if(projectName.equalsIgnoreCase("Gantt")) {
+			return new Gantt();
 		}
 		else {
 			return null;

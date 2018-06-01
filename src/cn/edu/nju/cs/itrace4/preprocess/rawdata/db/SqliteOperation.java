@@ -2,6 +2,7 @@ package cn.edu.nju.cs.itrace4.preprocess.rawdata.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -9,6 +10,18 @@ import java.sql.Statement;
 public class SqliteOperation implements DBOperationInterface{
 	
 	private Connection con;
+	
+	@SuppressWarnings("finally")
+	public PreparedStatement prepareStatement(String sql) {
+		try {
+			return con.prepareStatement(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			return null;
+		}
+	}
 	
 	public void setCommit(boolean flag) {
 		try {

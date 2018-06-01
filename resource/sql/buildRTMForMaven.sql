@@ -14,7 +14,7 @@
         select issue.issue_id, commit_hash,summary, description 
         from  issue, change_set_link
         where issue.issue_id=change_set_link.issue_id and issue_type in ('New Feature') 
-        and resolved_date is not null and priority in ('Major','Critical') and resolution in('Fixed','Complemented','Done','Works for Me')
+        and resolved_date is not null and resolution in('Fixed','Implemented','Done')
       ) as issue_commit
       where commit_file.commit_hash=issue_commit.commit_hash
       group by issue_id

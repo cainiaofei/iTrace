@@ -34,7 +34,8 @@ public class UD_CallThenDataWithRelationBetweenSubGraph implements CSTI{
 	public SimilarityMatrix improve(SimilarityMatrix matrix, TextDataset textDataset,
 			SimilarityMatrix similarityMatrix) {
 		//Map<String,Set<String>> valid = new HashMap<String,Set<String>>();
-		UD_CallSubGraphWithRelationBetweenSubGraph improveBasedCall = new UD_CallSubGraphWithRelationBetweenSubGraph(ri,valid,percent);
+		UD_CallSubGraphWithRelationBetweenSubGraph improveBasedCall = new UD_CallSubGraphWithRelationBetweenSubGraph(ri,valid,
+				percent);
 		SimilarityMatrix afterImproveBasedCall = improveBasedCall.improve(matrix, textDataset,methodType);
 		UD_DataSubGraphWithRelationBetweenSubGraph improveBasedData = new
 				UD_DataSubGraphWithRelationBetweenSubGraph(ri,valid,

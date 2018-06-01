@@ -116,7 +116,7 @@ public class SimilarityMatrix implements Serializable {
             retVal = links.get(targetArtfactId);
         }
         if(retVal==null){
-        	System.out.println(retVal);
+        	retVal = -1.0;
         }
         return retVal;
     }
@@ -626,7 +626,14 @@ public class SimilarityMatrix implements Serializable {
         }
         return highestLinks;
     }
-
+    /**
+     * @date 2018.5.17
+     * @author zzf
+     * @description get matrix 
+     */
+    public Map<String,Map<String,Double>> getMatrix(){
+    	return matrix;
+    }
 
 }
 
