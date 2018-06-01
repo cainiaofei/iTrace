@@ -110,7 +110,7 @@ public class WriteDBWithoutDuplicate {
 	public static void main(String[] args) throws SQLException {
 		String[] cols = {"caller","callee"};
 		WriteDBWithoutDuplicate tool = new WriteDBWithoutDuplicate();
-		String dbPath = "data/exp/Infinispan/relation/call.db";
+		String dbPath = "data/exp/Derby/relation/call.db";
 		String originTable = "callGraphExistDuplicate";
 		String newTable = "callGraph";
 		//tool.copyWithoutDuplicate(dbPath, originTable, newTable, cols);
