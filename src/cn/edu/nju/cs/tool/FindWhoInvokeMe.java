@@ -58,10 +58,10 @@ public class FindWhoInvokeMe {
 	}
 
 	public static void main(String[] args) throws IOException{
-		String basePath = "src";
+		String basePath = "./src";
 		//String basePath = "Z:\\研二\\iTrace4_icsme\\iTrace4\\src";
 		FindWhoInvokeMe tool = new FindWhoInvokeMe();
-		tool.doTask(basePath, "");
+		tool.doTask(basePath, "cluster");
 	}
 	
 }
