@@ -29,6 +29,7 @@ import cn.edu.nju.cs.refactor.util.FileWriterImp;
  */
 public class CodeRegionInfo {
 	private int routerLenThreshold = 4;
+	private int countThreshold = 3;
 	private RelationInfo ri;
 	private CodeRegionClosenessType codeRegionClosenessType;
 	private TextDataset textDataset;
@@ -145,6 +146,7 @@ public class CodeRegionInfo {
 			fw.writeLine(sb.toString());
 			fw.newLine();
 		}
+		fw.close();
 	}
 
 	private String getHeader() {
