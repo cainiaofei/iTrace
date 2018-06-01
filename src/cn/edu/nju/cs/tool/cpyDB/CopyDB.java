@@ -52,18 +52,12 @@ public class CopyDB {
 		String base = "insert into " + targetTable;
 		while(rs.next()) {
 			count++;
-			if(count<=1920000) {
-				System.out.println("count:"+count);
-				continue;
-			}
 			String insertSql = buildInsertSql(base,rs,cols);
 			targetDBOperate.executeSql(insertSql);
 			if(count%1000000==0) {
 				targetDBOperate.commit();
-				System.out.println("insert count:"+count);
 			}
 		}
-		System.out.println("the number of record is:"+count);
 		targetDBOperate.closeConnection();
 	}
 	
