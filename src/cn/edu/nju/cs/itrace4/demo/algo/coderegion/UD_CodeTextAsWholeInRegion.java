@@ -332,8 +332,10 @@ public class UD_CodeTextAsWholeInRegion implements CSTI{
 		return maxBonus;
 	}
 	
-	private void getAllRoutesFromOuterToInnerByDfs(double[][] graphs, int curVertex, List<Integer> curRoute,List<List<Integer>> allRoutes,
-			Set<Integer> vertexInGraph, Set<Integer> visited, int target,int routerLen) {
+	//outer to inner
+	private void getAllRoutesFromOuterToInnerByDfs(double[][] graphs, int curVertex, List<Integer> curRoute,
+			List<List<Integer>> allRoutes,Set<Integer> vertexInGraph, 
+			Set<Integer> visited, int target,int routerLen) {
 		 if(curVertex==target){
 	            allRoutes.add(new LinkedList<Integer>(curRoute));
 	     }

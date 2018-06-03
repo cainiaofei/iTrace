@@ -134,41 +134,6 @@ public class SqliteIOForGit implements SqliteIOInterface{
     }
     
 
-//  private static String getTracesInRTM(Statement stmt, List<String> columnsList) {
-//  StringBuilder sb = new StringBuilder();
-//
-//  try {
-//      ResultSet rs = stmt.executeQuery("SELECT * FROM reqs;");
-//      while (rs.next()) {
-//
-//          // rowName: AuthDAO
-//          String rowName = rs.getString("class");
-//
-//          // warning!! iTrust-req.db 存在“-”字符的编码问题
-//          rowName = rowName.replace("‐", "-");
-//
-//          for (String col : columnsList) {
-//              String cell = rs.getString(col).trim();
-//
-//              if (!cell.equals("")) {
-//                  if (cell.equals("x")) {
-//                      sb.append(col);
-//                      sb.append(" ");
-//                      sb.append(rowName);
-//                      sb.append(" ");
-//                      sb.append("1");
-//                      sb.append(" ");
-//                      sb.append("\n");
-//                  }
-//              }
-//          }
-//      }
-//      rs.close();
-//  } catch (SQLException e) {
-//      e.printStackTrace();
-//  }
-//  return sb.toString();
-//}
     /**
      * @date 2017/10/16
      * @description ensure no duplicate. 
@@ -189,15 +154,6 @@ public class SqliteIOForGit implements SqliteIOInterface{
 			index++;
 		}
 		return strArr;
-    	
-    	
-//		String[] strArr = strs.split("和");
-//		for(int i = 0; i < strArr.length;i++) {
-//			//System.out.println(strArr[i]);
-//			strArr[i] = strArr[i].replace("/", ".");
-//			strArr[i] = strArr[i].substring(0, strArr[i].lastIndexOf("."));
-//		}
-//		return strArr;
 	}
     /**
      * @author zzf
