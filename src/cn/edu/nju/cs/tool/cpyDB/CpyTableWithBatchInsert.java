@@ -19,7 +19,7 @@ public class CpyTableWithBatchInsert {
 	
 	private String propertyPath;
 	
-	private String driver = "org.sqlite.D";
+	private String driver = "org.sqlite.JDBC";
 	private SqliteOperation originDBOperate;
 	private SqliteOperation targetDBOperate;
 	
