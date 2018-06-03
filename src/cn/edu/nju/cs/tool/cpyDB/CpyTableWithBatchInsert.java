@@ -112,11 +112,11 @@ public class CpyTableWithBatchInsert {
 	}
 	
 	public static void main(String[] args) {
-		String originDBPath = "/home/zzf/sqliteOutput/test3.db";
-		String originTable = "pp";
-		String targetDBPath = "/home/zzf/newDB/test3.db";
-		String targetTable = "pp";
-		String propertyPath = "resource/sql/pp.property";
+		String originDBPath = "/home/zzf/drools/test2.db";
+		String originTable = "fm";
+		String targetDBPath = "/home/zzf/iTrace/data/exp/Drools/relation/test2.db";
+		String targetTable = "fieldModification";
+		String propertyPath = "resource/sql/fm.property";
 		CpyTableWithBatchInsert tool = new CpyTableWithBatchInsert(originDBPath,originTable,targetDBPath,
 				targetTable,propertyPath);
 		try {

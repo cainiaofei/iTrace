@@ -9,12 +9,7 @@ import java.sql.SQLException;
 
 import cn.edu.nju.cs.itrace4.preprocess.rawdata.db.SqliteOperation;
 
-/**
- * @date 2018.1.16
- * @author zzf
- * @description copy db
- */
-public class CopyDB {
+public class CopyDBThroughSQL {
 	private String originDBPath ;
 	private String originTable ;
 	
@@ -27,20 +22,19 @@ public class CopyDB {
 	private SqliteOperation originDBOperate;
 	private SqliteOperation targetDBOperate;
 	
-	
-	public CopyDB(String originDBPath,String originTable,String targetDBPath,
+	public CopyDBThroughSQL(String originDBPath,String originTable,String targetDBPath,
 			String targetTable,String propertyPath) {
 		this.originDBPath = originDBPath;
 		this.originTable = originTable;
 		this.targetDBPath = targetDBPath;
 		this.targetTable = targetTable;
 		this.originDBOperate = new SqliteOperation();
-		this.originDBOperate.buildConnection(driver, originDBPath);
+		this.originDBOperate.buildConnection(driver, this.originDBPath);
 		
 		this.propertyPath = propertyPath;
 		
 		this.targetDBOperate = new SqliteOperation();
-		this.targetDBOperate.buildConnection(driver, targetDBPath);
+		this.targetDBOperate.buildConnection(driver, this.targetDBPath);
 		this.targetDBOperate.setCommit(false);//batch insert
 	}
 	
@@ -50,16 +44,9 @@ public class CopyDB {
 		String query = "select * from " + originTable;
 		ResultSet rs = originDBOperate.executeQuery(query);
 		String base = "insert into " + targetTable;
-		while(rs.next()) {
-			count++;
-			String insertSql = buildInsertSql(base,rs,cols);
-			targetDBOperate.executeSql(insertSql);
-			if(count%10000==0) {
-				targetDBOperate.commit();
-				System.out.println("insert count:"+count);
-			}
-		}
-		System.out.println("the number of record is:"+count);
+		
+		S
+		
 		targetDBOperate.closeConnection();
 	}
 	
@@ -76,43 +63,5 @@ public class CopyDB {
 			fields[i] = fields[i].trim();
 		}
 		return fields;
-	}
-	
-	private String buildInsertSql(String base, ResultSet rs, String[] fields) throws SQLException {
-		StringBuilder sb = new StringBuilder(base);
-		// tableName(a,b,c) 
-		sb.append("(");
-		for(String field:fields) {
-			sb.append(field+",");
-		}
-		sb.deleteCharAt(sb.length()-1);
-		sb.append(")");
-		sb.append(" ");
-		
-		//values(aa,bb,cc)
-		sb.append("values");
-		sb.append("(");
-		for(String field:fields) {
-			sb.append("'"+rs.getString(field)+"'"+",");
-		}
-		sb.deleteCharAt(sb.length()-1);
-		sb.append(")");
-		return sb.toString();
-	}
-
-	public static void main(String[] args) {
-		String originDBPath = "/home/zzf/drools/test2.db";
-		String originTable = "fm";
-		String targetDBPath = "/home/zzf/iTrace/data/exp/Drools/relation/test2.db";
-		String targetTable = "fieldModification";
-		String propertyPath = "resource/sql/fm.property";
-		CopyDB tool = new CopyDB(originDBPath,originTable,targetDBPath,targetTable,propertyPath);
-		try {
-			tool.transfer();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 }
