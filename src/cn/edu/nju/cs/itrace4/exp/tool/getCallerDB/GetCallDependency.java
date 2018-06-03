@@ -20,15 +20,18 @@ import java.util.Set;
  */
 public class GetCallDependency {
 	private String sqlDriver = "org.sqlite.JDBC";
-	private String dbPath = "./data/exp/Maven_TestCase/relation/CallGraph.db";
+	private String dbPath = "./data/exp/Derby/relation/CallGraph.db";
 	private String tableName = "callGraph";
-
+	//2018.5.6
+	private String destTableName = "./data/exp/Derby/relation/call.db";
+	private int threadCount = 16;
+	
 	public void getCallDependency() {
 		Set<String> callRelationSet = Collections.synchronizedSet(new HashSet<String>());
 		List<Thread> threads = new ArrayList<Thread>();
 		for(String threadID:getThreadIDSet()) {//for
 			System.out.println(threadID);
-			if(threads.size()==8) {//8
+			if(threads.size()==threadCount) {//8
 				waitThread(threads);
 				threads.clear();
 			}
@@ -64,7 +67,7 @@ public class GetCallDependency {
 	private void writeDB(Set<String> callRelationSet) {
 		try {
 			Class.forName(sqlDriver);
-			Connection con = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
+			Connection con = DriverManager.getConnection("jdbc:sqlite:" + destTableName);
 			Statement stmt = con.createStatement();
 			String clearSql = "delete from graph";
 			stmt.execute(clearSql);
