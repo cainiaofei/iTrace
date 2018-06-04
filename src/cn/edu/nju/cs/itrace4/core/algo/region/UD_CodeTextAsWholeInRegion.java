@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.demo.algo.coderegion;
+package cn.edu.nju.cs.itrace4.core.algo.region;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import cn.edu.nju.cs.itrace4.core.algo.CSTI;
-import cn.edu.nju.cs.itrace4.core.algo.SortByMergedClass;
+import cn.edu.nju.cs.itrace4.core.algo.prealgo.CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.region.util.sort.SortByMergedClass;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.document.LinksList;
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
@@ -33,7 +33,7 @@ import cn.edu.nju.cs.refactor.util.FileProcessTool;
 import javafx.util.Pair;
 
 
-public class UD_CodeTextAsWholeInRegion implements CSTI{
+public class UD_CodeTextAsWholeInRegion extends AlgoBaseOnCodeRegion{
 	private int callRouterLen = 4;
 	private int dataRouterLen = 2;
 	private double[][] callGraphs;
@@ -241,8 +241,6 @@ public class UD_CodeTextAsWholeInRegion implements CSTI{
 			int maxId = subGraph.getVertexList().get(0);
 			List<Integer> vertexList = subGraph.getVertexList();
 			for(int i = 0; i<vertexList.size(); i++){
-//				System.out.println(vertexList.get(i));
-//				System.out.println(vertexIdNameMap.get(vertexList.get(i)));
 				double curScore = matrix.getScoreForLink(requirement,vertexIdNameMap.get(vertexList.get(i)));
 				maxScore = Math.max(maxScore, curScore);
 				if(Math.abs(curScore-maxScore)<=0.000000000001){
@@ -270,9 +268,6 @@ public class UD_CodeTextAsWholeInRegion implements CSTI{
 		}
 		for(int i = 0; i < nums.length;i++) {
 			for(int j = 0; j < nums.length;j++) {
-//				System.out.println(nums[i]+"-----"+nums[j]);
-//				System.out.println("call:"+callGraphs[nums[i]][nums[j]]+
-//						"data:"+dataGraphs[nums[i]][nums[j]]);
 				list.add(callGraphs[nums[i]][nums[j]]);
 				list.add(dataGraphs[nums[i]][nums[j]]);
 			}
@@ -370,19 +365,10 @@ public class UD_CodeTextAsWholeInRegion implements CSTI{
 			String loneVertexName = vertexIdNameMap.get(loneVertex);
 			
 			double bonus = giveBonusForLonePointBasedCallGraph(callGraphs, subGraph, loneVertex, 1);
-
-		//	double localMaxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(subGraph.getMaxId()));
-
-			//System.out.println("outBonus:"+bonus);
-			
 			double validValueSum = maxScore * bonus;
-			//double validValueSum = (localMaxScore) * bonus;
 			double originValue = matrix.getScoreForLink(req, loneVertexName);
 			double nowValue = originValue + validValueSum;
-			//2018.1.13
 			nowValue = Math.min(nowValue, maxScore);
-			//nowValue = Math.min(nowValue, originValue+subGraph.getMaxBonus());
-			
 			matrix.setScoreForLink(req, loneVertexName, nowValue);
 		}
 	}
@@ -454,12 +440,7 @@ public class UD_CodeTextAsWholeInRegion implements CSTI{
 		for (int loneVertex : loneVertexList) {
 			String loneVertexName = vertexIdNameMap.get(loneVertex);
 			double bonus = giveBonusForLonePointBasedDataGraph(dataGraphs, subGraph, loneVertex, 1);
-			//double localMaxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(subGraph.getMaxId()));
-			//double validValueSum = (localMaxScore) * bonus;
-			//System.out.println("outer bonus:"+bonus);
-			
 			double validValueSum = maxScore * bonus;
-			
 			double originValue = matrix.getScoreForLink(req, loneVertexName);
 			double nowValue = originValue + validValueSum;
 			

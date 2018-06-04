@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.core.algo;
+package cn.edu.nju.cs.itrace4.core.algo.prealgo;
 
 /**
  * Created by niejia on 15/4/18.

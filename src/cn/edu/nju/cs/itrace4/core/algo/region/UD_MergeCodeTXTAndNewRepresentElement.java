@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.demo.algo.coderegion;
+package cn.edu.nju.cs.itrace4.core.algo.region;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,8 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import cn.edu.nju.cs.itrace4.core.algo.CSTI;
-import cn.edu.nju.cs.itrace4.core.algo.SortByMergedClass;
+import cn.edu.nju.cs.itrace4.core.algo.region.util.sort.SortByMergedClass;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.document.LinksList;
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
@@ -33,7 +32,7 @@ import cn.edu.nju.cs.refactor.util.FileProcessTool;
 import javafx.util.Pair;
 
 
-public class UD_MergeCodeTXTAndNewRepresentElement implements CSTI{
+public class UD_MergeCodeTXTAndNewRepresentElement extends AlgoBaseOnCodeRegion{
 	private int callRouterLen = 4;
 	private int dataRouterLen = 2;
 	private double[][] callGraphs;
