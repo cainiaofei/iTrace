@@ -1,11 +1,10 @@
-package cn.edu.nju.cs.itrace4.demo.algo.util.graph;
+package cn.edu.nju.cs.itrace4.core.algo.region.util.graph;
 
-public class UnDirectedGraph extends GraphImp{
-	
+public class DirectedGraph extends GraphImp{
 	private double[][] graphs;
 	private int routerMaxLen;
 
-	public UnDirectedGraph(double[][] graphs,int routerMaxLen) {
+	public DirectedGraph(double[][] graphs,int routerMaxLen) {
 		super(graphs,routerMaxLen);
 		this.graphs = graphs;
 		this.routerMaxLen = routerMaxLen;
@@ -13,7 +12,7 @@ public class UnDirectedGraph extends GraphImp{
 	
 	@Override
 	protected boolean existRouterBetweenCurAndNext(int current, int next) {
-		return graphs[current][next]>0 || graphs[next][current]>0;
+		return graphs[current][next]>0;
 	}
-	
+
 }
