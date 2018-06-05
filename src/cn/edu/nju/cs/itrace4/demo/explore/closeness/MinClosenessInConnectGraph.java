@@ -40,9 +40,9 @@ public class MinClosenessInConnectGraph {
 		} catch (FileException | IOException e) {
 			e.printStackTrace();
 		}
-		String[] reqClassRowArray = content.split("/n");
+		String[] reqClassRowArray = content.split("\n");
 		for(String reqClassRow:reqClassRowArray) {
-			String[] strs = reqClassRow.split("/s+"); 
+			String[] strs = reqClassRow.split("\\s+"); 
 			if(!reqClassRTM.containsKey(strs[0])) {
 				reqClassRTM.put(strs[0], new HashSet<String>());
 			}
@@ -67,7 +67,7 @@ public class MinClosenessInConnectGraph {
 	public void showMinClosenessInConnectedArea() {
 		Map<String,Double> minClosessnessForReq = findMinClosenessInConnectedArea();
 		for(String req:minClosessnessForReq.keySet()) {
-			System.out.println("req:"+minClosessnessForReq.get(req));
+			System.out.println(req+":"+minClosessnessForReq.get(req));
 		}
 	}
 	
@@ -78,11 +78,15 @@ public class MinClosenessInConnectGraph {
 	 * 		directly between them, it may cause a bug. 
 	 */
 	private Map<String,Double> findMinClosenessInConnectedArea(){
-		double[][] codeDepGraphs = cpy(graphs);
 		Map<String,Double> minClosessnessForReq = new HashMap<String,Double>();
 		for(String req:reqClassRTM.keySet()) {
+			double[][] codeDepGraphs = cpy(graphs);
 			Set<Integer> classIDSet = getCorrespondClass(req);
-			Edge preClosessnessEdge = null; 
+			if(classIDSet.size()==1) {
+				minClosessnessForReq.put(req, 1.0);
+				continue;
+			}
+			Edge preClosessnessEdge = new Edge(0,0,-1); // cant connected
 			Edge minClosessnessEdge = findMinClosenessEdge(codeDepGraphs,classIDSet);
 			while(isConnectedArea(codeDepGraphs, classIDSet)) {
 				int vertexA = minClosessnessEdge.getVertexA();
@@ -174,13 +178,13 @@ public class MinClosenessInConnectGraph {
 		int seed = getSeedID(classInArea);
 		Set<Integer> hasBeenVisitedClass = new HashSet<Integer>();
 		hasBeenVisitedClass.add(seed);
-		Set<Integer> allReachedClassInArea = getAllReachedClassInArea(seed,classInArea,hasBeenVisitedClass);
+		Set<Integer> allReachedClassInArea = getAllReachedClassInArea(graphs,seed,classInArea,hasBeenVisitedClass);
 		return allReachedClassInArea.size()==classInArea.size();
 	}
 
 
 	//dfs
-	private Set<Integer> getAllReachedClassInArea(int seed, Set<Integer> classInArea,
+	private Set<Integer> getAllReachedClassInArea(double[][] graphs, int seed, Set<Integer> classInArea,
 			Set<Integer> hasBeenVisitedClass) {
 		Set<Integer> allReachedClassInArea = new HashSet<Integer>();
 		allReachedClassInArea.add(seed);
@@ -192,8 +196,9 @@ public class MinClosenessInConnectGraph {
 				if(classInArea.contains(i) && !hasBeenVisitedClass.contains(i) 
 						&& graphs[seed][i]>0) {
 					hasBeenVisitedClass.add(i);
-					Set<Integer> reachedClassFromCur = getAllReachedClassInArea(i,classInArea,hasBeenVisitedClass);
+					Set<Integer> reachedClassFromCur = getAllReachedClassInArea(graphs,i,classInArea,hasBeenVisitedClass);
 					allReachedClassInArea.addAll(reachedClassFromCur);
+					hasBeenVisitedClass.remove(i);
 				}
 			}
 		}
