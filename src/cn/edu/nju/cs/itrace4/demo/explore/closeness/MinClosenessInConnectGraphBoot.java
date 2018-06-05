@@ -12,7 +12,6 @@ import org.xml.sax.SAXException;
 
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.demo.FileParse.XmlParse;
-import cn.edu.nju.cs.itrace4.demo.algo.relationBetweenSubGraph.CodeRegionInfo;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Gantt;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Infinispan;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
@@ -54,6 +53,7 @@ public class MinClosenessInConnectGraphBoot {
         ObjectInputStream ois = new ObjectInputStream(fis);
         RelationInfo ri = (RelationInfo) ois.readObject();
         ois.close();
+        ri.setPruning(0, 0);//has to be added, or rather cant get call/data edge through ri.
         
         MinClosenessInConnectGraph minClosenessInConnectGraph = new MinClosenessInConnectGraph(ri,
         		textDataset);
