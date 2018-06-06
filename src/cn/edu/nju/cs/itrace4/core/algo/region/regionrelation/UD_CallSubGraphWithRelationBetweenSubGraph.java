@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.demo.algo.relationBetweenSubGraph;
+package cn.edu.nju.cs.itrace4.core.algo.region.regionrelation;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -9,7 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import cn.edu.nju.cs.itrace4.core.algo.CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.prealgo.CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.region.util.sort.SortBySubGraphInDist;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.document.LinksList;
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
