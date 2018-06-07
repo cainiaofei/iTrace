@@ -1,4 +1,4 @@
 iTrust
-Gantt
+gantt
 maven_testcase
 pig
