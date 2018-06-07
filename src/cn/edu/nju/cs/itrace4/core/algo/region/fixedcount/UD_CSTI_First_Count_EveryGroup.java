@@ -1,6 +1,6 @@
-package cn.edu.nju.cs.itrace4.demo.specifyByGroup;
+package cn.edu.nju.cs.itrace4.core.algo.region.fixedcount;
 
-import cn.edu.nju.cs.itrace4.core.algo.CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.prealgo.CSTI;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.document.LinksList;
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
@@ -13,19 +13,20 @@ import javafx.util.Pair;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
  * 每组指定count个
  */
-public class UD_CSTI_First_Count_EveryGroup_Format implements CSTI {
+public class UD_CSTI_First_Count_EveryGroup implements CSTI {
 
     public double bonus;
     private RelationGraph relationGraph;
     private int count;
 
-    public UD_CSTI_First_Count_EveryGroup_Format(RelationInfo relationInfo,int count) {
+    public UD_CSTI_First_Count_EveryGroup(RelationInfo relationInfo,int count) {
         this.relationGraph = new CallDataRelationGraph(relationInfo);
         this.count = count;
     }
@@ -38,54 +39,68 @@ public class UD_CSTI_First_Count_EveryGroup_Format implements CSTI {
         SimilarityMatrix oracle = textDataset.getRtm();
 
         bonus = getAdaptiveBonus(matrix);
+
+        LinksList originLinks = new LinksList() ;
+        LinksList allLinks = matrix.allLinks();
+        Collections.sort(allLinks, Collections.reverseOrder());
+        for (SingleLink link : allLinks) {
+            originLinks.add(link);
+        }
+
         LinksList resultLinks = new LinksList();
 
-        int i = matrix.allLinks().size();
-        for(String source:matrix.sourceArtifactsIds()){
-        	Map<String, Double> links = matrix.getLinksForSourceId(source);
-        	 LinksList originLinks = new LinksList();
-        	 for (String target : links.keySet()) {
-        		 originLinks.add(new SingleLink(source,target,links.get(target)));
-        	 }
-        	 Collections.sort(originLinks, Collections.reverseOrder());
-        	 //对于这个需求对应的链接进行处理
-        	  int times = count; 
-        	  while (originLinks.size() != 0) {////////////////////////
-                  SingleLink link =  originLinks.remove(0);
-                  String target = link.getTargetArtifactId();
-                  double score = link.getScore();
+        //每组指定count个
+        Map<String,Integer> map = new HashMap<String,Integer>();
+        int i = originLinks.size();
+        while (originLinks.size() != 0) {////////////////////////
+            SingleLink link = originLinks.get(0);
+            originLinks.remove(0);
+            String source = link.getSourceArtifactId();
+            String target = link.getTargetArtifactId();
+            double score = link.getScore();
 
-                  //如果这个source对应的已经判断过times次了  就不需要在判断了
-                  if(times<=0){
-                  	 List<CodeVertex> neighbours = ((CallDataRelationGraph) relationGraph).getNeighboursByCall(target);
-                       for (CodeVertex nb : neighbours) {
-                           double originScore = originLinks.getScore(source, nb.getName());
-                           if (originScore != -1) {
-                               originLinks.updateLink(source, nb.getName(), originScore * (1 + bonus));
-                           }
-                       }
-                       resultLinks.add(new SingleLink(source, target, score));
-                  }
-                  else{
-                	 times--;
-                  	if(oracle.isLinkAboveThreshold(source, target)) {
-                  		 List<CodeVertex> neighbours = ((CallDataRelationGraph) relationGraph).getNeighboursByCall(target);
-                           for (CodeVertex nb : neighbours) {
-                               double originScore = originLinks.getScore(source, nb.getName());
-                               if (originScore != -1) {
-                                   originLinks.updateLink(source, nb.getName(), originScore * (1 + bonus));
-                               }
-                           }
-                           resultLinks.add(new SingleLink(source, target, score+i));
-                       }
-                  	 else{
-                  		 resultLinks.add(new SingleLink(source, target, score*(-1)));
-                  	 }
-                  }//
-                  i--;
-                  Collections.sort(originLinks, Collections.reverseOrder());
-              }///////////////////外层while loop
-        }
+            //如果这个source对应的已经判断过了  就不需要在判断了
+            if(map.containsKey(source)&&map.get(source)>count){
+            	 List<CodeVertex> neighbours = ((CallDataRelationGraph) relationGraph).getNeighboursByCall(target);
+                 for (CodeVertex nb : neighbours) {
+                     double originScore = originLinks.getScore(source, nb.getName());
+                     if (originScore != -1) {
+                         originLinks.updateLink(source, nb.getName(), originScore * (1 + bonus));
+                     }
+                 }
+                 resultLinks.add(new SingleLink(source, target, score+i));
+            }
+            else{
+            	if(!map.containsKey(source)){
+            		map.put(source, 1);
+            	}
+            	else{
+            		map.put(source, map.get(source)+1);
+            	}
+            	if(oracle.isLinkAboveThreshold(source, target)) {
+            		 List<CodeVertex> neighbours = ((CallDataRelationGraph) relationGraph).getNeighboursByCall(target);
+                     for (CodeVertex nb : neighbours) {
+                         double originScore = originLinks.getScore(source, nb.getName());
+                         if (originScore != -1) {
+                             originLinks.updateLink(source, nb.getName(), originScore * (1 + bonus));
+                         }
+                     }
+                     resultLinks.add(new SingleLink(source, target, score+i));
+                 }
+            	 else{
+            		 resultLinks.add(new SingleLink(source, target, score+i));
+            	 }
+            }
+            
+           /* if (score != 0.0) {
+                resultLinks.add(new SingleLink(source, target, score+i));
+            } else {
+                resultLinks.add(new SingleLink(source, target, 0.0+i));
+            }*/
+
+            Collections.sort(originLinks, Collections.reverseOrder());
+            i--;
+        }///////////////////外层while loop
 
 //        System.out.println(" resultLinks = " + resultLinks );
 
@@ -95,7 +110,6 @@ public class UD_CSTI_First_Count_EveryGroup_Format implements CSTI {
 
 //        System.out.println(" matrix_ud = " + matrix_ud );
         matrix_ud.allLinks();
-        Collections.sort(matrix_ud.allLinks(),Collections.reverseOrder());
         return matrix_ud;
     }
 
@@ -106,7 +120,7 @@ public class UD_CSTI_First_Count_EveryGroup_Format implements CSTI {
 
     @Override
     public String getAlgorithmName() {
-        return "UD_CSTI_First_"+count+"_EveryGroup_Format";
+        return "UD_CSTI_First_"+count+"_EveryGroup";
     }
 
     @Override
