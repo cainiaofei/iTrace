@@ -1,11 +1,11 @@
-package cn.edu.nju.cs.itrace4.demo.algo;
+package cn.edu.nju.cs.itrace4.core.algo.region.callthendata;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.List;
 
-import cn.edu.nju.cs.itrace4.core.algo.CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.prealgo.CSTI;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
 import cn.edu.nju.cs.itrace4.demo.relation.StoreSubGraphInfoByThreshold;

@@ -1,11 +1,11 @@
-package cn.edu.nju.cs.itrace4.demo.algo;
+package cn.edu.nju.cs.itrace4.core.algo.region.callthendata;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import cn.edu.nju.cs.itrace4.core.algo.CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.prealgo.CSTI;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;

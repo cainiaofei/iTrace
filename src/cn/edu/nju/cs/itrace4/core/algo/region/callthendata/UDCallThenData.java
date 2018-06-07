@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.demo.algo;
+package cn.edu.nju.cs.itrace4.core.algo.region.callthendata;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import cn.edu.nju.cs.itrace4.core.algo.CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.prealgo.CSTI;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
 import cn.edu.nju.cs.itrace4.demo.algo.factory.InnerVertexProcessWithCallFactory;
@@ -28,11 +28,6 @@ import javafx.util.Pair;
 public class UDCallThenData implements CSTI{
 	protected RelationInfo ri;
 	double callThreshold, dataThreshold;
-	private InnerVertexProcessWithCallFactory innerVertexProcessWithCallFactory;
-	private InnerVertexProcessWithDataFactory innerVertexProcessWithDataFactory;
-	
-	private OuterVertexProcessWithCallFactory outerVertexProcessWithCallFactory;
-	private OuterVertexProcessWithDataFactory outerVertexProcessWithDataFactory;
 	
 	private InnerVertexProcessWithCallSubGraph innerMethodWithCall;
 	private InnerVertexProcessWithDataSubGraph innerMethodWithData;

@@ -14,13 +14,13 @@ import java.util.Set;
 
 import cn.edu.nju.cs.itrace4.core.algo.prealgo.CSTI;
 import cn.edu.nju.cs.itrace4.core.algo.region.util.sort.SortByMergedClass;
+import cn.edu.nju.cs.itrace4.core.algo.region.util.sort.SortBySubGraph;
+import cn.edu.nju.cs.itrace4.core.algo.region.util.sort.SortVertexByScore;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.document.LinksList;
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
 import cn.edu.nju.cs.itrace4.core.document.SingleLink;
 import cn.edu.nju.cs.itrace4.core.ir.IRModel;
-import cn.edu.nju.cs.itrace4.demo.algo.SortBySubGraph;
-import cn.edu.nju.cs.itrace4.demo.algo.SortVertexByScore;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
 import cn.edu.nju.cs.itrace4.demo.relation.StoreDataSubGraphRemoveEdge;
 import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
