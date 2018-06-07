@@ -1,7 +1,7 @@
-package cn.edu.nju.cs.itrace4.demo.remainPR;
+package cn.edu.nju.cs.itrace4.core.algo.prealgo.remain;
 
-import cn.edu.nju.cs.itrace4.core.algo.CSTI;
-import cn.edu.nju.cs.itrace4.core.algo.None_CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.prealgo.CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.prealgo.None_CSTI;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.document.LinksList;
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
@@ -22,9 +22,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by niejia on 15/3/3.
- */
 public class UD_CSTI_First_Count_Percent_Remain implements CSTI {
 
     public double bonus;
