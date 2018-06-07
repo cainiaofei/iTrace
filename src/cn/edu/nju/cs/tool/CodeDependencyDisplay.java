@@ -1,8 +1,8 @@
 package cn.edu.nju.cs.tool;
 
 
-import cn.edu.nju.cs.itrace4.core.algo.None_CSTI;
-import cn.edu.nju.cs.itrace4.core.algo.UseEdge;
+import cn.edu.nju.cs.itrace4.core.algo.prealgo.None_CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.prealgo.UseEdge;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.document.LinksList;
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;

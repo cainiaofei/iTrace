@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.demo.cdgraph;
+package cn.edu.nju.cs.itrace4.core.algo.region.calldata;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,13 +9,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import cn.edu.nju.cs.itrace4.core.algo.CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.prealgo.CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.region.util.sort.SortBySubGraph;
+import cn.edu.nju.cs.itrace4.core.algo.region.util.sort.SortVertexByScore;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.document.LinksList;
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
 import cn.edu.nju.cs.itrace4.core.document.SingleLink;
-import cn.edu.nju.cs.itrace4.demo.algo.SortBySubGraph;
-import cn.edu.nju.cs.itrace4.demo.algo.SortVertexByScore;
 import cn.edu.nju.cs.itrace4.demo.relation.StoreDataSubGraphRemoveEdge;
 import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
 import cn.edu.nju.cs.itrace4.relation.CallDataRelationGraph;
@@ -23,18 +23,8 @@ import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 import cn.edu.nju.cs.itrace4.relation.graph.CodeEdge;
 import javafx.util.Pair;
 
-/**
- * @author zzf
- * @date 2017.11.17
- * @description treat data/call edge equal. There exist this case that a region may contain both
- * 	call edge and data edge.
- * @step  
- * 	step1: get all regions through class <code>StoreDataSubGraphRemoveEdge</code>
- *  step2: the lone vertex will change because we define the lonevetex is vertex we has not verify.
- */
-public class UD_CallDataTreatEqual implements CSTI{
-	
-	private int callRouterLen = 6;
+public class UD_CallDataTreatEqualCount implements CSTI{
+	private int callRouterLen = 4;
 	private int dataRouterLen = 2;
 	private double[][] callGraphs;
 	private double[][] dataGraphs;
@@ -44,19 +34,20 @@ public class UD_CallDataTreatEqual implements CSTI{
 	
 	protected Map<Integer, String> vertexIdNameMap;
 	private Map<String,Set<String>> valid;
-	private double percent;
+	private int verifyCount;
 	private Set<Integer> allVertexIdList = new HashSet<Integer>();
-	private boolean hidden = true;
+	private boolean hidden = true;//
 	
 	private double callThreshold;
 	private double dataThreshold;
 	
-	private Map<Integer,Map<Integer,Double>> callRouterCache = new HashMap<Integer,Map<Integer,Double>>();
+	private Map<Integer,Map<Integer,Double>> callRouterCache = new HashMap<Integer,
+				Map<Integer,Double>>();
 	private int countThreshold = 2;
 	
 	
-	public UD_CallDataTreatEqual(RelationInfo ri,double callThreshold,double dataThreshold,
-			double percent,Map<String,Set<String>> valid){
+	public UD_CallDataTreatEqualCount(RelationInfo ri,double callThreshold,double dataThreshold,
+			int verifyCount,Map<String,Set<String>> valid){
 		allVertexIdList = ri.getVertexIdNameMap().keySet();
 		this.callThreshold = callThreshold;
 		this.dataThreshold = dataThreshold;
@@ -68,7 +59,7 @@ public class UD_CallDataTreatEqual implements CSTI{
 		
 		vertexIdNameMap = ri.getVertexIdNameMap();
 		this.valid = valid;
-		this.percent = percent;
+		this.verifyCount = verifyCount;
 	}
 	
 	
@@ -102,7 +93,7 @@ public class UD_CallDataTreatEqual implements CSTI{
 				//regard the max score in this subGraph as represent
 				int localMaxId = subGraph.getMaxId();
 				String represent = vertexIdNameMap.get(localMaxId);
-				if(index<subGraphAmount*percent){
+				if(index<=verifyCount){
 					if(valid.containsKey(req)){
 						valid.get(req).add(represent);
 					}
@@ -112,7 +103,7 @@ public class UD_CallDataTreatEqual implements CSTI{
 					}
 					subGraph.setVisited(req);
 				}
-				if(oracle.isLinkAboveThreshold(req,represent) && index<subGraphAmount*percent){//if start
+				if(oracle.isLinkAboveThreshold(req,represent) && index<=verifyCount){//if start
 					subGraph.addReq(req);
 					
 					for(int vertexId:vertexList) {
@@ -123,12 +114,25 @@ public class UD_CallDataTreatEqual implements CSTI{
 							int graphSize = subGraph.getVertexList().size();
 							//
 							//curValue = Math.min(maxScore*0.9999, curValue+maxScore/(graphSize-1));
+							//curValue = Math.min(maxScore*0.9999, curValue+maxScore/(Math.sqrt(graphSize)));
 							curValue = Math.min(maxScore*0.9999, curValue+maxScore/(graphSize));
 						}
 						matrix.setScoreForLink(req, vertexName, curValue);
 					}
 					Set<Integer> curLoneVertexList = fillLoneVertex(subGraph,
 							hasVisitedRegion,hidden);
+					/**
+					 * @date 2018.1.12
+					 * @description dont give bonus for outer vertex temperary. 
+					 */
+					/**
+					 * @date 2018.1.12
+					 * @description dont give bonus for outer vertex temperary. 
+					 */
+					List<Integer> temp = new ArrayList<Integer>();
+					temp.add(localMaxId);
+					subGraph = new SubGraph(temp);
+					
 					giveBonusForLoneNotInThisRegion(matrix, subGraph,curLoneVertexList,req);
 					hasVisitedRegion.addAll(subGraph.getVertexList());
 				}//if end
@@ -233,7 +237,7 @@ public class UD_CallDataTreatEqual implements CSTI{
 			
 			double bonus = giveBonusForLonePointBasedCallGraph(callGraphs, subGraph, loneVertex, 1);
 
-			double localMaxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(subGraph.getMaxId()));
+			//double localMaxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(subGraph.getMaxId()));
 
 			double validValueSum = maxScore * bonus;
 			//double validValueSum = (localMaxScore) * bonus;
@@ -311,7 +315,7 @@ public class UD_CallDataTreatEqual implements CSTI{
 		for (int loneVertex : loneVertexList) {
 			String loneVertexName = vertexIdNameMap.get(loneVertex);
 			double bonus = giveBonusForLonePointBasedDataGraph(dataGraphs, subGraph, loneVertex, 1);
-			double localMaxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(subGraph.getMaxId()));
+		//	double localMaxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(subGraph.getMaxId()));
 			//double validValueSum = (localMaxScore) * bonus;
 			double validValueSum = maxScore * bonus;
 			
@@ -412,7 +416,7 @@ public class UD_CallDataTreatEqual implements CSTI{
 
 	@Override
 	public String getAlgorithmName() {
-		return "UD_CallDataTreatEqual"+callThreshold+"_"+dataThreshold;
+		return "UD_CallDataTreatEqualCount"+callThreshold+"_"+dataThreshold;
 	}
 
 	@Override
@@ -440,6 +444,5 @@ public class UD_CallDataTreatEqual implements CSTI{
 		}
 		return list;
 	}
-
 
 }

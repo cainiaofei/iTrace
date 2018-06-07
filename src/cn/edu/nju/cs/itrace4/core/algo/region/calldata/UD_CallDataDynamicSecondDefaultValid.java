@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.demo.cdgraph;
+package cn.edu.nju.cs.itrace4.core.algo.region.calldata;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,14 +10,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import cn.edu.nju.cs.itrace4.core.algo.CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.prealgo.CSTI;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.document.LinksList;
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
 import cn.edu.nju.cs.itrace4.core.document.SingleLink;
 import cn.edu.nju.cs.itrace4.core.document.StringHashSet;
-import cn.edu.nju.cs.itrace4.demo.algo.SortBySubGraph;
-import cn.edu.nju.cs.itrace4.demo.algo.SortVertexByScore;
+import cn.edu.nju.cs.itrace4.core.algo.region.util.sort.SortBySubGraph;
+import cn.edu.nju.cs.itrace4.core.algo.region.util.sort.SortBySubGraph;
 import cn.edu.nju.cs.itrace4.demo.relation.StoreCallSubGraph;
 import cn.edu.nju.cs.itrace4.demo.relation.StoreDataSubGraph;
 import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
@@ -26,7 +26,7 @@ import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 import cn.edu.nju.cs.itrace4.relation.graph.CodeEdge;
 import javafx.util.Pair;
 
-public class UD_CallDataDynamicCount implements CSTI {
+public class UD_CallDataDynamicSecondDefaultValid implements CSTI{
 	private int routerLen;
 	private double[][] callGraphs;
 	private double[][] dataGraphs;
@@ -50,7 +50,7 @@ public class UD_CallDataDynamicCount implements CSTI {
 	private SimilarityMatrix matrix;
 	private int countThreshold = 2;
 	
-	public UD_CallDataDynamicCount(RelationInfo ri,double callThreshold,double dataThreshold,
+	public UD_CallDataDynamicSecondDefaultValid(RelationInfo ri,double callThreshold,double dataThreshold,
 			int verifyCount,Map<String,Set<String>> valid){
 		this.callThreshold = callThreshold;
 		this.dataThreshold = dataThreshold;
@@ -137,8 +137,9 @@ public class UD_CallDataDynamicCount implements CSTI {
 	@Override
 	public SimilarityMatrix improve(SimilarityMatrix matrix, TextDataset textDataset,
 			SimilarityMatrix similarityMatrix) {
-//		filterSubGraphsList(matrix.targetArtifactsIds(),callSubGraphList);
-//		filterSubGraphsList(matrix.targetArtifactsIds(),dataSubGraphList);
+		this.matrix = matrix;
+		filterSubGraphsList(matrix.targetArtifactsIds(),callSubGraphList);
+		filterSubGraphsList(matrix.targetArtifactsIds(),dataSubGraphList);
 		return processLoneVertexInnerMean(matrix,textDataset);
 	}
 	
@@ -188,7 +189,10 @@ public class UD_CallDataDynamicCount implements CSTI {
 				//regard the max score in this subGraph as represent
 				int localMaxId = subGraph.getMaxId();
 				String represent = vertexIdNameMap.get(localMaxId);
-				if(index<=verifyCount){
+				/**
+				 * the user needn't to justify the first, we regard it as valid by default. 
+				 */
+				if(index<=verifyCount && index!=2){
 					if(valid.containsKey(req)){
 						valid.get(req).add(represent);
 					}
@@ -198,7 +202,7 @@ public class UD_CallDataDynamicCount implements CSTI {
 					}
 					subGraph.setVisited(req);
 				}
-				if(oracle.isLinkAboveThreshold(req,represent)&&index<=verifyCount){
+				if(index==2 || (oracle.isLinkAboveThreshold(req,represent)&&index<=verifyCount)){
 					subGraph.addReq(req);
 					
 					for(int vertexId:vertexList) {
@@ -221,8 +225,8 @@ public class UD_CallDataDynamicCount implements CSTI {
 					 * @date 2017.10.30 
 					 */
 					//hasVisitedRegion.add(subGraph.getMaxId());
-					
 				}
+				
 				index++;
 				callDataSubGraphList.remove(0);
 			}///
@@ -595,7 +599,7 @@ public class UD_CallDataDynamicCount implements CSTI {
 	@Override
 	public String getAlgorithmName() {
 		// TODO Auto-generated method stub
-		return "UD_CallDataDynamicCount_"+callThreshold+"_"+dataThreshold;
+		return "UD_CallDataDynamicSecondDefaultValid_"+callThreshold+"_"+dataThreshold;
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.demo.cdgraph;
+package cn.edu.nju.cs.itrace4.core.algo.region.calldata;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,14 +10,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import cn.edu.nju.cs.itrace4.core.algo.CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.prealgo.CSTI;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.document.LinksList;
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
 import cn.edu.nju.cs.itrace4.core.document.SingleLink;
 import cn.edu.nju.cs.itrace4.core.document.StringHashSet;
-import cn.edu.nju.cs.itrace4.demo.algo.SortBySubGraph;
-import cn.edu.nju.cs.itrace4.demo.algo.SortVertexByScore;
+import cn.edu.nju.cs.itrace4.core.algo.region.util.sort.SortBySubGraph;
+import cn.edu.nju.cs.itrace4.core.algo.region.util.sort.SortBySubGraph;
 import cn.edu.nju.cs.itrace4.demo.relation.StoreCallSubGraph;
 import cn.edu.nju.cs.itrace4.demo.relation.StoreDataSubGraph;
 import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
@@ -26,7 +26,7 @@ import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 import cn.edu.nju.cs.itrace4.relation.graph.CodeEdge;
 import javafx.util.Pair;
 
-public class UD_CallDataDynamicLastDefaultFailure implements CSTI{
+public class UD_CallDataDynamicValidCount implements CSTI{
 	private int routerLen;
 	private double[][] callGraphs;
 	private double[][] dataGraphs;
@@ -37,14 +37,7 @@ public class UD_CallDataDynamicLastDefaultFailure implements CSTI{
 	
 	protected Map<Integer, String> vertexIdNameMap;
 	private Map<String,Set<String>> valid;
-	/**
-	 * @author zzf
-	 * @date 2017.11.06
-	 * @description ignore the last percent subGraph and regard them as false by default. 
-	 */
-	private double justifyPercent;
-	private double ignorePercent;
-	
+	private int validCount;
 	private Set<Integer> allVertexIdList = new HashSet<Integer>();
 	private boolean hidden = true;
 	private Set<Integer> absoluteLoneVertexSet = new HashSet<Integer>();
@@ -57,8 +50,8 @@ public class UD_CallDataDynamicLastDefaultFailure implements CSTI{
 	private SimilarityMatrix matrix;
 	private int countThreshold = 2;
 	
-	public UD_CallDataDynamicLastDefaultFailure(RelationInfo ri,double callThreshold,double dataThreshold,
-			double justifyPercent,Map<String,Set<String>> valid, double ignorePercent){
+	public UD_CallDataDynamicValidCount(RelationInfo ri,double callThreshold,double dataThreshold,
+			int validCount,Map<String,Set<String>> valid){
 		this.callThreshold = callThreshold;
 		this.dataThreshold = dataThreshold;
 		
@@ -74,10 +67,7 @@ public class UD_CallDataDynamicLastDefaultFailure implements CSTI{
 		dataGraphs = describeDataGraphWithMatrix(new CallDataRelationGraph(ri).dataEdgeScoreMap,ri.getVertexes().size());
 		vertexIdNameMap = ri.getVertexIdNameMap();
 		this.valid = valid;
-		
-		this.justifyPercent = justifyPercent;
-		this.ignorePercent = ignorePercent;
-		
+		this.validCount = validCount;
 		this.routerLen = Integer.valueOf(System.getProperty("routerLen"));
 		if(routerLen==0) {
 			System.err.println("---err---");
@@ -186,16 +176,6 @@ public class UD_CallDataDynamicLastDefaultFailure implements CSTI{
 			//int subGraphAmount = callDataSubGraphList.size() - loneVertexSize;
 			int subGraphAmount = callDataSubGraphList.size();
 			Set<Integer> hasVisitedRegion = new HashSet<Integer>();
-			/**
-			 * @author zzf <tiaozhanzhe668@163.com>
-			 * @date 2017.11.06
-			 * @description regard the last <code>ignorePercent</code> class as failure by default. 
-			 */
-			int ignoreDefault = (int) (callDataSubGraphList.size()*(1-ignorePercent));
-			for(int i=ignoreDefault;i<callDataSubGraphList.size();i++) {
-				hasVisitedRegion.addAll(callDataSubGraphList.get(i).getVertexList());
-			}
-			
 			//for(SubGraph subGraph:callDataSubGraphList){//subGraph
 			while(callDataSubGraphList.size()!=0) {
 				Collections.sort(callDataSubGraphList,new SortBySubGraph(vertexIdNameMap,matrix,req));
@@ -209,7 +189,7 @@ public class UD_CallDataDynamicLastDefaultFailure implements CSTI{
 				//regard the max score in this subGraph as represent
 				int localMaxId = subGraph.getMaxId();
 				String represent = vertexIdNameMap.get(localMaxId);
-				if(index<subGraphAmount*justifyPercent){
+				if(index<=validCount){
 					if(valid.containsKey(req)){
 						valid.get(req).add(represent);
 					}
@@ -219,7 +199,7 @@ public class UD_CallDataDynamicLastDefaultFailure implements CSTI{
 					}
 					subGraph.setVisited(req);
 				}
-				if(oracle.isLinkAboveThreshold(req,represent)&&index<subGraphAmount*justifyPercent){
+				if(oracle.isLinkAboveThreshold(req,represent)&&index<=validCount){
 					subGraph.addReq(req);
 					
 					for(int vertexId:vertexList) {
@@ -242,9 +222,9 @@ public class UD_CallDataDynamicLastDefaultFailure implements CSTI{
 					 * @date 2017.10.30 
 					 */
 					//hasVisitedRegion.add(subGraph.getMaxId());
-					
+					index++;
 				}
-				index++;
+//				index++;
 				callDataSubGraphList.remove(0);
 			}///
 		}//req
@@ -616,7 +596,7 @@ public class UD_CallDataDynamicLastDefaultFailure implements CSTI{
 	@Override
 	public String getAlgorithmName() {
 		// TODO Auto-generated method stub
-		return "UD_CallDataDynamicLastDefaultFailure_"+callThreshold+"_"+dataThreshold;
+		return "UD_CallDataDynamicValidCount_"+callThreshold+"_"+dataThreshold;
 	}
 
 	@Override

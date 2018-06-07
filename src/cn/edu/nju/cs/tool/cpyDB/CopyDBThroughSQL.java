@@ -45,8 +45,6 @@ public class CopyDBThroughSQL {
 		ResultSet rs = originDBOperate.executeQuery(query);
 		String base = "insert into " + targetTable;
 		
-		S
-		
 		targetDBOperate.closeConnection();
 	}
 	
