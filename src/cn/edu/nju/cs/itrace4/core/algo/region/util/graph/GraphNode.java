@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.demo.datastruct;
+package cn.edu.nju.cs.itrace4.core.algo.region.util.graph;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,8 @@ import java.util.List;
 /**
  * @author zzf
  * @date 2018.4.22
- * @description in order to find the node which has not been called by node in region, build this new class.   
+ * @description in order to find the node which has not been called by node in region, 
+ * 		build this new class.   who I am, who call me, I call who?
  */
 
 public class GraphNode {

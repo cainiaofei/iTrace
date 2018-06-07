@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.demo.cdgraph.inneroutter;
+package cn.edu.nju.cs.itrace4.core.algo.region.calldata.innerBonus;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,6 +23,11 @@ import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 import cn.edu.nju.cs.itrace4.relation.graph.CodeEdge;
 import javafx.util.Pair;
 
+/**
+ * @author zzf
+ * @description the paper "Combining User Feedback with Closeness Analysis on Code to Improve IR-Based
+ * 		 Traceability Recovery"(**rejected**) use this algorithm. 
+ */
 
 public class UD_InnerAndOuterSeq implements CSTI{
 	private int callRouterLen = 4;
@@ -123,16 +128,6 @@ public class UD_InnerAndOuterSeq implements CSTI{
 					subGraph.setVisited(req);
 				}
 				
-//				if(req.equals("UC18") && index<=verifyCount) {
-//					if(oracle.isLinkAboveThreshold(req,represent)) {
-//						validSet.add(represent);
-//					} 
-//					else {
-//						noValidSet.add(represent);
-//					}
-//				}
-				
-				
 				if(oracle.isLinkAboveThreshold(req,represent) && index<=verifyCount){//if start
 					subGraph.addReq(req);
 					/**
@@ -145,7 +140,6 @@ public class UD_InnerAndOuterSeq implements CSTI{
 					SubGraph newSubGraph =  new SubGraph(temp);
 					
 					Map<Integer,Double> outerBonusMap = new HashMap<Integer,Double>();
-//					double localMaxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(localMaxId));
 					for(int vertexId:vertexList) {
 						if(vertexId==localMaxId) {
 							continue;
@@ -170,8 +164,6 @@ public class UD_InnerAndOuterSeq implements CSTI{
 							int graphSize = subGraph.getVertexList().size();
 							//2018.1.13
 							double originValue = curValue;
-							//curValue = Math.min(maxScore*0.9999, curValue+maxScore/(graphSize-1));
-							//curValue = Math.min(maxScore*0.9999, curValue+maxScore/(Math.sqrt(graphSize)));
 							
 							double innerBonus = maxScore/(graphSize);
 							//bonus = Math.sqrt(bonus);

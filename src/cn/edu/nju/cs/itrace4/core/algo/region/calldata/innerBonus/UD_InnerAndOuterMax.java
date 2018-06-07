@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.demo.cdgraph.inneroutter;
+package cn.edu.nju.cs.itrace4.core.algo.region.calldata.innerBonus;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,13 +9,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import cn.edu.nju.cs.itrace4.core.algo.CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.prealgo.CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.region.util.sort.SortBySubGraph;
+import cn.edu.nju.cs.itrace4.core.algo.region.util.sort.SortVertexByScore;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.document.LinksList;
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
 import cn.edu.nju.cs.itrace4.core.document.SingleLink;
-import cn.edu.nju.cs.itrace4.demo.algo.SortBySubGraph;
-import cn.edu.nju.cs.itrace4.demo.algo.SortVertexByScore;
 import cn.edu.nju.cs.itrace4.demo.relation.StoreDataSubGraphRemoveEdge;
 import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
 import cn.edu.nju.cs.itrace4.relation.CallDataRelationGraph;
@@ -23,6 +23,12 @@ import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 import cn.edu.nju.cs.itrace4.relation.graph.CodeEdge;
 import javafx.util.Pair;
 
+/**
+ * @description  the UD_InnerAndOuterSeq  `IRin = (IRcurrent + maxScore/regionSize)*
+ * (1+BonusDC+ClosenessCD(x))`
+ * this algorithm(UD_InnerAndOuterMax)  `IRin = (IRcurrent + maxScore/regionSize)*
+ * (1+(BonusDC+ClosenessCD(x))*localMaxScore)`
+ */
 
 public class UD_InnerAndOuterMax implements CSTI{
 	private int callRouterLen = 4;
@@ -66,9 +72,7 @@ public class UD_InnerAndOuterMax implements CSTI{
 	public SimilarityMatrix optimizeIRMatrix(SimilarityMatrix matrix, TextDataset textDataset) {
 		 
 		 SimilarityMatrix oracle = textDataset.getRtm();
-		 
 		 int loneVertexSize = getRegionCountWhichHasOnlyOneVertex(regionList);
-		 
 		 for(String req:matrix.sourceArtifactsIds()){
 			List<SubGraph> curRegionList = new ArrayList<SubGraph>(regionList);
 			//it will get maxId for every subGraph after sort.
@@ -132,7 +136,6 @@ public class UD_InnerAndOuterMax implements CSTI{
 					 * @author zzf
 					 * @description inner bonus
 					 * */
-					
 					for(int vertexId:vertexList) {
 						String vertexName = vertexIdNameMap.get(vertexId);
 						double curValue = matrix.getScoreForLink(req, vertexName);
@@ -307,11 +310,6 @@ public class UD_InnerAndOuterMax implements CSTI{
 			String loneVertexName = vertexIdNameMap.get(loneVertex);
 			
 			double bonus = giveBonusForLonePointBasedCallGraph(callGraphs, subGraph, loneVertex, 1);
-
-		//	double localMaxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(subGraph.getMaxId()));
-
-			//System.out.println("outBonus:"+bonus);
-			
 			double validValueSum = maxScore * bonus;
 			//double validValueSum = (localMaxScore) * bonus;
 			double originValue = matrix.getScoreForLink(req, loneVertexName);

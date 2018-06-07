@@ -1,4 +1,5 @@
-package cn.edu.nju.cs.itrace4.demo.noud;
+package cn.edu.nju.cs.itrace4.core.algo.region.withoutud;
+
 
 
 import java.io.BufferedWriter;
@@ -19,15 +20,15 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.apache.commons.math3.stat.inference.MannWhitneyUTest;
 import org.xml.sax.SAXException;
 
-import cn.edu.nju.cs.itrace4.core.algo.None_CSTI;
-import cn.edu.nju.cs.itrace4.core.algo.UD_CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.prealgo.None_CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.prealgo.UD_CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.region.calldata.UD_CallDataDynamic;
+import cn.edu.nju.cs.itrace4.core.algo.region.calldata.UD_CallDataDynamicCount;
+import cn.edu.nju.cs.itrace4.core.algo.region.calldata.UD_CallDataDynamicFirstDefaultValid;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
 import cn.edu.nju.cs.itrace4.demo.FileParse.XmlParse;
-import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataDynamic;
-import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataDynamicCount;
-import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataDynamicFirstDefaultValid;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
 import cn.edu.nju.cs.itrace4.demo.exp.project.JhotDraw;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Maven;
