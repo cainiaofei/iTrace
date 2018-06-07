@@ -1,5 +1,4 @@
-package cn.edu.nju.cs.itrace4.demo.cdgraph.temp;
-
+package cn.edu.nju.cs.itrace4.core.algo.region.calldata;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,9 +23,8 @@ import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 import cn.edu.nju.cs.itrace4.relation.graph.CodeEdge;
 import javafx.util.Pair;
 
-
-public class NoOutter implements CSTI{
-	private int callRouterLen = 4;
+public class UD_CallDataTreatEqualCountTemp implements CSTI{
+	private int callRouterLen = 6;
 	private int dataRouterLen = 2;
 	private double[][] callGraphs;
 	private double[][] dataGraphs;
@@ -47,7 +45,7 @@ public class NoOutter implements CSTI{
 	private int countThreshold = 2;
 	
 	
-	public NoOutter(RelationInfo ri,double callThreshold,double dataThreshold,
+	public UD_CallDataTreatEqualCountTemp(RelationInfo ri,double callThreshold,double dataThreshold,
 			int verifyCount,Map<String,Set<String>> valid){
 		allVertexIdList = ri.getVertexIdNameMap().keySet();
 		this.callThreshold = callThreshold;
@@ -85,9 +83,6 @@ public class NoOutter implements CSTI{
 			while(curRegionList.size() != 0) {
 				Collections.sort(curRegionList,new SortBySubGraph(vertexIdNameMap,matrix,req));
 				SubGraph subGraph = curRegionList.get(0);
-				
-				double meanCloseness = showClosenessInGraph(subGraph);
-				
 				List<Integer> vertexList = subGraph.getVertexList();
 				Collections.sort(vertexList, new SortVertexByScore(vertexIdNameMap,matrix,req));
 				if(vertexList.size()<countThreshold){
@@ -116,24 +111,10 @@ public class NoOutter implements CSTI{
 						//double preValue = curValue;
 						if(!vertexName.equals(represent)){
 							int graphSize = subGraph.getVertexList().size();
-							//2018.1.13
-							double originValue = curValue;
+							//
 							//curValue = Math.min(maxScore*0.9999, curValue+maxScore/(graphSize-1));
 							//curValue = Math.min(maxScore*0.9999, curValue+maxScore/(Math.sqrt(graphSize)));
-							
-							double bonus = maxScore/(graphSize);
-							//bonus = Math.sqrt(bonus);
-							
-							//2018.1.18
-							//double bonus = maxScore * meanCloseness;
-							
-							curValue = Math.min(maxScore*0.9999, curValue+bonus);
-							/**
-							 * @date 2018.1.13
-							 * @description store the max bonus. 
-							 */
-							
-							subGraph.setMaxBonus(Math.max(subGraph.getMaxBonus(), bonus));
+							curValue = Math.min(maxScore*0.9999, curValue+maxScore/(graphSize));
 						}
 						matrix.setScoreForLink(req, vertexName, curValue);
 					}
@@ -143,11 +124,7 @@ public class NoOutter implements CSTI{
 					 * @date 2018.1.12
 					 * @description dont give bonus for outer vertex temperary. 
 					 */
-//					List<Integer> temp = new ArrayList<Integer>();
-//					temp.add(localMaxId);
-//					subGraph = new SubGraph(temp);
-					
-				    giveBonusForLoneNotInThisRegion(matrix, subGraph,curLoneVertexList,req);
+					//giveBonusForLoneNotInThisRegion(matrix, subGraph,curLoneVertexList,req);
 					hasVisitedRegion.addAll(subGraph.getVertexList());
 				}//if end
 				index++;
@@ -168,30 +145,6 @@ public class NoOutter implements CSTI{
 		return res;
 	}
 	
-	private double showClosenessInGraph(SubGraph subGraph) {
-		List<Double> list = new LinkedList<Double>();
-		int[] nums = new int[subGraph.getVertexList().size()];
-		for(int i = 0; i < nums.length;i++) {
-			nums[i] = subGraph.getVertexList().get(i);
-		}
-		for(int i = 0; i < nums.length;i++) {
-			for(int j = 0; j < nums.length;j++) {
-//				System.out.println(nums[i]+"-----"+nums[j]);
-//				System.out.println("call:"+callGraphs[nums[i]][nums[j]]+
-//						"data:"+dataGraphs[nums[i]][nums[j]]);
-				list.add(callGraphs[nums[i]][nums[j]]);
-				list.add(dataGraphs[nums[i]][nums[j]]);
-			}
-		}//outer for
-		Collections.sort(list, Collections.reverseOrder());
-		double sum = 0;
-		for(int i = 0; i < nums.length-1;i++) {
-			sum += list.get(i);
-		}
-		return sum / (nums.length-1);
-	}
-
-
 	private void giveBonusForLoneNotInThisRegion(SimilarityMatrix matrix, SubGraph subGraph,
 			Set<Integer> curLoneVertexList,String req) {
 		giveBonusBasedCallGraph(matrix, subGraph, curLoneVertexList,req);
@@ -275,17 +228,16 @@ public class NoOutter implements CSTI{
 			
 			double bonus = giveBonusForLonePointBasedCallGraph(callGraphs, subGraph, loneVertex, 1);
 
-		//	double localMaxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(subGraph.getMaxId()));
+			double localMaxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(subGraph.getMaxId()));
 
-			
-			double validValueSum = maxScore * bonus;
-			//double validValueSum = (localMaxScore) * bonus;
+			/**
+			 * @date  
+			 */
+			//double validValueSum = maxScore * bonus;
+			double validValueSum = (localMaxScore) * bonus;
 			double originValue = matrix.getScoreForLink(req, loneVertexName);
 			double nowValue = originValue + validValueSum;
-			//2018.1.13
 			nowValue = Math.min(nowValue, maxScore);
-			//nowValue = Math.min(nowValue, originValue+subGraph.getMaxBonus());
-			
 			matrix.setScoreForLink(req, loneVertexName, nowValue);
 		}
 	}
@@ -357,19 +309,13 @@ public class NoOutter implements CSTI{
 		for (int loneVertex : loneVertexList) {
 			String loneVertexName = vertexIdNameMap.get(loneVertex);
 			double bonus = giveBonusForLonePointBasedDataGraph(dataGraphs, subGraph, loneVertex, 1);
-			//double localMaxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(subGraph.getMaxId()));
+			double localMaxScore = matrix.getScoreForLink(req, vertexIdNameMap.get(subGraph.getMaxId()));
 			//double validValueSum = (localMaxScore) * bonus;
-			//System.out.println("outer bonus:"+bonus);
-			
 			double validValueSum = maxScore * bonus;
 			
 			double originValue = matrix.getScoreForLink(req, loneVertexName);
 			double nowValue = originValue + validValueSum;
-			
-			//2018.1.13
 			nowValue = Math.min(nowValue, maxScore);
-			//nowValue = Math.min(nowValue, originValue+subGraph.getMaxBonus());
-			
 			matrix.setScoreForLink(req, loneVertexName, nowValue);
 		}
 		
@@ -464,7 +410,7 @@ public class NoOutter implements CSTI{
 
 	@Override
 	public String getAlgorithmName() {
-		return "NoOutter"+callThreshold+"_"+dataThreshold;
+		return "UD_CallDataTreatEqualCountTemp"+callThreshold+"_"+dataThreshold;
 	}
 
 	@Override
