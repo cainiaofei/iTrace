@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.demo.tool;
+package cn.edu.nju.cs.itrace4.tool;
 
 import java.io.BufferedWriter;
 import java.io.File;

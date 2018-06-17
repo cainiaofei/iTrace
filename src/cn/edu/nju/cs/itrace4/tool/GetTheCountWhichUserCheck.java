@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.tool;
+package cn.edu.nju.cs.itrace4.tool;
 
 import java.io.FileInputStream;
 import java.io.IOException;

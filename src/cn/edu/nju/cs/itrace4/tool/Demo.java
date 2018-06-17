@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.tool;
+package cn.edu.nju.cs.itrace4.tool;
 
 import java.awt.Color;
 import java.awt.Frame;

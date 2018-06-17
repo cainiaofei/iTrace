@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.tool;
+package cn.edu.nju.cs.itrace4.tool;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -24,14 +24,11 @@ import cn.edu.nju.cs.itrace4.core.algo.prealgo.None_CSTI;
 import cn.edu.nju.cs.itrace4.core.algo.region.util.sort.SortBySubGraph;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
-import cn.edu.nju.cs.itrace4.core.document.StringHashSet;
 import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
-import cn.edu.nju.cs.itrace4.demo.FileParse.XmlParse;
 import cn.edu.nju.cs.itrace4.demo.relation.StoreCallSubGraph;
 import cn.edu.nju.cs.itrace4.demo.relation.StoreDataSubGraph;
 import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
-import cn.edu.nju.cs.itrace4.demo.tool.AnalyzeResult;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 
 public class FirstSubGraphValidPercent {
