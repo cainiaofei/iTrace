@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.tool.SlimDB;
+package cn.edu.nju.cs.itrace4.tool.SlimDB;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

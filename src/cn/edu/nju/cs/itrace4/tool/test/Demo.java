@@ -1,4 +1,5 @@
-package cn.edu.nju.cs.tool.test;
+package cn.edu.nju.cs.itrace4.tool.test;
+
 
 import java.io.File;
 import java.sql.Connection;

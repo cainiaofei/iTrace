@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.tool.cpyDB;
+package cn.edu.nju.cs.itrace4.tool.cpyDB;
 
 import java.io.BufferedReader;
 import java.io.File;

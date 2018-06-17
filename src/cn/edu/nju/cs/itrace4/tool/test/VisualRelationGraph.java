@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.tool.test;
+package cn.edu.nju.cs.itrace4.tool.test;
 
 import cn.edu.nju.cs.itrace4.core.algo.prealgo.None_CSTI;
 import cn.edu.nju.cs.itrace4.core.algo.prealgo.UseEdge;
