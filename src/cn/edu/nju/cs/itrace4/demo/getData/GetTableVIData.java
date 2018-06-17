@@ -17,7 +17,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import cn.edu.nju.cs.itrace4.core.algo.prealgo.None_CSTI;
-import cn.edu.nju.cs.itrace4.core.algo.UD_CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.prealgo.UD_CSTI;
 import cn.edu.nju.cs.itrace4.core.algo.prealgo.UseEdge;
 import cn.edu.nju.cs.itrace4.core.algo.icse.PruningCall_Data_Connection_Closenss;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;

@@ -19,7 +19,7 @@ import org.apache.commons.math3.stat.inference.MannWhitneyUTest;
 import org.xml.sax.SAXException;
 
 import cn.edu.nju.cs.itrace4.core.algo.prealgo.None_CSTI;
-import cn.edu.nju.cs.itrace4.core.algo.UD_CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.prealgo.UD_CSTI;
 import cn.edu.nju.cs.itrace4.core.algo.prealgo.UseEdge;
 import cn.edu.nju.cs.itrace4.core.algo.icse.PruningCall_Data_Connection_Closenss;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
@@ -36,7 +36,7 @@ import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
 import cn.edu.nju.cs.itrace4.demo.relation.StoreCallSubGraph;
 import cn.edu.nju.cs.itrace4.demo.relation.StoreDataSubGraph;
 import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
-import cn.edu.nju.cs.itrace4.demo.tool.AnalyzeResult;
+import cn.edu.nju.cs.itrace4.tool.AnalyzeResult;
 import cn.edu.nju.cs.itrace4.demo.visual.MyVisualCurve;
 import cn.edu.nju.cs.itrace4.exp.tool.LookForBug;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;

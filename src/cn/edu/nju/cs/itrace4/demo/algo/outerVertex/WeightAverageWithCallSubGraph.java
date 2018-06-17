@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
-import cn.edu.nju.cs.itrace4.demo.algo.SortBySubGraph;
+import cn.edu.nju.cs.itrace4.core.algo.region.util.sort.SortBySubGraph;
 import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
 
 public class WeightAverageWithCallSubGraph extends OuterVertexProcessWithCallSubGraph{
@@ -38,7 +38,7 @@ public class WeightAverageWithCallSubGraph extends OuterVertexProcessWithCallSub
 				double validSum = 0;
 				double validValueSum = 0;
 				for(SubGraph subGraph:callSubGraphList){///subGraph
-					if(subGraph.getVertexList().size()==1||!subGraph.isVisited()){
+					if(subGraph.getVertexList().size()==1||!subGraph.isVisited(req)){
 						continue;
 					}
 					double bonus = giveBonusForLonePoint(graphs,subGraph,loneVertex,1);

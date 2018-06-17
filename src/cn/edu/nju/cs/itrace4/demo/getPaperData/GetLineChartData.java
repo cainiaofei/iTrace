@@ -12,12 +12,12 @@ import java.util.Map;
 import java.util.Set;
 
 import cn.edu.nju.cs.itrace4.core.algo.prealgo.None_CSTI;
-import cn.edu.nju.cs.itrace4.core.algo.UD_CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.prealgo.UD_CSTI;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
-import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataDynamic;
-import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataTreatEqualCount;
+import cn.edu.nju.cs.itrace4.core.algo.region.calldata.UD_CallDataDynamic;
+import cn.edu.nju.cs.itrace4.core.algo.region.calldata.UD_CallDataTreatEqualCount;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Gantt;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Infinispan;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;

@@ -15,11 +15,11 @@ import java.util.Set;
 import org.apache.commons.math3.stat.inference.MannWhitneyUTest;
 
 import cn.edu.nju.cs.itrace4.core.algo.prealgo.None_CSTI;
-import cn.edu.nju.cs.itrace4.core.algo.UD_CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.prealgo.UD_CSTI;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
-import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataDynamic;
+import cn.edu.nju.cs.itrace4.core.algo.region.calldata.UD_CallDataDynamic;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Gantt;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Maven;

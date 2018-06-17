@@ -3,7 +3,7 @@ package cn.edu.nju.cs.itrace4.demo.test;
 import cn.edu.nju.cs.itrace4.core.algo.prealgo.None_CSTI;
 import cn.edu.nju.cs.itrace4.core.algo.prealgo.O_CSTI;
 import cn.edu.nju.cs.itrace4.core.algo.prealgo.PageRank_CSTI;
-import cn.edu.nju.cs.itrace4.core.algo.UD_CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.prealgo.UD_CSTI;
 import cn.edu.nju.cs.itrace4.core.algo.prealgo.UseEdge;
 import cn.edu.nju.cs.itrace4.core.algo.icse.PruningCall_Data_Connection_Closenss;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;

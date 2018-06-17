@@ -10,7 +10,7 @@ import java.util.Set;
 
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
-import cn.edu.nju.cs.itrace4.demo.algo.SortBySubGraph;
+import cn.edu.nju.cs.itrace4.core.algo.region.util.sort.SortBySubGraph;
 import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
 
 public class WeightAverageWithDataSubGraph extends 
@@ -65,7 +65,7 @@ public class WeightAverageWithDataSubGraph extends
 						judged.put(req, new HashSet<String>());
 						judged.get(req).add(representName);
 					}
-					subGraph.setVisited(true);
+					subGraph.setVisited(req);
 				}
 				if(index<amountNeedToJudge&&oracle.isLinkAboveThreshold(req,representName)){
 					subGraph.addReq(req);

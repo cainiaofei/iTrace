@@ -1,6 +1,6 @@
 package cn.edu.nju.cs.itrace4.demo.explore;
 
-import cn.edu.nju.cs.itrace4.core.algo.CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.prealgo.CSTI;
 import cn.edu.nju.cs.itrace4.core.algo.PruningCall_Data_CSTI;
 import cn.edu.nju.cs.itrace4.demo.specifyMixture.UD_CSTI_First_Count_Percent;
 import cn.edu.nju.cs.itrace4.core.algo.prealgo.UseEdge;
