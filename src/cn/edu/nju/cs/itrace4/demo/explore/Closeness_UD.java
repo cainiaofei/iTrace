@@ -3,7 +3,7 @@ package cn.edu.nju.cs.itrace4.demo.explore;
 import cn.edu.nju.cs.itrace4.core.algo.CSTI;
 import cn.edu.nju.cs.itrace4.core.algo.PruningCall_Data_CSTI;
 import cn.edu.nju.cs.itrace4.demo.specifyMixture.UD_CSTI_First_Count_Percent;
-import cn.edu.nju.cs.itrace4.core.algo.UseEdge;
+import cn.edu.nju.cs.itrace4.core.algo.prealgo.UseEdge;
 import cn.edu.nju.cs.itrace4.core.algo.icse.PruningCall_Data_Connection_Closenss;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.document.LinksList;

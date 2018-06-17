@@ -1,6 +1,6 @@
 package cn.edu.nju.cs.itrace4.exp.etour;
 
-import cn.edu.nju.cs.itrace4.core.algo.None_CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.prealgo.None_CSTI;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.ir.IRModelConst;
@@ -16,10 +16,10 @@ public class ETourIR {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 //        TextDataset textDataset = new TextDataset(ETOUR_CONSTANTS.ucPath, ETOUR_CONSTANTS.classDirPath, ETOUR_CONSTANTS.rtmClassPath);
-        TextDataset textDataset = new TextDataset(ETOUR_CONSTANTS.ucPath, ETOUR_CONSTANTS.classDirPath, ETOUR_CONSTANTS.rtmClassPath);
+          TextDataset textDataset = new TextDataset(ETOUR_CONSTANTS.ucPath, ETOUR_CONSTANTS.classDirPath, ETOUR_CONSTANTS.rtmClassPath);
 
 //        Result result_ir = IR.compute(textDataset, IRModelConst.VSM, new None_CSTI());
-            Result result_ir_all = IR.compute(textDataset, IRModelConst.JSD, new None_CSTI());
+          Result result_ir_all = IR.compute(textDataset, IRModelConst.JSD, new None_CSTI());
 //        Result result_ir_o = IR.compute(textDataset, IRModelConst.VSM_ALL, new O_CSTI());
 //        Result result_ir_ud = IR.compute(textDataset, IRModelConst.VSM_ALL, new None_CSTI());
 //        Result result_ir_vsm_both = IR.compute(textDataset, IRModelConst.VSM_Both, new None_CSTI());
