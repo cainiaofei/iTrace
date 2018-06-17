@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.refactor.exp.out;
+package cn.edu.nju.cs.itrace4.exp.out;
 
 import java.io.BufferedWriter;
 import java.io.File;

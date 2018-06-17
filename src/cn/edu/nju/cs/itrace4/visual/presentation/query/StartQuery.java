@@ -32,11 +32,11 @@ import javax.swing.JToolBar;
 import cn.edu.nju.cs.itrace4.core.document.LinksList;
 import cn.edu.nju.cs.itrace4.core.document.SingleLink;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
+import cn.edu.nju.cs.itrace4.exp.input.ModelFactory;
+import cn.edu.nju.cs.itrace4.exp.input.ModelFactoryImp;
 import cn.edu.nju.cs.itrace4.visual.presentation.CodeDependencyDisplay;
 import cn.edu.nju.cs.itrace4.visual.presentation.IRCompute;
 import cn.edu.nju.cs.itrace4.visual.presentation.PDFGenerate;
-import cn.edu.nju.cs.refactor.exp.input.ModelFactory;
-import cn.edu.nju.cs.refactor.exp.input.ModelFactoryImp;
 
 public class StartQuery implements ActionListener{
 	private String model;

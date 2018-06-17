@@ -18,8 +18,8 @@ import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
 import cn.edu.nju.cs.itrace4.relation.CallDataRelationGraph;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 import cn.edu.nju.cs.itrace4.relation.graph.CodeEdge;
-import cn.edu.nju.cs.refactor.util.FileWrite;
-import cn.edu.nju.cs.refactor.util.FileWriterImp;
+import cn.edu.nju.cs.itrace4.util.FileWrite;
+import cn.edu.nju.cs.itrace4.util.FileWriterImp;
 
 /**
  * @date 2018.5.28

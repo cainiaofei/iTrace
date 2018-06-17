@@ -27,9 +27,9 @@ import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
 import cn.edu.nju.cs.itrace4.relation.CallDataRelationGraph;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 import cn.edu.nju.cs.itrace4.relation.graph.CodeEdge;
-import cn.edu.nju.cs.refactor.exception.FileException;
-import cn.edu.nju.cs.refactor.util.FileProcess;
-import cn.edu.nju.cs.refactor.util.FileProcessTool;
+import cn.edu.nju.cs.itrace4.util.FileProcess;
+import cn.edu.nju.cs.itrace4.util.FileProcessTool;
+import cn.edu.nju.cs.itrace4.util.exception.FileException;
 import javafx.util.Pair;
 
 

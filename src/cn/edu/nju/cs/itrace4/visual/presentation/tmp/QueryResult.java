@@ -34,14 +34,14 @@ import javax.swing.table.DefaultTableCellRenderer;
 import cn.edu.nju.cs.itrace4.core.document.LinksList;
 import cn.edu.nju.cs.itrace4.core.document.SingleLink;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
+import cn.edu.nju.cs.itrace4.exp.input.ModelFactory;
+import cn.edu.nju.cs.itrace4.exp.input.ModelFactoryImp;
+import cn.edu.nju.cs.itrace4.util.FileProcess;
+import cn.edu.nju.cs.itrace4.util.FileProcessTool;
+import cn.edu.nju.cs.itrace4.util.exception.FileException;
 import cn.edu.nju.cs.itrace4.visual.presentation.CodeDependencyDisplay;
 import cn.edu.nju.cs.itrace4.visual.presentation.IRCompute;
 import cn.edu.nju.cs.itrace4.visual.presentation.PDFGenerate;
-import cn.edu.nju.cs.refactor.exception.FileException;
-import cn.edu.nju.cs.refactor.exp.input.ModelFactory;
-import cn.edu.nju.cs.refactor.exp.input.ModelFactoryImp;
-import cn.edu.nju.cs.refactor.util.FileProcess;
-import cn.edu.nju.cs.refactor.util.FileProcessTool;
 
 public class QueryResult{
 	private String filePath = "tempUC/UC18.txt";

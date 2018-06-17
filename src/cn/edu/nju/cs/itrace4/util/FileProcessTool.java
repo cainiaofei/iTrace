@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.refactor.util;
+package cn.edu.nju.cs.itrace4.util;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -8,7 +8,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import cn.edu.nju.cs.refactor.exception.FileException;
+import cn.edu.nju.cs.itrace4.util.exception.FileException;
 
 /**
  * @author zzf

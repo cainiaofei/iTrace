@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.refactor.exp.input;
+package cn.edu.nju.cs.itrace4.exp.input;
 
 import cn.edu.nju.cs.itrace4.demo.exp.project.Infinispan;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;

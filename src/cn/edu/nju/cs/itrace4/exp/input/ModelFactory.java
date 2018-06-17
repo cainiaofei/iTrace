@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.refactor.exp.input;
+package cn.edu.nju.cs.itrace4.exp.input;
 /**
  * @date 2018.1.22
  * @author zzf

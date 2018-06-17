@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.refactor.plug;
+package cn.edu.nju.cs.itrace4.util;
 
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
 

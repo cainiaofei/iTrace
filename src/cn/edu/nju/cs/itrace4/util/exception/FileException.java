@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.refactor.exception;
+package cn.edu.nju.cs.itrace4.util.exception;
 
 public class FileException extends SelfDefineException{
 	private static final long serialVersionUID = 1L;

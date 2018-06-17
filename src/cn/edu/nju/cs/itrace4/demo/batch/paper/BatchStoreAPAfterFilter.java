@@ -37,12 +37,12 @@ import cn.edu.nju.cs.itrace4.demo.exp.project.Pig;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Pig_Cluster;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
+import cn.edu.nju.cs.itrace4.util.FileProcess;
+import cn.edu.nju.cs.itrace4.util.FileProcessTool;
+import cn.edu.nju.cs.itrace4.util.FindBadReq;
+import cn.edu.nju.cs.itrace4.util.Plug;
 import cn.edu.nju.cs.itrace4.util.Setting;
-import cn.edu.nju.cs.refactor.exception.FileException;
-import cn.edu.nju.cs.refactor.plug.FindBadReq;
-import cn.edu.nju.cs.refactor.plug.Plug;
-import cn.edu.nju.cs.refactor.util.FileProcess;
-import cn.edu.nju.cs.refactor.util.FileProcessTool;
+import cn.edu.nju.cs.itrace4.util.exception.FileException;
 
 /**
  * @author zzf

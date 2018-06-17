@@ -22,8 +22,8 @@ import cn.edu.nju.cs.itrace4.relation.RelationGraph;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 import cn.edu.nju.cs.itrace4.relation.graph.CodeEdge;
 import cn.edu.nju.cs.itrace4.relation.graph.CodeVertex;
-import cn.edu.nju.cs.refactor.util.FileProcess;
-import cn.edu.nju.cs.refactor.util.FileProcessTool;
+import cn.edu.nju.cs.itrace4.util.FileProcess;
+import cn.edu.nju.cs.itrace4.util.FileProcessTool;
 import javafx.util.Pair;
 
 public class UDAndCluster implements CSTI{

@@ -20,10 +20,10 @@ import javax.swing.JTextPane;
     import javax.swing.text.StyleConstants;
     import javax.swing.text.StyleContext;
 
+import cn.edu.nju.cs.itrace4.util.FileProcess;
+import cn.edu.nju.cs.itrace4.util.FileProcessTool;
+import cn.edu.nju.cs.itrace4.util.exception.FileException;
 import cn.edu.nju.cs.itrace4.visual.presentation.demo.KeywordStyledDocument;
-import cn.edu.nju.cs.refactor.exception.FileException;
-import cn.edu.nju.cs.refactor.util.FileProcess;
-import cn.edu.nju.cs.refactor.util.FileProcessTool;
 
     public class CodeDisplay extends JFrame {
     	private String stopWordsList = "./data/exp/stopwords/stop-words_english_1_en.txt";

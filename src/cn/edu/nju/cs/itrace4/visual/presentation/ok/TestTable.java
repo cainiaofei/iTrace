@@ -27,13 +27,13 @@ import javax.swing.table.DefaultTableModel;
 import cn.edu.nju.cs.itrace4.core.document.LinksList;
 import cn.edu.nju.cs.itrace4.core.document.SingleLink;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
+import cn.edu.nju.cs.itrace4.exp.input.ModelFactory;
+import cn.edu.nju.cs.itrace4.exp.input.ModelFactoryImp;
+import cn.edu.nju.cs.itrace4.util.FileProcess;
+import cn.edu.nju.cs.itrace4.util.FileProcessTool;
+import cn.edu.nju.cs.itrace4.util.exception.FileException;
 import cn.edu.nju.cs.itrace4.visual.presentation.demo.QueryResult.MyCellRenderer;
 import cn.edu.nju.cs.itrace4.visual.presentation.result.UDCompute;
-import cn.edu.nju.cs.refactor.exception.FileException;
-import cn.edu.nju.cs.refactor.exp.input.ModelFactory;
-import cn.edu.nju.cs.refactor.exp.input.ModelFactoryImp;
-import cn.edu.nju.cs.refactor.util.FileProcess;
-import cn.edu.nju.cs.refactor.util.FileProcessTool;
 
 public class TestTable {
 	

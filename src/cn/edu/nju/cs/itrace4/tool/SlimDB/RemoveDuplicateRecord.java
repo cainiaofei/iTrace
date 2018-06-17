@@ -10,8 +10,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import cn.edu.nju.cs.itrace4.preprocess.rawdata.db.SqliteOperation;
-import cn.edu.nju.cs.refactor.util.FileProcess;
-import cn.edu.nju.cs.refactor.util.FileProcessTool;
+import cn.edu.nju.cs.itrace4.util.FileProcess;
+import cn.edu.nju.cs.itrace4.util.FileProcessTool;
 
 
 /**

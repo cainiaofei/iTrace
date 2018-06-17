@@ -6,8 +6,8 @@ import java.sql.SQLException;
 import cn.edu.nju.cs.itrace4.exp.tool.GetUC;
 import cn.edu.nju.cs.itrace4.preprocess.TextPreprocessor;
 import cn.edu.nju.cs.itrace4.preprocess.rawdata.db.SqliteOperation;
-import cn.edu.nju.cs.refactor.util.FileWrite;
-import cn.edu.nju.cs.refactor.util.FileWriterImp;
+import cn.edu.nju.cs.itrace4.util.FileWrite;
+import cn.edu.nju.cs.itrace4.util.FileWriterImp;
 
 public class GetReqInIssueDB {
 	private FileWrite fileWrite;
