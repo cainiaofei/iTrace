@@ -17,7 +17,9 @@ import cn.edu.nju.cs.itrace4.core.algo.icse.PruningCall_Data_Connection_Closenss
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
+import cn.edu.nju.cs.itrace4.demo.algo.verifiedfront.evalute.UDCodeRegion;
 import cn.edu.nju.cs.itrace4.demo.cdgraph.inneroutter.UD_InnerAndOuterSeq;
+import cn.edu.nju.cs.itrace4.demo.exp.project.Gantt;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Infinispan;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Maven_TestCase;
@@ -64,6 +66,7 @@ public class BatchStorePngPercent {
 		projectMap.put("infinispan", new Infinispan());
 		projectMap.put("pig", new Pig());
 		projectMap.put("maven_testcase", new Maven_TestCase());
+		projectMap.put("gantt", new Gantt());
 	}
 	
 	private void init() {
@@ -124,12 +127,10 @@ public class BatchStorePngPercent {
         Result result_ir = IR.compute(textDataset, model, new None_CSTI());
         Result result_UD_CSTI = IR.compute(textDataset, model, new UD_CSTI(ri));
         
-        Map<String,Set<String>> valid = new HashMap<String,Set<String>>();
         ri.setPruning(callThreshold, dataThreshold);
-        valid = new HashMap<String,Set<String>>();
         Result result_UD_CallDataTreatEqual = IR.compute(textDataset,model,
-        		new UD_InnerAndOuterSeq(ri,callThreshold,
-        			dataThreshold,userVerifyCount,valid));//0.7
+        		new UDCodeRegion(ri,callThreshold,
+        			dataThreshold));//0.7
         
         class_relation.setPruning(Setting.callThreshold, Setting.dataThreshold);
         class_relationForO.setPruning(-1, -1);
@@ -149,7 +150,7 @@ public class BatchStorePngPercent {
         //curve.addLine(result_UD_CallDataTreatEqualTemp);
         File baseFile = new File(pngPath+File.separator+project.getProjectName());
         if(!baseFile.exists()) {
-        	baseFile.mkdir();
+        	baseFile.mkdirs();
         }
         
         curve.showChart(project.getProjectName());
@@ -173,7 +174,7 @@ public class BatchStorePngPercent {
 		double percent = 0.035;
 		String projectPath = "resource/config/project.txt";
 		String modelPath = "resource/config/model.txt";
-		String pngPath = "paper/OuterInnerSeq/"+percent+File.separator+callThreshold+"-"+dataThreshold;
+		String pngPath = "paper/practice/"+File.separator+callThreshold+"-"+dataThreshold;
 		BatchStorePngPercent bsp = new BatchStorePngPercent(callThreshold,dataThreshold,
 				projectPath,modelPath,pngPath,percent);
 		bsp.batchStorePngPercent();

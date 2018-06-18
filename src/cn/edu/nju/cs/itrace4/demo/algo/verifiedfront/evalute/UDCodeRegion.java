@@ -447,7 +447,7 @@ public class UDCodeRegion implements CSTI{
 
 	@Override
 	public String getAlgorithmName() {
-		return "UD_CodeTextAsWholeInRegion"+callThreshold+"_"+dataThreshold;
+		return "UDCodeRegion"+callThreshold+"_"+dataThreshold;
 	}
 
 	@Override
