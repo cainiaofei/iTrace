@@ -11,16 +11,13 @@ public class SqliteOperation implements DBOperationInterface{
 	
 	private Connection con;
 	
-	@SuppressWarnings("finally")
 	public PreparedStatement prepareStatement(String sql) {
 		try {
 			return con.prepareStatement(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		finally {
-			return null;
-		}
+		return null;
 	}
 	
 	public void setCommit(boolean flag) {

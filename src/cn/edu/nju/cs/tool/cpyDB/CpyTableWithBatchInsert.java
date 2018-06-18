@@ -19,7 +19,7 @@ public class CpyTableWithBatchInsert {
 	
 	private String propertyPath;
 	
-	private String driver = "org.sqlite.D";
+	private String driver = "org.sqlite.JDBC";
 	private SqliteOperation originDBOperate;
 	private SqliteOperation targetDBOperate;
 	
@@ -37,7 +37,7 @@ public class CpyTableWithBatchInsert {
 		
 		this.targetDBOperate = new SqliteOperation();
 		this.targetDBOperate.buildConnection(driver, targetDBPath);
-//		this.targetDBOperate.setCommit(false);//batch insert
+		this.targetDBOperate.setCommit(false);//batch insert
 	}
 	
 	public void cpy() throws SQLException, IOException {
@@ -58,11 +58,14 @@ public class CpyTableWithBatchInsert {
 			
 			preparedStatement.addBatch();
 
-			if(count%1000000==0) {
+			if(count%100000==0) {
 				preparedStatement.executeBatch();
+				targetDBOperate.commit();
 				System.out.println("insert count:"+count);
 			}
 		}
+		preparedStatement.executeBatch();
+		targetDBOperate.commit();
 	}
 	
 	/**
@@ -112,11 +115,11 @@ public class CpyTableWithBatchInsert {
 	}
 	
 	public static void main(String[] args) {
-		String originDBPath = "/home/zzf/drools/test2.db";
-		String originTable = "fm";
-		String targetDBPath = "/home/zzf/iTrace/data/exp/Drools/relation/test2.db";
-		String targetTable = "fieldModification";
-		String propertyPath = "resource/sql/fm.property";
+		String originDBPath = "/home/zzf/sqliteOutput_Derby/test1.db";
+		String originTable = "fa";
+		String targetDBPath = "/home/zzf/iTrace/data/exp/Derby/relation/test1.db";
+		String targetTable = "fieldAccess";
+		String propertyPath = "resource/sql/fa.property";
 		CpyTableWithBatchInsert tool = new CpyTableWithBatchInsert(originDBPath,originTable,targetDBPath,
 				targetTable,propertyPath);
 		try {
