@@ -1,12 +1,8 @@
 package cn.edu.nju.cs.itrace4.gitProject;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -15,24 +11,13 @@ import org.apache.commons.math3.stat.inference.MannWhitneyUTest;
 
 import cn.edu.nju.cs.itrace4.core.algo.prealgo.None_CSTI;
 import cn.edu.nju.cs.itrace4.core.algo.prealgo.UD_CSTI;
-import cn.edu.nju.cs.itrace4.core.algo.prealgo.UseEdge;
-import cn.edu.nju.cs.itrace4.core.algo.icse.PruningCall_Data_Connection_Closenss;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.ir.IR;
-import cn.edu.nju.cs.itrace4.core.ir.IRModelConst;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
-import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.MethodTypeProcessLone;
-import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.UD_CallThenDataWithBonusForLone;
-import cn.edu.nju.cs.itrace4.core.algo.region.calldata.UD_CallDataDynamic;
-import cn.edu.nju.cs.itrace4.core.algo.region.calldata.UD_CallDataDynamicCount;
-import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataOutLevel;
 import cn.edu.nju.cs.itrace4.core.algo.region.calldata.UD_CallDataTreatEqual;
-import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataWithBonusForLone;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
-import cn.edu.nju.cs.itrace4.util.Setting;
-import cn.edu.nju.cs.itrace4.visual.MyVisualCurve;
 import cn.edu.nju.cs.itrace4.visual.VisualCurve;
 
 public class Executor implements Runnable{

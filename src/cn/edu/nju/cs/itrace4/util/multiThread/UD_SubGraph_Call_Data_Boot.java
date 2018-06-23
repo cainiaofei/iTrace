@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.demo.multiThread;
+package cn.edu.nju.cs.itrace4.util.multiThread;
 
 import java.io.FileInputStream;
 import java.io.IOException;
