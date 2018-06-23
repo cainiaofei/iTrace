@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.demo.visual;
+package cn.edu.nju.cs.itrace4.visual;
 
 import java.awt.BorderLayout;
 
@@ -10,8 +10,6 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.XYDataset;
-
-import cn.edu.nju.cs.itrace4.visual.VisualCurve;
 
 public class MyVisualCurve extends VisualCurve{
 	

@@ -36,7 +36,7 @@ import cn.edu.nju.cs.itrace4.demo.relation.StoreCallSubGraph;
 import cn.edu.nju.cs.itrace4.demo.relation.StoreDataSubGraph;
 import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
 import cn.edu.nju.cs.itrace4.tool.AnalyzeResult;
-import cn.edu.nju.cs.itrace4.demo.visual.MyVisualCurve;
+import cn.edu.nju.cs.itrace4.visual.MyVisualCurve;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
  
 public class BonusForLoneWithXml{

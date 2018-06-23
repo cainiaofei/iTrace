@@ -30,9 +30,9 @@ import cn.edu.nju.cs.itrace4.core.algo.region.calldata.UD_CallDataTreatEqual;
 import cn.edu.nju.cs.itrace4.demo.cdgraph.UD_CallDataWithBonusForLone;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
-import cn.edu.nju.cs.itrace4.demo.visual.MyVisualCurve;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 import cn.edu.nju.cs.itrace4.util.Setting;
+import cn.edu.nju.cs.itrace4.visual.MyVisualCurve;
 import cn.edu.nju.cs.itrace4.visual.VisualCurve;
 
 public class Executor implements Runnable{

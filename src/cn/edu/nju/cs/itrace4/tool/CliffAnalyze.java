@@ -33,8 +33,8 @@ import cn.edu.nju.cs.itrace4.demo.exp.project.Gantt;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
 import cn.edu.nju.cs.itrace4.demo.exp.project.JhotDraw;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
-import cn.edu.nju.cs.itrace4.demo.visual.MyVisualCurve;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
+import cn.edu.nju.cs.itrace4.visual.MyVisualCurve;
 
 public class CliffAnalyze {
 	//private StoreSubGraphInfoByThreshold storeSubGraphInfoByThreshold;

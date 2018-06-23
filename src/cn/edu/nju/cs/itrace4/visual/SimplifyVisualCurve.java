@@ -1,10 +1,11 @@
-package cn.edu.nju.cs.itrace4.demo.visual;
+package cn.edu.nju.cs.itrace4.visual;
 
 import cn.edu.nju.cs.itrace4.core.document.LinksList;
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
 import cn.edu.nju.cs.itrace4.core.document.SingleLink;
 import cn.edu.nju.cs.itrace4.core.metrics.PrecisionRecallCurve;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;

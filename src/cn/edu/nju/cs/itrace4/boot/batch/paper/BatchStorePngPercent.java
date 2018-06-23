@@ -23,12 +23,12 @@ import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Maven_TestCase;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Pig;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
-import cn.edu.nju.cs.itrace4.demo.visual.MyVisualCurve;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 import cn.edu.nju.cs.itrace4.util.FileProcess;
 import cn.edu.nju.cs.itrace4.util.FileProcessTool;
 import cn.edu.nju.cs.itrace4.util.Setting;
 import cn.edu.nju.cs.itrace4.util.exception.FileException;
+import cn.edu.nju.cs.itrace4.visual.MyVisualCurve;
 import cn.edu.nju.cs.itrace4.visual.VisualCurve;
 
 public class BatchStorePngPercent {
