@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import cn.edu.nju.cs.itrace4.core.algo.region.relation.StoreDataSubGraphRemoveEdge;
+import cn.edu.nju.cs.itrace4.core.algo.region.relation.SubGraph;
 import cn.edu.nju.cs.itrace4.core.algo.region.util.graph.GraphNode;
 import cn.edu.nju.cs.itrace4.core.algo.region.util.sort.SortByMergedClass;
 import cn.edu.nju.cs.itrace4.core.algo.region.util.sort.SortBySubGraph;
@@ -21,8 +23,6 @@ import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
 import cn.edu.nju.cs.itrace4.core.document.SingleLink;
 import cn.edu.nju.cs.itrace4.core.ir.IRModel;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
-import cn.edu.nju.cs.itrace4.demo.relation.StoreDataSubGraphRemoveEdge;
-import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
 import cn.edu.nju.cs.itrace4.relation.CallDataRelationGraph;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 import cn.edu.nju.cs.itrace4.relation.graph.CodeEdge;

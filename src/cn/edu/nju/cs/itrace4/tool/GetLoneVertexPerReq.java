@@ -6,10 +6,10 @@ import java.io.ObjectInputStream;
 import java.util.List;
 import java.util.Map;
 
+import cn.edu.nju.cs.itrace4.core.algo.region.relation.StoreCallSubGraph;
+import cn.edu.nju.cs.itrace4.core.algo.region.relation.SubGraph;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
-import cn.edu.nju.cs.itrace4.demo.relation.StoreCallSubGraph;
-import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
 import cn.edu.nju.cs.itrace4.exp.jhotdraw.JHotDraw_CONSTANTS;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 

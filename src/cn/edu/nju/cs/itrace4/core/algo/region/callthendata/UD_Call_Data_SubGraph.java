@@ -6,9 +6,9 @@ import java.io.ObjectInputStream;
 import java.util.List;
 
 import cn.edu.nju.cs.itrace4.core.algo.prealgo.CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.region.relation.StoreSubGraphInfoByThreshold;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
-import cn.edu.nju.cs.itrace4.demo.relation.StoreSubGraphInfoByThreshold;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 import javafx.util.Pair;
 

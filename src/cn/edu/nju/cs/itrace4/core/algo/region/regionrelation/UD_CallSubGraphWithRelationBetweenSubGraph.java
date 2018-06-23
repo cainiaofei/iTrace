@@ -10,6 +10,8 @@ import java.util.Map;
 import java.util.Set;
 
 import cn.edu.nju.cs.itrace4.core.algo.prealgo.CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.region.relation.StoreCallSubGraph;
+import cn.edu.nju.cs.itrace4.core.algo.region.relation.SubGraph;
 import cn.edu.nju.cs.itrace4.core.algo.region.util.sort.SortBySubGraph;
 import cn.edu.nju.cs.itrace4.core.algo.region.util.sort.SortBySubGraphInDist;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
@@ -18,8 +20,6 @@ import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
 import cn.edu.nju.cs.itrace4.core.document.SingleLink;
 import cn.edu.nju.cs.itrace4.core.document.StringHashSet;
 import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.MethodTypeProcessLone;
-import cn.edu.nju.cs.itrace4.demo.relation.StoreCallSubGraph;
-import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
 import cn.edu.nju.cs.itrace4.relation.CallDataRelationGraph;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 import cn.edu.nju.cs.itrace4.relation.graph.CodeEdge;

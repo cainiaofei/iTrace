@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.demo.relation;
+package cn.edu.nju.cs.itrace4.core.algo.region.relation;
 
 import cn.edu.nju.cs.itrace4.relation.CallDataRelationGraph;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;

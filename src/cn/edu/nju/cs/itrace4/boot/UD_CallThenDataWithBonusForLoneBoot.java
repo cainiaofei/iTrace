@@ -18,9 +18,9 @@ import cn.edu.nju.cs.itrace4.core.algo.region.callthendata.UD_CallSubGraph_Then_
 import cn.edu.nju.cs.itrace4.core.algo.region.callthendata.UD_CallThenDataWithBonusForLone;
 import cn.edu.nju.cs.itrace4.core.algo.region.callthendata.UD_SubGraphWithBonusForLone;
 import cn.edu.nju.cs.itrace4.core.algo.region.callthendata.UD_SubGraph_Closeness;
-import cn.edu.nju.cs.itrace4.demo.relation.StoreCallAndDataSubGraphByThreshold;
-import cn.edu.nju.cs.itrace4.demo.relation.StoreSubGraphInfoByThreshold;
-import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
+import cn.edu.nju.cs.itrace4.core.algo.region.relation.StoreCallAndDataSubGraphByThreshold;
+import cn.edu.nju.cs.itrace4.core.algo.region.relation.StoreSubGraphInfoByThreshold;
+import cn.edu.nju.cs.itrace4.core.algo.region.relation.SubGraph;
 import cn.edu.nju.cs.itrace4.exp.gantt.Gantt_CONSTANTS;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 import cn.edu.nju.cs.itrace4.visual.MyVisualCurve;

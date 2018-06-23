@@ -4,8 +4,8 @@ package cn.edu.nju.cs.itrace4.core.algo.region.util.sort;
 import java.util.Comparator;
 import java.util.Map;
 
+import cn.edu.nju.cs.itrace4.core.algo.region.relation.SubGraph;
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
-import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
 
 public class SortBySubGraphInDist implements Comparator<SubGraph>{
 

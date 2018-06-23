@@ -7,13 +7,13 @@ import java.util.Map;
 import java.util.Set;
 
 import cn.edu.nju.cs.itrace4.core.algo.prealgo.CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.region.relation.SubGraph;
 import cn.edu.nju.cs.itrace4.core.algo.region.util.sort.SortBySubGraph;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.document.LinksList;
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
 import cn.edu.nju.cs.itrace4.core.document.SingleLink;
 import cn.edu.nju.cs.itrace4.core.document.StringHashSet;
-import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
 import javafx.util.Pair;
 
 public class UD_SubGraph_Closeness implements CSTI{

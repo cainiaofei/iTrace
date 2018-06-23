@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.demo.relation;
+package cn.edu.nju.cs.itrace4.core.algo.region.relation;
 
 import java.util.HashMap;
 import java.util.HashSet;

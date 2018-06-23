@@ -21,14 +21,14 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import cn.edu.nju.cs.itrace4.core.algo.prealgo.None_CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.region.relation.StoreCallSubGraph;
+import cn.edu.nju.cs.itrace4.core.algo.region.relation.StoreDataSubGraph;
+import cn.edu.nju.cs.itrace4.core.algo.region.relation.SubGraph;
 import cn.edu.nju.cs.itrace4.core.algo.region.util.sort.SortBySubGraph;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
 import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
-import cn.edu.nju.cs.itrace4.demo.relation.StoreCallSubGraph;
-import cn.edu.nju.cs.itrace4.demo.relation.StoreDataSubGraph;
-import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 
 public class FirstSubGraphValidPercent {

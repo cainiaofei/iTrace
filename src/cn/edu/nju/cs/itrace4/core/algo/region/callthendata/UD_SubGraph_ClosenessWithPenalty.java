@@ -4,12 +4,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import cn.edu.nju.cs.itrace4.core.algo.region.relation.SubGraph;
 import cn.edu.nju.cs.itrace4.core.algo.region.util.sort.SortBySubGraph;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.document.LinksList;
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
 import cn.edu.nju.cs.itrace4.core.document.SingleLink;
-import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
 
 public class UD_SubGraph_ClosenessWithPenalty extends UD_SubGraph_Closeness{
 

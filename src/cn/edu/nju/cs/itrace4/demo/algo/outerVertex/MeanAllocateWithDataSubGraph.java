@@ -6,8 +6,8 @@ import java.util.Map;
 import java.util.Set;
 
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
+import cn.edu.nju.cs.itrace4.core.algo.region.relation.SubGraph;
 import cn.edu.nju.cs.itrace4.core.algo.region.util.sort.SortBySubGraph;
-import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
 
 public class MeanAllocateWithDataSubGraph extends 
 	OuterVertexProcessWithDataSubGraph{

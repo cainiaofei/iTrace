@@ -7,8 +7,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import cn.edu.nju.cs.itrace4.demo.relation.StoreCallAndDataSubGraphByThreshold;
-import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
+import cn.edu.nju.cs.itrace4.core.algo.region.relation.StoreCallAndDataSubGraphByThreshold;
+import cn.edu.nju.cs.itrace4.core.algo.region.relation.SubGraph;
 import cn.edu.nju.cs.itrace4.exp.itrust.ITRUST_CONSTANTS;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 

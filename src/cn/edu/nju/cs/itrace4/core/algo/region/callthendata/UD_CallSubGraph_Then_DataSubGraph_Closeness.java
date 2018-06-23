@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 import cn.edu.nju.cs.itrace4.core.algo.prealgo.CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.region.relation.StoreCallSubGraph;
+import cn.edu.nju.cs.itrace4.core.algo.region.relation.StoreDataSubGraph;
+import cn.edu.nju.cs.itrace4.core.algo.region.relation.SubGraph;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
-import cn.edu.nju.cs.itrace4.demo.relation.StoreCallSubGraph;
-import cn.edu.nju.cs.itrace4.demo.relation.StoreDataSubGraph;
-import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 import javafx.util.Pair;
 
