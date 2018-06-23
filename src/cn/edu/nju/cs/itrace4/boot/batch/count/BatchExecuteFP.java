@@ -13,7 +13,6 @@ import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
 import cn.edu.nju.cs.itrace4.core.algo.region.calldata.UD_CallDataTreatEqualOuterLessThanInner;
-import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
 import cn.edu.nju.cs.itrace4.exp.input.ModelFactory;
 import cn.edu.nju.cs.itrace4.exp.input.ModelFactoryImp;
 import cn.edu.nju.cs.itrace4.exp.input.ProjectFactory;
@@ -25,6 +24,7 @@ import cn.edu.nju.cs.itrace4.util.FileProcess;
 import cn.edu.nju.cs.itrace4.util.FileProcessTool;
 import cn.edu.nju.cs.itrace4.util.FileWrite;
 import cn.edu.nju.cs.itrace4.util.FileWriterImp;
+import cn.edu.nju.cs.itrace4.util.FileParse.project.Project;
 import cn.edu.nju.cs.itrace4.util.exception.FileException;
 
 /**

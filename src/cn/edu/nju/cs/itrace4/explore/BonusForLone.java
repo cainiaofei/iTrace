@@ -26,12 +26,12 @@ import cn.edu.nju.cs.itrace4.core.algo.region.callthendata.UD_CallThenDataWithBo
 import cn.edu.nju.cs.itrace4.core.algo.region.relation.StoreCallSubGraph;
 import cn.edu.nju.cs.itrace4.core.algo.region.relation.StoreDataSubGraph;
 import cn.edu.nju.cs.itrace4.core.algo.region.relation.SubGraph;
-import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
-import cn.edu.nju.cs.itrace4.demo.exp.project.JhotDraw;
-import cn.edu.nju.cs.itrace4.demo.exp.project.Gantt;
-import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 import cn.edu.nju.cs.itrace4.util.FileParse.XmlParse;
+import cn.edu.nju.cs.itrace4.util.FileParse.project.Gantt;
+import cn.edu.nju.cs.itrace4.util.FileParse.project.Itrust;
+import cn.edu.nju.cs.itrace4.util.FileParse.project.JhotDraw;
+import cn.edu.nju.cs.itrace4.util.FileParse.project.Project;
 import cn.edu.nju.cs.itrace4.visual.MyVisualCurve;
  
 public class BonusForLone{

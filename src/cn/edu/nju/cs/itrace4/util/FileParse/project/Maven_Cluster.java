@@ -1,17 +1,17 @@
-package cn.edu.nju.cs.itrace4.demo.exp.project;
+package cn.edu.nju.cs.itrace4.util.FileParse.project;
 
-public class Pig implements Project{
-	public String projectPath = "data/exp/Pig/";
+public class Maven_Cluster implements Project{
+	public String projectPath = "data/exp/Maven_Cluster/";
 	public String rtmClassPath = projectPath + "rtm/RTM_CLASS.txt";
 	public String rtmMethodPath = projectPath + "rtm/RTM_Method.txt";
 	public String ucPath = projectPath + "uc";
 	public String classDirPath = projectPath + "class/code";
 	public String class_relationInfoPath = projectPath + "relation/CLASS_relationInfo.ser";
 	public String class_relationInfoPathWhole = projectPath + "relation/CLASS_relationInfo_whole.ser";
-	public String vsmExpExportPath_ICSME = "data/exp/Pig/icsme_result/vsm";
-	public String jsExpExportPath_ICSME = "data/exp/Pig/icsme_result/js";
-	public String lsiExpExportPath_ICSME = "data/exp/Pig/icsme_result/lsi";
-	public String projectName = "Pig";
+	public String vsmExpExportPath_ICSME = "data/exp/Maven_Cluster/icsme_result/vsm";
+	public String jsExpExportPath_ICSME = "data/exp/Maven_Cluster/icsme_result/js";
+	public String lsiExpExportPath_ICSME = "data/exp/Maven_Cluster/icsme_result/lsi";
+	public String projectName = "Maven_Cluster";
 	
 	public String getProjectPath() {
 		return projectPath;

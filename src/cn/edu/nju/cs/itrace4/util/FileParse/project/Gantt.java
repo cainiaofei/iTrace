@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.demo.exp.project;
+package cn.edu.nju.cs.itrace4.util.FileParse.project;
 
 public class Gantt implements Project{
 	public String rtmClassPath = "data/exp/Gantt/rtm/RTM_CLASS.txt";

@@ -15,9 +15,9 @@ import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
 import cn.edu.nju.cs.itrace4.core.algo.region.calldata.UD_CallDataTreatEqual;
-import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
-import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
+import cn.edu.nju.cs.itrace4.util.FileParse.project.Itrust;
+import cn.edu.nju.cs.itrace4.util.FileParse.project.Project;
 import cn.edu.nju.cs.itrace4.visual.VisualCurve;
 
 public class Executor implements Runnable{

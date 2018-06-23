@@ -1,17 +1,17 @@
-package cn.edu.nju.cs.itrace4.demo.exp.project;
+package cn.edu.nju.cs.itrace4.util.FileParse.project;
 
-public class Infinispan_TestCase implements Project{
-	public String projectPath = "data/exp/Infinispan_TestCase/";
+public class Pig implements Project{
+	public String projectPath = "data/exp/Pig/";
 	public String rtmClassPath = projectPath + "rtm/RTM_CLASS.txt";
 	public String rtmMethodPath = projectPath + "rtm/RTM_Method.txt";
 	public String ucPath = projectPath + "uc";
 	public String classDirPath = projectPath + "class/code";
 	public String class_relationInfoPath = projectPath + "relation/CLASS_relationInfo.ser";
 	public String class_relationInfoPathWhole = projectPath + "relation/CLASS_relationInfo_whole.ser";
-	public String vsmExpExportPath_ICSME = "data/exp/Infinispan_TestCase/icsme_result/vsm";
-	public String jsExpExportPath_ICSME = "data/exp/Infinispan_TestCase/icsme_result/js";
-	public String lsiExpExportPath_ICSME = "data/exp/Infinispan_TestCase/icsme_result/lsi";
-	public String projectName = "Infinispan_TestCase";
+	public String vsmExpExportPath_ICSME = "data/exp/Pig/icsme_result/vsm";
+	public String jsExpExportPath_ICSME = "data/exp/Pig/icsme_result/js";
+	public String lsiExpExportPath_ICSME = "data/exp/Pig/icsme_result/lsi";
+	public String projectName = "Pig";
 	
 	public String getProjectPath() {
 		return projectPath;

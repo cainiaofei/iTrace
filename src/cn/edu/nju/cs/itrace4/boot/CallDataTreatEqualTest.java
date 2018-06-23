@@ -23,14 +23,14 @@ import cn.edu.nju.cs.itrace4.core.metrics.Result;
 import cn.edu.nju.cs.itrace4.core.algo.region.calldata.UD_CallDataDynamic;
 import cn.edu.nju.cs.itrace4.core.algo.region.calldata.UD_CallDataTreatEqual;
 import cn.edu.nju.cs.itrace4.core.algo.region.relation.SubGraph;
-import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
-import cn.edu.nju.cs.itrace4.demo.exp.project.JhotDraw;
-import cn.edu.nju.cs.itrace4.demo.exp.project.Maven;
-import cn.edu.nju.cs.itrace4.demo.exp.project.Gantt;
-import cn.edu.nju.cs.itrace4.demo.exp.project.Infinispan;
-import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 import cn.edu.nju.cs.itrace4.util.FileParse.XmlParse;
+import cn.edu.nju.cs.itrace4.util.FileParse.project.Gantt;
+import cn.edu.nju.cs.itrace4.util.FileParse.project.Infinispan;
+import cn.edu.nju.cs.itrace4.util.FileParse.project.Itrust;
+import cn.edu.nju.cs.itrace4.util.FileParse.project.JhotDraw;
+import cn.edu.nju.cs.itrace4.util.FileParse.project.Maven;
+import cn.edu.nju.cs.itrace4.util.FileParse.project.Project;
 import cn.edu.nju.cs.itrace4.visual.MyVisualCurve;
  
 public class CallDataTreatEqualTest{

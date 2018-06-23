@@ -20,17 +20,17 @@ import cn.edu.nju.cs.itrace4.core.algo.icse.PruningCall_Data_Connection_Closenss
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
-import cn.edu.nju.cs.itrace4.demo.exp.project.Infinispan;
-import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
-import cn.edu.nju.cs.itrace4.demo.exp.project.Maven_TestCase;
-import cn.edu.nju.cs.itrace4.demo.exp.project.Pig;
-import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 import cn.edu.nju.cs.itrace4.util.FileProcess;
 import cn.edu.nju.cs.itrace4.util.FileProcessTool;
 import cn.edu.nju.cs.itrace4.util.FileWrite;
 import cn.edu.nju.cs.itrace4.util.FileWriterImp;
 import cn.edu.nju.cs.itrace4.util.Setting;
+import cn.edu.nju.cs.itrace4.util.FileParse.project.Infinispan;
+import cn.edu.nju.cs.itrace4.util.FileParse.project.Itrust;
+import cn.edu.nju.cs.itrace4.util.FileParse.project.Maven_TestCase;
+import cn.edu.nju.cs.itrace4.util.FileParse.project.Pig;
+import cn.edu.nju.cs.itrace4.util.FileParse.project.Project;
 import cn.edu.nju.cs.itrace4.util.exception.FileException;
 
 public class BatchStoreChartLinePercent {

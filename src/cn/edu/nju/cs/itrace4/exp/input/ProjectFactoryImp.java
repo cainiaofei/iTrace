@@ -1,10 +1,10 @@
 package cn.edu.nju.cs.itrace4.exp.input;
 
-import cn.edu.nju.cs.itrace4.demo.exp.project.Infinispan;
-import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
-import cn.edu.nju.cs.itrace4.demo.exp.project.Maven_TestCase;
-import cn.edu.nju.cs.itrace4.demo.exp.project.Pig;
-import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
+import cn.edu.nju.cs.itrace4.util.FileParse.project.Infinispan;
+import cn.edu.nju.cs.itrace4.util.FileParse.project.Itrust;
+import cn.edu.nju.cs.itrace4.util.FileParse.project.Maven_TestCase;
+import cn.edu.nju.cs.itrace4.util.FileParse.project.Pig;
+import cn.edu.nju.cs.itrace4.util.FileParse.project.Project;
 
 public class ProjectFactoryImp implements ProjectFactory{
 

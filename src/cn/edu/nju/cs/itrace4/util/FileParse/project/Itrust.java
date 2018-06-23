@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.demo.exp.project;
+package cn.edu.nju.cs.itrace4.util.FileParse.project;
 
 public class Itrust implements Project{
 	public static String rtmClassPath = "data/exp/iTrust/rtm/RTM_CLASS.txt";
