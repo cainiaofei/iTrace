@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.demo.algo.relationBetweenSubGraph;
+package cn.edu.nju.cs.itrace4.core.algo.region.regionrelation;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -18,7 +18,6 @@ import org.xml.sax.SAXException;
 
 import cn.edu.nju.cs.itrace4.core.algo.prealgo.None_CSTI;
 import cn.edu.nju.cs.itrace4.core.algo.prealgo.UD_CSTI;
-import cn.edu.nju.cs.itrace4.core.algo.region.regionrelation.UD_CallThenDataWithRelationBetweenSubGraph;
 import cn.edu.nju.cs.itrace4.core.algo.region.relation.StoreCallSubGraph;
 import cn.edu.nju.cs.itrace4.core.algo.region.relation.StoreDataSubGraph;
 import cn.edu.nju.cs.itrace4.core.algo.region.relation.SubGraph;

@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.demo.algo.relationBetweenSubGraph;
+package cn.edu.nju.cs.itrace4.core.algo.region.regionrelation;
 
 public class Demo {
 	public static void main(String[] args) {
