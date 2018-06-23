@@ -13,8 +13,8 @@ import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.ir.IRModelConst;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
-import cn.edu.nju.cs.itrace4.demo.explore.PageRankFeedBack;
 import cn.edu.nju.cs.itrace4.exp.gantt.Gantt_CONSTANTS;
+import cn.edu.nju.cs.itrace4.explore.PageRankFeedBack;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 import cn.edu.nju.cs.itrace4.visual.VisualCurve;
 

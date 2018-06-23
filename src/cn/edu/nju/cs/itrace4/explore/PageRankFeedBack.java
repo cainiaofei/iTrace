@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.demo.explore;
+package cn.edu.nju.cs.itrace4.explore;
 
 import cn.edu.nju.cs.itrace4.core.algo.prealgo.CSTI;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
@@ -8,7 +8,7 @@ import cn.edu.nju.cs.itrace4.core.document.SingleLink;
 import cn.edu.nju.cs.itrace4.demo.specifyMixture.UD_CSTI_First_Count_Percent;
 import cn.edu.nju.cs.itrace4.demo.specifyMixture.UD_CSTI_First_Five;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
-import cn.edu.nju.cs.tool.PrintPageRankResult;
+import cn.edu.nju.cs.itrace4.tool.PrintPageRankResult;
 import javafx.util.Pair;
 
 import java.util.ArrayList;

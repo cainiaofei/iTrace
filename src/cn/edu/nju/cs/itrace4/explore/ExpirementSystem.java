@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.demo.explore;
+package cn.edu.nju.cs.itrace4.explore;
 
 public class ExpirementSystem {
 	private String ucPath;

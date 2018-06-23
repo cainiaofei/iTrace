@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.demo.explore;
+package cn.edu.nju.cs.itrace4.explore;
 
 public class ITrust extends ExpirementSystem{
 	private static String ucPath = "data/exp/iTrust/uc";
