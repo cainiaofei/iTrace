@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.demo.exp;
+package cn.edu.nju.cs.itrace4.boot;
 
 import java.io.BufferedWriter;
 import java.io.File;
