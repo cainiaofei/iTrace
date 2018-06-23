@@ -23,7 +23,6 @@ import cn.edu.nju.cs.itrace4.core.algo.prealgo.UD_CSTI;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
-import cn.edu.nju.cs.itrace4.demo.FileParse.XmlParse;
 import cn.edu.nju.cs.itrace4.core.algo.region.UD_CodeTextAsWholeInRegion;
 import cn.edu.nju.cs.itrace4.core.algo.region.UD_MergeCodeTXTAndNewRepresentElement;
 import cn.edu.nju.cs.itrace4.demo.algo.verifiedfront.resultprocess.ResultChange;
@@ -39,6 +38,7 @@ import cn.edu.nju.cs.itrace4.demo.relation.StoreCallSubGraph;
 import cn.edu.nju.cs.itrace4.demo.relation.StoreDataSubGraph;
 import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
 import cn.edu.nju.cs.itrace4.tool.AnalyzeResult;
+import cn.edu.nju.cs.itrace4.util.FileParse.XmlParse;
 import cn.edu.nju.cs.itrace4.visual.MyVisualCurve;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
  

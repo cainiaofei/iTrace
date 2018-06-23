@@ -11,7 +11,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
-import cn.edu.nju.cs.itrace4.demo.FileParse.XmlParse;
 import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.CodeRegionClosenessType;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Gantt;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Infinispan;
@@ -21,6 +20,7 @@ import cn.edu.nju.cs.itrace4.demo.exp.project.Maven;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Maven_Cluster_40;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
 import cn.edu.nju.cs.itrace4.tool.AnalyzeResult;
+import cn.edu.nju.cs.itrace4.util.FileParse.XmlParse;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 
 /**

@@ -21,7 +21,6 @@ import cn.edu.nju.cs.itrace4.core.algo.prealgo.UD_CSTI;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
-import cn.edu.nju.cs.itrace4.demo.FileParse.XmlParse;
 import cn.edu.nju.cs.itrace4.core.algo.region.callthendata.UD_CallSubGraph_Then_DataSubGraph_Closeness;
 import cn.edu.nju.cs.itrace4.core.algo.region.callthendata.UD_CallThenDataWithBonusForLone;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
@@ -32,6 +31,7 @@ import cn.edu.nju.cs.itrace4.demo.relation.StoreCallSubGraph;
 import cn.edu.nju.cs.itrace4.demo.relation.StoreDataSubGraph;
 import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
 import cn.edu.nju.cs.itrace4.tool.AnalyzeResult;
+import cn.edu.nju.cs.itrace4.util.FileParse.XmlParse;
 import cn.edu.nju.cs.itrace4.visual.MyVisualCurve;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
  

@@ -5,4 +5,4 @@
  * @author zhangsan
  *
  */
-package cn.edu.nju.cs.itrace4.demo.FileParse;
+package cn.edu.nju.cs.itrace4.util.FileParse;

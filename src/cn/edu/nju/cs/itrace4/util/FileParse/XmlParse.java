@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.demo.FileParse;
+package cn.edu.nju.cs.itrace4.util.FileParse;
 
 import java.io.File;
 import java.io.IOException;

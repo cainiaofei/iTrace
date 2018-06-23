@@ -25,7 +25,6 @@ import cn.edu.nju.cs.itrace4.core.algo.icse.PruningCall_Data_Connection_Closenss
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
-import cn.edu.nju.cs.itrace4.demo.FileParse.XmlParse;
 import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.MethodTypeProcessLone;
 import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.UD_CallThenDataWithBonusForLone;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
@@ -41,6 +40,7 @@ import cn.edu.nju.cs.itrace4.tool.AnalyzeResult;
 import cn.edu.nju.cs.itrace4.exp.tool.LookForBug;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 import cn.edu.nju.cs.itrace4.util.Setting;
+import cn.edu.nju.cs.itrace4.util.FileParse.XmlParse;
 import cn.edu.nju.cs.itrace4.visual.MyVisualCurve;
  
 public class BonusForLoneWithXml{

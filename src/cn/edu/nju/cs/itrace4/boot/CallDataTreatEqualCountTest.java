@@ -19,7 +19,6 @@ import cn.edu.nju.cs.itrace4.core.algo.prealgo.UD_CSTI;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
-import cn.edu.nju.cs.itrace4.demo.FileParse.XmlParse;
 import cn.edu.nju.cs.itrace4.core.algo.region.calldata.UD_CallDataTreatEqual;
 import cn.edu.nju.cs.itrace4.core.algo.region.calldata.UD_CallDataTreatEqualCount;
 import cn.edu.nju.cs.itrace4.core.algo.region.calldata.UD_CallDataTreatEqualCountTemp;
@@ -41,6 +40,7 @@ import cn.edu.nju.cs.itrace4.visual.SimplifyVisualCurve;
 import cn.edu.nju.cs.itrace4.visual.VisualCurve;
 import cn.edu.nju.cs.itrace4.tool.NegativeLinkAnalyze;
 import cn.edu.nju.cs.itrace4.tool.ResultAnalyze;
+import cn.edu.nju.cs.itrace4.util.FileParse.XmlParse;
 
 public class CallDataTreatEqualCountTest {
 	//private StoreSubGraphInfoByThreshold storeSubGraphInfoByThreshold;
