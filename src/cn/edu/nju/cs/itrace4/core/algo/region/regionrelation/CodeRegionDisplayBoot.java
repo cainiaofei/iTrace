@@ -10,8 +10,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import cn.edu.nju.cs.itrace4.core.algo.region.outerVertex.process.CodeRegionClosenessType;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
-import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.CodeRegionClosenessType;
 import cn.edu.nju.cs.itrace4.tool.AnalyzeResult;
 import cn.edu.nju.cs.itrace4.util.FileParse.XmlParse;
 import cn.edu.nju.cs.itrace4.util.FileParse.project.Gantt;

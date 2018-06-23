@@ -17,11 +17,11 @@ import org.xml.sax.SAXException;
 
 import cn.edu.nju.cs.itrace4.core.algo.prealgo.None_CSTI;
 import cn.edu.nju.cs.itrace4.core.algo.region.calldata.UD_CallDataTreatEqualCount;
+import cn.edu.nju.cs.itrace4.core.algo.region.outerVertex.process.MethodTypeProcessLone;
+import cn.edu.nju.cs.itrace4.core.algo.region.outerVertex.process.UD_CallThenDataWithBonusForLone;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
-import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.MethodTypeProcessLone;
-import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.UD_CallThenDataWithBonusForLone;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 import cn.edu.nju.cs.itrace4.tool.CliffAnalyze;
 import cn.edu.nju.cs.itrace4.util.FileParse.project.Gantt;

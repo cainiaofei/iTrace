@@ -21,6 +21,8 @@ import org.xml.sax.SAXException;
 import cn.edu.nju.cs.itrace4.core.algo.prealgo.None_CSTI;
 import cn.edu.nju.cs.itrace4.core.algo.prealgo.UD_CSTI;
 import cn.edu.nju.cs.itrace4.core.algo.prealgo.UseEdge;
+import cn.edu.nju.cs.itrace4.core.algo.region.outerVertex.process.MethodTypeProcessLone;
+import cn.edu.nju.cs.itrace4.core.algo.region.outerVertex.process.UD_CallThenDataWithBonusForLone;
 import cn.edu.nju.cs.itrace4.core.algo.region.relation.StoreCallSubGraph;
 import cn.edu.nju.cs.itrace4.core.algo.region.relation.StoreDataSubGraph;
 import cn.edu.nju.cs.itrace4.core.algo.region.relation.SubGraph;
@@ -28,8 +30,6 @@ import cn.edu.nju.cs.itrace4.core.algo.icse.PruningCall_Data_Connection_Closenss
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
-import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.MethodTypeProcessLone;
-import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.UD_CallThenDataWithBonusForLone;
 import cn.edu.nju.cs.itrace4.tool.AnalyzeResult;
 import cn.edu.nju.cs.itrace4.exp.tool.LookForBug;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
