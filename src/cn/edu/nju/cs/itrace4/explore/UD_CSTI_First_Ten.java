@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.demo.specifyMixture;
+package cn.edu.nju.cs.itrace4.explore;
 
 import cn.edu.nju.cs.itrace4.core.algo.prealgo.CSTI;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
@@ -19,15 +19,15 @@ import java.util.Map;
 /**
  * Created by niejia on 15/3/3.
  */
-public class UD_CSTI_First_Count_Percent implements CSTI {
+public class UD_CSTI_First_Ten implements CSTI {
 
     public double bonus;
     private RelationGraph relationGraph;
     //现在是只需要用户指定前count个即可   现在这个还是全体排序进行的
-    private double percent;
-    public UD_CSTI_First_Count_Percent(RelationInfo relationInfo,double percent) {
+    private int count;
+    public UD_CSTI_First_Ten(RelationInfo relationInfo,int count) {
         this.relationGraph = new CallDataRelationGraph(relationInfo);
-        this.percent = percent;
+        this.count = count;
     }
 
     @Override
@@ -47,10 +47,8 @@ public class UD_CSTI_First_Count_Percent implements CSTI {
         }
 
         LinksList resultLinks = new LinksList();
-        int count = (int)(originLinks.size() * percent);
         int size = originLinks.size();
         while (count != 0) {////////////////////////
-        	count--;
             SingleLink link = originLinks.remove(0);
             String source = link.getSourceArtifactId();
             String target = link.getTargetArtifactId();
@@ -64,6 +62,7 @@ public class UD_CSTI_First_Count_Percent implements CSTI {
                         originLinks.updateLink(source, nb.getName(), originScore * (1 + bonus));
                     }
                 }
+                count--;
             }
 
             if (score != 0.0) {
@@ -98,10 +97,7 @@ public class UD_CSTI_First_Count_Percent implements CSTI {
     @Override
     public String getAlgorithmName() {
     	//返回这个方法名字
-    	if(percent==0.015){
-    		percent = 0.02;
-    	}
-        return "UD_CSTI_First_"+percent*1000+"_Percent";
+        return "UD_CSTI_First_Ten";
     }
 
     @Override

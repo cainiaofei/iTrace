@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.demo.rtm.issue;
+package cn.edu.nju.cs.itrace4.preprocess.rtm.issue;
 
 import java.io.BufferedWriter;
 import java.io.File;

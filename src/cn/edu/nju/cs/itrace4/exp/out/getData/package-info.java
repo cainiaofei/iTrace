@@ -7,4 +7,4 @@
  */
 
 //get experiment data
-package cn.edu.nju.cs.itrace4.demo.getData;
+package cn.edu.nju.cs.itrace4.exp.out.getData;

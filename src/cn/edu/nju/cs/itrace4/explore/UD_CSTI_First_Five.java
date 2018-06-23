@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.demo.specifyMixture;
+package cn.edu.nju.cs.itrace4.explore;
 
 import cn.edu.nju.cs.itrace4.core.algo.prealgo.CSTI;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
@@ -19,13 +19,13 @@ import java.util.Map;
 /**
  * Created by niejia on 15/3/3.
  */
-public class UD_CSTI_First_Ten implements CSTI {
+public class UD_CSTI_First_Five implements CSTI {
 
     public double bonus;
     private RelationGraph relationGraph;
     //现在是只需要用户指定前count个即可   现在这个还是全体排序进行的
     private int count;
-    public UD_CSTI_First_Ten(RelationInfo relationInfo,int count) {
+    public UD_CSTI_First_Five(RelationInfo relationInfo,int count) {
         this.relationGraph = new CallDataRelationGraph(relationInfo);
         this.count = count;
     }
@@ -48,13 +48,13 @@ public class UD_CSTI_First_Ten implements CSTI {
 
         LinksList resultLinks = new LinksList();
         int size = originLinks.size();
-        while (count != 0) {////////////////////////
+        while (size != 0) {////////////////////////
             SingleLink link = originLinks.remove(0);
             String source = link.getSourceArtifactId();
             String target = link.getTargetArtifactId();
             double score = link.getScore();
 
-            if (oracle.isLinkAboveThreshold(source, target)) {
+            if (oracle.isLinkAboveThreshold(source, target)||count<=0) {
                 List<CodeVertex> neighbours = ((CallDataRelationGraph) relationGraph).getNeighboursByCall(target);
                 for (CodeVertex nb : neighbours) {
                     double originScore = originLinks.getScore(source, nb.getName());
@@ -80,12 +80,15 @@ public class UD_CSTI_First_Ten implements CSTI {
         	resultLinks.add(originLinks.remove(0));
         }
         
+        
         for (SingleLink link : resultLinks) {
             matrix_ud.addLink(link.getSourceArtifactId(), link.getTargetArtifactId(), link.getScore());
         }
 
 //        System.out.println(" matrix_ud = " + matrix_ud );
+        //这个语句应该没太大意义吧
         matrix_ud.allLinks();
+        //分类存好了  底层是个map
         return matrix_ud;
     }
 
@@ -97,7 +100,7 @@ public class UD_CSTI_First_Ten implements CSTI {
     @Override
     public String getAlgorithmName() {
     	//返回这个方法名字
-        return "UD_CSTI_First_Ten";
+        return "UD_CSTI_First_Five";
     }
 
     @Override

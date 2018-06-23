@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.demo.specifyMixture;
+package cn.edu.nju.cs.itrace4.explore;
 
 import cn.edu.nju.cs.itrace4.core.algo.prealgo.CSTI;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
@@ -16,18 +16,16 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by niejia on 15/3/3.
- */
-public class UD_CSTI_First_Five implements CSTI {
+
+public class UD_CSTI_First_Count_Percent implements CSTI {
 
     public double bonus;
     private RelationGraph relationGraph;
     //现在是只需要用户指定前count个即可   现在这个还是全体排序进行的
-    private int count;
-    public UD_CSTI_First_Five(RelationInfo relationInfo,int count) {
+    private double percent;
+    public UD_CSTI_First_Count_Percent(RelationInfo relationInfo,double percent) {
         this.relationGraph = new CallDataRelationGraph(relationInfo);
-        this.count = count;
+        this.percent = percent;
     }
 
     @Override
@@ -47,14 +45,16 @@ public class UD_CSTI_First_Five implements CSTI {
         }
 
         LinksList resultLinks = new LinksList();
+        int count = (int)(originLinks.size() * percent);
         int size = originLinks.size();
-        while (size != 0) {////////////////////////
+        while (count != 0) {////////////////////////
+        	count--;
             SingleLink link = originLinks.remove(0);
             String source = link.getSourceArtifactId();
             String target = link.getTargetArtifactId();
             double score = link.getScore();
 
-            if (oracle.isLinkAboveThreshold(source, target)||count<=0) {
+            if (oracle.isLinkAboveThreshold(source, target)) {
                 List<CodeVertex> neighbours = ((CallDataRelationGraph) relationGraph).getNeighboursByCall(target);
                 for (CodeVertex nb : neighbours) {
                     double originScore = originLinks.getScore(source, nb.getName());
@@ -62,7 +62,6 @@ public class UD_CSTI_First_Five implements CSTI {
                         originLinks.updateLink(source, nb.getName(), originScore * (1 + bonus));
                     }
                 }
-                count--;
             }
 
             if (score != 0.0) {
@@ -80,15 +79,12 @@ public class UD_CSTI_First_Five implements CSTI {
         	resultLinks.add(originLinks.remove(0));
         }
         
-        
         for (SingleLink link : resultLinks) {
             matrix_ud.addLink(link.getSourceArtifactId(), link.getTargetArtifactId(), link.getScore());
         }
 
 //        System.out.println(" matrix_ud = " + matrix_ud );
-        //这个语句应该没太大意义吧
         matrix_ud.allLinks();
-        //分类存好了  底层是个map
         return matrix_ud;
     }
 
@@ -100,7 +96,10 @@ public class UD_CSTI_First_Five implements CSTI {
     @Override
     public String getAlgorithmName() {
     	//返回这个方法名字
-        return "UD_CSTI_First_Five";
+    	if(percent==0.015){
+    		percent = 0.02;
+    	}
+        return "UD_CSTI_First_"+percent*1000+"_Percent";
     }
 
     @Override
