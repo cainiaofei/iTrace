@@ -25,12 +25,11 @@ import cn.edu.nju.cs.itrace4.core.algo.region.calldata.UD_CallDataDynamic;
 import cn.edu.nju.cs.itrace4.core.algo.region.calldata.UD_CallDataTreatEqual;
 import cn.edu.nju.cs.itrace4.core.algo.region.calldata.UD_CallDataTreatEqualCount;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
-import cn.edu.nju.cs.itrace4.demo.exp.project.JhotDraw;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Maven;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Gantt;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
-import cn.edu.nju.cs.itrace4.demo.tool.CliffAnalyze;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
+import cn.edu.nju.cs.itrace4.tool.CliffAnalyze;
  
 public class GetFPData{
 	

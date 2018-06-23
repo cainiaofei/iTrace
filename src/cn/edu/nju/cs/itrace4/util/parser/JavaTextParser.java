@@ -1,8 +1,9 @@
-package cn.edu.nju.cs.itrace4.parser;
+package cn.edu.nju.cs.itrace4.util.parser;
 
 import cn.edu.nju.cs.itrace4.io._;
-import cn.edu.nju.cs.itrace4.parser.javatext.JField;
-import cn.edu.nju.cs.itrace4.parser.javatext.JMethod;
+import cn.edu.nju.cs.itrace4.util.parser.javatext.JField;
+import cn.edu.nju.cs.itrace4.util.parser.javatext.JMethod;
+
 import org.eclipse.jdt.core.dom.*;
 
 import java.io.File;

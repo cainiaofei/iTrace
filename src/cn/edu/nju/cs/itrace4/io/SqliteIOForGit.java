@@ -3,7 +3,7 @@ package cn.edu.nju.cs.itrace4.io;
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
 import cn.edu.nju.cs.itrace4.core.type.Granularity;
 import cn.edu.nju.cs.itrace4.io._;
-import cn.edu.nju.cs.itrace4.parser.RTMParser;
+import cn.edu.nju.cs.itrace4.util.parser.RTMParser;
 
 import java.io.File;
 import java.sql.*;

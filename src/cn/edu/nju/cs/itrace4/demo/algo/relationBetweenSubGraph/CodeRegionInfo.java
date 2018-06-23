@@ -9,10 +9,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import cn.edu.nju.cs.itrace4.core.algo.region.util.graph.GraphNode;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
 import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.CodeRegionClosenessType;
-import cn.edu.nju.cs.itrace4.demo.datastruct.GraphNode;
 import cn.edu.nju.cs.itrace4.demo.relation.StoreDataSubGraphRemoveEdge;
 import cn.edu.nju.cs.itrace4.demo.relation.SubGraph;
 import cn.edu.nju.cs.itrace4.relation.CallDataRelationGraph;

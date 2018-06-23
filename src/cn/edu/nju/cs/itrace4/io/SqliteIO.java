@@ -2,7 +2,7 @@ package cn.edu.nju.cs.itrace4.io;
 
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
 import cn.edu.nju.cs.itrace4.core.type.Granularity;
-import cn.edu.nju.cs.itrace4.parser.RTMParser;
+import cn.edu.nju.cs.itrace4.util.parser.RTMParser;
 
 import java.io.File;
 import java.sql.*;
@@ -15,7 +15,6 @@ import java.util.List;
 public class SqliteIO {
 
     public static SimilarityMatrix readRTMFromDB(String path, Granularity granularity) {
-
 
         File dbFile = new File(path);
         if (!dbFile.exists()) {

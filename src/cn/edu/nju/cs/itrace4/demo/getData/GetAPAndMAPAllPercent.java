@@ -7,7 +7,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -19,17 +18,13 @@ import cn.edu.nju.cs.itrace4.core.algo.prealgo.None_CSTI;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
-import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.MethodTypeProcessLone;
-import cn.edu.nju.cs.itrace4.demo.algo.outerVertex.process.UD_CallThenDataWithBonusForLone;
 import cn.edu.nju.cs.itrace4.core.algo.region.calldata.UD_CallDataTreatEqualCount;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Itrust;
-import cn.edu.nju.cs.itrace4.demo.exp.project.JhotDraw;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Maven;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Gantt;
-import cn.edu.nju.cs.itrace4.demo.exp.project.Gantt;
 import cn.edu.nju.cs.itrace4.demo.exp.project.Project;
-import cn.edu.nju.cs.itrace4.demo.tool.CliffAnalyze;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
+import cn.edu.nju.cs.itrace4.tool.CliffAnalyze;
  
 public class GetAPAndMAPAllPercent{
 	

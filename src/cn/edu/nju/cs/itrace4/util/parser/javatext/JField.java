@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.parser.javatext;
+package cn.edu.nju.cs.itrace4.util.parser.javatext;
 
 /**
  * Created by niejia on 15/2/22.

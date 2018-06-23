@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.parser;
+package cn.edu.nju.cs.itrace4.util.parser;
 
 /**
  * @author zzf <tiaozhanzhe668@163.com>

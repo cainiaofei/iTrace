@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.parser;
+package cn.edu.nju.cs.itrace4.util.parser;
 
 import cn.edu.nju.cs.itrace4.core.type.Granularity;
 import cn.edu.nju.cs.itrace4.io._;

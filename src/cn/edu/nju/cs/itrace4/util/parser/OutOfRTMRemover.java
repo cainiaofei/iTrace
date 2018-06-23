@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.parser;
+package cn.edu.nju.cs.itrace4.util.parser;
 
 /**
  * Created by niejia on 15/2/10.

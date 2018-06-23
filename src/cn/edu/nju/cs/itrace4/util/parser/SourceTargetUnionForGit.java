@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.parser;
+package cn.edu.nju.cs.itrace4.util.parser;
 
 
 import cn.edu.nju.cs.itrace4.core.document.ArtifactsCollection;
@@ -9,7 +9,7 @@ import cn.edu.nju.cs.itrace4.io.ArtifactsReader;
 import cn.edu.nju.cs.itrace4.io.RTMIO;
 import cn.edu.nju.cs.itrace4.io.SqliteIOForGit;
 import cn.edu.nju.cs.itrace4.io._;
-import cn.edu.nju.cs.itrace4.parser.BatchingParser;
+import cn.edu.nju.cs.itrace4.util.parser.BatchingParser;
 
 import java.io.File;
 import java.util.Set;

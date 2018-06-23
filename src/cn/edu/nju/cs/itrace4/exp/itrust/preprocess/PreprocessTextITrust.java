@@ -5,9 +5,9 @@ import java.util.HashSet;
 
 import cn.edu.nju.cs.itrace4.core.type.Granularity;
 import cn.edu.nju.cs.itrace4.exp.tool.PruneBaseRI;
-import cn.edu.nju.cs.itrace4.parser.SourceTargetUnion;
 import cn.edu.nju.cs.itrace4.preprocess.BatchingPreprocess;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
+import cn.edu.nju.cs.itrace4.util.parser.SourceTargetUnion;
 
 /**
  * Created by niejia on 15/2/22.

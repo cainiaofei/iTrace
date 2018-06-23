@@ -1,11 +1,11 @@
 package cn.edu.nju.cs.itrace4.demo;
 
 import cn.edu.nju.cs.itrace4.core.algo.prealgo.UD_CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.region.fixedcount.UD_CSTI_Judge_Group;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.ir.IRModelConst;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
-import cn.edu.nju.cs.itrace4.demo.specifyByGroup.UD_CSTI_Judge_Group;
 import cn.edu.nju.cs.itrace4.demo.specifyMixture.UD_CSTI_First_Five;
 import cn.edu.nju.cs.itrace4.demo.specifyMixture.UD_CSTI_First_Ten;
 import cn.edu.nju.cs.itrace4.exp.gantt.Gantt_CONSTANTS;

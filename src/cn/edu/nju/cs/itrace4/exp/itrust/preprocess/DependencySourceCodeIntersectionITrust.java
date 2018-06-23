@@ -1,8 +1,8 @@
 package cn.edu.nju.cs.itrace4.exp.itrust.preprocess;
 
 import cn.edu.nju.cs.itrace4.core.type.Granularity;
-import cn.edu.nju.cs.itrace4.parser.DependencySourceCodeUnion;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
+import cn.edu.nju.cs.itrace4.util.parser.DependencySourceCodeUnion;
 
 /**
  * Created by niejia on 16/3/27.

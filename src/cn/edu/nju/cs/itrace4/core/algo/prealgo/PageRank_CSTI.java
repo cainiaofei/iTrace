@@ -5,7 +5,7 @@ import cn.edu.nju.cs.itrace4.core.document.LinksList;
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
 import cn.edu.nju.cs.itrace4.core.document.SingleLink;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
-import cn.edu.nju.cs.tool.PrintPageRankResult;
+import cn.edu.nju.cs.itrace4.tool.PrintPageRankResult;
 import javafx.util.Pair;
 
 import java.util.ArrayList;

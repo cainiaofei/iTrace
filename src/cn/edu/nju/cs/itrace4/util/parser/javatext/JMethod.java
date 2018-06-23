@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.parser.javatext;
+package cn.edu.nju.cs.itrace4.util.parser.javatext;
 
 import java.util.ArrayList;
 import java.util.List;

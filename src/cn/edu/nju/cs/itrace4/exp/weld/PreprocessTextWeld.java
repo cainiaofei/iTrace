@@ -1,7 +1,7 @@
 package cn.edu.nju.cs.itrace4.exp.weld;
 
-import cn.edu.nju.cs.itrace4.parser.SourceTargetUnion;
 import cn.edu.nju.cs.itrace4.preprocess.BatchingPreprocess;
+import cn.edu.nju.cs.itrace4.util.parser.SourceTargetUnion;
 
 /**
  * Created by niejia on 16/3/11.
