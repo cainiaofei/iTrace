@@ -3,13 +3,13 @@ package cn.edu.nju.cs.itrace4.relation;
 
 import cn.edu.nju.cs.itrace4.core.document.ArtifactsCollection;
 import cn.edu.nju.cs.itrace4.core.type.Granularity;
-import cn.edu.nju.cs.itrace4.io.ArtifactsReader;
 import cn.edu.nju.cs.itrace4.relation.info.*;
 import cn.edu.nju.cs.itrace4.relation.io.CallRelationIO;
 import cn.edu.nju.cs.itrace4.relation.io.CallRelationIOForGit;
 import cn.edu.nju.cs.itrace4.relation.io.DataRelationIO;
 import cn.edu.nju.cs.itrace4.relation.io.DataRelationIOForGit;
 import cn.edu.nju.cs.itrace4.util.Setting;
+import cn.edu.nju.cs.itrace4.util.io.ArtifactsReader;
 import edu.uci.ics.jung.algorithms.scoring.PageRank;
 import edu.uci.ics.jung.algorithms.scoring.PageRankWithPriors;
 import edu.uci.ics.jung.graph.DirectedSparseGraph;

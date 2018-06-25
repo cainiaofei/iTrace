@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.io;
+package cn.edu.nju.cs.itrace4.util.io;
 
 import cn.edu.nju.cs.itrace4.core.document.Artifact;
 import cn.edu.nju.cs.itrace4.core.document.ArtifactsCollection;

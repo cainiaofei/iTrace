@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.io;
+package cn.edu.nju.cs.itrace4.util.io;
 
 /**
  * @author zzf
