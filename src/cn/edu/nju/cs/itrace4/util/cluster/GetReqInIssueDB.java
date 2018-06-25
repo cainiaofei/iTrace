@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.cluster;
+package cn.edu.nju.cs.itrace4.util.cluster;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

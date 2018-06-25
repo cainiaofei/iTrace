@@ -4,10 +4,10 @@ import cn.edu.nju.cs.itrace4.core.document.ArtifactsCollection;
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
 import cn.edu.nju.cs.itrace4.core.type.Granularity;
 import cn.edu.nju.cs.itrace4.exp.tool.RemoveUCNotInRtmClass;
-import cn.edu.nju.cs.itrace4.io.ArtifactsReader;
-import cn.edu.nju.cs.itrace4.io.RTMIO;
-import cn.edu.nju.cs.itrace4.io.SqliteIO;
-import cn.edu.nju.cs.itrace4.io._;
+import cn.edu.nju.cs.itrace4.util.io.ArtifactsReader;
+import cn.edu.nju.cs.itrace4.util.io.RTMIO;
+import cn.edu.nju.cs.itrace4.util.io.SqliteIO;
+import cn.edu.nju.cs.itrace4.util.io._;
 
 import java.io.File;
 import java.util.Set;

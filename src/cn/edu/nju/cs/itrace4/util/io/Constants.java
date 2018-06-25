@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.io;
+package cn.edu.nju.cs.itrace4.util.io;
 
 /**
  * Created by niejia on 15/2/23.

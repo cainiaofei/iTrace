@@ -5,11 +5,11 @@ package cn.edu.nju.cs.itrace4.relation;
  */
 
 import cn.edu.nju.cs.itrace4.core.algo.legacy.PathSearch;
-import cn.edu.nju.cs.itrace4.io._;
 import cn.edu.nju.cs.itrace4.relation.graph.*;
 import cn.edu.nju.cs.itrace4.relation.info.DataRelation;
 import cn.edu.nju.cs.itrace4.relation.info.RelationPair;
 import cn.edu.nju.cs.itrace4.util.Setting;
+import cn.edu.nju.cs.itrace4.util.io._;
 import edu.uci.ics.jung.algorithms.scoring.PageRank;
 import edu.uci.ics.jung.algorithms.scoring.PageRankWithPriors;
 import edu.uci.ics.jung.graph.DirectedSparseGraph;

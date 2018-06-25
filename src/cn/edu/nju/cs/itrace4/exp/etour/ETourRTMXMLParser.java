@@ -2,8 +2,8 @@ package cn.edu.nju.cs.itrace4.exp.etour;
 
 import cn.edu.nju.cs.itrace4.core.document.Artifact;
 import cn.edu.nju.cs.itrace4.core.document.ArtifactsCollection;
-import cn.edu.nju.cs.itrace4.io.XMLParser;
-import cn.edu.nju.cs.itrace4.io._;
+import cn.edu.nju.cs.itrace4.util.io.XMLParser;
+import cn.edu.nju.cs.itrace4.util.io._;
 
 import java.util.HashSet;
 import java.util.Set;

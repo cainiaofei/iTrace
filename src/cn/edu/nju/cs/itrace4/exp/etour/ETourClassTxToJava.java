@@ -1,8 +1,8 @@
 package cn.edu.nju.cs.itrace4.exp.etour;
 
-import cn.edu.nju.cs.itrace4.io._;
-
 import java.io.File;
+
+import cn.edu.nju.cs.itrace4.util.io._;
 
 /**
  * Created by niejia on 15/12/20.

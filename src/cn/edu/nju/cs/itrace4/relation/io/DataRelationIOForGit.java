@@ -1,7 +1,7 @@
 package cn.edu.nju.cs.itrace4.relation.io;
 
-import cn.edu.nju.cs.itrace4.io._;
 import cn.edu.nju.cs.itrace4.relation.info.*;
+import cn.edu.nju.cs.itrace4.util.io._;
 
 import java.io.File;
 import java.sql.*;

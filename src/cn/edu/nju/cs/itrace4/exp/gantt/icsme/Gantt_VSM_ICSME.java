@@ -10,9 +10,9 @@ import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.ir.IRModelConst;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
 import cn.edu.nju.cs.itrace4.exp.gantt.Gantt_CONSTANTS;
-import cn.edu.nju.cs.itrace4.io._;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 import cn.edu.nju.cs.itrace4.util.Setting;
+import cn.edu.nju.cs.itrace4.util.io._;
 import cn.edu.nju.cs.itrace4.visual.VisualCurve;
 import org.apache.commons.math3.stat.inference.MannWhitneyUTest;
 

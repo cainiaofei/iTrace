@@ -1,9 +1,9 @@
 package cn.edu.nju.cs.itrace4.exp.itrust.preprocess;
 
 import cn.edu.nju.cs.itrace4.exp.itrust.ITRUST_CONSTANTS;
-import cn.edu.nju.cs.itrace4.io._;
 import cn.edu.nju.cs.itrace4.relation.CallDataRelationGraph;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
+import cn.edu.nju.cs.itrace4.util.io._;
 
 import java.io.File;
 import java.io.FileInputStream;
