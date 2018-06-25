@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.gitProject;
+package cn.edu.nju.cs.itrace4.tool.gitProject;
 
 import java.io.File;
 import java.io.FileInputStream;

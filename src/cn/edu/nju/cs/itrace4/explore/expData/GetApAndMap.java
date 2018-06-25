@@ -1,4 +1,4 @@
-package cn.edu.nju.cs.itrace4.expData;
+package cn.edu.nju.cs.itrace4.explore.expData;
 
 import java.io.BufferedWriter;
 import java.io.File;
