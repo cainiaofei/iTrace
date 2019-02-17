@@ -6,7 +6,6 @@ output/
 *.zip
 *.rar
 *.xml
-*.png
 *.out
 data_old/
 图片/
