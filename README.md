@@ -11,8 +11,7 @@
 similarity越大表示代码(class)和需求(req)之间具备相关性的可能越大。
 ##iTrace是怎么实现的？
 架构图如下：
-![title](https://leanote.com/api/file/getImage?fileId=5c68d271ab64414348000470)
+![image](http://github.com/cainiaofei/iTrace/raw/master/image/iTrace结构图.png)
 如图所示，首先，一方面基于开源工具jsoup爬取数据；另一方面，运行项目(java项目)并将基于jvmti实现的代码依赖捕获工具插桩到虚拟机中，获取代码依赖数据。然后，对数据进行分词，去停用词，词根还原等文本预处理，这里的数据集是oracle，也是接下来试验方法数据的输入。接下来，基于软件可追踪生成方法建立需求和代码的关联关系。最后，检验方法效果并展示pr图。
 代码依赖捕获工具结构图如下：
-![title](https://leanote.com/api/file/getImage?fileId=5c68d4a3ab6441434800048c)
-
+![image](http://github.com/cainiaofei/iTrace/raw/master/image/codeDependency.png)
