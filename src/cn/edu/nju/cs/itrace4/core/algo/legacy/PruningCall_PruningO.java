@@ -1,6 +1,6 @@
 package cn.edu.nju.cs.itrace4.core.algo.legacy;
 
-import cn.edu.nju.cs.itrace4.core.algo.*;
+import cn.edu.nju.cs.itrace4.core.algo.prealgo.*;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;

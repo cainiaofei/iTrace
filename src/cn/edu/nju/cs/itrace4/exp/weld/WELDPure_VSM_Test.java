@@ -1,6 +1,6 @@
 package cn.edu.nju.cs.itrace4.exp.weld;
 
-import cn.edu.nju.cs.itrace4.core.algo.None_CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.prealgo.None_CSTI;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.ir.IRModelConst;

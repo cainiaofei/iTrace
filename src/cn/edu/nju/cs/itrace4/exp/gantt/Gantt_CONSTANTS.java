@@ -19,10 +19,10 @@ public class Gantt_CONSTANTS {
     public static String vsmExpExportPath = "data/exp/Gantt/result/vsm";
     public static String jsExpExportPath = "data/exp/Gantt/result/js";
 
-    public static String class_relationInfoPath = "data/exp/Gantt/relation/Class_relationInfo.ser";
+    public static String class_relationInfoPath = "data/exp/Gantt/relation/CLASS_relationInfo.ser";
 
 
-    public static String class_relationInfoPathWhole = "data/exp/Gantt/relation/Class_relationInfo_whole.ser";
+    public static String class_relationInfoPathWhole = "data/exp/Gantt/relation/CLASS_relationInfo_whole.ser";
 
     public static String method_relationInfoPath = "data/exp/Gantt/relation/Method_relationInfo.ser";
 

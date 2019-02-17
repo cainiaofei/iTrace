@@ -1,7 +1,6 @@
 package cn.edu.nju.cs.itrace4.visual;
 
-import cn.edu.nju.cs.itrace4.core.algo.None_CSTI;
-import cn.edu.nju.cs.itrace4.core.algo.UseEdge;
+import cn.edu.nju.cs.itrace4.core.algo.prealgo.None_CSTI;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.document.LinksList;
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
@@ -43,9 +42,6 @@ import java.io.ObjectInputStream;
 import java.util.*;
 import java.util.List;
 
-/**
- * Created by niejia on 15/3/1.
- */
 public class ReqModulesDisplay {
 
     private RelationGraph relationGraph;

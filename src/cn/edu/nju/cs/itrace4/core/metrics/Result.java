@@ -4,8 +4,8 @@ import cn.edu.nju.cs.itrace4.core.document.LinksList;
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
 import cn.edu.nju.cs.itrace4.core.document.SingleLink;
 import cn.edu.nju.cs.itrace4.core.document.StringHashSet;
-import cn.edu.nju.cs.itrace4.io._;
 import cn.edu.nju.cs.itrace4.util.NDCG;
+import cn.edu.nju.cs.itrace4.util.io._;
 import javafx.util.Pair;
 
 import java.io.Serializable;

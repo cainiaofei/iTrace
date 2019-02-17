@@ -1,18 +1,18 @@
 package cn.edu.nju.cs.itrace4.exp.gantt.icsme;
 
-import cn.edu.nju.cs.itrace4.core.algo.None_CSTI;
-import cn.edu.nju.cs.itrace4.core.algo.O_CSTI;
-import cn.edu.nju.cs.itrace4.core.algo.PageRank_CSTI;
-import cn.edu.nju.cs.itrace4.core.algo.UseEdge;
+import cn.edu.nju.cs.itrace4.core.algo.prealgo.None_CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.prealgo.O_CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.prealgo.PageRank_CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.prealgo.UseEdge;
 import cn.edu.nju.cs.itrace4.core.algo.icse.PruningCall_Data_Connection_Closenss;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.ir.IR;
 import cn.edu.nju.cs.itrace4.core.ir.IRModelConst;
 import cn.edu.nju.cs.itrace4.core.metrics.Result;
 import cn.edu.nju.cs.itrace4.exp.gantt.Gantt_CONSTANTS;
-import cn.edu.nju.cs.itrace4.io._;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
 import cn.edu.nju.cs.itrace4.util.Setting;
+import cn.edu.nju.cs.itrace4.util.io._;
 import cn.edu.nju.cs.itrace4.visual.VisualCurve;
 import org.apache.commons.math3.stat.inference.MannWhitneyUTest;
 

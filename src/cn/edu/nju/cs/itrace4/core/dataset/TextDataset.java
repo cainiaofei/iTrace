@@ -2,8 +2,8 @@ package cn.edu.nju.cs.itrace4.core.dataset;
 
 import cn.edu.nju.cs.itrace4.core.document.ArtifactsCollection;
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
-import cn.edu.nju.cs.itrace4.io.ArtifactsReader;
-import cn.edu.nju.cs.itrace4.io.RTMIO;
+import cn.edu.nju.cs.itrace4.util.io.ArtifactsReader;
+import cn.edu.nju.cs.itrace4.util.io.RTMIO;
 
 /**
  * Created by niejia on 15/2/23.

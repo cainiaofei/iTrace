@@ -1,8 +1,8 @@
 package cn.edu.nju.cs.itrace4.core.algo.legacy;
 
-import cn.edu.nju.cs.itrace4.core.algo.CSTI;
-import cn.edu.nju.cs.itrace4.core.algo.PruningCall_CSTI;
-import cn.edu.nju.cs.itrace4.core.algo.UseEdge;
+import cn.edu.nju.cs.itrace4.core.algo.prealgo.CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.prealgo.PruningCall_CSTI;
+import cn.edu.nju.cs.itrace4.core.algo.prealgo.UseEdge;
 import cn.edu.nju.cs.itrace4.core.dataset.TextDataset;
 import cn.edu.nju.cs.itrace4.core.document.SimilarityMatrix;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;

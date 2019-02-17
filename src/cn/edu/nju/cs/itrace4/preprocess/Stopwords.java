@@ -1,9 +1,9 @@
 package cn.edu.nju.cs.itrace4.preprocess;
 
-import cn.edu.nju.cs.itrace4.io._;
-
 import java.util.Arrays;
 import java.util.List;
+
+import cn.edu.nju.cs.itrace4.util.io._;
 
 /**
  * Created by niejia on 15/2/23.

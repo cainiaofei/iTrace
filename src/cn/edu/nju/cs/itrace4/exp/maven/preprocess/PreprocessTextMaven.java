@@ -7,13 +7,13 @@ import cn.edu.nju.cs.itrace4.exp.tool.GetSrc;
 import cn.edu.nju.cs.itrace4.exp.tool.GetSrcBaseRI;
 import cn.edu.nju.cs.itrace4.exp.tool.GetUC;
 import cn.edu.nju.cs.itrace4.exp.tool.TransferTXT;
-import cn.edu.nju.cs.itrace4.parser.SourceTargetUnionForGit;
 import cn.edu.nju.cs.itrace4.preprocess.BatchingPreprocess;
 import cn.edu.nju.cs.itrace4.preprocess.rawdata.db.GenerateRTM;
 import cn.edu.nju.cs.itrace4.preprocess.rawdata.db.GenerateRTMExt;
 import cn.edu.nju.cs.itrace4.preprocess.rawdata.db.GenerateRTMExtMsg;
 import cn.edu.nju.cs.itrace4.preprocess.rawdata.db.GenerateRTMThroughCluster;
 import cn.edu.nju.cs.itrace4.relation.RelationInfo;
+import cn.edu.nju.cs.itrace4.util.parser.SourceTargetUnionForGit;
 
 /**
  * @author zzf

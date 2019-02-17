@@ -1,8 +1,8 @@
 package cn.edu.nju.cs.itrace4.exp.weld;
 
-import cn.edu.nju.cs.itrace4.io._;
-
 import java.io.File;
+
+import cn.edu.nju.cs.itrace4.util.io._;
 
 /**
  * Created by niejia on 16/3/11.

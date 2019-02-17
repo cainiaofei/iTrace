@@ -1,7 +1,7 @@
 package cn.edu.nju.cs.itrace4.exp.etour;
 
-import cn.edu.nju.cs.itrace4.parser.BatchingParser;
 import cn.edu.nju.cs.itrace4.preprocess.BatchingPreprocess;
+import cn.edu.nju.cs.itrace4.util.parser.BatchingParser;
 
 /**
  * Created by niejia on 15/12/20.
